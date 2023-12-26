@@ -2,8 +2,8 @@
 
 ## Developed by
 - [Vittorio Damiano Brasini](https://github.com/vdamianob)
-- [Luca Nicholae Tofan Ferar](https://github.com)
-- [Roberto Sopranzetti](https://github.com)
+- [Luca Ferar Tofan Nicolae](https://github.com/LucaJ-Tv)
+- [Roberto Sopranzetti](https://github.com/RobertoSopranzetti)
 - [Filippo Velli](https://github.com/FilVel)
 ---
 
