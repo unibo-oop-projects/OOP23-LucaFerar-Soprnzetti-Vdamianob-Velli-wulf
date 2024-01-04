@@ -8,6 +8,6 @@
 ---
 
 ## Description of the java application
-Jawa Wulf is a videogame made in Java loosely based on [Sabre Wulf (1984)](https://www.c64-wiki.com/wiki/Sabre_Wulf).
+Java Wulf is a videogame made in Java loosely based on [Sabre Wulf (1984)](https://www.c64-wiki.com/wiki/Sabre_Wulf).
 
 This game is being made for a university group project in Object-Oriented Programming.
