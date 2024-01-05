@@ -7,21 +7,16 @@ public abstract class Collectable {
     private Pair<Integer, Integer> position;
     private Integer points;
 
-    public Collectable(Pair<Integer, Integer> position, Integer points) {
-        this.position = position;
-        this.points = points;
+    public Integer getPoints() {
+        return this.points;
     }
 
-    public Integer getPoints() {
-        return points;
+    public Pair<Integer, Integer> getPosition() {
+        return this.position;
     }
 
     public void setPoints(Integer points) {
         this.points = points;
-    }
-
-    public Pair<Integer, Integer> getPosition() {
-        return position;
     }
 
     public void setPosition(Pair<Integer, Integer> position) {
@@ -29,6 +24,7 @@ public abstract class Collectable {
     }
 
     public abstract void collect();
+
     public abstract void applyEffect();
 
 }
