@@ -26,7 +26,11 @@ public abstract class Collectable extends GameObject {
         this.position = position;
     }
 
-    public abstract void collect();
+    public void collect(Player p){
+        if (p.getPosition().equals(this.position)) {
+            this.applyEffect();
+        }
+    };
 
     public abstract void applyEffect();
 
