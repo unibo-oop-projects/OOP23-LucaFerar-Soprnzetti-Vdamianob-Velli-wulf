@@ -1,17 +1,20 @@
 package javawulf.model;
 
-import javafx.util.Pair;
+public abstract class Collectable extends GameObject {
 
-public abstract class Collectable {
-
-    private Pair<Integer, Integer> position;
+    private PositionOnMap position;
     private Integer points;
+
+    public Collectable(PositionOnMap position, Integer points) {
+        this.position = position;
+        this.points = points;
+    }
 
     public Integer getPoints() {
         return this.points;
     }
 
-    public Pair<Integer, Integer> getPosition() {
+    public PositionOnMap getPosition() {
         return this.position;
     }
 
@@ -19,7 +22,7 @@ public abstract class Collectable {
         this.points = points;
     }
 
-    public void setPosition(Pair<Integer, Integer> position) {
+    public void setPosition(PositionOnMap position) {
         this.position = position;
     }
 
