@@ -2,5 +2,5 @@ package javawulf.model;
 
 public interface BoundingBox {
 
-    public boolean isCollidingWith();
+    public boolean isCollidingWith(BoundingBox boundingBox);
 }
