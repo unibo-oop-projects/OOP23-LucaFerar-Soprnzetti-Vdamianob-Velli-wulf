@@ -3,10 +3,11 @@ package javawulf.model;
 public class Guard extends EnemyImpl {
 
     private Integer killValue;
-    
-    public Guard(PositionOnMap position, Integer points) {
-        super(position, points);
 
+    public Guard(BoundingBox collision, PositionOnMap position, Integer speed, BoundingBox hitBox, Integer points,
+            Integer killValue) {
+        super(collision, position, speed, hitBox, points);
+        this.killValue = killValue;
     }
 
     public Integer getKillValue() {
