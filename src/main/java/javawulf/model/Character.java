@@ -4,6 +4,12 @@ public abstract class Character extends GameObject {
     private Integer speed;
     private BoundingBox hitBox;
 
+    public Character(BoundingBox collision, PositionOnMap position, Integer speed, BoundingBox hitBox) {
+        super(collision, position);
+        this.speed = speed;
+        this.hitBox = hitBox;
+    }
+
     public Integer getSpeed() {
         return this.speed;
     }

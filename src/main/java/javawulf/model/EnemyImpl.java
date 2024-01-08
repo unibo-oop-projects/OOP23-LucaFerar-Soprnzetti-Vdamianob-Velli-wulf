@@ -1,20 +1,16 @@
 package javawulf.model;
 
 public abstract class EnemyImpl extends Character implements Enemy {
-    
-    private PositionOnMap position;
+
     private Integer points;
 
-    public PositionOnMap getPosition() {
-        return this.position;
+    public EnemyImpl(BoundingBox collision, PositionOnMap position, Integer speed, BoundingBox hitBox, Integer points) {
+        super(collision, position, speed, hitBox);
+        this.points = points;
     }
 
     public Integer getPoints() {
         return this.points;
-    }
-
-    public void setPosition(PositionOnMap position) {
-        this.position = position;
     }
 
     public void setPoints(Integer points) {
