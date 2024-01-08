@@ -24,7 +24,13 @@ public abstract class EnemyImpl extends Character implements Enemy {
     public abstract void move();
 
     public void inflictDamage(Player p) {
-        // TODO implement here
+        if (this.isPlayerColliding(p)) {
+            p.takeDamage();
+        }
+    }
+
+    private boolean isPlayerColliding(Player p) {
+        return this.getBounds().isCollidingWith(p.getBounds());
     }
 
     public abstract void takeHit();
