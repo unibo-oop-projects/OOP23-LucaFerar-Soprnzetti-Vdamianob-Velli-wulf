@@ -1,5 +1,7 @@
 package javawulf.model;
 
-public interface Player {
+public interface Player extends GameElement {
+
+    void takeDamage();
     
 }
