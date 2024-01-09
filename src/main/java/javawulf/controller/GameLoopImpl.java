@@ -1,5 +1,7 @@
 package javawulf.controller;
 
+import javawulf.view.GamePanel;
+
 public class GameLoopImpl implements GameLoop, Runnable {
 
     private final static int FPS = 60;
@@ -11,6 +13,7 @@ public class GameLoopImpl implements GameLoop, Runnable {
     private double interval;
     private Thread gameLoopThread;
     private int drawCount = 0;
+    private GamePanel gamePanel;
 
     @Override
     public void run() {
@@ -54,6 +57,7 @@ public class GameLoopImpl implements GameLoop, Runnable {
     public void startGameLoopThread() {
         this.gameLoopThread = new Thread(this);
         this.gameLoopThread.start();
+        this.gamePanel = new GamePanel();
     }
 
 }
