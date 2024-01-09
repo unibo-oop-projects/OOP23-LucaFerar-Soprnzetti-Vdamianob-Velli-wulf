@@ -5,6 +5,8 @@ package it.unibo.samplejavafx;
 
 
 import javafx.application.Application;
+import javawulf.controller.GameLoop;
+import javawulf.controller.GameLoopImpl;
 
 /** Main application entry-point's class. */
 

@@ -36,7 +36,7 @@ public class GameLoopImpl implements GameLoop, Runnable {
         }
 
         if (this.timer >= NANOSECONDS) {
-            // System.out.println("FPS: " + drawCount);
+            System.out.println("FPS: " + drawCount);
             this.drawCount = 0;
             this.timer = 0;
         }
