@@ -1,5 +1,5 @@
 package javawulf.controller;
 
-public interface GameLoop extends Runnable {
+public interface GameLoop {
     void startGameLoopThread();
 }
