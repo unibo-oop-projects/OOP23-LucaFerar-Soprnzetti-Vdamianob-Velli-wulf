@@ -15,6 +15,10 @@ public class GameLoopImpl implements GameLoop, Runnable {
     private int drawCount = 0;
     private GamePanel gamePanel;
 
+    public GameLoopImpl(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
+
     @Override
     public void run() {
             this.interval = NANOSECONDS / FPS;
@@ -51,13 +55,13 @@ public class GameLoopImpl implements GameLoop, Runnable {
 
     private void reDraw() {
         // Qui l'update della view...
+        this.gamePanel.repaint();
     }
 
     @Override
     public void startGameLoopThread() {
         this.gameLoopThread = new Thread(this);
         this.gameLoopThread.start();
-        this.gamePanel = new GamePanel();
     }
 
 }

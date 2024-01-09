@@ -1,11 +1,9 @@
 package javawulf.view;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import javafx.scene.paint.Color;
 
 public class GamePanel extends JPanel {
     // Screen settings
@@ -20,18 +18,9 @@ public class GamePanel extends JPanel {
     final int screenHeight = tileSize * maxScreenRow;
 
     public GamePanel() {
-        JFrame window = new JFrame();
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setTitle("Game title");
-        // GamePanel gamePanel = new GamePanel();
-        window.add(this);
-        window.pack();
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
 
         this.setPreferredSize(new Dimension(this.ScreenWidth, this.screenHeight));
-        this.setBackground(java.awt.Color.BLACK);
+        this.setBackground(java.awt.Color.WHITE);
         this.setDoubleBuffered(true);
         // this.addKeyListener(keyHandler);
         this.setFocusable(true);
