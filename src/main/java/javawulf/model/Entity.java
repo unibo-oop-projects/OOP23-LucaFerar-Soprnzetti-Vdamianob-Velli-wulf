@@ -1,6 +1,6 @@
 package javawulf.model;
 
-public abstract class Character extends GameObject {
+public abstract class Entity extends GameObject {
     private Integer speed;
     private BoundingBox hitBox;
 
