@@ -17,4 +17,8 @@ public interface Player {
     public void usePowerUp(PowerUp p);
 
     public boolean isDefeated();
+
+    public int getScore();
+
+    public void increaseScore(int points);
 }
