@@ -1,6 +1,6 @@
 package javawulf.model;
 
-public abstract class EnemyImpl extends Character implements Enemy {
+public abstract class EnemyImpl extends Entity implements Enemy {
 
     private Integer points;
 
@@ -11,7 +11,7 @@ public abstract class EnemyImpl extends Character implements Enemy {
 
     public Integer getPoints() {
         return this.points;
-    }
+    } 
 
     public void setPoints(Integer points) {
         this.points = points;

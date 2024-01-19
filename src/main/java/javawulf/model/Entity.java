@@ -5,7 +5,7 @@ public abstract class Entity extends GameObject {
     private BoundingBox hitBox;
     private Direction direction;
 
-    public Character(BoundingBox collision, PositionOnMap position, Integer speed, BoundingBox hitBox) {
+    public Entity(BoundingBox collision, PositionOnMap position, Integer speed, BoundingBox hitBox) {
         super(collision, position);
         this.speed = speed;
         this.hitBox = hitBox;
