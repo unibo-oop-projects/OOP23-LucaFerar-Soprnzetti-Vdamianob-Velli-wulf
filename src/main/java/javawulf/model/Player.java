@@ -1,8 +1,12 @@
 package javawulf.model;
 
+import javawulf.model.PlayerImpl.SwordType;
+
 public interface Player {
     
     public void attack();
+
+    public SwordType getSwordType();
 
     public void move() throws IllegalStateException;
 

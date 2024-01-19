@@ -10,6 +10,7 @@ public class PlayerImpl extends Entity implements Player {
     private int health;
     private SwordType sword;
     private int score;
+    private int strength;
 
     @Override
     public void attack() {
@@ -19,7 +20,8 @@ public class PlayerImpl extends Entity implements Player {
         throw new UnsupportedOperationException("Unimplemented method 'attack'");
     }
 
-    private SwordType getSwordType(){
+    @Override
+    public SwordType getSwordType(){
         return this.sword;
     }
 
@@ -46,6 +48,7 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public void changeSwordType() {
         this.sword = this.sword==SwordType.NORMAL ? SwordType.GREATSWORD : SwordType.NORMAL;
+        this.strength = this.sword==SwordType.GREATSWORD ? 2 : 1;
     }
 
     @Override
