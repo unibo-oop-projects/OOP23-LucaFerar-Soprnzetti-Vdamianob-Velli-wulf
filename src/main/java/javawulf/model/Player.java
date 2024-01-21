@@ -2,7 +2,7 @@ package javawulf.model;
 
 import javawulf.model.PlayerImpl.SwordType;
 
-public interface Player {
+public interface Player extends GameElement {
     
     public void attack();
 
