@@ -15,7 +15,7 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public void attack() {
         // TODO generate boundingbox in area considering its type
-        SwordType type = getSwordType();
+        //SwordType type = getSwordType();
         //considering the player direction form the bounding box
         throw new UnsupportedOperationException("Unimplemented method 'attack'");
     }
@@ -80,6 +80,16 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public void increaseScore(int points) {
         this.score = this.score + points;    
+    }
+
+    @Override
+    public int getSwordStrength() {
+        return this.strength;
+    }
+
+    @Override
+    public void setSwordStrength(int strength) {
+        this.strength = strength;
     }
     
 }
