@@ -21,7 +21,7 @@ public abstract class EnemyImpl extends Entity implements Enemy {
 
     public void inflictDamage(Player p) {
         if (this.isPlayerColliding(p)) {
-            p.takeDamage();
+            p.isHit();
         }
     }
 
