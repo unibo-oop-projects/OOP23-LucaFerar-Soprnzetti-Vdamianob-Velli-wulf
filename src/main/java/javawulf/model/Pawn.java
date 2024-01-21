@@ -24,7 +24,7 @@ public class Pawn extends EnemyImpl {
     }
 
     @Override
-    public void takeHit() {
+    public void takeHit(Player p) {
         this.setAlive(false);
     }
 
