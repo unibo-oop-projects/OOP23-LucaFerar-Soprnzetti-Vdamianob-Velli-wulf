@@ -5,5 +5,5 @@ public interface Enemy extends GameElement {
 
     public void inflictDamage(Player p);
 
-    public void takeHit();
+    public void takeHit(Player p);
 }

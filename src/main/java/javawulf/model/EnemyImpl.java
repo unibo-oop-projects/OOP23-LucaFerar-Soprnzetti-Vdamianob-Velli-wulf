@@ -29,5 +29,5 @@ public abstract class EnemyImpl extends Entity implements Enemy {
         return this.getBounds().isCollidingWith(p.getBounds());
     }
 
-    public abstract void takeHit();
+    public abstract void takeHit(Player p);
 }
