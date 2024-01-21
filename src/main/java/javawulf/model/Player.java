@@ -2,7 +2,7 @@ package javawulf.model;
 
 import javawulf.model.PlayerImpl.SwordType;
 
-public interface Player {
+public interface Player extends GameElement {
     
     public void attack();
 
@@ -25,4 +25,8 @@ public interface Player {
     public int getScore();
 
     public void increaseScore(int points);
+
+    public int getSwordStrength();
+
+    public void setSwordStrength(int strength);
 }
