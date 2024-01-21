@@ -6,11 +6,13 @@ public class Pawn extends EnemyImpl {
 
     private boolean isAlive;
     private long moveTime;
+    private int timeToWait;
 
     public Pawn(BoundingBox collision, PositionOnMap position, Integer speed, BoundingBox hitBox, Integer points) {
         super(collision, position, speed, hitBox, points);
         this.isAlive = true;
         this.moveTime = System.currentTimeMillis();
+        this.timeToWait = new Random().nextInt(4) + 1;
         this.setDirection(Direction.values()[new Random().nextInt(4)]);
     }
 
@@ -25,9 +27,10 @@ public class Pawn extends EnemyImpl {
     @Override
     public void move() {
 
-        if (System.currentTimeMillis() - this.moveTime >= new Random().nextInt(4) * 1000) {
+        if (System.currentTimeMillis() - this.moveTime >= timeToWait * 1000) {
             this.setDirection(Direction.values()[new Random().nextInt(4)]);
             this.moveTime = System.currentTimeMillis();
+            this.timeToWait = new Random().nextInt(4) + 1;
         }
 
         switch (this.getDirection()) {
