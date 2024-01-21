@@ -20,10 +20,6 @@ public class Pawn extends EnemyImpl {
         return isAlive;
     }
 
-    public void setAlive(boolean isAlive) {
-        this.isAlive = isAlive;
-    }
-
     @Override
     public void move() {
 
@@ -53,7 +49,7 @@ public class Pawn extends EnemyImpl {
 
     @Override
     public void takeHit(Player p) {
-        this.setAlive(false);
+        this.isAlive = false;
         p.increaseScore(this.getPoints());
     }
 
