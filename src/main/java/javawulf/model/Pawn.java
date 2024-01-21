@@ -1,12 +1,17 @@
 package javawulf.model;
 
+import java.util.Random;
+
 public class Pawn extends EnemyImpl {
 
     private boolean isAlive;
+    private long moveTime;
 
     public Pawn(BoundingBox collision, PositionOnMap position, Integer speed, BoundingBox hitBox, Integer points) {
         super(collision, position, speed, hitBox, points);
         this.isAlive = true;
+        this.moveTime = System.currentTimeMillis();
+        this.setDirection(Direction.values()[new Random().nextInt(4)]);
     }
 
     public boolean isAlive() {
@@ -19,8 +24,28 @@ public class Pawn extends EnemyImpl {
 
     @Override
     public void move() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'move'");
+
+        if (System.currentTimeMillis() - this.moveTime >= new Random().nextInt(4) * 1000) {
+            this.setDirection(Direction.values()[new Random().nextInt(4)]);
+            this.moveTime = System.currentTimeMillis();
+        }
+
+        switch (this.getDirection()) {
+            case UP:
+                this.getPosition().setPosition(this.getPosition().getX(), this.getPosition().getY() - this.getSpeed());
+                break;
+            case DOWN:
+                this.getPosition().setPosition(this.getPosition().getX(), this.getPosition().getY() + this.getSpeed());
+                break;
+            case LEFT:
+                this.getPosition().setPosition(this.getPosition().getX() - this.getSpeed(), this.getPosition().getY());
+                break;
+            case RIGHT:
+                this.getPosition().setPosition(this.getPosition().getX() + this.getSpeed(), this.getPosition().getY());
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
