@@ -2,27 +2,15 @@ package javawulf.model;
 
 public class PlayerImpl extends Entity implements Player {
 
-    public enum SwordType{
-        NORMAL,
-        GREATSWORD;
-    }
-
     private int health;
-    private SwordType sword;
     private int score;
-    private int strength;
+    private Sword sword;
 
     @Override
     public void attack() {
         // TODO generate boundingbox in area considering its type
-        //SwordType type = getSwordType();
         //considering the player direction form the bounding box
         throw new UnsupportedOperationException("Unimplemented method 'attack'");
-    }
-
-    @Override
-    public SwordType getSwordType(){
-        return this.sword;
     }
 
     @Override
@@ -43,12 +31,6 @@ public class PlayerImpl extends Entity implements Player {
     private void takeDamage(){
         this.health--;
         System.out.println("Health remaining :" + getHealth());
-    }
-
-    @Override
-    public void changeSwordType() {
-        this.sword = this.sword==SwordType.NORMAL ? SwordType.GREATSWORD : SwordType.NORMAL;
-        this.strength = this.sword==SwordType.GREATSWORD ? 2 : 1;
     }
 
     @Override
@@ -83,13 +65,8 @@ public class PlayerImpl extends Entity implements Player {
     }
 
     @Override
-    public int getSwordStrength() {
-        return this.strength;
-    }
-
-    @Override
-    public void setSwordStrength(int strength) {
-        this.strength = strength;
+    public Sword getSword() {
+        return this.sword;
     }
     
 }

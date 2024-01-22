@@ -1,18 +1,12 @@
 package javawulf.model;
 
-import javawulf.model.PlayerImpl.SwordType;
-
 public interface Player extends GameElement {
     
     public void attack();
 
-    public SwordType getSwordType();
-
     public void move() throws IllegalStateException;
 
     public boolean isHit();
-
-    public void changeSwordType();
 
     public boolean isAmuletPieceInCoordinate();
 
@@ -26,7 +20,5 @@ public interface Player extends GameElement {
 
     public void increaseScore(int points);
 
-    public int getSwordStrength();
-
-    public void setSwordStrength(int strength);
+    public Sword getSword();
 }
