@@ -1,10 +1,21 @@
 package javawulf.model;
 
+import java.util.Optional;
+
 public class PlayerImpl extends Entity implements Player {
 
     private int health;
     private int score;
     private Sword sword;
+    private int multiplier = 1;
+    private Optional<PowerUp> activePowerUp;
+
+    public PlayerImpl(int health){
+        this.score = 0;
+        this.health = health;
+        this.sword = new SwordImpl();
+        this.activePowerUp = Optional.empty();
+    }
 
     @Override
     public void attack() {
@@ -61,7 +72,7 @@ public class PlayerImpl extends Entity implements Player {
 
     @Override
     public void increaseScore(int points) {
-        this.score = this.score + points;    
+        this.score = this.score + points*multiplier;    
     }
 
     @Override
