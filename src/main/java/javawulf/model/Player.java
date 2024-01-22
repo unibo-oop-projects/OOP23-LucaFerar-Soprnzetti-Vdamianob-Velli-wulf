@@ -1,7 +1,7 @@
 package javawulf.model;
 
 public interface Player extends GameElement {
-    
+
     public void attack();
 
     public void move() throws IllegalStateException;
@@ -21,4 +21,6 @@ public interface Player extends GameElement {
     public void increaseScore(int points);
 
     public Sword getSword();
+    
+    
 }
