@@ -14,6 +14,10 @@ public interface BoundingBox {
 
     public boolean isCollidingWith(Rectangle box);
 
+    public Rectangle getCollisionArea();
+
+    public void setCollisionArea(int x, int y, int width, int height);
+
     public CollisionType getCollisionType();
 
     public void changeCollisionType(CollisionType type);

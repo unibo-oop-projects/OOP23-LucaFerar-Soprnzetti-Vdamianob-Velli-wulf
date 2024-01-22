@@ -9,13 +9,23 @@ public class BoundingBoxImpl implements BoundingBox {
     private CollisionType type;
 
     public BoundingBoxImpl(int x, int y, int width, int height, CollisionType type){
-        this.area = Optional.of(new Rectangle(x, y, width, height));
+        this.area = Optional.ofNullable(new Rectangle(x, y, width, height));
         this.type = type;
     };
 
     @Override
     public boolean isCollidingWith(Rectangle box) {
-        return this.area.orElse(new Rectangle(0,0,0,0)).intersects(box);
+        return this.area.orElse(new Rectangle()).intersects(box);
+    }
+
+    @Override
+    public Rectangle getCollisionArea() {
+        return this.area.orElse(new Rectangle());
+    }
+
+    @Override
+    public void setCollisionArea(int x, int y, int width, int height) {
+        this.area = Optional.ofNullable(new Rectangle(x, y, width, height));
     }
 
     @Override
