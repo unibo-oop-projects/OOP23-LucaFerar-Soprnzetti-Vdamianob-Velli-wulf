@@ -2,5 +2,5 @@ package javawulf.model;
 
 public interface Item {
 
-    void applyEffect();
+    void applyEffect(Player p);
 }

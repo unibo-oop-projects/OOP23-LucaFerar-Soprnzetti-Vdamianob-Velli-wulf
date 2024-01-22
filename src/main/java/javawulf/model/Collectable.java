@@ -28,10 +28,10 @@ public abstract class Collectable extends GameObject {
 
     public void collect(Player p){
         if (p.getPosition().equals(this.position)) {
-            this.applyEffect();
+            this.applyEffect(p);
         }
     };
 
-    public abstract void applyEffect();
+    public abstract void applyEffect(Player p);
 
 }
