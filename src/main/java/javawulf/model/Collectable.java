@@ -20,6 +20,7 @@ public abstract class Collectable extends GameObject {
     public void collect(Player p){
         if (p.getPosition().equals(this.position)) {
             this.applyEffect(p);
+            p.addPoints(this.points);
         }
     };
 
