@@ -6,7 +6,7 @@ public interface Player extends GameElement {
 
     public void move() throws IllegalStateException;
 
-    public boolean isHit();
+    public boolean isHit(BoundingBox b);
 
     public boolean isAmuletPieceInCoordinate();
 

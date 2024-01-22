@@ -2,6 +2,8 @@ package javawulf.model;
 
 import java.util.Optional;
 
+import javawulf.model.BoundingBox.CollisionType;
+
 public class PlayerImpl extends Entity implements Player {
 
     private int health;
@@ -10,7 +12,8 @@ public class PlayerImpl extends Entity implements Player {
     private int multiplier = 1;
     private Optional<PowerUp> activePowerUp;
 
-    public PlayerImpl(int health){
+    public PlayerImpl(int startingX, int startingY, int health){
+        //this.setPosition(new PositionOnMapImpl(startingX, startingY));
         this.score = 0;
         this.health = health;
         this.sword = new SwordImpl();
@@ -20,6 +23,8 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public void attack() {
         // TODO generate boundingbox in area considering its type
+        this.sword.getSwordType();
+        //this.sword.setBounds();
         //considering the player direction form the bounding box
         throw new UnsupportedOperationException("Unimplemented method 'attack'");
     }
@@ -27,16 +32,20 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public void move() throws IllegalStateException {
         // TODO Auto-generated method stub
-        super.getSpeed();
+        this.getSpeed();
+        //this.setDirection(getDirection());
         throw new UnsupportedOperationException("Unimplemented method 'move'");
     }
 
     @Override
-    public boolean isHit() {
-        //if (condition) {
+    public boolean isHit(BoundingBox b) {
+        if (this.getBounds().isCollidingWith(b.getCollisionArea())
+            && b.getCollisionType().equals(CollisionType.ENEMY)) {
             takeDamage();
-        //then return true;} else
-        return false;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void takeDamage(){
