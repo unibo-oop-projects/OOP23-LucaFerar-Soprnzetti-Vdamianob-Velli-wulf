@@ -3,6 +3,11 @@ package javawulf.model;
 public abstract class Collectable extends GameObject {
 
     private Integer points;
+
+    public Collectable(PositionOnMap position, Integer points) {
+        super(position);
+        this.points = points;
+    }
     
     public Integer getPoints() {
         return this.points;
