@@ -1,5 +1,7 @@
 package javawulf.model;
 
+import javawulf.model.BoundingBox.CollisionType;
+
 public class SwordImpl extends GameObject implements Sword {
 
     private final static int NORMAL = 1;
@@ -10,6 +12,7 @@ public class SwordImpl extends GameObject implements Sword {
     public SwordImpl(){
         this.strength = NORMAL;
         this.swordType = SwordType.GREATSWORD;
+        this.setBounds(new BoundingBoxImpl(0, 0, 0, 0, CollisionType.SWORD));
     }
 
     @Override
