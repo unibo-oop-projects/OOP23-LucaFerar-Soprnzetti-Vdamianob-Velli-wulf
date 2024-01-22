@@ -19,7 +19,9 @@ public class SwordImpl extends GameObject implements Sword {
 
     @Override
     public void setSwordStrength(int strength) {
-        this.strength = strength;
+        if (strength==NORMAL || strength==STRONG){
+            this.strength = strength;
+        }
     }
 
     @Override
