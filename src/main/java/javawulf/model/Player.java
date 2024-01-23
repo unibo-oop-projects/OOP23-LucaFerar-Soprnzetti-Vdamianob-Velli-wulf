@@ -10,7 +10,7 @@ public interface Player extends GameElement {
 
     public boolean isAmuletPieceInCoordinate();
 
-    public PlayerHealth getHealth();
+    public PlayerHealth getPlayerHealth();
 
     public void usePowerUp(PowerUp p);
 
@@ -24,6 +24,6 @@ public interface Player extends GameElement {
 
     public void setSword(Sword sword);
 
-    public void setHealth(PlayerHealth health);
+    public void setPlayerHealth(PlayerHealth health);
     
 }
