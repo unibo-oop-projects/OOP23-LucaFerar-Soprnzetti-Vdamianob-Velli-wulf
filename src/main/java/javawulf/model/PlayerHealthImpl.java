@@ -6,6 +6,12 @@ public class PlayerHealthImpl implements PlayerHealth {
     private int maxHealth;
     private ShieldStatus shieldStatus;
 
+    public PlayerHealthImpl(int startingHealth){
+        this.health = startingHealth;
+        this.maxHealth = startingHealth;
+        this.shieldStatus = ShieldStatus.NONE;
+    }
+
     @Override
     public int getHealth() {
         return this.health;
@@ -23,14 +29,10 @@ public class PlayerHealthImpl implements PlayerHealth {
 
     @Override
     public void setHealth(int health) {
-        if (health>=0){
-            if (this.health + health < this.maxHealth) {
-                this.health = this.health + health;
-            } else {
-                this.health = this.maxHealth;
-            }
+        if (this.health + health < this.maxHealth) {
+            this.health += health;
         } else {
-            this.health--;
+            this.health = this.maxHealth;
         }
     }
 
