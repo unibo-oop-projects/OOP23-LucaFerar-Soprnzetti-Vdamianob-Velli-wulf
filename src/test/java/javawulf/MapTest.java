@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import javawulf.model.map.Room;
-import javawulf.model.map.RoomImpl;
+import javawulf.model.map.Space;
 import javawulf.model.map.Tile;
 import javawulf.model.map.TileImpl;
 import javawulf.model.map.TileType;
@@ -23,12 +23,13 @@ public class MapTest {
 
     @Test
     void testRooms() {
-        Room roomA = new RoomImpl(10, 10);
+        Space roomA = new Room(10, 10);
         assertEquals(10, roomA.getWidth());
         assertEquals(10, roomA.getHeight());
 
-        Room roomB = new RoomImpl(6, 9);
+        Space roomB = new Room(6, 9);
         assertEquals(6, roomB.getWidth());
         assertEquals(9, roomB.getHeight());
+        assertEquals(TileType.ROOM, Room.defaultType);
     }
 }

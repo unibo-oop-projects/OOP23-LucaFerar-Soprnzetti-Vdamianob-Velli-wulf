@@ -1,10 +1,10 @@
 package javawulf.model.map;
 
-public class RoomImpl implements Room {
-    private int width;
-    private int height;
+public abstract class AbstractSpace implements Space {
+    private final int width;
+    private final int height;
 
-    public RoomImpl(int width, int height) {
+    public AbstractSpace(int width, int height) {
         this.width = width;
         this.height = height;
     }
