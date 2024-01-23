@@ -11,12 +11,16 @@ public class PlayerImpl extends Entity implements Player {
     private Sword sword;
     private int multiplier = 1;
     private Optional<PowerUp> activePowerUp;
+    private int shield;
+    private int maxHealth;
 
     public PlayerImpl(int startingX, int startingY, int health){
         //this.setPosition(new PositionOnMapImpl(startingX, startingY));
+        super(new PositionOnMapImpl(startingX, startingY), CollisionType.PLAYER, 1);
         this.score = 0;
         this.health = health;
-        this.sword = new SwordImpl();
+        this.maxHealth = health;
+        this.sword = new SwordImpl(new PositionOnMapImpl(startingX, startingY+1));
         this.activePowerUp = Optional.empty();
     }
 

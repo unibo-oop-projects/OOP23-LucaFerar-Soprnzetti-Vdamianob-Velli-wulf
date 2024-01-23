@@ -9,10 +9,10 @@ public class SwordImpl extends GameObject implements Sword {
     private int strength;
     private SwordType swordType;
 
-    public SwordImpl(){
+    public SwordImpl(PositionOnMap position){
+        super(position, new BoundingBoxImpl(0, 0, 0, 0, CollisionType.SWORD));
         this.strength = NORMAL;
         this.swordType = SwordType.GREATSWORD;
-        this.setBounds(new BoundingBoxImpl(0, 0, 0, 0, CollisionType.SWORD));
     }
 
     @Override
