@@ -35,6 +35,7 @@ public class MapTest {
         assertEquals(9, roomB.getHeight());
     }
 
+    @Test
     void testCorridors() {
         assertEquals(TileType.CORRIDOR, Corridor.defaultType);
 
