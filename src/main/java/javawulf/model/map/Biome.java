@@ -48,6 +48,6 @@ public interface Biome {
      * @return a defensive copy of a list of corridor positions and their relative
      *         corridors [ (tile x, y) - CORRIDOR ]
      */
-    List<Pair<Pair<Integer, Integer>, Room>> getCorridors();
+    List<Pair<Pair<Integer, Integer>, Corridor>> getCorridors();
 
 }
