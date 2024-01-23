@@ -1,11 +1,13 @@
 package javawulf.model;
 
+import javawulf.model.BoundingBox.CollisionType;
+
 public abstract class Collectable extends GameObject {
 
     private Integer points;
 
     public Collectable(PositionOnMap position, Integer points) {
-        super(position);
+        super(position, CollisionType.COLLECTABLE);
         this.points = points;
     }
     
@@ -18,7 +20,7 @@ public abstract class Collectable extends GameObject {
     }
   
     public void collect(Player p){
-        if (p.getPosition().equals(this.position)) {
+        if (this.getBounds().isCollidingWith(p.getBounds())) {
             this.applyEffect(p);
             p.addPoints(this.points);
         }
