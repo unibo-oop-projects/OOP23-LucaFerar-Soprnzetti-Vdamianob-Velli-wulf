@@ -27,7 +27,7 @@ public class ScoreImpl implements Score{
 
     @Override
     public void addPoints(int points) {
-        this.points = this.points + points*this.getMultiplier();
+        this.points = this.points + points * this.getMultiplier();
     }
     
 }

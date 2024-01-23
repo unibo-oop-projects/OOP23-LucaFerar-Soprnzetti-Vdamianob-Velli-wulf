@@ -16,7 +16,8 @@ public abstract class GameObject implements GameElement{
         //the size of the element should be factor, likely through a parameter of the constructor
         //or as a private static final variable (as it could be the standard one),
         //otherwise it would be difficult to calculate the area surronding the position of the element
-        //which in this case would be the standard one (player/enemy/normal sword/collectables) 
+        //which in this case would be the standard one (player/enemy/normal sword/collectables)
+        //which is a square basically
         this(position, new BoundingBoxImpl(0, 0, 0, 0, type));
     }
 
