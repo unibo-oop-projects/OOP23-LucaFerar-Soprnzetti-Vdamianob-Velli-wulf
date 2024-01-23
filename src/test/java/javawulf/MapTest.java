@@ -11,6 +11,7 @@ public class MapTest {
     @Test void testTiles() {
         Tile firstTile = new TileImpl(TileType.CORRIDOR);
         assertEquals(TileType.CORRIDOR, firstTile.getType());
+        assertTrue(firstTile.getType().isCrossable());
         // firstTile.setType(TileType.ROOM);
         // assertEquals(TileType.ROOM, firstTile.getType());
 
