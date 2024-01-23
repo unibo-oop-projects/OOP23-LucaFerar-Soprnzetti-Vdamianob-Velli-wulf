@@ -32,4 +32,5 @@ public class MapTest {
         assertEquals(9, roomB.getHeight());
         assertEquals(TileType.ROOM, Room.defaultType);
     }
+    
 }
