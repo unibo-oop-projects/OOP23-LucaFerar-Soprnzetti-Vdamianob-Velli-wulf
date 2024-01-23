@@ -25,7 +25,7 @@ public interface Biome {
      *                 placed inside the biome (tile x, y)
      * @param room     to add to the Biome
      */
-    void addRoom(Pair<Integer, Integer> biomePos, Room room);
+    void addRoom(TilePosition biomePos, Room room);
 
     /**
      * 
@@ -34,20 +34,20 @@ public interface Biome {
      *                 placed inside the biome (tile x, y)
      * @param corridor to add to the Biome
      */
-    void addCorridor(Pair<Integer, Integer> biomePos, Corridor corridor);
+    void addCorridor(TilePosition biomePos, Corridor corridor);
 
     /**
      * 
      * @return a defensive copy of a list of room positions and their relative rooms
      *         [ (tile x, y) - ROOM ]
      */
-    List<Pair<Pair<Integer, Integer>, Room>> getRooms();
+    List<Pair<TilePosition, Room>> getRooms();
 
     /**
      * 
      * @return a defensive copy of a list of corridor positions and their relative
      *         corridors [ (tile x, y) - CORRIDOR ]
      */
-    List<Pair<Pair<Integer, Integer>, Corridor>> getCorridors();
+    List<Pair<TilePosition, Corridor>> getCorridors();
 
 }
