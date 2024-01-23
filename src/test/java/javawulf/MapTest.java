@@ -3,6 +3,7 @@ package javawulf;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import javawulf.model.map.Corridor;
 import javawulf.model.map.Room;
 import javawulf.model.map.Space;
 import javawulf.model.map.Tile;
@@ -23,6 +24,8 @@ public class MapTest {
 
     @Test
     void testRooms() {
+        assertEquals(TileType.ROOM, Room.defaultType);
+
         Space roomA = new Room(10, 10);
         assertEquals(10, roomA.getWidth());
         assertEquals(10, roomA.getHeight());
@@ -30,7 +33,17 @@ public class MapTest {
         Space roomB = new Room(6, 9);
         assertEquals(6, roomB.getWidth());
         assertEquals(9, roomB.getHeight());
-        assertEquals(TileType.ROOM, Room.defaultType);
     }
-    
+
+    void testCorridors() {
+        assertEquals(TileType.CORRIDOR, Corridor.defaultType);
+
+        Space corridor1 = new Corridor(10, 5);
+        assertEquals(10, corridor1.getWidth());
+        assertEquals(5, corridor1.getHeight());
+
+        Space corridor2 = new Corridor(6, 3);
+        assertEquals(6, corridor2.getWidth());
+        assertEquals(3, corridor2.getHeight());
+    }
 }
