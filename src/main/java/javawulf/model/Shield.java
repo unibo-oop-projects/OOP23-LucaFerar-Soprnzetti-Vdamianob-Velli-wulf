@@ -1,5 +1,7 @@
 package javawulf.model;
 
+import javawulf.model.PlayerHealth.ShieldStatus;
+
 public class Shield extends Collectable implements Item {
 
     private int duration;
@@ -19,8 +21,7 @@ public class Shield extends Collectable implements Item {
 
     @Override
     public void applyEffect(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'applyEffect'");
+        p.getPlayerHealth().setShieldStatus(ShieldStatus.FULL);
     }
 
 }
