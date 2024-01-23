@@ -19,7 +19,6 @@ public class GreatSword extends Collectable implements Item {
 
     @Override
     public void applyEffect(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'applyEffect'");
+        p.getSword().changeSwordType();
     }
 }
