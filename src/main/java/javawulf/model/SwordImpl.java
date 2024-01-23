@@ -11,7 +11,7 @@ public class SwordImpl extends GameObject implements Sword {
     private int durability;
     private SwordType swordType;
 
-    public SwordImpl(PositionOnMap position){
+    public SwordImpl(PositionOnMap position) {
         super(position, new BoundingBoxImpl(0, 0, 0, 0, CollisionType.SWORD));
         this.strength = NORMAL;
         this.swordType = SwordType.NORMAL;
@@ -34,7 +34,7 @@ public class SwordImpl extends GameObject implements Sword {
 
     @Override
     public void setSwordStrength(int strength) {
-        if (strength==NORMAL || strength==STRONG){
+        if (strength == NORMAL || strength == STRONG) {
             this.strength = strength;
         }
     }
@@ -44,11 +44,16 @@ public class SwordImpl extends GameObject implements Sword {
         return this.swordType;
     }
 
+    /**
+     * changes the type of the sword, if the sword is a greatsword it will change to a normal sword
+     * if the sword is a normal sword it will change to a greatsword, also, when it changes to a
+     * greatsword it will set the durability to the standard initial value
+     */
     @Override
     public void changeSwordType() {
-        this.swordType = this.swordType==SwordType.NORMAL ? SwordType.GREATSWORD : SwordType.NORMAL;
-        this.strength = this.swordType==SwordType.GREATSWORD ? STRONG : this.strength;
-        if (this.swordType==SwordType.GREATSWORD){
+        this.swordType = this.swordType == SwordType.NORMAL ? SwordType.GREATSWORD : SwordType.NORMAL;
+        this.strength = this.swordType == SwordType.GREATSWORD ? STRONG : this.strength;
+        if (this.swordType == SwordType.GREATSWORD) {
             this.setDurability(DURABILITY);
         }
     }
@@ -58,8 +63,4 @@ public class SwordImpl extends GameObject implements Sword {
         this.durability--;
     }
 
-    
-
-    
-    
 }
