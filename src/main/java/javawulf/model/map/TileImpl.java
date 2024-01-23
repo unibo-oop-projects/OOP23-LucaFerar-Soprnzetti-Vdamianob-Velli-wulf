@@ -13,10 +13,4 @@ public class TileImpl implements Tile {
         return this.type;
     }
 
-    // @Override
-    // public void setType(TileType type) {
-    //     // TODO Auto-generated method stub
-    //     throw new UnsupportedOperationException("Unimplemented method 'setType'");
-    // }
-
 }
