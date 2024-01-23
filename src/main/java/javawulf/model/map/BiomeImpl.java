@@ -16,26 +16,22 @@ public class BiomeImpl implements Biome {
 
     @Override
     public void addRoom(Pair<Integer, Integer> biomePos, Room room) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addRoom'");
+        this.rooms.add(new Pair<Pair<Integer, Integer>, Room>(biomePos, room));
     }
 
     @Override
     public void addCorridor(Pair<Integer, Integer> biomePos, Corridor corridor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addCorridor'");
+        this.corridors.add(new Pair<Pair<Integer, Integer>, Corridor>(biomePos, corridor));
     }
 
     @Override
     public List<Pair<Pair<Integer, Integer>, Room>> getRooms() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRooms'");
+        return new ArrayList<>(this.rooms);
     }
 
     @Override
-    public List<Pair<Pair<Integer, Integer>, Room>> getCorridors() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCorridors'");
+    public List<Pair<Pair<Integer, Integer>, Corridor>> getCorridors() {
+        return new ArrayList<>(this.corridors);
     }
 
 }
