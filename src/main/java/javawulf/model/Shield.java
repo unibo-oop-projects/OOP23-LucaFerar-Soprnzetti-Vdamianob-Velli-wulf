@@ -2,7 +2,7 @@ package javawulf.model;
 
 public class Shield extends Collectable implements Item {
 
-    private Integer duration;
+    private int duration;
 
     public Shield(PositionOnMap position, Integer points, Integer duration) {
         super(position, points);
@@ -13,8 +13,8 @@ public class Shield extends Collectable implements Item {
         return duration;
     }
 
-    public void setDuration(Integer duration) {
-        this.duration = duration;
+    public void consume() {
+        this.duration--;
     }
 
     @Override
