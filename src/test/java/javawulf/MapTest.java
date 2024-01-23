@@ -3,7 +3,6 @@ package javawulf;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import javafx.util.Pair;
 import javawulf.model.map.Biome;
 import javawulf.model.map.BiomeImpl;
 import javawulf.model.map.Corridor;
