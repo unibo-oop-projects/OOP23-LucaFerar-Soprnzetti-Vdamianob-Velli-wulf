@@ -7,17 +7,15 @@ import javawulf.model.BoundingBox.CollisionType;
 public class PlayerImpl extends Entity implements Player {
 
     private int health;
-    private int score;
+    private Score score;
     private Sword sword;
-    private int multiplier = 1;
     private Optional<PowerUp> activePowerUp;
     private int shield;
     private int maxHealth;
 
     public PlayerImpl(int startingX, int startingY, int health){
-        //this.setPosition(new PositionOnMapImpl(startingX, startingY));
         super(new PositionOnMapImpl(startingX, startingY), CollisionType.PLAYER, 1);
-        this.score = 0;
+        this.score = new ScoreImpl();
         this.health = health;
         this.maxHealth = health;
         this.sword = new SwordImpl(new PositionOnMapImpl(startingX, startingY+1));
@@ -79,13 +77,8 @@ public class PlayerImpl extends Entity implements Player {
     }
 
     @Override
-    public int getScore() {
+    public Score getScore() {
         return this.score;
-    }
-
-    @Override
-    public void increaseScore(int points) {
-        this.score = this.score + points*multiplier;    
     }
 
     @Override

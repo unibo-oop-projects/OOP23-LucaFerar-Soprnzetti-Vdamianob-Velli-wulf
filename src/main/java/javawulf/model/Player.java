@@ -16,9 +16,7 @@ public interface Player extends GameElement {
 
     public boolean isDefeated();
 
-    public int getScore();
-
-    public void increaseScore(int points);
+    public Score getScore();
 
     public Sword getSword();
     
