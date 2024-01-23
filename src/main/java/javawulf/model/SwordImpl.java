@@ -6,6 +6,7 @@ public class SwordImpl extends GameObject implements Sword {
 
     private final static int NORMAL = 1;
     private final static int STRONG = 2;
+    private final static int DURABILITY = 50;
     private int strength;
     private int durability;
     private SwordType swordType;
@@ -48,7 +49,7 @@ public class SwordImpl extends GameObject implements Sword {
         this.swordType = this.swordType==SwordType.NORMAL ? SwordType.GREATSWORD : SwordType.NORMAL;
         this.strength = this.swordType==SwordType.GREATSWORD ? STRONG : this.strength;
         if (this.swordType==SwordType.GREATSWORD){
-            this.setDurability(50);
+            this.setDurability(DURABILITY);
         }
     }
 
