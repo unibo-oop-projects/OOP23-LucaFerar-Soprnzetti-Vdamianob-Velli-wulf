@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.PlayerHealth.ShieldStatus;
+import javawulf.model.Sword.SwordType;
 
 public class PlayerImpl extends Entity implements Player {
 
@@ -24,7 +25,21 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public void attack() {
         // TODO generate boundingbox in area considering its type
-        this.sword.getSwordType();
+        
+        //implementation of the greatsword getting consumed
+        if (this.sword.getSwordType().equals(SwordType.GREATSWORD)){
+            
+            this.sword.consume();
+
+            System.out.println("Durability remaining :" + this.sword.getDurability());
+
+            if (this.sword.getDurability()==0){
+                this.sword.changeSwordType();
+                System.out.println("Greatsword broke!! Changed to normal");
+            }
+            
+        }
+
         //this.sword.setBounds();
         //considering the player direction form the bounding box
         throw new UnsupportedOperationException("Unimplemented method 'attack'");
