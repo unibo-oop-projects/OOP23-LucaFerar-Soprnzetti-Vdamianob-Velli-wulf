@@ -3,21 +3,20 @@ package javawulf.model;
 import java.util.Optional;
 
 import javawulf.model.BoundingBox.CollisionType;
+import javawulf.model.PlayerHealth.ShieldStatus;
 
 public class PlayerImpl extends Entity implements Player {
 
-    private int health;
+    private static final int DAMAGE = -1;
+    private PlayerHealth health;
     private Score score;
     private Sword sword;
     private Optional<PowerUp> activePowerUp;
-    private int shield;
-    private int maxHealth;
 
     public PlayerImpl(int startingX, int startingY, int health){
         super(new PositionOnMapImpl(startingX, startingY), CollisionType.PLAYER, 1);
         this.score = new ScoreImpl();
-        this.health = health;
-        this.maxHealth = health;
+        this.health = new PlayerHealthImpl(health);
         this.sword = new SwordImpl(new PositionOnMapImpl(startingX, startingY+1));
         this.activePowerUp = Optional.empty();
     }
@@ -51,8 +50,17 @@ public class PlayerImpl extends Entity implements Player {
     }
 
     private void takeDamage(){
-        this.health--;
-        System.out.println("Health remaining :" + getHealth());
+        if(this.health.getShieldStatus().equals(ShieldStatus.NONE)){
+            this.health.setHealth(DAMAGE);
+        } else {
+            if (this.health.getShieldStatus().equals(ShieldStatus.FULL)){
+                this.health.setShieldStatus(ShieldStatus.HALF);
+            } else {
+                this.health.setShieldStatus(ShieldStatus.NONE);
+            }
+        }
+        System.out.println("Health remaining :" + this.getPlayerHealth().getHealth());
+        System.out.println("Shield hits remaining :" + this.getPlayerHealth().getShieldStatus().strength);
     }
 
     @Override
@@ -61,7 +69,7 @@ public class PlayerImpl extends Entity implements Player {
     }
 
     @Override
-    public int getHealth() {
+    public PlayerHealth getPlayerHealth() {
         return this.health;
     }
 
@@ -73,7 +81,7 @@ public class PlayerImpl extends Entity implements Player {
 
     @Override
     public boolean isDefeated() {
-        return this.health==0;
+        return this.health.getHealth()==0;
     }
 
     @Override
@@ -84,6 +92,21 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public Sword getSword() {
         return this.sword;
+    }
+
+    @Override
+    public void setScore(Score score) {
+        this.score = score;
+    }
+
+    @Override
+    public void setSword(Sword sword) {
+        this.sword = sword;
+    }
+
+    @Override
+    public void setPlayerHealth(PlayerHealth health) {
+        this.health = health;
     }
     
 }
