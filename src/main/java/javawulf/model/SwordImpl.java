@@ -44,11 +44,6 @@ public class SwordImpl extends GameObject implements Sword {
         return this.swordType;
     }
 
-    /**
-     * changes the type of the sword, if the sword is a greatsword it will change to a normal sword
-     * if the sword is a normal sword it will change to a greatsword, also, when it changes to a
-     * greatsword it will set the durability to the standard initial value
-     */
     @Override
     public void changeSwordType() {
         this.swordType = this.swordType == SwordType.NORMAL ? SwordType.GREATSWORD : SwordType.NORMAL;
