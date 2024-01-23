@@ -16,7 +16,7 @@ public interface Biome {
      * (Size repesents
      * both Height and Width).
      */
-    public static int size = 50;
+    public static int SIZE = 50;
 
     /**
      * 
