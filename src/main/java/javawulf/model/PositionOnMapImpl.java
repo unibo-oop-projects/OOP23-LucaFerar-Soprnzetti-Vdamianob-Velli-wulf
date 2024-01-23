@@ -6,6 +6,10 @@ public class PositionOnMapImpl implements PositionOnMap {
     
     private Pair<Integer, Integer> position;
 
+    public PositionOnMapImpl(int x, int y){
+        this.position = new Pair<Integer,Integer>(x, y);
+    }
+
     public Pair<Integer, Integer> getPosition() {
         return position;
     }
