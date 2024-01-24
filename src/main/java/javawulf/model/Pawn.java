@@ -48,9 +48,10 @@ public class Pawn extends EnemyImpl {
             default:
                 break;
         }
-        if (!this.getBounds().isCollidingWith(newX, newY)){
+        this.getPosition().setPosition(newX, newY);
+        /*if (!this.getBounds().isCollidingWith(newX, newY)){
             this.getPosition().setPosition(newX, newY);
-        }
+        }*/
     }
 
     @Override
