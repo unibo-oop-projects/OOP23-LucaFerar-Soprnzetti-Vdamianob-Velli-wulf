@@ -11,6 +11,11 @@ public class SwordImpl extends GameObject implements Sword {
     private int durability;
     private SwordType swordType;
 
+    /**
+     * Creates a new sword by using the specified position
+     * 
+     * @param position the exact position the sword must be in when it is created
+     */
     public SwordImpl(PositionOnMap position) {
         super(position, new BoundingBoxImpl(0, 0, 0, 0, CollisionType.SWORD));
         this.strength = NORMAL;
@@ -46,8 +51,8 @@ public class SwordImpl extends GameObject implements Sword {
 
     @Override
     public void changeSwordType() {
-        this.swordType = this.swordType == SwordType.NORMAL ? SwordType.GREATSWORD : SwordType.NORMAL;
-        this.strength = this.swordType == SwordType.GREATSWORD ? STRONG : this.strength;
+        this.swordType = this.swordType.equals(SwordType.NORMAL) ? SwordType.GREATSWORD : SwordType.NORMAL;
+        this.strength = this.swordType.equals(SwordType.GREATSWORD) ? STRONG : this.strength;
         if (this.swordType == SwordType.GREATSWORD) {
             this.setDurability(DURABILITY);
         }
