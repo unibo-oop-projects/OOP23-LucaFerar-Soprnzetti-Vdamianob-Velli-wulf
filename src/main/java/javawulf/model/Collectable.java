@@ -20,9 +20,9 @@ public abstract class Collectable extends GameObject {
     }
   
     public void collect(Player p){
-        if (this.getBounds().isCollidingWith(p.getBounds())) {
+        if (this.getBounds().isCollidingWith(p.getBounds().getCollisionArea())) {
             this.applyEffect(p);
-            p.addPoints(this.points);
+            p.getScore().addPoints(this.points);
         }
     };
 
