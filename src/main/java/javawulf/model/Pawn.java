@@ -56,8 +56,10 @@ public class Pawn extends EnemyImpl {
 
     @Override
     public void takeHit(Player p) {
-        this.isAlive = false;
-        p.increaseScore(this.getPoints());
+        if (this.isHit(p.getSword())){
+            this.isAlive = false;
+            p.getScore().addPoints(this.getPoints());
+        } 
     }
 
 }
