@@ -6,6 +6,13 @@ public class PlayerHealthImpl implements PlayerHealth {
     private int maxHealth;
     private ShieldStatus shieldStatus;
 
+    /**
+     * Creates the player's health statistics for the current game.
+     * The starting health indicates also the current maximum amount
+     * of health the player has at the beginning of the game
+     * 
+     * @param startingHealth the amount of health the player begins the game with 
+     */
     public PlayerHealthImpl(int startingHealth){
         this.health = startingHealth;
         this.maxHealth = startingHealth;
