@@ -8,6 +8,16 @@ import javawulf.model.PositionOnMap;
  * <img src="../../../../resources/javadoc/biome-map-suddivision.png" />
  */
 public interface Map {
+    /**
+     * 
+     * @param position (absolute)
+     * @return tile position
+     */
     TilePosition getTilePosition(PositionOnMap position);
+    /**
+     * 
+     * @param position (absolute)
+     * @return tile type relative to the position passed
+     */
     TileType getTileType(PositionOnMap position);
 }
