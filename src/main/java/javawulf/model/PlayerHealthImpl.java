@@ -36,10 +36,25 @@ public class PlayerHealthImpl implements PlayerHealth {
 
     @Override
     public void setHealth(int health) {
-        if (this.health + health < this.maxHealth) {
-            this.health += health;
+        if (health<0){
+            this.damage();
         } else {
-            this.health = this.maxHealth;
+            this.health = Math.min((this.health + health), this.maxHealth);
+        }
+    }
+
+    private void damage(){
+        if(this.getShieldStatus().equals(ShieldStatus.NONE)){
+            this.health--;
+            System.out.println("Health remaining :" + this.getHealth());
+        } else {
+            if (this.getShieldStatus().equals(ShieldStatus.FULL)){
+                this.setShieldStatus(ShieldStatus.HALF);
+                System.out.println("Shield hits remaining :" + this.getShieldStatus().strength);
+            } else {
+                this.setShieldStatus(ShieldStatus.NONE);
+                System.out.println("Shield broke!");
+            }
         }
     }
 

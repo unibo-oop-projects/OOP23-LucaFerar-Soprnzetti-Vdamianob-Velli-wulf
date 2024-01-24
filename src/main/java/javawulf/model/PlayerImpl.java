@@ -3,7 +3,6 @@ package javawulf.model;
 import java.util.Optional;
 
 import javawulf.model.BoundingBox.CollisionType;
-import javawulf.model.PlayerHealth.ShieldStatus;
 import javawulf.model.Sword.SwordType;
 
 public class PlayerImpl extends Entity implements Player {
@@ -57,25 +56,11 @@ public class PlayerImpl extends Entity implements Player {
     public boolean isHit(BoundingBox b) {
         if (this.getBounds().isCollidingWith(b.getCollisionArea())
             && b.getCollisionType().equals(CollisionType.ENEMY)) {
-            takeDamage();
+            this.health.setHealth(DAMAGE);
             return true;
         } else {
             return false;
         }
-    }
-
-    private void takeDamage(){
-        if(this.health.getShieldStatus().equals(ShieldStatus.NONE)){
-            this.health.setHealth(DAMAGE);
-        } else {
-            if (this.health.getShieldStatus().equals(ShieldStatus.FULL)){
-                this.health.setShieldStatus(ShieldStatus.HALF);
-            } else {
-                this.health.setShieldStatus(ShieldStatus.NONE);
-            }
-        }
-        System.out.println("Health remaining :" + this.getPlayerHealth().getHealth());
-        System.out.println("Shield hits remaining :" + this.getPlayerHealth().getShieldStatus().strength);
     }
 
     @Override
