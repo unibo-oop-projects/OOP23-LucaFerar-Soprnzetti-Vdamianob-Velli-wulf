@@ -6,7 +6,7 @@ public interface PositionOnMap {
     
     public Pair<Integer,Integer> getPosition();
 
-    public void setPosition(Pair<Integer,Integer> p);
+    public void setPosition(Integer x, Integer y);
 
     public Integer getX();
 

@@ -21,20 +21,25 @@ public abstract class GameObject implements GameElement{
         this(position, new BoundingBoxImpl(0, 0, 0, 0, type));
     }
 
-    public BoundingBox getBounds(){
+    public GameObject(BoundingBox collision, PositionOnMap position) {
+        this.collision = collision;
+        this.position = position;
+    }
+
+    public BoundingBox getBounds() {
         return this.collision;
     }
 
-    public PositionOnMap getPosition(){
+    public PositionOnMap getPosition() {
         return this.position;
     }
 
-    public void setBounds(BoundingBox b){
+    public void setBounds(BoundingBox b) {
         this.collision = b;
     }
 
-    public void setPosition(PositionOnMap p){
+    public void setPosition(PositionOnMap p) {
         this.position = p;
     }
-    
+
 }

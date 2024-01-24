@@ -14,8 +14,8 @@ public class PositionOnMapImpl implements PositionOnMap {
         return position;
     }
 
-    public void setPosition(Pair<Integer, Integer> position) {
-        this.position = position;
+    public void setPosition(Integer x, Integer y) {
+        this.position = new Pair<Integer, Integer>(x, y);
     }
 
     public Integer getX() {
