@@ -5,8 +5,13 @@ public class ScoreImpl implements Score{
     private int points;
     private Multiplier multiplier;
 
-    public ScoreImpl(){
-        this.points = 0;
+    /**
+     * Creates the score for the current game.
+     * If a certain amount has been specified it will be used as a strating point
+     * for the point total (could be used as a bonus for choosing a harder difficulty)
+     */
+    public ScoreImpl(int points){
+        this.points = points;
         this.multiplier = Multiplier.DEFAULT;
     }
 
