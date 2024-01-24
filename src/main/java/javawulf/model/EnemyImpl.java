@@ -28,12 +28,12 @@ public abstract class EnemyImpl extends Entity implements Enemy {
     }
 
     private boolean isPlayerColliding(Player p) {
-        return this.getBounds().isCollidingWith(p.getBounds().getCollisionArea());
+        return this.getBounds().isCollidingWith(p.getBounds().getCollisionArea()) && p.getBounds().getCollisionType() == CollisionType.PLAYER;
     }
 
     public abstract void takeHit(Player p);
 
     protected boolean isHit(Sword s) {
-        return this.getBounds().isCollidingWith(s.getBounds().getCollisionArea());
+        return this.getBounds().isCollidingWith(s.getBounds().getCollisionArea()) && s.getBounds().getCollisionType() == CollisionType.SWORD;
     }
 }
