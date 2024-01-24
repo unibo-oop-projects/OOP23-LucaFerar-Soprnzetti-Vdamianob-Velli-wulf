@@ -23,7 +23,7 @@ public abstract class EnemyImpl extends Entity implements Enemy {
 
     public void inflictDamage(Player p) {
         if (this.isPlayerColliding(p)) {
-            p.isHit();
+            p.isHit(this.getBounds());
         }
     }
 
@@ -32,4 +32,8 @@ public abstract class EnemyImpl extends Entity implements Enemy {
     }
 
     public abstract void takeHit(Player p);
+
+    protected boolean isHit(Sword s) {
+        return this.getBounds().isCollidingWith(s.getBounds().getCollisionArea());
+    }
 }
