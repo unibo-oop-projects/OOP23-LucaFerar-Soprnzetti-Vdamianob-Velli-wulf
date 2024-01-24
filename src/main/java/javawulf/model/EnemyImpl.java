@@ -1,11 +1,13 @@
 package javawulf.model;
 
+import javawulf.model.BoundingBox.CollisionType;
+
 public abstract class EnemyImpl extends Entity implements Enemy {
 
     private Integer points;
 
-    public EnemyImpl(BoundingBox collision, PositionOnMap position, Integer speed, BoundingBox hitBox, Integer points) {
-        super(collision, position, speed, hitBox);
+    public EnemyImpl(PositionOnMap position, Integer speed, Integer points) {
+        super(position, CollisionType.ENEMY, speed);
         this.points = points;
     }
 
@@ -26,7 +28,7 @@ public abstract class EnemyImpl extends Entity implements Enemy {
     }
 
     private boolean isPlayerColliding(Player p) {
-        return this.getBounds().isCollidingWith(p.getBounds());
+        return this.getBounds().isCollidingWith(p.getBounds().getCollisionArea());
     }
 
     public abstract void takeHit(Player p);
