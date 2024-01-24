@@ -47,13 +47,13 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public void move(Direction direction) throws IllegalStateException {
         PositionOnMap current = this.getPosition();
-        Integer delta = this.getSpeed(); //it will be multiplied by a constant, corresponding to the side of a tile/size of player
-        this.setPosition(new PositionOnMapImpl(current.getX() + (int)direction.getX()*delta,
-            current.getY() + (int)direction.getY()*delta));
+        int delta = this.getSpeed(); //it will be multiplied by a constant, corresponding to the side of a tile/size of player
+        this.getPosition().setPosition(current.getX() + (int)direction.getX()*delta,
+            current.getY() + (int)direction.getY()*delta);
         //this.sword.setPosition(player.position, player.direction); //in sword also the direction will be changed
         //new Point(DAMAGE, DAMAGE).move(DAMAGE, DAMAGE);
         this.setDirection(direction);
-        if(isDefeated()){ //if wall, will be changed later
+        if(isDefeated()){ //if wall, this will be changed later
             throw new IllegalStateException("There is a wall");
         }
     }
