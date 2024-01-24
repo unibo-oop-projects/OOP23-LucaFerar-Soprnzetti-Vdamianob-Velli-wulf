@@ -11,5 +11,4 @@ public class PowerUpInvincibility extends PowerUpImpl {
         this.durationInMilli = DURATIONMILLI;
         this.pointsGiven = POINTS;
     }
-
 }

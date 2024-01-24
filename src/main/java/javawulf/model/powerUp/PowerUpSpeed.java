@@ -11,5 +11,4 @@ public class PowerUpSpeed extends PowerUpImpl{
         this.durationInMilli = DURATIONMILLI;
         this.pointsGiven = POINTS;
     }
-
 }
