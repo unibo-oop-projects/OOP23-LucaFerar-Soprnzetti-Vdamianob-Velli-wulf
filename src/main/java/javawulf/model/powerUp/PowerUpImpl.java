@@ -2,23 +2,17 @@ package javawulf.model.powerUp;
 
 public abstract class PowerUpImpl implements PowerUp {
 
-    
-    private final int durationInMilli;
-    private final String type;
-    private final int pointsGiven;
-    private long activationTimeInMilli;
-    
-    public PowerUpImpl(int duration, String type, int pointsGiven) {
-        this.durationInMilli = duration;
-        this.type = type;
-        this.pointsGiven = pointsGiven;
-    }    
+    protected int durationInMilli;
+    protected String type;
+    protected int pointsGiven;
+    protected long activationTimeInMilli;
     
     @Override
     public void activateEffect() {
         activationTimeInMilli = System.currentTimeMillis();
     }
     
+    @Override
     public boolean stillActive() {
         return activationTimeInMilli + durationInMilli < System.currentTimeMillis();
     }
