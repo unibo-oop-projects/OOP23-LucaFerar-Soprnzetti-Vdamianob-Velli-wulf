@@ -1,6 +1,6 @@
 package javawulf.model;
 
-public interface Item {
+public interface Item extends GameElement {
 
-    void applyEffect();
+    void applyEffect(Player p);
 }

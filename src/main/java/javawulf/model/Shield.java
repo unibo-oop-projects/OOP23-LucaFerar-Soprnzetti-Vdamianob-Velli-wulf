@@ -18,7 +18,7 @@ public class Shield extends Collectable implements Item {
     }
 
     @Override
-    public void applyEffect() {
+    public void applyEffect(Player p) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'applyEffect'");
     }

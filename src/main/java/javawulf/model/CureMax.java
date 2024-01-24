@@ -8,9 +8,9 @@ public class CureMax extends Cure {
     }
 
     @Override
-    public void applyEffect() {
+    public void applyEffect(Player p) {
         // TODO Auto-generated method stub
-        super.applyEffect();
+        super.applyEffect(p);
     }
     
 }
