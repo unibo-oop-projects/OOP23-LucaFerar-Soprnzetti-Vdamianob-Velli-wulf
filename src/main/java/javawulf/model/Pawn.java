@@ -8,7 +8,7 @@ public class Pawn extends EnemyImpl {
     private long moveTime;
     private int timeToWait;
 
-    public Pawn(PositionOnMap position, Integer speed, Integer points) {
+    public Pawn(PositionOnMap position, Integer speed, int points) {
         super(position, speed, points);
         this.isAlive = true;
         this.moveTime = System.currentTimeMillis();

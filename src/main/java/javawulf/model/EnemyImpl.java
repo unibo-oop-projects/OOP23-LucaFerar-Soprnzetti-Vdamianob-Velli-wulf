@@ -4,9 +4,9 @@ import javawulf.model.BoundingBox.CollisionType;
 
 public abstract class EnemyImpl extends Entity implements Enemy {
 
-    private Integer points;
+    private int points;
 
-    public EnemyImpl(PositionOnMap position, Integer speed, Integer points) {
+    public EnemyImpl(PositionOnMap position, Integer speed, int points) {
         super(position, CollisionType.ENEMY, speed);
         this.points = points;
     }
@@ -15,7 +15,7 @@ public abstract class EnemyImpl extends Entity implements Enemy {
         return this.points;
     } 
 
-    public void setPoints(Integer points) {
+    public void setPoints(int points) {
         this.points = points;
     }
 
