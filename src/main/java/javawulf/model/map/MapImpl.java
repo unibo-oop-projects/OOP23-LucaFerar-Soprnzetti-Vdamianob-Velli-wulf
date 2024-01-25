@@ -45,22 +45,31 @@ public class MapImpl implements Map {
 
     @Override
     public Optional<TilePosition> getTilePosition(Position position) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTilePosition'");
+        if (!this.isValidPosition(position)) {
+            return Optional.empty();
+        }
+        return Optional.of(
+                new TilePosition(position.getX() / TileType.TILE_DIMENSION, position.getY() / TileType.TILE_DIMENSION));
     }
 
     @Override
     public Optional<TileType> getTileType(Position position) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTileType'");
+        var tilePos = this.getTilePosition(position);
+        if (tilePos.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return (this.tiles.containsKey(tilePos.get()) ? Optional.of(tiles.get(tilePos.get()))
+                : Optional.of(TileType.WALL));
     }
 
     private void build() {
         for (var biomeOffSet : BiomeOffset.values()) {
             for (var room : biomes.get(biomeOffSet.getPos()).getRooms()) {
-                for(int y = room.getKey().getY(); y < room.getValue().getHeight(); y++) {
-                    for(int x = room.getKey().getX(); x < room.getValue().getWidth(); x++) {
-                        this.tiles.put(new TilePosition(x+biomeOffSet.getOffset().getX(), y+biomeOffSet.getOffset().getY()), Room.defaultType);
+                for (int y = room.getKey().getY(); y < room.getValue().getHeight(); y++) {
+                    for (int x = room.getKey().getX(); x < room.getValue().getWidth(); x++) {
+                        this.tiles.put(new TilePosition(x + biomeOffSet.getOffset().getX(),
+                                y + biomeOffSet.getOffset().getY()), Room.defaultType);
                     }
                 }
 
@@ -69,9 +78,10 @@ public class MapImpl implements Map {
 
         for (var biomeOffSet : BiomeOffset.values()) {
             for (var corridor : biomes.get(biomeOffSet.getPos()).getCorridors()) {
-                for(int y = corridor.getKey().getY(); y < corridor.getValue().getHeight(); y++) {
-                    for(int x = corridor.getKey().getX(); x < corridor.getValue().getWidth(); x++) {
-                        this.tiles.put(new TilePosition(x+biomeOffSet.getOffset().getX(), y+biomeOffSet.getOffset().getY()), Corridor.defaultType);
+                for (int y = corridor.getKey().getY(); y < corridor.getValue().getHeight(); y++) {
+                    for (int x = corridor.getKey().getX(); x < corridor.getValue().getWidth(); x++) {
+                        this.tiles.put(new TilePosition(x + biomeOffSet.getOffset().getX(),
+                                y + biomeOffSet.getOffset().getY()), Corridor.defaultType);
                     }
                 }
 
@@ -80,6 +90,7 @@ public class MapImpl implements Map {
     }
 
     private boolean isValidPosition(Position pos) {
-        return (pos.getX() < 0 || pos.getY() < 0 || (pos.getX() / TileType.TILE_DIMENSION) >= MAP_SIZE ? false : true);
+        return (pos.getX() < 0 || pos.getY() < 0 || (pos.getX() / TileType.TILE_DIMENSION) >= MAP_SIZE
+                || (pos.getY() / TileType.TILE_DIMENSION) >= MAP_SIZE ? false : true);
     }
 }
