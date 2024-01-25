@@ -1,5 +1,7 @@
-package javawulf.model;
+package javawulf.model.enemy;
 
+import javawulf.model.BoundingBox;
+import javawulf.model.PositionOnMap;
 import javawulf.model.player.Player;
 import javawulf.model.player.Sword.SwordType;
 

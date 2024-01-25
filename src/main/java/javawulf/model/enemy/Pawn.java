@@ -1,7 +1,9 @@
-package javawulf.model;
+package javawulf.model.enemy;
 
 import java.util.Random;
 
+import javawulf.model.Direction;
+import javawulf.model.PositionOnMap;
 import javawulf.model.player.Player;
 
 public class Pawn extends EnemyImpl {
