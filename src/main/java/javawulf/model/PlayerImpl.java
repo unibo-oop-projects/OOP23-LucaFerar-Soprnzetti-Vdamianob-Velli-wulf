@@ -23,8 +23,7 @@ public class PlayerImpl extends Entity implements Player {
 
     @Override
     public void attack() {
-        // TODO generate boundingbox in area considering its type
-        
+
         //implementation of the greatsword getting consumed
         if (this.sword.getSwordType().equals(SwordType.GREATSWORD)){
             
@@ -39,9 +38,7 @@ public class PlayerImpl extends Entity implements Player {
             
         }
 
-        //this.sword.setBounds();
-        //considering the player direction form the bounding box
-        throw new UnsupportedOperationException("Unimplemented method 'attack'");
+        this.sword.activate();
     }
 
     @Override
@@ -50,7 +47,7 @@ public class PlayerImpl extends Entity implements Player {
         int delta = this.getSpeed(); //it will be multiplied by a constant, corresponding to the side of a tile/size of player
         this.getPosition().setPosition(current.getX() + (int)direction.getX()*delta,
             current.getY() + (int)direction.getY()*delta);
-        //this.sword.setPosition(player.position, player.direction); //in sword also the direction will be changed
+        this.sword.move(this.getPosition(), direction, delta);
         //new Point(DAMAGE, DAMAGE).move(DAMAGE, DAMAGE);
         this.setDirection(direction);
         if(isDefeated()){ //if wall, this will be changed later
