@@ -9,7 +9,7 @@ public class BoundingBoxImpl implements BoundingBox {
     private CollisionType type;
 
     public BoundingBoxImpl(int x, int y, int width, int height, CollisionType type){
-        this.area = Optional.ofNullable(new Rectangle(x, y, width, height));
+        this.area = Optional.ofNullable(new Rectangle(x - width/2, y - height/2, width, height));
         this.type = type;
     };
 
@@ -25,7 +25,7 @@ public class BoundingBoxImpl implements BoundingBox {
 
     @Override
     public void setCollisionArea(int x, int y, int width, int height) {
-        this.area = Optional.ofNullable(new Rectangle(x, y, width, height));
+        this.area = Optional.ofNullable(new Rectangle(x - width/2, y - height/2, width, height));
     }
 
     @Override
