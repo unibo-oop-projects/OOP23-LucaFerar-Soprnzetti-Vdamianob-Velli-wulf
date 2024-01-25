@@ -1,6 +1,6 @@
 package javawulf.model.powerUp;
 
-import javawulf.model.PositionOnMap;
+import javawulf.model.Coordinate;
 
 public class PowerUpInvincibility extends PowerUpImpl {
     
@@ -8,7 +8,7 @@ public class PowerUpInvincibility extends PowerUpImpl {
     private final int POINTS = 100;
     private final String TYPE = "Invincibility";
     
-    public PowerUpInvincibility(PositionOnMap position) {
+    public PowerUpInvincibility(Coordinate position) {
         this.coordinates = position;
         this.type = TYPE;
         this.durationInMilli = DURATIONMILLI;

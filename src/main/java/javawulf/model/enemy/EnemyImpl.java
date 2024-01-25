@@ -1,7 +1,7 @@
 package javawulf.model.enemy;
 
 import javawulf.model.Entity;
-import javawulf.model.PositionOnMap;
+import javawulf.model.Coordinate;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.player.Player;
 import javawulf.model.player.Sword;
@@ -10,7 +10,7 @@ public abstract class EnemyImpl extends Entity implements Enemy {
 
     private int points;
 
-    public EnemyImpl(PositionOnMap position, Integer speed, int points) {
+    public EnemyImpl(Coordinate position, Integer speed, int points) {
         super(position, CollisionType.ENEMY, speed);
         this.points = points;
     }

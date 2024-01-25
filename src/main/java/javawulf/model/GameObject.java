@@ -4,24 +4,20 @@ import javawulf.model.BoundingBox.CollisionType;
 
 public abstract class GameObject implements GameElement{
 
+    private static final int OBJECT_SIZE = 24;
     private BoundingBox collision;
-    private PositionOnMap position;
+    private Coordinate position;
 
-    public GameObject(PositionOnMap position, BoundingBox collision){
+    public GameObject(Coordinate position, BoundingBox collision){
         this.position = position;
         this.collision = collision;
     }
 
-    public GameObject(PositionOnMap position, CollisionType type){
-        //the size of the element should be factor, likely through a parameter of the constructor
-        //or as a private static final variable (as it could be the standard one),
-        //otherwise it would be difficult to calculate the area surronding the position of the element
-        //which in this case would be the standard one (player/enemy/normal sword/collectables)
-        //which is a square basically
-        this(position, new BoundingBoxImpl(0, 0, 0, 0, type));
+    public GameObject(Coordinate position, CollisionType type){
+        this(position, new BoundingBoxImpl(position.getX(), position.getY(), OBJECT_SIZE, OBJECT_SIZE, type));
     }
 
-    public GameObject(BoundingBox collision, PositionOnMap position) {
+    public GameObject(BoundingBox collision, Coordinate position) {
         this.collision = collision;
         this.position = position;
     }
@@ -30,7 +26,7 @@ public abstract class GameObject implements GameElement{
         return this.collision;
     }
 
-    public PositionOnMap getPosition() {
+    public Coordinate getPosition() {
         return this.position;
     }
 
@@ -38,7 +34,7 @@ public abstract class GameObject implements GameElement{
         this.collision = b;
     }
 
-    public void setPosition(PositionOnMap p) {
+    public void setPosition(Coordinate p) {
         this.position = p;
     }
 

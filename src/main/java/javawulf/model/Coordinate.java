@@ -1,10 +1,10 @@
 package javawulf.model;
 
-import javafx.util.Pair;
+import java.awt.Point;
 
-public interface PositionOnMap {
+public interface Coordinate {
     
-    public Pair<Integer,Integer> getPosition();
+    public Point getPosition();
 
     public void setPosition(int x, int y);
 

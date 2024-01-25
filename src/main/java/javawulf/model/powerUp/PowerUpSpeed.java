@@ -1,6 +1,6 @@
 package javawulf.model.powerUp;
 
-import javawulf.model.PositionOnMap;
+import javawulf.model.Coordinate;
 
 public class PowerUpSpeed extends PowerUpImpl{
     
@@ -8,7 +8,7 @@ public class PowerUpSpeed extends PowerUpImpl{
     private final int POINTS = 50;
     private final String TYPE = "Speed";
 
-    public PowerUpSpeed(PositionOnMap position) {
+    public PowerUpSpeed(Coordinate position) {
         this.coordinates = position;
         this.type = TYPE;
         this.durationInMilli = DURATIONMILLI;

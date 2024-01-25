@@ -5,8 +5,8 @@ import java.util.Optional;
 import javawulf.model.BoundingBox;
 import javawulf.model.Direction;
 import javawulf.model.Entity;
-import javawulf.model.PositionOnMap;
-import javawulf.model.PositionOnMapImpl;
+import javawulf.model.Coordinate;
+import javawulf.model.CoordinateImpl;
 import javawulf.model.powerUp.PowerUp;
 import javawulf.model.BoundingBox.CollisionType;
 
@@ -19,11 +19,11 @@ public class PlayerImpl extends Entity implements Player {
     private Optional<PowerUp> activePowerUp;
 
     public PlayerImpl(int startingX, int startingY, int health, int startingPoints){
-        super(new PositionOnMapImpl(startingX, startingY), CollisionType.PLAYER, 1);
+        super(new CoordinateImpl(startingX, startingY), CollisionType.PLAYER, 1);
         this.score = new ScoreImpl(startingPoints);
         this.setDirection(Direction.DOWN);
         this.health = new PlayerHealthImpl(health);
-        this.sword = new SwordImpl(new PositionOnMapImpl(startingX, startingY+1), this.getDirection());
+        this.sword = new SwordImpl(new CoordinateImpl(startingX, startingY+1), this.getDirection());
         this.activePowerUp = Optional.empty();
     }
 
@@ -34,7 +34,7 @@ public class PlayerImpl extends Entity implements Player {
 
     @Override
     public void move(Direction direction) throws IllegalStateException {
-        PositionOnMap current = this.getPosition();
+        Coordinate current = this.getPosition();
         int delta = this.getSpeed(); //it will be multiplied by a constant, corresponding to the side of a tile/size of player
         this.getPosition().setPosition(current.getX() + (int)direction.getX()*delta,
             current.getY() + (int)direction.getY()*delta);
