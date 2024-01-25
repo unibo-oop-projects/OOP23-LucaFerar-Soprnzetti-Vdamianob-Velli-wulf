@@ -7,19 +7,24 @@ package javawulf.model;
 public interface PlayerHealth {
     
     /**
-     * ShieldStatus defines the current status of the player's shield. By default it is NONE
+     * ShieldStatus defines the current status of the player's shield.
+     * If FULL it protects the player from 2 hits, if HALF only from 1 hit.
+     * By default it is NONE
      */
     public enum ShieldStatus{
         NONE(0),
         HALF(1),
         FULL(2);
 
-        public final int strength;
+        private final int strength;
 
         ShieldStatus(int strength){
             this.strength = strength;
         }
 
+        /**
+         * @return The amount of hits the shield can still withstand
+         */
         public int getStrength(){
             return this.strength;
         }
