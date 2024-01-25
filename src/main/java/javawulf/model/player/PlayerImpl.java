@@ -7,7 +7,7 @@ import javawulf.model.Direction;
 import javawulf.model.Entity;
 import javawulf.model.PositionOnMap;
 import javawulf.model.PositionOnMapImpl;
-import javawulf.model.PowerUp;
+import javawulf.model.powerUp.PowerUp;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.player.Sword.SwordType;
 
