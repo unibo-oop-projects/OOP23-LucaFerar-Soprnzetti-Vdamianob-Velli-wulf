@@ -16,10 +16,11 @@ public class MapImpl implements Map {
     private final java.util.Map<TilePosition, TileType> tiles = new HashMap<>();
 
     enum BiomeOffset {
-        FIRST(0, new TilePosition(0, 0)), // TODO: defines offsets!
-        SECOND(1, new TilePosition(Biome.SIZE, 0)),
-        THIRD(2, new TilePosition(2 * Biome.SIZE, 0)),
-        FOURTH(3, new TilePosition(3 * Biome.SIZE, 0));
+        // TODO: verificare correttezza degli offsets!
+        FIRST(0, new TilePosition(0, 0)),
+        SECOND(1, new TilePosition(Biome.SIZE + WIDTH_CENTRAL_BIOME, 0)),
+        THIRD(2, new TilePosition(Biome.SIZE + WIDTH_CENTRAL_BIOME, Biome.SIZE + WIDTH_CENTRAL_BIOME)),
+        FOURTH(3, new TilePosition(0, Biome.SIZE + WIDTH_CENTRAL_BIOME));
 
         private final int pos;
         private final TilePosition offset;
