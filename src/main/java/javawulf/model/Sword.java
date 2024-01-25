@@ -14,6 +14,12 @@ public interface Sword extends GameElement {
         GREATSWORD;
     }
     
+    public void move(PositionOnMap playerPosition, Direction playerDirection, int delta);
+
+    public void activate();
+
+    public void deactivate();
+
     /**
      * @return The current strength of the player's sword
      */

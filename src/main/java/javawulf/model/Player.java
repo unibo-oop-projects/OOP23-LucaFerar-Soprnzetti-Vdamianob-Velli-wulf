@@ -4,7 +4,7 @@ public interface Player extends GameElement {
 
     public void attack();
 
-    public void move() throws IllegalStateException;
+    public void move(Direction direction) throws IllegalStateException;
 
     public boolean isHit(BoundingBox b);
 

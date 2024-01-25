@@ -10,16 +10,59 @@ public class SwordImpl extends GameObject implements Sword {
     private int strength;
     private int durability;
     private SwordType swordType;
+    private Direction swordDirection;
 
     /**
      * Creates a new sword by using the specified position
      * 
-     * @param position the exact position the sword must be in when it is created
+     * @param position The exact position the sword must be in when it is created
+     * @param direction The direction the sword must face when it is created
      */
-    public SwordImpl(PositionOnMap position) {
-        super(position, new BoundingBoxImpl(0, 0, 0, 0, CollisionType.SWORD));
+    public SwordImpl(PositionOnMap position, Direction direction) {
+        super(position, new BoundingBoxImpl(position.getX(), position.getY(), 0, 0, CollisionType.STUNNED));
         this.strength = NORMAL;
         this.swordType = SwordType.NORMAL;
+        this.swordDirection = direction;
+    }
+
+    @Override
+    public void move(PositionOnMap playerPosition, Direction playerDirection, int delta){
+        updateDirection(playerDirection);
+        this.getPosition().setPosition(playerPosition.getX() + (int)this.swordDirection.getX()*delta,
+            playerPosition.getY() + (int)this.swordDirection.getY()*delta);
+        //this.getBounds().setCollisionArea(this.getPosition.getX(), this.getPosition.getY(), delta, delta);
+    }
+
+    private void updateDirection(Direction playerDirection){
+        Direction movementDirection = playerDirection;
+        if (checkIfDiagonal(playerDirection)){
+            if(checkIfOpposite(playerDirection)){
+                //movementDirection = ; a crtierion must be chosen
+            } else {
+                movementDirection = swordDirection;
+            }
+        }
+        this.swordDirection = movementDirection;
+    }
+
+    private boolean checkIfDiagonal(Direction playerDirection){
+        return playerDirection.equals(Direction.DOWN_LEFT) || playerDirection.equals(Direction.DOWN_RIGHT) ||
+            playerDirection.equals(Direction.UP_LEFT) || playerDirection.equals(Direction.UP_RIGHT);
+    }
+
+    private boolean checkIfOpposite(Direction playerDirection){
+        return Math.signum(playerDirection.getX()) != Math.signum(this.swordDirection.getX()) &&
+            Math.signum(playerDirection.getY()) != Math.signum(this.swordDirection.getY());
+    }
+
+    @Override
+    public void activate(){
+        this.getBounds().changeCollisionType(CollisionType.SWORD);
+    }
+
+    @Override
+    public void deactivate(){
+        this.getBounds().changeCollisionType(CollisionType.STUNNED);
     }
 
     @Override

@@ -16,15 +16,15 @@ public class PlayerImpl extends Entity implements Player {
     public PlayerImpl(int startingX, int startingY, int health, int startingPoints){
         super(new PositionOnMapImpl(startingX, startingY), CollisionType.PLAYER, 1);
         this.score = new ScoreImpl(startingPoints);
+        this.setDirection(Direction.DOWN);
         this.health = new PlayerHealthImpl(health);
-        this.sword = new SwordImpl(new PositionOnMapImpl(startingX, startingY+1));
+        this.sword = new SwordImpl(new PositionOnMapImpl(startingX, startingY+1), this.getDirection());
         this.activePowerUp = Optional.empty();
     }
 
     @Override
     public void attack() {
-        // TODO generate boundingbox in area considering its type
-        
+
         //implementation of the greatsword getting consumed
         if (this.sword.getSwordType().equals(SwordType.GREATSWORD)){
             
@@ -39,17 +39,21 @@ public class PlayerImpl extends Entity implements Player {
             
         }
 
-        //this.sword.setBounds();
-        //considering the player direction form the bounding box
-        throw new UnsupportedOperationException("Unimplemented method 'attack'");
+        this.sword.activate();
     }
 
     @Override
-    public void move() throws IllegalStateException {
-        // TODO Auto-generated method stub
-        this.getSpeed();
-        //this.setDirection(getDirection());
-        throw new UnsupportedOperationException("Unimplemented method 'move'");
+    public void move(Direction direction) throws IllegalStateException {
+        PositionOnMap current = this.getPosition();
+        int delta = this.getSpeed(); //it will be multiplied by a constant, corresponding to the side of a tile/size of player
+        this.getPosition().setPosition(current.getX() + (int)direction.getX()*delta,
+            current.getY() + (int)direction.getY()*delta);
+        this.sword.move(this.getPosition(), direction, delta);
+        //new Point(DAMAGE, DAMAGE).move(DAMAGE, DAMAGE);
+        this.setDirection(direction);
+        if(isDefeated()){ //if wall, this will be changed later
+            throw new IllegalStateException("There is a wall");
+        }
     }
 
     @Override

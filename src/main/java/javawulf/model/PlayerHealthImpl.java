@@ -11,7 +11,7 @@ public class PlayerHealthImpl implements PlayerHealth {
      * The starting health indicates also the current maximum amount
      * of health the player has at the beginning of the game
      * 
-     * @param startingHealth the amount of health the player begins the game with 
+     * @param startingHealth The amount of health the player starts the game with 
      */
     public PlayerHealthImpl(int startingHealth){
         this.health = startingHealth;
@@ -37,20 +37,20 @@ public class PlayerHealthImpl implements PlayerHealth {
     @Override
     public void setHealth(int health) {
         if (health<0){
-            this.damage();
+            this.damage(health);
         } else {
             this.health = Math.min((this.health + health), this.maxHealth);
         }
     }
 
-    private void damage(){
+    private void damage(int health){
         if(this.getShieldStatus().equals(ShieldStatus.NONE)){
-            this.health--;
-            System.out.println("Health remaining :" + this.getHealth());
+            this.health = this.health - health;
+            System.out.println("Health remaining : " + this.getHealth());
         } else {
             if (this.getShieldStatus().equals(ShieldStatus.FULL)){
                 this.setShieldStatus(ShieldStatus.HALF);
-                System.out.println("Shield hits remaining :" + this.getShieldStatus().strength);
+                System.out.println("Shield hits remaining :" + this.getShieldStatus().getStrength());
             } else {
                 this.setShieldStatus(ShieldStatus.NONE);
                 System.out.println("Shield broke!");
