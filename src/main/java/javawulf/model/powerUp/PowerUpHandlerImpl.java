@@ -1,6 +1,6 @@
 package javawulf.model.powerUp;
 
-import javawulf.model.Player;
+import javawulf.model.player.Player;
 
 public class PowerUpHandlerImpl implements PowerUpHandler{
 
