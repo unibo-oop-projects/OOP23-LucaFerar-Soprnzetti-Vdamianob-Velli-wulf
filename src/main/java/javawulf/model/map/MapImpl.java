@@ -3,6 +3,7 @@ package javawulf.model.map;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import javawulf.model.PositionOnMap;
 
@@ -45,13 +46,13 @@ public class MapImpl implements Map {
     }
 
     @Override
-    public TilePosition getTilePosition(PositionOnMap position) {
+    public Optional<TilePosition> getTilePosition(PositionOnMap position) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getTilePosition'");
     }
 
     @Override
-    public TileType getTileType(PositionOnMap position) {
+    public Optional<TileType> getTileType(PositionOnMap position) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getTileType'");
     }
@@ -80,4 +81,8 @@ public class MapImpl implements Map {
         }
     }
 
+    private boolean isValidPosition(PositionOnMap pos) {
+        pos.
+        return (pos. < 0 || (pos / TileType.TILE_DIMENSION) >= MAP_SIZE ? false : true);
+    }
 }
