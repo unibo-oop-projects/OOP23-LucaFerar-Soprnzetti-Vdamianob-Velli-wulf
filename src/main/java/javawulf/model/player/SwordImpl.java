@@ -41,7 +41,7 @@ public class SwordImpl extends GameObject implements Sword {
         Direction movementDirection = playerDirection;
         if (checkIfDiagonal(playerDirection)){
             if(checkIfOpposite(playerDirection)){
-                //movementDirection = ; a crtierion must be chosen
+                movementDirection = (int) playerDirection.getX() < 0 ? Direction.LEFT : Direction.RIGHT;
             } else {
                 movementDirection = swordDirection;
             }
