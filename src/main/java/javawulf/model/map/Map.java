@@ -1,5 +1,7 @@
 package javawulf.model.map;
 
+import java.util.Optional;
+
 import javawulf.model.PositionOnMap;
 
 /**
@@ -14,14 +16,14 @@ public interface Map {
     /**
      * 
      * @param position (absolute)
-     * @return tile position
+     * @return tile position (empty if the given position is Out of map)
      */
-    TilePosition getTilePosition(PositionOnMap position);
+    Optional<TilePosition> getTilePosition(PositionOnMap position);
 
     /**
      * 
      * @param position (absolute)
-     * @return tile type relative to the position passed
+     * @return tile type relative to the given position (empty if the position is Out of map)
      */
-    TileType getTileType(PositionOnMap position);
+    Optional<TileType> getTileType(PositionOnMap position);
 }
