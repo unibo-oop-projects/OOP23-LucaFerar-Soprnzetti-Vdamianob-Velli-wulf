@@ -7,6 +7,8 @@ import javawulf.model.PositionOnMap;
  * it uses their to build the enviroment.
  * Enviroment will be:
  * <img src="../../../../resources/javadoc/biome-map-suddivision.png" />
+ * 
+ * So Map will behave like a builder of the final Enviroment of the game.
  */
 public interface Map {
     /**

@@ -7,12 +7,16 @@ import java.util.List;
 import javawulf.model.PositionOnMap;
 
 public class MapImpl implements Map {
+    /**
+     * Default central cross-biome width
+     */
     private static int WIDTH_CENTRAL_BIOME = 12;
     private final int MAP_SIZE = Biome.SIZE * 2 + WIDTH_CENTRAL_BIOME;
     private final List<Biome> biomes = new ArrayList<>();
     private final java.util.Map<TilePosition, Tile> tileEnviroment = new HashMap<>();
 
-    public MapImpl() {
+    public MapImpl(Biome firstBiome, Biome secondBiome, Biome thirdBiome, Biome fourthBiome) {
+        build();
     }
 
     @Override
@@ -28,7 +32,7 @@ public class MapImpl implements Map {
     }
 
     private void build() {
-
+        
     }
 
 }
