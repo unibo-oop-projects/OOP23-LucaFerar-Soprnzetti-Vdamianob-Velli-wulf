@@ -62,6 +62,14 @@ public class SwordImpl extends GameObject implements Sword {
     @Override
     public void activate(){
         this.getBounds().changeCollisionType(CollisionType.SWORD);
+        if (this.swordType.equals(SwordType.GREATSWORD)){
+            this.consume();
+            System.out.println("Durability remaining :" + this.durability);
+            if (this.durability == 0){
+                this.changeSwordType();
+                System.out.println("Greatsword broke!! Changed to normal");
+            }
+        }
     }
 
     @Override
@@ -105,8 +113,10 @@ public class SwordImpl extends GameObject implements Sword {
         }
     }
 
-    @Override
-    public void consume() {
+    /**
+     * reduces the durability of the sword by one each time
+     */
+    private void consume() {
         this.durability--;
     }
 

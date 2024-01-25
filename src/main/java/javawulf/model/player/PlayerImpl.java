@@ -31,6 +31,7 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public void attack() {
 
+        /* 
         //implementation of the greatsword getting consumed
         if (this.sword.getSwordType().equals(SwordType.GREATSWORD)){
             
@@ -43,7 +44,7 @@ public class PlayerImpl extends Entity implements Player {
                 System.out.println("Greatsword broke!! Changed to normal");
             }
             
-        }
+        }*/
 
         this.sword.activate();
     }
