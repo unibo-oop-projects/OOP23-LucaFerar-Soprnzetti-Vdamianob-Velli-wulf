@@ -7,6 +7,7 @@ public enum TileType {
     CORRIDOR(true);
     
     private final boolean crossable;
+    static int TILE_DIMENSION = 24;
 
     TileType(boolean crossable) {
         this.crossable = crossable;
