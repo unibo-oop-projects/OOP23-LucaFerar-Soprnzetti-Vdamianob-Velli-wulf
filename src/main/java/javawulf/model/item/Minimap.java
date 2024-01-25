@@ -1,12 +1,12 @@
 package javawulf.model.item;
 
 import javawulf.model.Collectable;
-import javawulf.model.PositionOnMap;
+import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
 public class Minimap extends Collectable implements Item {
 
-    public Minimap(PositionOnMap position, Integer points) {
+    public Minimap(Coordinate position, Integer points) {
         super(position, points);
         // TODO Auto-generated constructor stub
     }

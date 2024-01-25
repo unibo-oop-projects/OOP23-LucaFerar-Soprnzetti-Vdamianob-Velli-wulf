@@ -1,6 +1,6 @@
 package javawulf.model.enemy;
 
-import javawulf.model.PositionOnMap;
+import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
 public class Guard extends EnemyImpl {
@@ -10,7 +10,7 @@ public class Guard extends EnemyImpl {
     private boolean isStunned;
     private long stunTime;
 
-    public Guard(PositionOnMap position, Integer speed, int points) {
+    public Guard(Coordinate position, Integer speed, int points) {
         super(position, speed, points);
         this.isAlive = true;
         this.isStunned = false;

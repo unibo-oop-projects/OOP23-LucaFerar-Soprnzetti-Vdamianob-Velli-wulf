@@ -1,12 +1,12 @@
 package javawulf.model.item;
 
 import javawulf.model.Collectable;
-import javawulf.model.PositionOnMap;
+import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
 public class ExtraHeart extends Collectable implements Item {
 
-    public ExtraHeart(PositionOnMap position, Integer points) {
+    public ExtraHeart(Coordinate position, Integer points) {
         super(position, points);
     }
 

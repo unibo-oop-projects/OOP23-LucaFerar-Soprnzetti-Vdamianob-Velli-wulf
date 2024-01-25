@@ -1,12 +1,12 @@
 package javawulf.model.item;
 
 import javawulf.model.Collectable;
-import javawulf.model.PositionOnMap;
+import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
 public class GreatSword extends Collectable implements Item {
 
-    public GreatSword(PositionOnMap position, Integer points, Integer duration) {
+    public GreatSword(Coordinate position, Integer points, Integer duration) {
         super(position, points);
     }
 

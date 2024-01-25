@@ -1,6 +1,6 @@
 package javawulf.model.powerUp;
 
-import javawulf.model.PositionOnMap;
+import javawulf.model.Coordinate;
 
 public abstract class PowerUpImpl implements PowerUp {
 
@@ -8,13 +8,13 @@ public abstract class PowerUpImpl implements PowerUp {
     protected String type;
     protected int pointsGiven;
     protected long activationTimeInMilli;
-    protected PositionOnMap coordinates;
+    protected Coordinate coordinates;
     
     public int getPointsGiven() {
         return this.pointsGiven;
     }
 
-    public PositionOnMap getCoordinates() {
+    public Coordinate getCoordinates() {
         return this.coordinates;
     }
 

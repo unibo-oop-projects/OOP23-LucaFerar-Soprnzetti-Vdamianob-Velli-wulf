@@ -6,7 +6,7 @@ public abstract class Entity extends GameObject {
     private Integer speed;
     private Direction direction;
 
-    public Entity(PositionOnMap position, CollisionType type, Integer speed) {
+    public Entity(Coordinate position, CollisionType type, Integer speed) {
         super(position, type);
         this.speed = speed;
         this.direction = Direction.DOWN;
