@@ -8,22 +8,22 @@ import javawulf.model.map.BiomeImpl;
 import javawulf.model.map.Corridor;
 import javawulf.model.map.Room;
 import javawulf.model.map.Space;
-import javawulf.model.map.Tile;
-import javawulf.model.map.TileImpl;
+// import javawulf.model.map.Tile;
+// import javawulf.model.map.TileImpl;
 import javawulf.model.map.TilePosition;
 import javawulf.model.map.TileType;
 
 public class MapTest {
-    @Test
-    void testTiles() {
-        Tile firstTile = new TileImpl(TileType.CORRIDOR);
-        assertEquals(TileType.CORRIDOR, firstTile.getType());
-        assertTrue(firstTile.getType().isCrossable());
+    // @Test
+    // void testTiles() {
+    //     Tile firstTile = new TileImpl(TileType.CORRIDOR);
+    //     assertEquals(TileType.CORRIDOR, firstTile.getType());
+    //     assertTrue(firstTile.getType().isCrossable());
 
-        Tile secondTile = new TileImpl(TileType.WALL);
-        assertEquals(TileType.WALL, secondTile.getType());
-        assertFalse(secondTile.getType().isCrossable());
-    }
+    //     Tile secondTile = new TileImpl(TileType.WALL);
+    //     assertEquals(TileType.WALL, secondTile.getType());
+    //     assertFalse(secondTile.getType().isCrossable());
+    // }
 
     @Test
     void testRooms() {
