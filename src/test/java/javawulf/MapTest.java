@@ -62,4 +62,13 @@ public class MapTest {
 
         assertThrows(IllegalArgumentException.class, () -> firstBiome.addRoom(new TilePosition(200, 500), new Room(5, 4)));
     }
+
+    @Test
+    void testMap() {
+        Biome firstBiome = new BiomeImpl();
+        firstBiome.addRoom(new TilePosition(1, 1), new Room(10, 10));
+
+        Biome secondBiome = new BiomeImpl();
+        secondBiome.addRoom(new TilePosition(1, 1), new Room(7, 7));
+    }
 }
