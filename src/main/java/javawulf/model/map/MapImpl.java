@@ -46,13 +46,13 @@ public class MapImpl implements Map {
     }
 
     @Override
-    public Optional<TilePosition> getTilePosition(PositionOnMap position) {
+    public Optional<TilePosition> getTilePosition(Position position) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getTilePosition'");
     }
 
     @Override
-    public Optional<TileType> getTileType(PositionOnMap position) {
+    public Optional<TileType> getTileType(Position position) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getTileType'");
     }
@@ -81,8 +81,7 @@ public class MapImpl implements Map {
         }
     }
 
-    private boolean isValidPosition(PositionOnMap pos) {
-        pos.
-        return (pos. < 0 || (pos / TileType.TILE_DIMENSION) >= MAP_SIZE ? false : true);
+    private boolean isValidPosition(Position pos) {
+        return (pos.getX() < 0 || pos.getY() < 0 || (pos.getX() / TileType.TILE_DIMENSION) >= MAP_SIZE ? false : true);
     }
 }

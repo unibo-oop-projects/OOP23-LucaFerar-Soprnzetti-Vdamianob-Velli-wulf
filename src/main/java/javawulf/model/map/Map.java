@@ -2,6 +2,7 @@ package javawulf.model.map;
 
 import java.util.Optional;
 
+import javafx.geometry.Pos;
 import javawulf.model.PositionOnMap;
 
 /**
@@ -18,12 +19,12 @@ public interface Map {
      * @param position (absolute)
      * @return tile position (empty if the given position is Out of map)
      */
-    Optional<TilePosition> getTilePosition(PositionOnMap position);
+    Optional<TilePosition> getTilePosition(Position position);
 
     /**
      * 
      * @param position (absolute)
      * @return tile type relative to the given position (empty if the position is Out of map)
      */
-    Optional<TileType> getTileType(PositionOnMap position);
+    Optional<TileType> getTileType(Position position);
 }
