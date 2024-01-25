@@ -10,8 +10,8 @@ public enum Direction {
     DOWN_LEFT(-Math.cos(Math.PI/4), Math.sin(Math.PI/4)), 
     DOWN_RIGHT(Math.cos(Math.PI/4), Math.sin(Math.PI/4));
 
-    private double x;
-    private double y;
+    private final double x;
+    private final double y;
 
     Direction(double x, double y){
         this.x = x;
