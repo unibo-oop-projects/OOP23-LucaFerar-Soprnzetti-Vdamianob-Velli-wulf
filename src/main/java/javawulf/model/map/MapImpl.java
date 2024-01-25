@@ -8,7 +8,7 @@ import javawulf.model.PositionOnMap;
 
 public class MapImpl implements Map {
     /**
-     * Default central cross-biome width
+     * Default central cross-biome width (+)
      */
     private static int WIDTH_CENTRAL_BIOME = 12;
     private final int MAP_SIZE = Biome.SIZE * 2 + WIDTH_CENTRAL_BIOME;
