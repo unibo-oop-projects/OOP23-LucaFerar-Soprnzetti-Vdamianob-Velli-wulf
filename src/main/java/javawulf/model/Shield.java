@@ -1,26 +1,17 @@
 package javawulf.model;
 
+import javawulf.model.player.Player;
+import javawulf.model.player.PlayerHealth.ShieldStatus;
+
 public class Shield extends Collectable implements Item {
 
-    private Integer duration;
-
-    public Shield(PositionOnMap position, Integer points, Integer duration) {
+    public Shield(PositionOnMap position, Integer points) {
         super(position, points);
-        this.duration = duration;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
     }
 
     @Override
     public void applyEffect(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'applyEffect'");
+        p.getPlayerHealth().setShieldStatus(ShieldStatus.FULL);
     }
 
 }

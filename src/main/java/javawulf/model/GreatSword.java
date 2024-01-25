@@ -1,25 +1,15 @@
 package javawulf.model;
 
-public class GreatSword extends Collectable implements Item {
+import javawulf.model.player.Player;
 
-    private Integer duration;
+public class GreatSword extends Collectable implements Item {
 
     public GreatSword(PositionOnMap position, Integer points, Integer duration) {
         super(position, points);
-        this.duration = duration;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
     }
 
     @Override
     public void applyEffect(Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'applyEffect'");
+        p.getSword().changeSwordType();
     }
 }
