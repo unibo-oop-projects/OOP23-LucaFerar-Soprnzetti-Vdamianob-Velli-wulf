@@ -2,6 +2,8 @@ package javawulf.model;
 
 import java.util.Random;
 
+import javawulf.model.player.Player;
+
 public class Pawn extends EnemyImpl {
 
     private boolean isAlive;

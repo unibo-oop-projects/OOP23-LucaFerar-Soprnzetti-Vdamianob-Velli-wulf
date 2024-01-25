@@ -1,6 +1,7 @@
 package javawulf.model;
 
-import javawulf.model.PlayerHealth.ShieldStatus;
+import javawulf.model.player.Player;
+import javawulf.model.player.PlayerHealth.ShieldStatus;
 
 public class Shield extends Collectable implements Item {
 

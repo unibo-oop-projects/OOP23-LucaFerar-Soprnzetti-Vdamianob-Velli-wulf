@@ -1,4 +1,8 @@
-package javawulf.model;
+package javawulf.model.player;
+
+import javawulf.model.Direction;
+import javawulf.model.GameElement;
+import javawulf.model.PositionOnMap;
 
 /**
  * Sword is class whose purpose is to deal with all of the attack functions of player,

@@ -1,5 +1,7 @@
 package javawulf.model;
 
+import javawulf.model.player.Player;
+
 public class AmuletFragments extends Collectable implements Item {
 
     public AmuletFragments(PositionOnMap position, Integer points) {

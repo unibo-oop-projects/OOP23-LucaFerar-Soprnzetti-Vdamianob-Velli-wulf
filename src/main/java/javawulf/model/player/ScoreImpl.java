@@ -1,4 +1,4 @@
-package javawulf.model;
+package javawulf.model.player;
 
 public class ScoreImpl implements Score{
 

@@ -1,6 +1,7 @@
 package javawulf.model;
 
-import javawulf.model.PlayerImpl.SwordType;
+import javawulf.model.player.Player;
+import javawulf.model.player.Sword.SwordType;
 
 public class Guard extends EnemyImpl {
 

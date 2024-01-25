@@ -1,5 +1,7 @@
 package javawulf.model;
 
+import javawulf.model.player.Player;
+
 public class Minimap extends Collectable implements Item {
 
     public Minimap(PositionOnMap position, Integer points) {

@@ -1,5 +1,7 @@
 package javawulf.model;
 
+import javawulf.model.player.Player;
+
 public class CureMax extends Cure {
 
     public CureMax(PositionOnMap position, Integer points) {

@@ -1,5 +1,9 @@
-package javawulf.model;
+package javawulf.model.player;
 
+import javawulf.model.BoundingBoxImpl;
+import javawulf.model.Direction;    
+import javawulf.model.GameObject;
+import javawulf.model.PositionOnMap;
 import javawulf.model.BoundingBox.CollisionType;
 
 public class SwordImpl extends GameObject implements Sword {

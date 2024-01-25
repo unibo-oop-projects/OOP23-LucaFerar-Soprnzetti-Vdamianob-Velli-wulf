@@ -1,4 +1,4 @@
-package javawulf.model;
+package javawulf.model.player;
 
 /**
  *  PlayerHealth is a class which manages all that is related to the player's health

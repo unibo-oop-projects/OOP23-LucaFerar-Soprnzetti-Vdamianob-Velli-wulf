@@ -1,5 +1,7 @@
 package javawulf.model;
 
+import javawulf.model.player.Player;
+
 public interface Enemy extends GameElement {
     public void move();
 

@@ -1,4 +1,4 @@
-package javawulf.model;
+package javawulf.model.player;
 
 /**
  * The class Score's objective is to take care of the current point total gotten

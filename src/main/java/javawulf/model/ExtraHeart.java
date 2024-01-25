@@ -1,5 +1,7 @@
 package javawulf.model;
 
+import javawulf.model.player.Player;
+
 public class ExtraHeart extends Collectable implements Item {
 
     public ExtraHeart(PositionOnMap position, Integer points) {

@@ -1,9 +1,15 @@
-package javawulf.model;
+package javawulf.model.player;
 
 import java.util.Optional;
 
+import javawulf.model.BoundingBox;
+import javawulf.model.Direction;
+import javawulf.model.Entity;
+import javawulf.model.PositionOnMap;
+import javawulf.model.PositionOnMapImpl;
+import javawulf.model.PowerUp;
 import javawulf.model.BoundingBox.CollisionType;
-import javawulf.model.Sword.SwordType;
+import javawulf.model.player.Sword.SwordType;
 
 public class PlayerImpl extends Entity implements Player {
 

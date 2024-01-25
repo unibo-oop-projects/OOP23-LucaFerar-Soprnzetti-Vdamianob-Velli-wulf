@@ -1,6 +1,8 @@
 package javawulf.model;
 
 import javawulf.model.BoundingBox.CollisionType;
+import javawulf.model.player.Player;
+import javawulf.model.player.Sword;
 
 public abstract class EnemyImpl extends Entity implements Enemy {
 

@@ -1,6 +1,7 @@
 package javawulf.model;
 
 import javawulf.model.BoundingBox.CollisionType;
+import javawulf.model.player.Player;
 
 public abstract class Collectable extends GameObject {
 
