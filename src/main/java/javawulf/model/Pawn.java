@@ -29,37 +29,23 @@ public class Pawn extends EnemyImpl {
             this.timeToWait = new Random().nextInt(4) + 1;
         }
 
-        int newX = this.getPosition().getX();
-        int newY = this.getPosition().getY();
+        double newX = this.getPosition().getX() + this.getDirection().getX() * this.getSpeed();
+        double newY = this.getPosition().getY() + this.getDirection().getY() * this.getSpeed();
 
-        switch (this.getDirection()) {
-            case UP:
-                newY -= this.getSpeed();
-                break;
-            case DOWN:
-                newY += this.getSpeed();
-                break;
-            case LEFT:
-                newX -= this.getSpeed();
-                break;
-            case RIGHT:
-                newX += this.getSpeed();
-                break;
-            default:
-                break;
-        }
-        this.getPosition().setPosition(newX, newY);
-        /*if (!this.getBounds().isCollidingWith(newX, newY)){
-            this.getPosition().setPosition(newX, newY);
-        }*/
+        this.getPosition().setPosition((int) Math.round(newX), (int) Math.round(newY));
+        /*
+         * if (!this.getBounds().isCollidingWith(newX, newY)){
+         * this.getPosition().setPosition(newX, newY);
+         * }
+         */
     }
 
     @Override
     public void takeHit(Player p) {
-        if (this.isHit(p.getSword())){
+        if (this.isHit(p.getSword())) {
             this.isAlive = false;
             p.getScore().addPoints(this.getPoints());
-        } 
+        }
     }
 
 }
