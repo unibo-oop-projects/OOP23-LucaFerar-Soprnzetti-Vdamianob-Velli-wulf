@@ -67,6 +67,17 @@ public class MapImpl implements Map {
 
             }
         }
+
+        for (var biomeOffSet : BiomeOffset.values()) {
+            for (var corridor : biomes.get(biomeOffSet.getPos()).getCorridors()) {
+                for(int y = corridor.getKey().getY(); y < corridor.getValue().getHeight(); y++) {
+                    for(int x = corridor.getKey().getX(); x < corridor.getValue().getWidth(); x++) {
+                        this.tiles.put(new TilePosition(x+biomeOffSet.getOffset().getX(), y+biomeOffSet.getOffset().getY()), Corridor.defaultType);
+                    }
+                }
+
+            }
+        }
     }
 
 }
