@@ -9,7 +9,6 @@ import javawulf.model.PositionOnMap;
 import javawulf.model.PositionOnMapImpl;
 import javawulf.model.powerUp.PowerUp;
 import javawulf.model.BoundingBox.CollisionType;
-import javawulf.model.player.Sword.SwordType;
 
 public class PlayerImpl extends Entity implements Player {
 
@@ -30,22 +29,6 @@ public class PlayerImpl extends Entity implements Player {
 
     @Override
     public void attack() {
-
-        /* 
-        //implementation of the greatsword getting consumed
-        if (this.sword.getSwordType().equals(SwordType.GREATSWORD)){
-            
-            this.sword.consume();
-
-            System.out.println("Durability remaining :" + this.sword.getDurability());
-
-            if (this.sword.getDurability()==0){
-                this.sword.changeSwordType();
-                System.out.println("Greatsword broke!! Changed to normal");
-            }
-            
-        }*/
-
         this.sword.activate();
     }
 
