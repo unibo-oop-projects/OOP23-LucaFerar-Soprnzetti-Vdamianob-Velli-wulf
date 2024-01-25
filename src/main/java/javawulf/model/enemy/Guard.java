@@ -38,13 +38,23 @@ public class Guard extends EnemyImpl {
     }
 
     @Override
-    public void move() {
+    public void move(Player p) {
         if (this.isStunned) {
             if (System.currentTimeMillis() >= this.stunTime) {
                 this.isStunned = false;
             }
         } else {
-            throw new UnsupportedOperationException("Unimplemented method 'move'");
+            
+            int diffX = p.getPosition().getX() - this.getPosition().getX();
+            int diffY = p.getPosition().getY() - this.getPosition().getY(); 
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                this.getPosition().setPosition(this.getPosition().getX() + (int)Math.signum(dx) * this.getSpeed(), 
+                                           this.getPosition().getY());
+            } else {
+                this.getPosition().setPosition(this.getPosition().getX(), 
+                                           this.getPosition().getY() + (int)Math.signum(dy) * this.getSpeed());
+            }
         }
     }
 

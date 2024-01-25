@@ -25,7 +25,7 @@ public class Pawn extends EnemyImpl {
     }
 
     @Override
-    public void move() {
+    public void move(Player p) {
 
         if (System.currentTimeMillis() - this.moveTime >= timeToWait * 1000) {
             this.setDirection(Direction.values()[new Random().nextInt(4)]);

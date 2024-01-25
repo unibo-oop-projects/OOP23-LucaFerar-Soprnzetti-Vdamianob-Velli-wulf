@@ -23,7 +23,7 @@ public abstract class EnemyImpl extends Entity implements Enemy {
         this.points = points;
     }
 
-    public abstract void move();
+    public abstract void move(Player p);
 
     public void inflictDamage(Player p) {
         if (this.isPlayerColliding(p)) {
