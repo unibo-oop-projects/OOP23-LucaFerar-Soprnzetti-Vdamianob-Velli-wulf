@@ -25,18 +25,32 @@ public class SwordImpl extends GameObject implements Sword {
 
     @Override
     public void move(PositionOnMap playerPosition, Direction playerDirection, int delta){
-        checkIfDiagonal(playerDirection);
+        updateDirection(playerDirection);
         this.getPosition().setPosition(playerPosition.getX() + (int)this.swordDirection.getX()*delta,
             playerPosition.getY() + (int)this.swordDirection.getY()*delta);
+        //this.getBounds().setCollisionArea(this.getPosition.getX(), this.getPosition.getY(), delta, delta);
     }
 
-    private void checkIfDiagonal(Direction playerDirection){
+    private void updateDirection(Direction playerDirection){
         Direction movementDirection = playerDirection;
-        if (playerDirection.equals(Direction.DOWN_LEFT) || playerDirection.equals(Direction.DOWN_RIGHT) ||
-            playerDirection.equals(Direction.UP_LEFT) || playerDirection.equals(Direction.UP_RIGHT)){
+        if (checkIfDiagonal(playerDirection)){
+            if(checkIfOpposite(playerDirection)){
+                //movementDirection = ; a crtierion must be chosen
+            } else {
                 movementDirection = swordDirection;
+            }
         }
         this.swordDirection = movementDirection;
+    }
+
+    private boolean checkIfDiagonal(Direction playerDirection){
+        return playerDirection.equals(Direction.DOWN_LEFT) || playerDirection.equals(Direction.DOWN_RIGHT) ||
+            playerDirection.equals(Direction.UP_LEFT) || playerDirection.equals(Direction.UP_RIGHT);
+    }
+
+    private boolean checkIfOpposite(Direction playerDirection){
+        return Math.signum(playerDirection.getX()) != Math.signum(this.swordDirection.getX()) &&
+            Math.signum(playerDirection.getY()) != Math.signum(this.swordDirection.getY());
     }
 
     @Override
