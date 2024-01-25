@@ -51,9 +51,4 @@ public interface Sword extends GameElement {
      */
     public void changeSwordType();
 
-    /**
-     * reduces the durability of the sword by one each time
-     */
-    public void consume();
-
 }
