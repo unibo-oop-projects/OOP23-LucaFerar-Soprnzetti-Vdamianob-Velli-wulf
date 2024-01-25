@@ -1,22 +1,19 @@
 package javawulf.model.enemy;
 
-import javawulf.model.BoundingBox;
 import javawulf.model.PositionOnMap;
 import javawulf.model.player.Player;
-import javawulf.model.player.Sword.SwordType;
 
 public class Guard extends EnemyImpl {
 
-    private final SwordType killValue;
+    private final static int KILLVALUE = 2;
     private boolean isAlive;
     private boolean isStunned;
     private long stunTime;
 
-    public Guard(BoundingBox collision, PositionOnMap position, Integer speed, BoundingBox hitBox, Integer points,
-            SwordType killValue) {
-        super(collision, position, speed, hitBox, points);
-        this.killValue = killValue;
+    public Guard(PositionOnMap position, Integer speed, int points) {
+        super(position, speed, points);
         this.isAlive = true;
+        this.isStunned = false;
     }
 
     public boolean isAlive() {
@@ -28,7 +25,7 @@ public class Guard extends EnemyImpl {
     }
 
     public boolean isKillable(Player p) {
-        return this.killValue.equals(p.getSwordType());
+        return p.getSword().getSwordStrength() == KILLVALUE;
     }
 
     public void checkRoom() {
@@ -55,6 +52,7 @@ public class Guard extends EnemyImpl {
     public void takeHit(Player p) {
         if (this.isKillable(p)) {
             this.setAlive(false);
+            p.getScore().addPoints(this.getPoints());
         } else {
             this.stun(4);
         }
