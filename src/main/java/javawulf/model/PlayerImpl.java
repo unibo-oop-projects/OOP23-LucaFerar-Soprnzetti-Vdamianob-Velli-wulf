@@ -16,8 +16,9 @@ public class PlayerImpl extends Entity implements Player {
     public PlayerImpl(int startingX, int startingY, int health, int startingPoints){
         super(new PositionOnMapImpl(startingX, startingY), CollisionType.PLAYER, 1);
         this.score = new ScoreImpl(startingPoints);
+        this.setDirection(Direction.DOWN);
         this.health = new PlayerHealthImpl(health);
-        this.sword = new SwordImpl(new PositionOnMapImpl(startingX, startingY+1));
+        this.sword = new SwordImpl(new PositionOnMapImpl(startingX, startingY+1), this.getDirection());
         this.activePowerUp = Optional.empty();
     }
 

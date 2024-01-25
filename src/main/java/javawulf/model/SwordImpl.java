@@ -15,12 +15,14 @@ public class SwordImpl extends GameObject implements Sword {
     /**
      * Creates a new sword by using the specified position
      * 
-     * @param position the exact position the sword must be in when it is created
+     * @param position The exact position the sword must be in when it is created
+     * @param direction The direction the sword must face when it is created
      */
-    public SwordImpl(PositionOnMap position) {
+    public SwordImpl(PositionOnMap position, Direction direction) {
         super(position, new BoundingBoxImpl(position.getX(), position.getY(), 0, 0, CollisionType.STUNNED));
         this.strength = NORMAL;
         this.swordType = SwordType.NORMAL;
+        this.swordDirection = direction;
     }
 
     @Override
