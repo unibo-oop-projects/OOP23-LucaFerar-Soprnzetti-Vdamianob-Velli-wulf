@@ -10,6 +10,7 @@ public class SwordImpl extends GameObject implements Sword {
     private int strength;
     private int durability;
     private SwordType swordType;
+    private Direction swordDirection;
 
     /**
      * Creates a new sword by using the specified position
@@ -17,9 +18,35 @@ public class SwordImpl extends GameObject implements Sword {
      * @param position the exact position the sword must be in when it is created
      */
     public SwordImpl(PositionOnMap position) {
-        super(position, new BoundingBoxImpl(0, 0, 0, 0, CollisionType.SWORD));
+        super(position, new BoundingBoxImpl(position.getX(), position.getY(), 0, 0, CollisionType.STUNNED));
         this.strength = NORMAL;
         this.swordType = SwordType.NORMAL;
+    }
+
+    @Override
+    public void move(PositionOnMap playerPosition, Direction playerDirection, int delta){
+        checkIfDiagonal(playerDirection);
+        this.getPosition().setPosition(playerPosition.getX() + (int)this.swordDirection.getX()*delta,
+            playerPosition.getY() + (int)this.swordDirection.getY()*delta);
+    }
+
+    private void checkIfDiagonal(Direction playerDirection){
+        Direction movementDirection = playerDirection;
+        if (playerDirection.equals(Direction.DOWN_LEFT) || playerDirection.equals(Direction.DOWN_RIGHT) ||
+            playerDirection.equals(Direction.UP_LEFT) || playerDirection.equals(Direction.UP_RIGHT)){
+                movementDirection = swordDirection;
+        }
+        this.swordDirection = movementDirection;
+    }
+
+    @Override
+    public void activate(){
+        this.getBounds().changeCollisionType(CollisionType.SWORD);
+    }
+
+    @Override
+    public void deactivate(){
+        this.getBounds().changeCollisionType(CollisionType.STUNNED);
     }
 
     @Override
