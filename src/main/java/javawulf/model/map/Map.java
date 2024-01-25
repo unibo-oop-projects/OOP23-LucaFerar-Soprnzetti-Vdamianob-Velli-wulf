@@ -2,9 +2,6 @@ package javawulf.model.map;
 
 import java.util.Optional;
 
-import javafx.geometry.Pos;
-import javawulf.model.PositionOnMap;
-
 /**
  * Map is the complete bidimensional game Enviroment. It takes four biomes and
  * it uses their to build the enviroment.

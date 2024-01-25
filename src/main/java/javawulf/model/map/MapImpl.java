@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-import javawulf.model.PositionOnMap;
-
 public class MapImpl implements Map {
     /**
      * Default central cross-biome width (+)
