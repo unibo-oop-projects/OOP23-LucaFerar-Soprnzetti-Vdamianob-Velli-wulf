@@ -1,5 +1,6 @@
-package javawulf.model;
+package javawulf.model.item;
 
+import javawulf.model.PositionOnMap;
 import javawulf.model.player.Player;
 
 public class CureMax extends Cure {
