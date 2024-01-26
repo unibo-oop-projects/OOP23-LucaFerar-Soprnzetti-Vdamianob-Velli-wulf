@@ -1,12 +1,14 @@
 package javawulf.model.player;
 
 import java.awt.Color;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javawulf.model.BoundingBox;
 import javawulf.model.Direction;
 import javawulf.model.GameElement;
+import javawulf.model.item.AmuletFragments;
 import javawulf.model.powerUp.PowerUp;
 
 /**
@@ -54,7 +56,7 @@ public interface Player extends GameElement {
      */
     public boolean isHit(BoundingBox box);
 
-    public boolean isAmuletPieceInCoordinate();
+    public void collectAmuletPiece(AmuletFragments piece);
 
     /**
      * @return The current health of the player character, including also the maximum
@@ -85,5 +87,7 @@ public interface Player extends GameElement {
     public void setSword(Sword sword);
 
     public void setPlayerHealth(PlayerHealth health);
+
+    public List<AmuletFragments> getFragments();
     
 }
