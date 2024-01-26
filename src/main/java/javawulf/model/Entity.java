@@ -3,6 +3,8 @@ package javawulf.model;
 import javawulf.model.BoundingBox.CollisionType;
 
 public abstract class Entity extends GameObject {
+    
+    public static final int MOVEMENT_DELTA = OBJECT_SIZE/8;
     private Integer speed;
     private Direction direction;
 
