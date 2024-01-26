@@ -1,6 +1,9 @@
 package javawulf;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import javawulf.model.Coordinate;
@@ -112,7 +115,12 @@ public class MapTest {
         assertEquals(TileType.ROOM,
                 gameMapExample.getTileType(
                         new CoordinateImpl(TileType.TILE_DIMENSION * (Biome.SIZE + Map.WIDTH_CENTRAL_BIOME
-                                + secondBiome.getRooms().get(0).getValue().getWidth()) - 24, 24))
+                                + secondBiome.getRooms().get(0).getValue().getWidth()) - 1, 24))
                         .get());
+
+        // Coordinate che ricadono fuori dalla mappa (deve restituire quindi un
+        // Optional.empty)
+        assertEquals(Optional.empty(),
+                gameMapExample.getTileType(new CoordinateImpl(Map.MAP_SIZE * TileType.TILE_DIMENSION, 0)));
     }
 }
