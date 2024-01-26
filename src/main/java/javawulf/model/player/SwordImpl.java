@@ -3,7 +3,7 @@ package javawulf.model.player;
 import javawulf.model.BoundingBoxImpl;
 import javawulf.model.Direction;    
 import javawulf.model.GameObject;
-import javawulf.model.PositionOnMap;
+import javawulf.model.Coordinate;
 import javawulf.model.BoundingBox.CollisionType;
 
 public class SwordImpl extends GameObject implements Sword {
@@ -22,7 +22,7 @@ public class SwordImpl extends GameObject implements Sword {
      * @param position The exact position the sword must be in when it is created
      * @param direction The direction the sword must face when it is created
      */
-    public SwordImpl(PositionOnMap position, Direction direction) {
+    public SwordImpl(Coordinate position, Direction direction) {
         super(position, new BoundingBoxImpl(position.getX(), position.getY(), 0, 0, CollisionType.STUNNED));
         this.strength = NORMAL;
         this.swordType = SwordType.NORMAL;
@@ -30,7 +30,7 @@ public class SwordImpl extends GameObject implements Sword {
     }
 
     @Override
-    public void move(PositionOnMap playerPosition, Direction playerDirection, int delta){
+    public void move(Coordinate playerPosition, Direction playerDirection, int delta){
         updateDirection(playerDirection);
         this.getPosition().setPosition(playerPosition.getX() + (int)this.swordDirection.getX()*delta,
             playerPosition.getY() + (int)this.swordDirection.getY()*delta);
@@ -41,7 +41,7 @@ public class SwordImpl extends GameObject implements Sword {
         Direction movementDirection = playerDirection;
         if (checkIfDiagonal(playerDirection)){
             if(checkIfOpposite(playerDirection)){
-                //movementDirection = ; a crtierion must be chosen
+                movementDirection = (int) playerDirection.getX() < 0 ? Direction.LEFT : Direction.RIGHT;
             } else {
                 movementDirection = swordDirection;
             }

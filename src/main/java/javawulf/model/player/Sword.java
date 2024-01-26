@@ -2,7 +2,7 @@ package javawulf.model.player;
 
 import javawulf.model.Direction;
 import javawulf.model.GameElement;
-import javawulf.model.PositionOnMap;
+import javawulf.model.Coordinate;
 
 /**
  * Sword is class whose purpose is to deal with all of the attack functions of player,
@@ -18,7 +18,7 @@ public interface Sword extends GameElement {
         GREATSWORD;
     }
     
-    public void move(PositionOnMap playerPosition, Direction playerDirection, int delta);
+    public void move(Coordinate playerPosition, Direction playerDirection, int delta);
 
     public void activate();
 

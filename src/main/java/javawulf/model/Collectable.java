@@ -7,7 +7,7 @@ public abstract class Collectable extends GameObject {
 
     private final Integer points;
 
-    public Collectable(PositionOnMap position, Integer points) {
+    public Collectable(Coordinate position, Integer points) {
         super(position, CollisionType.COLLECTABLE);
         this.points = points;
     }

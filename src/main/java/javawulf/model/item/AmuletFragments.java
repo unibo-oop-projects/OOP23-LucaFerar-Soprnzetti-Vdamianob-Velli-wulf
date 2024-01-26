@@ -1,12 +1,12 @@
 package javawulf.model.item;
 
 import javawulf.model.Collectable;
-import javawulf.model.PositionOnMap;
+import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
 public class AmuletFragments extends Collectable implements Item {
 
-    public AmuletFragments(PositionOnMap position, Integer points) {
+    public AmuletFragments(Coordinate position, Integer points) {
         super(position, points);
         // TODO Auto-generated constructor stub
     }

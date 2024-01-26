@@ -4,9 +4,9 @@ public interface GameElement {
     
     public BoundingBox getBounds();
 
-    public PositionOnMap getPosition();
+    public Coordinate getPosition();
 
     public void setBounds(BoundingBox b);
 
-    public void setPosition(PositionOnMap p);
+    public void setPosition(Coordinate p);
 }

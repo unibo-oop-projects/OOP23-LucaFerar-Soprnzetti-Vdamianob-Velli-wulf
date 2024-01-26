@@ -3,7 +3,7 @@ package javawulf.model.player;
 import javawulf.model.BoundingBox;
 import javawulf.model.Direction;
 import javawulf.model.GameElement;
-import javawulf.model.PowerUp;
+import javawulf.model.powerUp.PowerUp;
 
 public interface Player extends GameElement {
 

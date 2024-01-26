@@ -3,7 +3,7 @@ package javawulf.model.enemy;
 import java.util.Random;
 
 import javawulf.model.Direction;
-import javawulf.model.PositionOnMap;
+import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
 public class Pawn extends EnemyImpl {
@@ -12,7 +12,7 @@ public class Pawn extends EnemyImpl {
     private long moveTime;
     private int timeToWait;
 
-    public Pawn(PositionOnMap position, Integer speed, int points) {
+    public Pawn(Coordinate position, Integer speed, int points) {
         super(position, speed, points);
         this.isAlive = true;
         this.moveTime = System.currentTimeMillis();
