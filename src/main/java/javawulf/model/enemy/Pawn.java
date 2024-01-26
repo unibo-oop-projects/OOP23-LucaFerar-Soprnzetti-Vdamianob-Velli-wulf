@@ -37,7 +37,7 @@ public class Pawn extends EnemyImpl {
         double newY = this.getPosition().getY() + this.getDirection().getY() * this.getSpeed();
 
         this.getPosition().setPosition((int) Math.round(newX), (int) Math.round(newY));
-        /*
+        /* TODO: Fix collision detection
          * if (!this.getBounds().isCollidingWith(newX, newY)){
          * this.getPosition().setPosition(newX, newY);
          * }
