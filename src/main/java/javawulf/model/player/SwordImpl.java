@@ -64,7 +64,7 @@ public class SwordImpl extends GameObject implements Sword {
     private void updateCollisionArea(){
         int constantWidth=1;
         int constantHeight=1;
-        if(getSwordType().equals(SwordType.GREATSWORD)){
+        if(this.getSwordType().equals(SwordType.GREATSWORD)){
             if(Math.abs((int)this.swordDirection.getX()) > 0){
                 constantHeight = 3;
             } else {
