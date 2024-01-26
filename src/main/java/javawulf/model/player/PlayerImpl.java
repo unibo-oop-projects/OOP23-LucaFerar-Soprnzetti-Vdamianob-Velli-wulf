@@ -12,8 +12,6 @@ import javawulf.model.BoundingBox.CollisionType;
 
 public class PlayerImpl extends Entity implements Player {
 
-    private static final int PLAYER_SIZE = 24;
-    private static final int MOVEMENT_DELTA = PLAYER_SIZE/8;
     private static final int DAMAGE = -1;
     private PlayerHealth health;
     private Score score;
@@ -48,7 +46,7 @@ public class PlayerImpl extends Entity implements Player {
         // }
         this.getPosition().setPosition(current.getX() + (int)direction.getX()*delta,
             current.getY() + (int)direction.getY()*delta);
-        this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), PLAYER_SIZE, PLAYER_SIZE);
+        this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE, OBJECT_SIZE);
         this.sword.move(this.getPosition(), direction, delta);
         this.setDirection(direction);
     }

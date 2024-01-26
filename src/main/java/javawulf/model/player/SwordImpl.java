@@ -1,14 +1,13 @@
 package javawulf.model.player;
 
 import javawulf.model.BoundingBoxImpl;
-import javawulf.model.Direction;    
+import javawulf.model.Direction;
 import javawulf.model.GameObject;
 import javawulf.model.Coordinate;
 import javawulf.model.BoundingBox.CollisionType;
 
 public class SwordImpl extends GameObject implements Sword {
 
-    private static final int SWORD_SIZE = 24;
     private final static int NORMAL = 1;
     private final static int STRONG = 2;
     private final static int DURABILITY = 50;
@@ -24,8 +23,8 @@ public class SwordImpl extends GameObject implements Sword {
      * @param direction The direction the sword must face when it is created
      */
     public SwordImpl(Coordinate position, Direction direction) {
-        super(position, new BoundingBoxImpl(position.getX()+(int)direction.getX()*SWORD_SIZE,
-            position.getY()+(int)direction.getY()*SWORD_SIZE, SWORD_SIZE, SWORD_SIZE,
+        super(position, new BoundingBoxImpl(position.getX()+(int)direction.getX()*OBJECT_SIZE,
+            position.getY()+(int)direction.getY()*OBJECT_SIZE, OBJECT_SIZE, OBJECT_SIZE,
             CollisionType.STUNNED));
         this.strength = NORMAL;
         this.swordType = SwordType.NORMAL;
@@ -73,7 +72,7 @@ public class SwordImpl extends GameObject implements Sword {
             }
         }
         this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(),
-            constantWidth*SWORD_SIZE, constantHeight*SWORD_SIZE);
+            constantWidth*OBJECT_SIZE, constantHeight*OBJECT_SIZE);
     }
 
     @Override
