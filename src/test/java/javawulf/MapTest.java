@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.map.Biome;
 import javawulf.model.map.BiomeImpl;
@@ -15,8 +14,6 @@ import javawulf.model.map.Map;
 import javawulf.model.map.MapImpl;
 import javawulf.model.map.Room;
 import javawulf.model.map.Space;
-// import javawulf.model.map.Tile;
-// import javawulf.model.map.TileImpl;
 import javawulf.model.map.TilePosition;
 import javawulf.model.map.TileType;
 
