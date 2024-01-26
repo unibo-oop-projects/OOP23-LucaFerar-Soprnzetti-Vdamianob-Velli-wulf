@@ -28,8 +28,10 @@ public class Guard extends EnemyImpl {
         return p.getSword().getSwordStrength() == KILLVALUE;
     }
 
-    public void checkRoom() {
+    public boolean checkRoom(Player p) {
         // TODO implement here
+        // Return true if player is in the same room as the guard, probably should be private
+        return false;
     }
 
     public void stun(Integer time) {
@@ -39,7 +41,7 @@ public class Guard extends EnemyImpl {
 
     @Override
     public void move(Player p) {
-        if (this.isStunned) {
+        if (this.isStunned || !this.checkRoom(p)) {
             if (System.currentTimeMillis() >= this.stunTime) {
                 this.isStunned = false;
             }
