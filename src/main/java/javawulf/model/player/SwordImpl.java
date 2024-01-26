@@ -8,6 +8,7 @@ import javawulf.model.BoundingBox.CollisionType;
 
 public class SwordImpl extends GameObject implements Sword {
 
+    private static final int SWORD_SIZE = 24;
     private final static int NORMAL = 1;
     private final static int STRONG = 2;
     private final static int DURABILITY = 50;
@@ -23,7 +24,9 @@ public class SwordImpl extends GameObject implements Sword {
      * @param direction The direction the sword must face when it is created
      */
     public SwordImpl(Coordinate position, Direction direction) {
-        super(position, new BoundingBoxImpl(position.getX(), position.getY(), 0, 0, CollisionType.STUNNED));
+        super(position, new BoundingBoxImpl(position.getX()+(int)direction.getX()*SWORD_SIZE,
+            position.getY()+(int)direction.getY()*SWORD_SIZE, SWORD_SIZE, SWORD_SIZE,
+            CollisionType.STUNNED));
         this.strength = NORMAL;
         this.swordType = SwordType.NORMAL;
         this.swordDirection = direction;
@@ -34,7 +37,7 @@ public class SwordImpl extends GameObject implements Sword {
         updateDirection(playerDirection);
         this.getPosition().setPosition(playerPosition.getX() + (int)this.swordDirection.getX()*delta,
             playerPosition.getY() + (int)this.swordDirection.getY()*delta);
-        //this.getBounds().setCollisionArea(this.getPosition.getX(), this.getPosition.getY(), delta, delta);
+        updateCollisionArea();
     }
 
     private void updateDirection(Direction playerDirection){
@@ -57,6 +60,20 @@ public class SwordImpl extends GameObject implements Sword {
     private boolean checkIfOpposite(Direction playerDirection){
         return Math.signum(playerDirection.getX()) != Math.signum(this.swordDirection.getX()) &&
             Math.signum(playerDirection.getY()) != Math.signum(this.swordDirection.getY());
+    }
+
+    private void updateCollisionArea(){
+        int constantWidth=1;
+        int constantHeight=1;
+        if(getSwordType().equals(SwordType.GREATSWORD)){
+            if(Math.abs((int)this.swordDirection.getX()) > 0){
+                constantHeight = 3;
+            } else {
+                constantWidth = 3;
+            }
+        }
+        this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(),
+            constantWidth*SWORD_SIZE, constantHeight*SWORD_SIZE);
     }
 
     @Override
