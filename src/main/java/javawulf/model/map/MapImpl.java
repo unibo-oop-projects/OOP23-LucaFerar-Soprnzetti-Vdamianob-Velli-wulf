@@ -2,9 +2,13 @@ package javawulf.model.map;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+import java.awt.Rectangle;
+import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
 
 public class MapImpl implements Map {
@@ -65,6 +69,22 @@ public class MapImpl implements Map {
                 : Optional.of(TileType.WALL));
     }
 
+    @Override
+    public Set<TileType> getTileTypes(BoundingBox boundBoxEntity) {
+        Rectangle entityRect = boundBoxEntity.getCollisionArea();
+        HashSet<TileType> intersectedTileTypes = new HashSet<>();
+
+        for (int i = entityRect.x; i < entityRect.x + (entityRect.width / TileType.TILE_DIMENSION); i++) {
+            for (int j = entityRect.y; j < entityRect.y + (entityRect.height / TileType.TILE_DIMENSION); j++) {
+                TilePosition tilePos = new TilePosition(i, j);
+                if (this.tiles.containsKey(tilePos)) {
+                    intersectedTileTypes.add(this.tiles.get(tilePos));
+                }
+            }
+        }
+        return intersectedTileTypes;
+    }
+
     private void build() {
         for (var biomeOffSet : BiomeOffset.values()) {
             for (var room : biomes.get(biomeOffSet.getPos()).getRooms()) {
@@ -94,4 +114,5 @@ public class MapImpl implements Map {
         return (pos.getX() < 0 || pos.getY() < 0 || (pos.getX() / TileType.TILE_DIMENSION) >= MAP_SIZE
                 || (pos.getY() / TileType.TILE_DIMENSION) >= MAP_SIZE ? false : true);
     }
+
 }
