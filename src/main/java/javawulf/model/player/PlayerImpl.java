@@ -1,5 +1,7 @@
 package javawulf.model.player;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javawulf.model.BoundingBox;
@@ -9,22 +11,26 @@ import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.powerUp.PowerUp;
 import javawulf.model.BoundingBox.CollisionType;
+import javawulf.model.item.AmuletFragments;
 
 public class PlayerImpl extends Entity implements Player {
 
     private static final int DAMAGE = -1;
+    private static final int PLAYER_DEFAULT_SPEED = 1;
     private PlayerHealth health;
     private Score score;
     private Sword sword;
+    private List<AmuletFragments> fragmentsCollected;
     private Optional<PowerUp> activePowerUp;
     private PlayerColor color;
 
     public PlayerImpl(int startingX, int startingY, int health, int startingPoints){
-        super(new CoordinateImpl(startingX, startingY), CollisionType.PLAYER, 1);
+        super(new CoordinateImpl(startingX, startingY), CollisionType.PLAYER, PLAYER_DEFAULT_SPEED);
         this.score = new ScoreImpl(startingPoints);
         this.setDirection(Direction.DOWN);
         this.health = new PlayerHealthImpl(health);
         this.sword = new SwordImpl(getPosition(), this.getDirection());
+        this.fragmentsCollected  = new ArrayList<>(4);
         this.activePowerUp = Optional.empty();
         this.color = PlayerColor.NONE;
     }
@@ -65,8 +71,8 @@ public class PlayerImpl extends Entity implements Player {
     }
 
     @Override
-    public boolean isAmuletPieceInCoordinate() {
-        return false;
+    public void collectAmuletPiece(AmuletFragments piece) {
+        this.fragmentsCollected.add(piece);
     }
 
     @Override
@@ -118,6 +124,11 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public void setColor(PlayerColor color) {
         this.color = color;
+    }
+
+    @Override
+    public List<AmuletFragments> getFragments() {
+        return this.fragmentsCollected;
     }
     
 }
