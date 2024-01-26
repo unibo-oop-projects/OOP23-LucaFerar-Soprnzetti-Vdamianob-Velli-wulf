@@ -16,4 +16,9 @@ public class TilePosition extends Pair<Integer, Integer> {
         return this.getValue();
     }
 
+    @Override
+    public String toString() {
+        return "TilePosition [x:"+getX()+" y:"+getY()+"]";
+    }
+
 }
