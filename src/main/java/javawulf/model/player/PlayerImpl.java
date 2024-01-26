@@ -17,6 +17,7 @@ public class PlayerImpl extends Entity implements Player {
     private Score score;
     private Sword sword;
     private Optional<PowerUp> activePowerUp;
+    private PlayerColor color;
 
     public PlayerImpl(int startingX, int startingY, int health, int startingPoints){
         super(new CoordinateImpl(startingX, startingY), CollisionType.PLAYER, 1);
@@ -25,6 +26,7 @@ public class PlayerImpl extends Entity implements Player {
         this.health = new PlayerHealthImpl(health);
         this.sword = new SwordImpl(getPosition(), this.getDirection());
         this.activePowerUp = Optional.empty();
+        this.color = PlayerColor.NONE;
     }
 
     @Override
@@ -106,6 +108,16 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public void setPlayerHealth(PlayerHealth health) {
         this.health = health;
+    }
+
+    @Override
+    public PlayerColor getColor() {
+        return this.color;
+    }
+
+    @Override
+    public void setColor(PlayerColor color) {
+        this.color = color;
     }
     
 }

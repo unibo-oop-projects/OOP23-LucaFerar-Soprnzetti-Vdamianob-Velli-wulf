@@ -1,5 +1,9 @@
 package javawulf.model.player;
 
+import java.awt.Color;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 import javawulf.model.BoundingBox;
 import javawulf.model.Direction;
 import javawulf.model.GameElement;
@@ -9,6 +13,24 @@ import javawulf.model.powerUp.PowerUp;
  * Player represents the playable character and its statitstics
  */
 public interface Player extends GameElement {
+
+    public enum PlayerColor{
+        RED(Optional.of(Color.RED)),
+        BLUE(Optional.of(Color.BLUE)),
+        YELLOW(Optional.of(Color.YELLOW)),
+        GREEN(Optional.of(Color.GREEN)),
+        NONE(Optional.empty());
+
+        private final Optional<Color> color;
+
+        private PlayerColor(Optional<Color> color){
+            this.color = color;
+        }
+
+        public Color getColor() throws NoSuchElementException{
+            return this.color.orElseThrow();
+        }
+    }
 
     /**
      * Activate the sword in order to attack
@@ -53,6 +75,10 @@ public interface Player extends GameElement {
      * @return The player's sword
      */
     public Sword getSword();
+
+    public PlayerColor getColor();
+
+    public void setColor(PlayerColor color);
     
     public void setScore(Score score);
 
