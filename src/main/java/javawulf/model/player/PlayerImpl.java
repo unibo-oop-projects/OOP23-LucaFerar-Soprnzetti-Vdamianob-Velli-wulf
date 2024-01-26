@@ -23,7 +23,7 @@ public class PlayerImpl extends Entity implements Player {
         this.score = new ScoreImpl(startingPoints);
         this.setDirection(Direction.DOWN);
         this.health = new PlayerHealthImpl(health);
-        this.sword = new SwordImpl(new CoordinateImpl(startingX, startingY+1), this.getDirection());
+        this.sword = new SwordImpl(getPosition(), this.getDirection());
         this.activePowerUp = Optional.empty();
     }
 
@@ -35,15 +35,20 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public void move(Direction direction) throws IllegalStateException {
         Coordinate current = this.getPosition();
-        int delta = this.getSpeed(); //it will be multiplied by a constant, corresponding to the side of a tile/size of player
+        int delta = this.getSpeed()*MOVEMENT_DELTA;
+        // var preview = this.getPosition();
+        // preview.setPosition(current.getX() + (int)direction.getX()*delta,
+        //     current.getY() + (int)direction.getY()*delta);
+        if(isDefeated()){ //if wall, this will be changed later
+             throw new IllegalStateException("There is a wall");
+        }// else {
+        //     this.setPosition(preview);
+        // }
         this.getPosition().setPosition(current.getX() + (int)direction.getX()*delta,
             current.getY() + (int)direction.getY()*delta);
+        this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE, OBJECT_SIZE);
         this.sword.move(this.getPosition(), direction, delta);
-        //new Point(DAMAGE, DAMAGE).move(DAMAGE, DAMAGE);
         this.setDirection(direction);
-        if(isDefeated()){ //if wall, this will be changed later
-            throw new IllegalStateException("There is a wall");
-        }
     }
 
     @Override

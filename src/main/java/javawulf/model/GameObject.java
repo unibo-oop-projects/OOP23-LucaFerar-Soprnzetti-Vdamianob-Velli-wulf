@@ -4,7 +4,7 @@ import javawulf.model.BoundingBox.CollisionType;
 
 public abstract class GameObject implements GameElement{
 
-    private static final int OBJECT_SIZE = 24;
+    public static final int OBJECT_SIZE = 24;
     private BoundingBox collision;
     private Coordinate position;
 

@@ -1,7 +1,7 @@
 package javawulf.model.player;
 
 import javawulf.model.BoundingBoxImpl;
-import javawulf.model.Direction;    
+import javawulf.model.Direction;
 import javawulf.model.GameObject;
 import javawulf.model.Coordinate;
 import javawulf.model.BoundingBox.CollisionType;
@@ -23,7 +23,9 @@ public class SwordImpl extends GameObject implements Sword {
      * @param direction The direction the sword must face when it is created
      */
     public SwordImpl(Coordinate position, Direction direction) {
-        super(position, new BoundingBoxImpl(position.getX(), position.getY(), 0, 0, CollisionType.STUNNED));
+        super(position, new BoundingBoxImpl(position.getX()+(int)direction.getX()*OBJECT_SIZE,
+            position.getY()+(int)direction.getY()*OBJECT_SIZE, OBJECT_SIZE, OBJECT_SIZE,
+            CollisionType.STUNNED));
         this.strength = NORMAL;
         this.swordType = SwordType.NORMAL;
         this.swordDirection = direction;
@@ -34,7 +36,7 @@ public class SwordImpl extends GameObject implements Sword {
         updateDirection(playerDirection);
         this.getPosition().setPosition(playerPosition.getX() + (int)this.swordDirection.getX()*delta,
             playerPosition.getY() + (int)this.swordDirection.getY()*delta);
-        //this.getBounds().setCollisionArea(this.getPosition.getX(), this.getPosition.getY(), delta, delta);
+        updateCollisionArea();
     }
 
     private void updateDirection(Direction playerDirection){
@@ -57,6 +59,20 @@ public class SwordImpl extends GameObject implements Sword {
     private boolean checkIfOpposite(Direction playerDirection){
         return Math.signum(playerDirection.getX()) != Math.signum(this.swordDirection.getX()) &&
             Math.signum(playerDirection.getY()) != Math.signum(this.swordDirection.getY());
+    }
+
+    private void updateCollisionArea(){
+        int constantWidth=1;
+        int constantHeight=1;
+        if(getSwordType().equals(SwordType.GREATSWORD)){
+            if(Math.abs((int)this.swordDirection.getX()) > 0){
+                constantHeight = 3;
+            } else {
+                constantWidth = 3;
+            }
+        }
+        this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(),
+            constantWidth*OBJECT_SIZE, constantHeight*OBJECT_SIZE);
     }
 
     @Override
