@@ -28,8 +28,10 @@ public class Guard extends EnemyImpl {
         return p.getSword().getSwordStrength() == KILLVALUE;
     }
 
-    public void checkRoom() {
+    public boolean checkRoom(Player p) {
         // TODO implement here
+        // Return true if player is in the same room as the guard, probably should be private
+        return false;
     }
 
     public void stun(Integer time) {
@@ -38,13 +40,26 @@ public class Guard extends EnemyImpl {
     }
 
     @Override
-    public void move() {
-        if (this.isStunned) {
+    public void move(Player p) {
+        if (this.isStunned || !this.checkRoom(p)) {
             if (System.currentTimeMillis() >= this.stunTime) {
                 this.isStunned = false;
             }
         } else {
-            throw new UnsupportedOperationException("Unimplemented method 'move'");
+            
+            int diffX = p.getPosition().getX() - this.getPosition().getX();
+            int diffY = p.getPosition().getY() - this.getPosition().getY(); 
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                this.getPosition().setPosition(this.getPosition().getX() + (int)Math.signum(dx) * this.getSpeed() * MOVEMENT_DELTA, 
+                                           this.getPosition().getY());
+            } else {
+                this.getPosition().setPosition(this.getPosition().getX(), 
+                                           this.getPosition().getY() + (int)Math.signum(dy) * this.getSpeed() * MOVEMENT_DELTA);
+            }
+
+            this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE,
+                    OBJECT_SIZE);
         }
     }
 
