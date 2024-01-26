@@ -7,4 +7,5 @@ public interface PowerUpHandler {
     void collectPowerUp(PowerUp powerUpPicked);
 
     void update(Player player);
+    
 }

@@ -15,10 +15,14 @@ public abstract class PowerUpImpl extends Collectable implements PowerUp {
         this.type = type;
         this.durationInMilli = durationInMilli;
     }
+    
+    protected void activateEffect() {
+        activationTimeInMilli = System.currentTimeMillis();
+    }
 
     @Override
     public void applyEffect(Player player) {
-        activationTimeInMilli = System.currentTimeMillis();
+        activateEffect();
     }
     
     @Override
