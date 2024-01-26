@@ -3,9 +3,13 @@ package javawulf;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import javawulf.model.Coordinate;
+import javawulf.model.CoordinateImpl;
 import javawulf.model.map.Biome;
 import javawulf.model.map.BiomeImpl;
 import javawulf.model.map.Corridor;
+import javawulf.model.map.Map;
+import javawulf.model.map.MapImpl;
 import javawulf.model.map.Room;
 import javawulf.model.map.Space;
 // import javawulf.model.map.Tile;
@@ -16,13 +20,13 @@ import javawulf.model.map.TileType;
 public class MapTest {
     // @Test
     // void testTiles() {
-    //     Tile firstTile = new TileImpl(TileType.CORRIDOR);
-    //     assertEquals(TileType.CORRIDOR, firstTile.getType());
-    //     assertTrue(firstTile.getType().isCrossable());
+    // Tile firstTile = new TileImpl(TileType.CORRIDOR);
+    // assertEquals(TileType.CORRIDOR, firstTile.getType());
+    // assertTrue(firstTile.getType().isCrossable());
 
-    //     Tile secondTile = new TileImpl(TileType.WALL);
-    //     assertEquals(TileType.WALL, secondTile.getType());
-    //     assertFalse(secondTile.getType().isCrossable());
+    // Tile secondTile = new TileImpl(TileType.WALL);
+    // assertEquals(TileType.WALL, secondTile.getType());
+    // assertFalse(secondTile.getType().isCrossable());
     // }
 
     @Test
@@ -56,11 +60,12 @@ public class MapTest {
         Biome firstBiome = new BiomeImpl();
         firstBiome.addRoom(new TilePosition(5, 5), new Room(10, 10));
         firstBiome.addRoom(new TilePosition(10, 5), new Room(7, 6));
-        
+
         assertEquals(2, firstBiome.getRooms().size());
         assertEquals(0, firstBiome.getCorridors().size());
 
-        assertThrows(IllegalArgumentException.class, () -> firstBiome.addRoom(new TilePosition(200, 500), new Room(5, 4)));
+        assertThrows(IllegalArgumentException.class,
+                () -> firstBiome.addRoom(new TilePosition(200, 500), new Room(5, 4)));
     }
 
     @Test
@@ -70,5 +75,16 @@ public class MapTest {
 
         Biome secondBiome = new BiomeImpl();
         secondBiome.addRoom(new TilePosition(1, 1), new Room(7, 7));
+
+        Biome thirdBiome = new BiomeImpl();
+        thirdBiome.addRoom(new TilePosition(1, 1), new Room(10, 10));
+
+        Biome fourthBiome = new BiomeImpl();
+        fourthBiome.addRoom(new TilePosition(1, 1), new Room(10, 10));
+
+        Map gameMapExample = new MapImpl(firstBiome, secondBiome, thirdBiome, fourthBiome);
+
+        assertEquals(TileType.WALL, gameMapExample.getTileType(new CoordinateImpl(0, 0)).get());
+        assertEquals(TileType.ROOM, gameMapExample.getTileType(new CoordinateImpl(3, 3)).get());
     }
 }
