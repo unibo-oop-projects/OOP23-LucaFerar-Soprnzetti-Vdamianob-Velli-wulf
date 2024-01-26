@@ -6,7 +6,7 @@ import javawulf.model.player.Player;
 
 public class GreatSword extends Collectable implements Item {
 
-    public GreatSword(Coordinate position, Integer points, Integer duration) {
+    public GreatSword(Coordinate position, Integer points) {
         super(position, points);
     }
 

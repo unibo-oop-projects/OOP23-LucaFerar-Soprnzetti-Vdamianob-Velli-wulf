@@ -5,7 +5,7 @@ import javawulf.model.player.Player;
 
 public interface Enemy extends GameElement {
     
-    public void move();
+    public void move(Player p);
 
     public void inflictDamage(Player p);
 
