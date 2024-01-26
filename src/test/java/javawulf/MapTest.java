@@ -138,8 +138,18 @@ public class MapTest {
     void testMapEntityInteraction() {
         this.setUp();
 
+        // EntityBox coincide perfettamente con la tile di posizione (0, 0) che è un muro
         assertEquals(Set.of(TileType.WALL), gameMapExample.getTileTypes(new BoundingBoxImpl(12, 12, 24, 24, BoundingBox.CollisionType.PLAYER)));
+        
+        // EntityBox interseca 4 tile differenti, 3 di tipo WALL e 1 di tipo ROOM 
         assertEquals(Set.of(TileType.WALL, TileType.ROOM), gameMapExample.getTileTypes(new BoundingBoxImpl(13, 13, 24, 24, BoundingBox.CollisionType.PLAYER)));
+        
+        // EntityBox si trova dentro una stanza
+        assertEquals(Set.of(TileType.ROOM), gameMapExample.getTileTypes(new BoundingBoxImpl(200, 200, 24, 24, BoundingBox.CollisionType.PLAYER)));
+        
+        // EntityBox passato è fuori dalla mappa: in tal caso, dovrebbe restituire un Set vuoto
+        assertEquals(Set.of(), gameMapExample.getTileTypes(new BoundingBoxImpl(Map.MAP_SIZE * TileType.TILE_DIMENSION + 24, 0, 24, 24, BoundingBox.CollisionType.PLAYER)));
+
 
     }
 }
