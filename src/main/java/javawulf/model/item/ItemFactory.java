@@ -49,7 +49,7 @@ public class ItemFactory {
 
         private final String name;
 
-        ItemType(String name) {
+        private ItemType(String name) {
             this.name = name;
         }
 

@@ -21,7 +21,7 @@ public class EnemyFactory {
 
         private final String name;
 
-        EnemyType(String name) {
+        private EnemyType(String name) {
             this.name = name;
         }
 
