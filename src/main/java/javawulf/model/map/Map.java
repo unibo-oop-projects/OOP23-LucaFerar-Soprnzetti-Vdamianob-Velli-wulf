@@ -48,6 +48,8 @@ public interface Map {
      *         empty Set if it is
      *         Out of map)
      *         <img src="../../../../resources/javadoc/intersections.gif" />
+     * In this GIF, in a first moment the entity (red square) is completely inside a room, so will be return Set = { ROOM }.
+     * In a second time, the entity is between room tiles and wall tiles: will be return Set = { ROOM, WALL }.
      */
     Set<TileType> getTileTypes(BoundingBox boundBoxEntity);
 }
