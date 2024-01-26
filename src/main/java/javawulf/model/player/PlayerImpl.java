@@ -20,6 +20,7 @@ public class PlayerImpl extends Entity implements Player {
     private PlayerHealth health;
     private Score score;
     private Sword sword;
+    private static final int NUMBER_OF_FRAGMENTS = 4;
     private List<AmuletFragments> fragmentsCollected;
     private Optional<PowerUp> activePowerUp;
     private PlayerColor color;
@@ -30,7 +31,7 @@ public class PlayerImpl extends Entity implements Player {
         this.setDirection(Direction.DOWN);
         this.health = new PlayerHealthImpl(health);
         this.sword = new SwordImpl(getPosition(), this.getDirection());
-        this.fragmentsCollected  = new ArrayList<>(4);
+        this.fragmentsCollected  = new ArrayList<>(NUMBER_OF_FRAGMENTS);
         this.activePowerUp = Optional.empty();
         this.color = PlayerColor.NONE;
     }
