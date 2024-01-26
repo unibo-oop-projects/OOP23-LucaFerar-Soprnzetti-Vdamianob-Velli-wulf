@@ -22,6 +22,11 @@ public interface Map {
     public static int WIDTH_CENTRAL_BIOME = 12;
 
     /**
+     * Tile-dimension of the whole map
+     */
+    public static final int MAP_SIZE = Biome.SIZE * 2 + WIDTH_CENTRAL_BIOME;
+
+    /**
      * 
      * @param position (absolute)
      * @return tile position (empty if the given position is Out of map)
@@ -39,9 +44,10 @@ public interface Map {
     /**
      * 
      * @param boundBoxEntity to calculate
-     * @return a Set of tiletypes that the given boundingbox is intersecting (an empty Set if it is
+     * @return a Set of tiletypes that the given boundingbox is intersecting (an
+     *         empty Set if it is
      *         Out of map)
-     * <img src="../../../../resources/javadoc/intersections.gif" />
+     *         <img src="../../../../resources/javadoc/intersections.gif" />
      */
     Set<TileType> getTileTypes(BoundingBox boundBoxEntity);
 }

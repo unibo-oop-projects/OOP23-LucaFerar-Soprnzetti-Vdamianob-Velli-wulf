@@ -12,10 +12,7 @@ import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
 
 public class MapImpl implements Map {
-    /**
-     * Default central cross-biome width (+)
-     */
-    private final int MAP_SIZE = Biome.SIZE * 2 + WIDTH_CENTRAL_BIOME;
+
     private final List<Biome> biomes = new ArrayList<>();
     private final java.util.Map<TilePosition, TileType> tiles = new HashMap<>();
 
