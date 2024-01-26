@@ -15,7 +15,6 @@ public class MapImpl implements Map {
     /**
      * Default central cross-biome width (+)
      */
-    private static int WIDTH_CENTRAL_BIOME = 12;
     private final int MAP_SIZE = Biome.SIZE * 2 + WIDTH_CENTRAL_BIOME;
     private final List<Biome> biomes = new ArrayList<>();
     private final java.util.Map<TilePosition, TileType> tiles = new HashMap<>();

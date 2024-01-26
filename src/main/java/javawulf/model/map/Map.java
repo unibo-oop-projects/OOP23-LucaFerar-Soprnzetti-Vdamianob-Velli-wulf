@@ -15,6 +15,12 @@ import javawulf.model.Coordinate;
  * So Map will behave like a builder of the final Enviroment of the game.
  */
 public interface Map {
+
+    /**
+     * Width-tile dimension of the central biome
+     */
+    public static int WIDTH_CENTRAL_BIOME = 12;
+
     /**
      * 
      * @param position (absolute)
