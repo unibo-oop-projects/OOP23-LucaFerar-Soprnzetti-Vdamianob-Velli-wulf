@@ -10,6 +10,7 @@ import java.util.Set;
 import java.awt.Rectangle;
 import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
+import javawulf.model.CoordinateImpl;
 
 public class MapImpl implements Map {
 
@@ -69,12 +70,18 @@ public class MapImpl implements Map {
     public Set<TileType> getTileTypes(BoundingBox boundBoxEntity) {
         Rectangle entityRect = boundBoxEntity.getCollisionArea();
         HashSet<TileType> intersectedTileTypes = new HashSet<>();
+        if (!isValidPosition(new CoordinateImpl(entityRect.x,entityRect.y))) {
+            return intersectedTileTypes;
+        }
 
-        for (int i = entityRect.x; i < entityRect.x + (entityRect.width / TileType.TILE_DIMENSION); i++) {
-            for (int j = entityRect.y; j < entityRect.y + (entityRect.height / TileType.TILE_DIMENSION); j++) {
-                TilePosition tilePos = new TilePosition(i, j);
+        for (int x = entityRect.x; x < entityRect.x + entityRect.width /* entityRect.x + (entityRect.width / TileType.TILE_DIMENSION) */; x++) {
+            for (int y = entityRect.y; y < entityRect.y + entityRect.height /* entityRect.y + (entityRect.height / TileType.TILE_DIMENSION) */; y++) {
+                // TilePosition tilePos = new TilePosition(x, y);
+                TilePosition tilePos = getTilePosition(new CoordinateImpl(x, y)).get();
                 if (this.tiles.containsKey(tilePos)) {
                     intersectedTileTypes.add(this.tiles.get(tilePos));
+                } else {
+                    intersectedTileTypes.add(TileType.WALL);
                 }
             }
         }
