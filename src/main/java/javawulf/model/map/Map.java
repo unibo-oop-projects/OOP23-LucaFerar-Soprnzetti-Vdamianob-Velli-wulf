@@ -1,7 +1,9 @@
 package javawulf.model.map;
 
 import java.util.Optional;
+import java.util.Set;
 
+import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
 
 /**
@@ -23,7 +25,17 @@ public interface Map {
     /**
      * 
      * @param position (absolute)
-     * @return tile type relative to the given position (empty if the position is Out of map)
+     * @return tile type relative to the given position (empty if the position is
+     *         Out of map)
      */
     Optional<TileType> getTileType(Coordinate position);
+
+    /**
+     * 
+     * @param boundBoxEntity to calculate
+     * @return a Set of tiletypes that the given boundingbox is intersecting (an empty Set if it is
+     *         Out of map)
+     * <img src="../../../../resources/javadoc/intersections.gif" />
+     */
+    Set<TileType> getTileTypes(BoundingBox boundBoxEntity);
 }
