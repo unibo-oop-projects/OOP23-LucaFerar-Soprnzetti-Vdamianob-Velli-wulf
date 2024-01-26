@@ -84,7 +84,35 @@ public class MapTest {
 
         Map gameMapExample = new MapImpl(firstBiome, secondBiome, thirdBiome, fourthBiome);
 
+        // Coordinate che ricadono nella prima Tile in alto a sx della Mappa, che devono
+        // essere di tipo WALL
         assertEquals(TileType.WALL, gameMapExample.getTileType(new CoordinateImpl(0, 0)).get());
-        assertEquals(TileType.ROOM, gameMapExample.getTileType(new CoordinateImpl(3, 3)).get());
+        assertEquals(TileType.WALL, gameMapExample.getTileType(new CoordinateImpl(23, 23)).get());
+
+        // Coordinate che ricadono nelle Tiles della unica stanza contenuta nel primo
+        // bioma
+        assertEquals(TileType.ROOM, gameMapExample.getTileType(new CoordinateImpl(24, 24)).get());
+        assertEquals(TileType.ROOM, gameMapExample.getTileType(new CoordinateImpl(100, 100)).get());
+
+        // Coordinate che ricade al di fuori della stanza del primo bioma (quindi
+        // dev'essere un WALL)
+        assertEquals(TileType.WALL, gameMapExample.getTileType(new CoordinateImpl(1000, 1000)).get());
+
+        // Coordinata che ricade nel bioma centrale (+) dove non ci sono corridoi
+        // (quindi dev'essere un WALL)
+        assertEquals(TileType.WALL,
+                gameMapExample.getTileType(new CoordinateImpl(TileType.TILE_DIMENSION * Biome.SIZE, 0)).get());
+
+        // Coordinate che ricadono nelle Tiles della unica stanza contenuta nel secondo
+        // bioma
+        assertEquals(TileType.ROOM,
+                gameMapExample.getTileType(
+                        new CoordinateImpl(TileType.TILE_DIMENSION * (Biome.SIZE + Map.WIDTH_CENTRAL_BIOME) + 24, 24))
+                        .get());
+        assertEquals(TileType.ROOM,
+                gameMapExample.getTileType(
+                        new CoordinateImpl(TileType.TILE_DIMENSION * (Biome.SIZE + Map.WIDTH_CENTRAL_BIOME
+                                + secondBiome.getRooms().get(0).getValue().getWidth()) - 24, 24))
+                        .get());
     }
 }
