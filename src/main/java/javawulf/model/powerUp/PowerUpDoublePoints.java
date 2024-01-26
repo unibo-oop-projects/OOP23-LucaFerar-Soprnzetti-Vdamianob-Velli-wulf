@@ -4,14 +4,11 @@ import javawulf.model.Coordinate;
 
 public class PowerUpDoublePoints extends PowerUpImpl {
 
-    private final int DURATIONMILLI = 30_000;
-    private final int POINTS = 100;
-    private final String TYPE = "DoublePoints";
+    private final static int DURATIONMILLI = 30_000;
+    private final static int POINTS = 100;
+    private final static String TYPE = "DoublePoints";
     
     public PowerUpDoublePoints(Coordinate position) {
-        this.coordinates = position;
-        this.type = TYPE;
-        this.durationInMilli = DURATIONMILLI;
-        this.pointsGiven = POINTS;
+        super(position, POINTS, TYPE, DURATIONMILLI);
     }
 }
