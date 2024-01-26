@@ -76,13 +76,7 @@ public class MapImpl implements Map {
 
         for (int x = entityRect.x; x < entityRect.x + entityRect.width /* entityRect.x + (entityRect.width / TileType.TILE_DIMENSION) */; x++) {
             for (int y = entityRect.y; y < entityRect.y + entityRect.height /* entityRect.y + (entityRect.height / TileType.TILE_DIMENSION) */; y++) {
-                // TilePosition tilePos = new TilePosition(x, y);
-                TilePosition tilePos = getTilePosition(new CoordinateImpl(x, y)).get();
-                if (this.tiles.containsKey(tilePos)) {
-                    intersectedTileTypes.add(this.tiles.get(tilePos));
-                } else {
-                    intersectedTileTypes.add(TileType.WALL);
-                }
+                intersectedTileTypes.add(this.getTileType(new CoordinateImpl(x, y)).get());
             }
         }
         return intersectedTileTypes;
