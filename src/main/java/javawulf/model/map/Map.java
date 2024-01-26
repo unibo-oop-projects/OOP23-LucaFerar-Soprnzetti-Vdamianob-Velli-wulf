@@ -2,6 +2,8 @@ package javawulf.model.map;
 
 import java.util.Optional;
 
+import javawulf.model.Coordinate;
+
 /**
  * Map is the complete bidimensional game Enviroment. It takes four biomes and
  * it uses their to build the enviroment.
@@ -16,12 +18,12 @@ public interface Map {
      * @param position (absolute)
      * @return tile position (empty if the given position is Out of map)
      */
-    Optional<TilePosition> getTilePosition(Position position);
+    Optional<TilePosition> getTilePosition(Coordinate position);
 
     /**
      * 
      * @param position (absolute)
      * @return tile type relative to the given position (empty if the position is Out of map)
      */
-    Optional<TileType> getTileType(Position position);
+    Optional<TileType> getTileType(Coordinate position);
 }

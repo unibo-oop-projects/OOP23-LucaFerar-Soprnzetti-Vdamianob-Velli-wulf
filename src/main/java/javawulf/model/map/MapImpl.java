@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import javawulf.model.Coordinate;
+
 public class MapImpl implements Map {
     /**
      * Default central cross-biome width (+)
@@ -44,7 +46,7 @@ public class MapImpl implements Map {
     }
 
     @Override
-    public Optional<TilePosition> getTilePosition(Position position) {
+    public Optional<TilePosition> getTilePosition(Coordinate position) {
         if (!this.isValidPosition(position)) {
             return Optional.empty();
         }
@@ -53,7 +55,7 @@ public class MapImpl implements Map {
     }
 
     @Override
-    public Optional<TileType> getTileType(Position position) {
+    public Optional<TileType> getTileType(Coordinate position) {
         var tilePos = this.getTilePosition(position);
         if (tilePos.isEmpty()) {
             return Optional.empty();
@@ -72,7 +74,6 @@ public class MapImpl implements Map {
                                 y + biomeOffSet.getOffset().getY()), Room.defaultType);
                     }
                 }
-
             }
         }
 
@@ -89,7 +90,7 @@ public class MapImpl implements Map {
         }
     }
 
-    private boolean isValidPosition(Position pos) {
+    private boolean isValidPosition(Coordinate pos) {
         return (pos.getX() < 0 || pos.getY() < 0 || (pos.getX() / TileType.TILE_DIMENSION) >= MAP_SIZE
                 || (pos.getY() / TileType.TILE_DIMENSION) >= MAP_SIZE ? false : true);
     }
