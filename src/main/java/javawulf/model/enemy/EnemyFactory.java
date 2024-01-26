@@ -5,24 +5,35 @@ import javawulf.model.Coordinate;
 public class EnemyFactory {
 
     public enum EnemyType {
-        PAWN, 
-        GUARD
-    }
-    
-    public Enemy orderEnemy(EnemyType type, Coordinate position, Integer speed, int points){
-        Enemy enemy = createEnemy(type, position, speed, points);
-        return enemy;
+
+        PAWN("Pawn") {
+            @Override
+            public Enemy create(Coordinate position, Integer speed, int points) {
+                return new Pawn(position, speed, points);
+            }
+        },
+        GUARD("Guard") {
+            @Override
+            public Enemy create(Coordinate position, Integer speed, int points) {
+                return new Guard(position, speed, points);
+            }
+        };
+
+        private final String name;
+
+        EnemyType(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public abstract Enemy create(Coordinate position, Integer speed, int points);
     }
 
-    private Enemy createEnemy(EnemyType type, Coordinate position, Integer speed, int points) {
-        switch (type) {
-            case PAWN:
-                return new Pawn(position, speed, points);
-            case GUARD:
-                return new Guard(position, speed, points);
-            default:
-                throw new IllegalArgumentException("Invalid enemy type");
-        }
+    public Enemy orderEnemy(EnemyType type, Coordinate position, Integer speed, int points) {
+        return type.create(position, speed, points);
     }
 
 }
