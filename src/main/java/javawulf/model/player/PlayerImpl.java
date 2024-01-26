@@ -52,9 +52,9 @@ public class PlayerImpl extends Entity implements Player {
     }
 
     @Override
-    public boolean isHit(BoundingBox b) {
-        if (this.getBounds().isCollidingWith(b.getCollisionArea())
-            && b.getCollisionType().equals(CollisionType.ENEMY)) {
+    public boolean isHit(BoundingBox box) {
+        if (this.getBounds().isCollidingWith(box.getCollisionArea())
+            && box.getCollisionType().equals(CollisionType.ENEMY)) {
             this.health.setHealth(DAMAGE);
             return true;
         } else {
@@ -80,7 +80,7 @@ public class PlayerImpl extends Entity implements Player {
 
     @Override
     public boolean isDefeated() {
-        return this.health.getHealth()==0;
+        return this.health.getHealth()<=0;
     }
 
     @Override
