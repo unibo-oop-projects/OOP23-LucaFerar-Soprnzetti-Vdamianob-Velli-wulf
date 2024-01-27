@@ -31,7 +31,7 @@ public class PlayerImpl extends Entity implements Player {
         this.setDirection(Direction.DOWN);
         this.health = new PlayerHealthImpl(health);
         this.sword = new SwordImpl(getPosition(), this.getDirection());
-        this.fragmentsCollected = new ArrayList<>(NUMBER_OF_PIECES);
+        this.piecesCollected  = new ArrayList<>(NUMBER_OF_PIECES);
         this.activePowerUp = Optional.empty();
         this.color = PlayerColor.NONE;
     }
@@ -75,7 +75,7 @@ public class PlayerImpl extends Entity implements Player {
 
     @Override
     public void collectAmuletPiece(AmuletPiece piece) throws IllegalStateException {
-        if (this.piecesCollected.size() == NUMBER_OF_PIECES){ 
+        if (this.piecesCollected.size()==NUMBER_OF_PIECES){
             throw new IllegalStateException("Already gotten all fragments of the amulet");
         } else {
             this.piecesCollected.add(piece);

@@ -42,7 +42,7 @@ public class PlayerTest {
         assertTrue(new PlayerHealthImpl(health).equals(player.getPlayerHealth()));
         assertEquals(SwordType.NORMAL, player.getSword().getSwordType());
         assertTrue(new ScoreImpl(startingPoints).equals(player.getScore()));
-        assertEquals(0, player.getFragments().size());
+        assertEquals(0, player.getPieces().size());
     }
 
     @Test
@@ -92,9 +92,9 @@ public class PlayerTest {
         for (int i = 0; i < 4; i++) {
             fragments.add(fragment);
             player.collectAmuletPiece(fragments.get(i));
-            assertEquals(i+1, player.getFragments().size());
+            assertEquals(i+1, player.getPieces().size());
         }
         assertThrows(IllegalStateException.class, () -> player.collectAmuletPiece(fragment));
-        assertNotEquals(5, player.getFragments().size());
+        assertNotEquals(5, player.getPieces().size());
     }
 }

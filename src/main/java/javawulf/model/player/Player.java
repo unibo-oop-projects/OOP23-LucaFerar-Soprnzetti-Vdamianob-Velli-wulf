@@ -82,6 +82,6 @@ public interface Player extends GameElement {
 
     public void setColor(PlayerColor color);
 
-    public List<AmuletPiece> getFragments();
+    public List<AmuletPiece> getPieces();
     
 }
