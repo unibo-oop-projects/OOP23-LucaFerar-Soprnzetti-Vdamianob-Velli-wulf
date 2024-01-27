@@ -1,9 +1,19 @@
 package javawulf.view;
 
 import javax.swing.JPanel;
+
+import javawulf.controller.GameLoop;
+import javawulf.model.map.Map;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.awt.Color;
+import java.io.IOException;
+import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 public class GamePanel extends JPanel {
     // Screen settings
@@ -16,6 +26,8 @@ public class GamePanel extends JPanel {
     // Dimensione (h e w) dello schermo
     final int ScreenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
+    private int i = 0;
+    private GameLoop controller;
 
     public GamePanel() {
 
@@ -30,6 +42,23 @@ public class GamePanel extends JPanel {
         super.paintComponent(graphics);
         Graphics2D graphics2d = (Graphics2D)graphics;
         // player.draw(graphics2d);
+
+        // graphics2d.setColor(Color.red);
+        // graphics2d.fillRect(100, 100, this.tileSize, this.tileSize);
+        BufferedImage img;
+        try {
+            img = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
+            i+=16;
+            graphics2d.drawImage(img, 100+i, 100, this.tileSize, this.tileSize, null);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         graphics2d.dispose();
+    }
+
+    public void addController(GameLoop gl) {
+        this.controller = gl;
     }
 }

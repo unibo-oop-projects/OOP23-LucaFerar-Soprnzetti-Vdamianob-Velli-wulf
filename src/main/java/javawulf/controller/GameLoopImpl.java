@@ -22,7 +22,7 @@ public class GameLoopImpl implements GameLoop, Runnable {
     private Thread gameLoopThread;
     private int drawCount = 0;
     private GamePanel gamePanel;
-    private Map mappa;
+    public Map mappa;
     private Entity giocatore;
 
 
