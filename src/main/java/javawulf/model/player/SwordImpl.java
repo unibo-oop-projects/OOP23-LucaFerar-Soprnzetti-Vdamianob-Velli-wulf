@@ -4,6 +4,7 @@ import javawulf.model.BoundingBoxImpl;
 import javawulf.model.Direction;
 import javawulf.model.GameObject;
 import javawulf.model.Coordinate;
+import javawulf.model.CoordinateImpl;
 import javawulf.model.BoundingBox.CollisionType;
 
 public class SwordImpl extends GameObject implements Sword {
@@ -23,7 +24,9 @@ public class SwordImpl extends GameObject implements Sword {
      * @param direction The direction the sword must face when it is created
      */
     public SwordImpl(Coordinate position, Direction direction) {
-        super(position, new BoundingBoxImpl(position.getX()+(int)(direction.getX()*OBJECT_SIZE),
+        super(new CoordinateImpl(position.getX()+(int)(direction.getX()*OBJECT_SIZE),
+            position.getY()+(int)(direction.getY()*OBJECT_SIZE)),
+            new BoundingBoxImpl(position.getX()+(int)(direction.getX()*OBJECT_SIZE),
             position.getY()+(int)(direction.getY()*OBJECT_SIZE), OBJECT_SIZE, OBJECT_SIZE,
             CollisionType.STUNNED));
         this.strength = NORMAL;
