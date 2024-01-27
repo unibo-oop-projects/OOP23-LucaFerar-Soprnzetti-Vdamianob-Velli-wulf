@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import javawulf.controller.GameLoop;
 import javawulf.model.map.Map;
+import javawulf.model.map.TilePosition;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -27,10 +28,10 @@ public class GamePanel extends JPanel {
     final int ScreenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
     private int i = 0;
-    private GameLoop controller;
+    private GameLoop loop;
 
-    public GamePanel() {
-
+    public GamePanel(GameLoop loop) {
+        this.loop = loop;
         this.setPreferredSize(new Dimension(this.ScreenWidth, this.screenHeight));
         this.setBackground(java.awt.Color.WHITE);
         this.setDoubleBuffered(true);
@@ -58,7 +59,14 @@ public class GamePanel extends JPanel {
         graphics2d.dispose();
     }
 
-    public void addController(GameLoop gl) {
-        this.controller = gl;
+    private void drawMap(Graphics2D graphics2d) {
+        for(int x = 0; x<Map.MAP_SIZE; x++) {
+            for(int y = 0; y<Map.MAP_SIZE; y++) {
+                if (loop.getMap().getTilesMap().containsKey(new TilePosition(x, y))) {
+                    
+                }
+            }
+        }
+        
     }
 }

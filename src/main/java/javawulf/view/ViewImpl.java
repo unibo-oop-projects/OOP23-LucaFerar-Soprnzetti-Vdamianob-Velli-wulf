@@ -2,6 +2,8 @@ package javawulf.view;
 
 import javax.swing.JFrame;
 
+import javawulf.controller.GameLoop;
+
 public class ViewImpl {
 
     private GamePanel gamePanel;
@@ -10,8 +12,8 @@ public class ViewImpl {
         return gamePanel;
     }
 
-    public ViewImpl() {
-        this.gamePanel = new GamePanel();
+    public ViewImpl(GameLoop loop) {
+        this.gamePanel = new GamePanel(loop);
 
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -9,6 +9,7 @@ import javawulf.model.map.Room;
 import javawulf.model.map.TilePosition;
 import javawulf.model.player.PlayerImpl;
 import javawulf.view.GamePanel;
+import javawulf.view.ViewImpl;
 
 public class GameLoopImpl implements GameLoop, Runnable {
 
@@ -21,13 +22,14 @@ public class GameLoopImpl implements GameLoop, Runnable {
     private double interval;
     private Thread gameLoopThread;
     private int drawCount = 0;
+    ViewImpl view;
     private GamePanel gamePanel;
     public Map mappa;
     private Entity giocatore;
 
 
-    public GameLoopImpl(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
+    public GameLoopImpl() {
+        view = new ViewImpl(this);
         mapInit();
         playerInit();
     }
@@ -99,7 +101,7 @@ public class GameLoopImpl implements GameLoop, Runnable {
         this.gameLoopThread.start();
     }
 
-    public Map getMappa() {
+    public Map getMap() {
         return mappa;
     }
 

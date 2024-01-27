@@ -1,7 +1,9 @@
 package javawulf.model.map;
 
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
@@ -52,4 +54,6 @@ public interface Map {
      * In a second time, the entity is between room tiles and wall tiles: will be return Set = { ROOM, WALL }.
      */
     Set<TileType> getTileTypes(BoundingBox boundBoxEntity);
+
+    HashMap<TilePosition, TileType> getTilesMap();
 }

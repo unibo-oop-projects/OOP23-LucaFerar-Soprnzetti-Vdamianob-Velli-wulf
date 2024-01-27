@@ -6,8 +6,8 @@ import javawulf.view.ViewImpl;
 
 public class JavaWulf {
     public static void main(String[] args) {
-        ViewImpl view = new ViewImpl();
-        GameLoop loop = new GameLoopImpl(view.getGamePanel());
+        // ViewImpl view = new ViewImpl();
+        GameLoop loop = new GameLoopImpl();
         loop.startGameLoopThread();
     }
 }

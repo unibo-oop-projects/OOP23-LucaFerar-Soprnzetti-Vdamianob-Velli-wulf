@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 
@@ -110,6 +111,11 @@ public class MapImpl implements Map {
     private boolean isValidPosition(Coordinate pos) {
         return (pos.getX() < 0 || pos.getY() < 0 || (pos.getX() / TileType.TILE_DIMENSION) >= MAP_SIZE
                 || (pos.getY() / TileType.TILE_DIMENSION) >= MAP_SIZE ? false : true);
+    }
+
+    @Override
+    public HashMap<TilePosition, TileType> getTilesMap() {
+        return new HashMap<>(this.tiles);
     }
 
 }
