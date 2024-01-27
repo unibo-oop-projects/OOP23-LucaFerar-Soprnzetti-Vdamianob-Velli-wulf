@@ -53,8 +53,8 @@ public class PlayerImpl extends Entity implements Player {
         }// else {
         //     this.setPosition(preview);
         // }
-        this.getPosition().setPosition(current.getX() + (int)direction.getX()*delta,
-            current.getY() + (int)direction.getY()*delta);
+        this.setPosition(new CoordinateImpl(current.getX() + (int)(direction.getX()*delta),
+            current.getY() + (int)(direction.getY()*delta)));
         this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE, OBJECT_SIZE);
         this.sword.move(this.getPosition(), direction, delta);
         this.setDirection(direction);
@@ -65,6 +65,7 @@ public class PlayerImpl extends Entity implements Player {
         if (this.getBounds().isCollidingWith(box.getCollisionArea())
             && box.getCollisionType().equals(CollisionType.ENEMY)) {
             this.health.setHealth(DAMAGE);
+            this.getBounds().changeCollisionType(CollisionType.STUNNED);
             return true;
         } else {
             return false;
