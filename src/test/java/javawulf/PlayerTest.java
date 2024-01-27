@@ -2,16 +2,19 @@ package javawulf;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javawulf.model.BoundingBox;
+import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.BoundingBoxImpl;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.Direction;
 import javawulf.model.Entity;
-import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletFragments;
 import javawulf.model.player.*;
 import javawulf.model.player.Sword.SwordType;
@@ -33,14 +36,13 @@ public class PlayerTest {
 
     @Test
     void testStartingPlayerStatistics() {
-        assertEquals(player.getPosition().getPosition(), test.getPosition());
-        assertEquals(player.getBounds().getCollisionArea(),
-            new BoundingBoxImpl(startingX, startingY, Entity.OBJECT_SIZE, Entity.OBJECT_SIZE,
-                CollisionType.PLAYER).getCollisionArea());
+        assertEquals(test.getPosition(), player.getPosition().getPosition());
+        assertEquals(new BoundingBoxImpl(startingX, startingY, Entity.OBJECT_SIZE, Entity.OBJECT_SIZE,
+                CollisionType.PLAYER).getCollisionArea(), player.getBounds().getCollisionArea());
         assertTrue(new PlayerHealthImpl(health).equals(player.getPlayerHealth()));
-        assertEquals(player.getSword().getSwordType(), SwordType.NORMAL);
+        assertEquals(SwordType.NORMAL, player.getSword().getSwordType());
         assertTrue(new ScoreImpl(startingPoints).equals(player.getScore()));
-        assertEquals(player.getFragments().size(), 0);
+        assertEquals(0, player.getFragments().size());
     }
 
     @Test
@@ -53,19 +55,19 @@ public class PlayerTest {
         BoundingBox expectedBoundingBox = new BoundingBoxImpl(expectedCoordinate.getX(),
             expectedCoordinate.getY(), Entity.OBJECT_SIZE, Entity.OBJECT_SIZE, CollisionType.PLAYER);
         player.move(movementDirection);
-        assertNotEquals(player.getPosition().getPosition(), test.getPosition());
-        assertEquals(player.getPosition().getPosition(), expectedCoordinate.getPosition());
-        assertEquals(player.getBounds().getCollisionArea(), expectedBoundingBox.getCollisionArea());
+        assertNotEquals(test.getPosition(), player.getPosition().getPosition());
+        assertEquals(expectedCoordinate.getPosition(), player.getPosition().getPosition());
+        assertEquals(expectedBoundingBox.getCollisionArea(), player.getBounds().getCollisionArea());
     }
 
     @Test
     void testAttack(){
         CollisionType original = player.getSword().getBounds().getCollisionType();
         CollisionType expected = CollisionType.SWORD;
-        assertEquals(player.getSword().getBounds().getCollisionType(), original);
+        assertEquals(original, player.getSword().getBounds().getCollisionType());
         player.attack();
-        assertNotEquals(player.getSword().getBounds().getCollisionType(), original);
-        assertEquals(player.getSword().getBounds().getCollisionType(), expected);
+        assertNotEquals(original, player.getSword().getBounds().getCollisionType());
+        assertEquals(expected, player.getSword().getBounds().getCollisionType());
     }
 
     @Test
@@ -73,13 +75,26 @@ public class PlayerTest {
         BoundingBox item = new BoundingBoxImpl(startingX, startingY, Entity.OBJECT_SIZE,
             Entity.OBJECT_SIZE, CollisionType.COLLECTABLE);
         assertFalse(player.isHit(item));
-        assertNotEquals(player.getBounds().getCollisionType(), CollisionType.STUNNED);
+        assertNotEquals(CollisionType.STUNNED, player.getBounds().getCollisionType());
 
         BoundingBox enemy = new BoundingBoxImpl(startingX, startingY, Entity.OBJECT_SIZE,
             Entity.OBJECT_SIZE, CollisionType.ENEMY);
         assertTrue(player.isHit(enemy));
-        assertEquals(player.getBounds().getCollisionType(), CollisionType.STUNNED);
+        assertEquals(CollisionType.STUNNED, player.getBounds().getCollisionType());
         assertFalse(new PlayerHealthImpl(health).equals(player.getPlayerHealth()));
         assertEquals(new PlayerHealthImpl(health-1).getHealth(), player.getPlayerHealth().getHealth());
+    }
+
+    @Test
+    void testObtainFragment(){
+        List<AmuletFragments> fragments = new ArrayList<>();
+        AmuletFragments fragment = new AmuletFragments(test, startingPoints);
+        for (int i = 0; i < 4; i++) {
+            fragments.add(fragment);
+            player.collectAmuletPiece(fragments.get(i));
+            assertEquals(i+1, player.getFragments().size());
+        }
+        assertThrows(IllegalStateException.class, () -> player.collectAmuletPiece(fragment));
+        assertNotEquals(5, player.getFragments().size());
     }
 }
