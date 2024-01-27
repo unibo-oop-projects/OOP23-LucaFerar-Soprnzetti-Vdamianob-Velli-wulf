@@ -22,8 +22,8 @@ import javawulf.model.player.Sword.SwordType;
 public class PlayerTest {
 
     int health = 3;
-    int startingX = 10;
-    int startingY = 10;
+    int startingX = 12;
+    int startingY = 12;
     int startingPoints = 0;
     Player player;
     Coordinate test;
