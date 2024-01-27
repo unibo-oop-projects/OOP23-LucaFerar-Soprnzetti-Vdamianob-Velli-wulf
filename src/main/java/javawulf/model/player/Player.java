@@ -81,12 +81,6 @@ public interface Player extends GameElement {
     public PlayerColor getColor();
 
     public void setColor(PlayerColor color);
-    
-    public void setScore(Score score);
-
-    public void setSword(Sword sword);
-
-    public void setPlayerHealth(PlayerHealth health);
 
     public List<AmuletFragments> getFragments();
     

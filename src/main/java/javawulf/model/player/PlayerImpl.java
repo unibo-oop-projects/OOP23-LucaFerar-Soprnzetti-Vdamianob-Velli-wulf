@@ -108,21 +108,6 @@ public class PlayerImpl extends Entity implements Player {
     }
 
     @Override
-    public void setScore(Score score) {
-        this.score = score;
-    }
-
-    @Override
-    public void setSword(Sword sword) {
-        this.sword = sword;
-    }
-
-    @Override
-    public void setPlayerHealth(PlayerHealth health) {
-        this.health = health;
-    }
-
-    @Override
     public PlayerColor getColor() {
         return this.color;
     }
