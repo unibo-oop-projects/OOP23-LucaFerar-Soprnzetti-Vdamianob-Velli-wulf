@@ -23,8 +23,8 @@ public class SwordImpl extends GameObject implements Sword {
      * @param direction The direction the sword must face when it is created
      */
     public SwordImpl(Coordinate position, Direction direction) {
-        super(position, new BoundingBoxImpl(position.getX()+(int)direction.getX()*OBJECT_SIZE,
-            position.getY()+(int)direction.getY()*OBJECT_SIZE, OBJECT_SIZE, OBJECT_SIZE,
+        super(position, new BoundingBoxImpl(position.getX()+(int)(direction.getX()*OBJECT_SIZE),
+            position.getY()+(int)(direction.getY()*OBJECT_SIZE), OBJECT_SIZE, OBJECT_SIZE,
             CollisionType.STUNNED));
         this.strength = NORMAL;
         this.swordType = SwordType.NORMAL;
@@ -34,8 +34,8 @@ public class SwordImpl extends GameObject implements Sword {
     @Override
     public void move(Coordinate playerPosition, Direction playerDirection, int delta){
         updateDirection(playerDirection);
-        this.getPosition().setPosition(playerPosition.getX() + (int)this.swordDirection.getX()*delta,
-            playerPosition.getY() + (int)this.swordDirection.getY()*delta);
+        this.getPosition().setPosition(playerPosition.getX() + (int)(this.swordDirection.getX()*delta),
+            playerPosition.getY() + (int)(this.swordDirection.getY()*delta));
         updateCollisionArea();
     }
 
