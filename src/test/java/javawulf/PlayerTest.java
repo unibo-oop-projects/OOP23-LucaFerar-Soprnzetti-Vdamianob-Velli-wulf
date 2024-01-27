@@ -15,7 +15,7 @@ import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.Direction;
 import javawulf.model.Entity;
-import javawulf.model.item.AmuletFragments;
+import javawulf.model.item.AmuletPiece;
 import javawulf.model.player.*;
 import javawulf.model.player.Sword.SwordType;
 
@@ -87,8 +87,8 @@ public class PlayerTest {
 
     @Test
     void testObtainFragment(){
-        List<AmuletFragments> fragments = new ArrayList<>();
-        AmuletFragments fragment = new AmuletFragments(test, startingPoints);
+        List<AmuletPiece> fragments = new ArrayList<>();
+        AmuletPiece fragment = new AmuletPiece(test, startingPoints);
         for (int i = 0; i < 4; i++) {
             fragments.add(fragment);
             player.collectAmuletPiece(fragments.get(i));

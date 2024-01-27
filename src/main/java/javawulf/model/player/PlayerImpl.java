@@ -11,7 +11,7 @@ import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.powerUp.PowerUp;
 import javawulf.model.BoundingBox.CollisionType;
-import javawulf.model.item.AmuletFragments;
+import javawulf.model.item.AmuletPiece;
 
 public class PlayerImpl extends Entity implements Player {
 
@@ -21,7 +21,7 @@ public class PlayerImpl extends Entity implements Player {
     private Score score;
     private Sword sword;
     private static final int NUMBER_OF_FRAGMENTS = 4;
-    private List<AmuletFragments> fragmentsCollected;
+    private List<AmuletPiece> fragmentsCollected;
     private Optional<PowerUp> activePowerUp;
     private PlayerColor color;
 
@@ -73,7 +73,7 @@ public class PlayerImpl extends Entity implements Player {
     }
 
     @Override
-    public void collectAmuletPiece(AmuletFragments piece) throws IllegalStateException {
+    public void collectAmuletPiece(AmuletPiece piece) throws IllegalStateException {
         if (this.fragmentsCollected.size()==NUMBER_OF_FRAGMENTS){
             throw new IllegalStateException("Already gotten all fragments of the amulet");
         } else {
@@ -118,7 +118,7 @@ public class PlayerImpl extends Entity implements Player {
     }
 
     @Override
-    public List<AmuletFragments> getFragments() {
+    public List<AmuletPiece> getFragments() {
         return this.fragmentsCollected;
     }
     

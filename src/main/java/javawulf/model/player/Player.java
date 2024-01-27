@@ -8,7 +8,7 @@ import java.util.Optional;
 import javawulf.model.BoundingBox;
 import javawulf.model.Direction;
 import javawulf.model.GameElement;
-import javawulf.model.item.AmuletFragments;
+import javawulf.model.item.AmuletPiece;
 import javawulf.model.powerUp.PowerUp;
 
 /**
@@ -56,7 +56,7 @@ public interface Player extends GameElement {
      */
     public boolean isHit(BoundingBox box);
 
-    public void collectAmuletPiece(AmuletFragments piece);
+    public void collectAmuletPiece(AmuletPiece piece);
 
     /**
      * @return The current health of the player character, including also the maximum
@@ -82,6 +82,6 @@ public interface Player extends GameElement {
 
     public void setColor(PlayerColor color);
 
-    public List<AmuletFragments> getFragments();
+    public List<AmuletPiece> getFragments();
     
 }

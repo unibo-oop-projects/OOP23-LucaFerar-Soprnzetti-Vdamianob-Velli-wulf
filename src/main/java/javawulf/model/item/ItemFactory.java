@@ -10,10 +10,10 @@ public class ItemFactory {
      */
     public enum ItemType {
         
-        AMULET_FRAGMENTS("Amulet Fragments") {
+        AMULET_PIECE("Amulet Piece") {
             @Override
             public Item create(Coordinate position, Integer points) {
-                return new AmuletFragments(position, points);
+                return new AmuletPiece(position, points);
             }
         },
         GREAT_SWORD("Great Sword") {
