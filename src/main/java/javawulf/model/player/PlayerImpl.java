@@ -25,13 +25,13 @@ public class PlayerImpl extends Entity implements Player {
     private Optional<PowerUp> activePowerUp;
     private PlayerColor color;
 
-    public PlayerImpl(int startingX, int startingY, int health, int startingPoints){
+    public PlayerImpl(int startingX, int startingY, int health, int startingPoints) {
         super(new CoordinateImpl(startingX, startingY), CollisionType.PLAYER, PLAYER_DEFAULT_SPEED);
         this.score = new ScoreImpl(startingPoints);
         this.setDirection(Direction.DOWN);
         this.health = new PlayerHealthImpl(health);
         this.sword = new SwordImpl(getPosition(), this.getDirection());
-        this.fragmentsCollected  = new ArrayList<>(NUMBER_OF_PIECES);
+        this.fragmentsCollected = new ArrayList<>(NUMBER_OF_PIECES);
         this.activePowerUp = Optional.empty();
         this.color = PlayerColor.NONE;
     }
@@ -44,18 +44,19 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public void move(Direction direction) throws IllegalStateException {
         Coordinate current = this.getPosition();
-        int delta = this.getSpeed()*MOVEMENT_DELTA;
+        int delta = this.getSpeed() * MOVEMENT_DELTA;
         // var preview = this.getPosition();
         // preview.setPosition(current.getX() + (int)direction.getX()*delta,
-        //     current.getY() + (int)direction.getY()*delta);
-        if(isDefeated()){ //if wall, this will be changed later
-             throw new IllegalStateException("There is a wall");
-        }// else {
-        //     this.setPosition(preview);
-        // }
-        this.setPosition(new CoordinateImpl(current.getX() + (int)(direction.getX()*delta),
-            current.getY() + (int)(direction.getY()*delta)));
-        this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE, OBJECT_SIZE);
+        // current.getY() + (int)direction.getY()*delta);
+        if (isDefeated()) { // if wall, this will be changed later
+            throw new IllegalStateException("There is a wall");
+        } // else {
+          // this.setPosition(preview);
+          // }
+        this.setPosition(new CoordinateImpl(current.getX() + (int) (direction.getX() * delta),
+                current.getY() + (int) (direction.getY() * delta)));
+        this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE,
+                OBJECT_SIZE);
         this.sword.move(this.getPosition(), direction, delta);
         this.setDirection(direction);
     }
@@ -63,7 +64,7 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public boolean isHit(BoundingBox box) {
         if (this.getBounds().isCollidingWith(box.getCollisionArea())
-            && box.getCollisionType().equals(CollisionType.ENEMY)) {
+                && box.getCollisionType().equals(CollisionType.ENEMY)) {
             this.health.setHealth(DAMAGE);
             this.getBounds().changeCollisionType(CollisionType.STUNNED);
             return true;
@@ -74,7 +75,7 @@ public class PlayerImpl extends Entity implements Player {
 
     @Override
     public void collectAmuletPiece(AmuletPiece piece) throws IllegalStateException {
-        if (this.piecesCollected.size()==NUMBER_OF_FRAGMENTS){
+        if (this.piecesCollected.size() == NUMBER_OF_PIECES){ 
             throw new IllegalStateException("Already gotten all fragments of the amulet");
         } else {
             this.piecesCollected.add(piece);
@@ -94,7 +95,7 @@ public class PlayerImpl extends Entity implements Player {
 
     @Override
     public boolean isDefeated() {
-        return this.health.getHealth()<=0;
+        return this.health.getHealth() <= 0;
     }
 
     @Override
@@ -121,5 +122,5 @@ public class PlayerImpl extends Entity implements Player {
     public List<AmuletPiece> getPieces() {
         return this.piecesCollected;
     }
-    
+
 }
