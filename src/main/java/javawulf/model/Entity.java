@@ -1,6 +1,10 @@
 package javawulf.model;
 
+import java.util.Optional;
+
 import javawulf.model.BoundingBox.CollisionType;
+import javawulf.model.map.Map;
+import javawulf.model.map.TileType;
 
 public abstract class Entity extends GameObject {
     
@@ -30,4 +34,12 @@ public abstract class Entity extends GameObject {
         this.direction = direction;
     }
 
+    protected boolean isCollidingWithWall(Map m){
+        Optional<TileType> tile = m.getTileType(this.getPosition());
+        if (tile.isPresent()){
+            return !tile.get().isCrossable();
+        } else {
+            return true;
+        }
+    }
 }

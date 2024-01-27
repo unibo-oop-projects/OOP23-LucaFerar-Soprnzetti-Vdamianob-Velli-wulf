@@ -2,12 +2,8 @@ package javawulf.model.enemy;
 
 import javawulf.model.Entity;
 
-import java.util.Optional;
-
 import javawulf.model.Coordinate;
 import javawulf.model.BoundingBox.CollisionType;
-import javawulf.model.map.Map;
-import javawulf.model.map.TileType;
 import javawulf.model.player.Player;
 import javawulf.model.player.Sword;
 
@@ -41,12 +37,4 @@ public abstract class EnemyImpl extends Entity implements Enemy {
                 && s.getBounds().getCollisionType() == CollisionType.SWORD;
     }
 
-    protected boolean isCollidingWithWall(Map m){
-        Optional<TileType> tile = m.getTileType(this.getPosition());
-        if (tile.isPresent()){
-            return !tile.get().isCrossable();
-        } else {
-            return true;
-        }
-    }
 }
