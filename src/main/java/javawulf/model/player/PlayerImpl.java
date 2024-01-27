@@ -63,7 +63,8 @@ public class PlayerImpl extends Entity implements Player {
     @Override
     public boolean isHit(BoundingBox box) {
         if (this.getBounds().isCollidingWith(box.getCollisionArea())
-            && box.getCollisionType().equals(CollisionType.ENEMY)) {
+            && box.getCollisionType().equals(CollisionType.ENEMY)
+            && this.getBounds().getCollisionType().equals(CollisionType.PLAYER)) {
             this.health.setHealth(DAMAGE);
             this.getBounds().changeCollisionType(CollisionType.STUNNED);
             return true;
