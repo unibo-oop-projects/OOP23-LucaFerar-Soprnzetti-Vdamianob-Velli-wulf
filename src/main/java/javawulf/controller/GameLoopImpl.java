@@ -1,5 +1,13 @@
 package javawulf.controller;
 
+import javawulf.model.Entity;
+import javawulf.model.map.Biome;
+import javawulf.model.map.BiomeImpl;
+import javawulf.model.map.Map;
+import javawulf.model.map.MapImpl;
+import javawulf.model.map.Room;
+import javawulf.model.map.TilePosition;
+import javawulf.model.player.PlayerImpl;
 import javawulf.view.GamePanel;
 
 public class GameLoopImpl implements GameLoop, Runnable {
@@ -14,9 +22,36 @@ public class GameLoopImpl implements GameLoop, Runnable {
     private Thread gameLoopThread;
     private int drawCount = 0;
     private GamePanel gamePanel;
+    private Map mappa;
+    private Entity giocatore;
+
 
     public GameLoopImpl(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+        mapInit();
+        playerInit();
+    }
+
+    private void mapInit() {
+        Biome primoBioma, secondoBioma, terzoBioma, quartoBioma;
+
+        primoBioma = new BiomeImpl();
+        primoBioma.addRoom(new TilePosition(1, 1), new Room(10, 10));
+
+        secondoBioma = new BiomeImpl();
+        secondoBioma.addRoom(new TilePosition(1, 1), new Room(7, 7));
+
+        terzoBioma = new BiomeImpl();
+        terzoBioma.addRoom(new TilePosition(1, 1), new Room(10, 10));
+
+        quartoBioma = new BiomeImpl();
+        quartoBioma.addRoom(new TilePosition(1, 1), new Room(10, 10));
+
+        this.mappa = new MapImpl(primoBioma, secondoBioma, terzoBioma, quartoBioma);
+    }
+
+    private void playerInit() {
+        this.giocatore = new PlayerImpl(100, 100, 3, 10);
     }
 
     @Override
@@ -62,6 +97,14 @@ public class GameLoopImpl implements GameLoop, Runnable {
     public void startGameLoopThread() {
         this.gameLoopThread = new Thread(this);
         this.gameLoopThread.start();
+    }
+
+    public Map getMappa() {
+        return mappa;
+    }
+
+    public Entity getGiocatore() {
+        return giocatore;
     }
 
 }
