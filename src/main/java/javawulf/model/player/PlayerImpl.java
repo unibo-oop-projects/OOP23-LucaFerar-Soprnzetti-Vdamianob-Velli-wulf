@@ -73,8 +73,12 @@ public class PlayerImpl extends Entity implements Player {
     }
 
     @Override
-    public void collectAmuletPiece(AmuletFragments piece) {
-        this.fragmentsCollected.add(piece);
+    public void collectAmuletPiece(AmuletFragments piece) throws IllegalStateException {
+        if (this.fragmentsCollected.size()==NUMBER_OF_FRAGMENTS){
+            throw new IllegalStateException("Already gotten all fragments of the amulet");
+        } else {
+            this.fragmentsCollected.add(piece);
+        }
     }
 
     @Override
