@@ -20,8 +20,8 @@ public class PlayerImpl extends Entity implements Player {
     private PlayerHealth health;
     private Score score;
     private Sword sword;
-    private static final int NUMBER_OF_FRAGMENTS = 4;
-    private List<AmuletPiece> fragmentsCollected;
+    private static final int NUMBER_OF_PIECES = 4;
+    private List<AmuletPiece> piecesCollected;
     private Optional<PowerUp> activePowerUp;
     private PlayerColor color;
 
@@ -31,7 +31,7 @@ public class PlayerImpl extends Entity implements Player {
         this.setDirection(Direction.DOWN);
         this.health = new PlayerHealthImpl(health);
         this.sword = new SwordImpl(getPosition(), this.getDirection());
-        this.fragmentsCollected  = new ArrayList<>(NUMBER_OF_FRAGMENTS);
+        this.fragmentsCollected  = new ArrayList<>(NUMBER_OF_PIECES);
         this.activePowerUp = Optional.empty();
         this.color = PlayerColor.NONE;
     }
@@ -74,10 +74,10 @@ public class PlayerImpl extends Entity implements Player {
 
     @Override
     public void collectAmuletPiece(AmuletPiece piece) throws IllegalStateException {
-        if (this.fragmentsCollected.size()==NUMBER_OF_FRAGMENTS){
+        if (this.piecesCollected.size()==NUMBER_OF_FRAGMENTS){
             throw new IllegalStateException("Already gotten all fragments of the amulet");
         } else {
-            this.fragmentsCollected.add(piece);
+            this.piecesCollected.add(piece);
         }
     }
 
@@ -118,8 +118,8 @@ public class PlayerImpl extends Entity implements Player {
     }
 
     @Override
-    public List<AmuletPiece> getFragments() {
-        return this.fragmentsCollected;
+    public List<AmuletPiece> getPieces() {
+        return this.piecesCollected;
     }
     
 }
