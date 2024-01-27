@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 
 public class GamePanel extends JPanel {
     // Screen settings
-    final int originalTileSize = 16; // Celle da 16x16px (standard per diversi retro-game)
+    final int originalTileSize = 24; // Celle da 16x16px (standard per diversi retro-game)
     final int scale = 3; // Fattore di scala (può essere proporzionale alla risoluzione dello schermo)
     public final int tileSize = originalTileSize * scale; // Dimensione finale effettiva delle celle (48x48px)
     // Numero massimo di celle (h e w) da visualizzare in gioco
