@@ -30,7 +30,7 @@ public class PlayerImpl extends Entity implements Player {
         this.score = new ScoreImpl(startingPoints);
         this.setDirection(Direction.DOWN);
         this.health = new PlayerHealthImpl(health);
-        this.sword = new SwordImpl(getPosition(), this.getDirection());
+        this.sword = new SwordImpl(this.getPosition(), this.getDirection());
         this.piecesCollected  = new ArrayList<>(NUMBER_OF_PIECES);
         this.activePowerUp = Optional.empty();
         this.color = PlayerColor.NONE;
