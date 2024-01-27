@@ -7,6 +7,7 @@ import javawulf.model.map.Map;
 import javawulf.model.map.MapImpl;
 import javawulf.model.map.Room;
 import javawulf.model.map.TilePosition;
+import javawulf.model.player.Player;
 import javawulf.model.player.PlayerImpl;
 import javawulf.view.GamePanel;
 import javawulf.view.ViewImpl;
@@ -22,17 +23,22 @@ public class GameLoopImpl implements GameLoop, Runnable {
     private double interval;
     private Thread gameLoopThread;
     private int drawCount = 0;
-    ViewImpl view;
     private GamePanel gamePanel;
     public Map mappa;
-    private Entity giocatore;
+    private Player giocatore;
 
 
-    public GameLoopImpl() {
-        view = new ViewImpl(this);
+    public GameLoopImpl(GamePanel panel) {
         mapInit();
         playerInit();
+        this.gamePanel = panel;
     }
+
+    // public GameLoopImpl(GamePanel gamePanel) {
+    //     mapInit();
+    //     playerInit();
+    //     this.gamePanel = gamePanel;
+    // }
 
     private void mapInit() {
         Biome primoBioma, secondoBioma, terzoBioma, quartoBioma;
@@ -93,10 +99,12 @@ public class GameLoopImpl implements GameLoop, Runnable {
     private void reDraw() {
         // Qui l'update della view...
         this.gamePanel.repaint();
+
     }
 
     @Override
     public void startGameLoopThread() {
+
         this.gameLoopThread = new Thread(this);
         this.gameLoopThread.start();
     }
@@ -105,8 +113,5 @@ public class GameLoopImpl implements GameLoop, Runnable {
         return mappa;
     }
 
-    public Entity getGiocatore() {
-        return giocatore;
-    }
 
 }

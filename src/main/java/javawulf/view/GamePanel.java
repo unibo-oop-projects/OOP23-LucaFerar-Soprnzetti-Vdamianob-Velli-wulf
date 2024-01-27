@@ -3,8 +3,10 @@ package javawulf.view;
 import javax.swing.JPanel;
 
 import javawulf.controller.GameLoop;
+import javawulf.controller.GameLoopImpl;
 import javawulf.model.map.Map;
 import javawulf.model.map.TilePosition;
+import javawulf.model.map.TileType;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -27,16 +29,19 @@ public class GamePanel extends JPanel {
     // Dimensione (h e w) dello schermo
     final int ScreenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
-    private int i = 0;
-    private GameLoop loop;
 
-    public GamePanel(GameLoop loop) {
-        this.loop = loop;
+    private GameLoop gameLoop;
+
+    public GamePanel() {
+        this.gameLoop = new GameLoopImpl(this);
         this.setPreferredSize(new Dimension(this.ScreenWidth, this.screenHeight));
         this.setBackground(java.awt.Color.WHITE);
         this.setDoubleBuffered(true);
         // this.addKeyListener(keyHandler);
         this.setFocusable(true);
+
+        // this.drawMap(null);this.
+        gameLoop.startGameLoopThread();
     }
 
     public void paintComponent(Graphics graphics) {
@@ -46,11 +51,19 @@ public class GamePanel extends JPanel {
 
         // graphics2d.setColor(Color.red);
         // graphics2d.fillRect(100, 100, this.tileSize, this.tileSize);
-        BufferedImage img;
+        
+        // BufferedImage img;
+        // try {
+        //     img = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
+        //     i+=16;
+        //     graphics2d.drawImage(img, 100+i, 100, this.tileSize, this.tileSize, null);
+        // } catch (IOException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
+
         try {
-            img = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
-            i+=16;
-            graphics2d.drawImage(img, 100+i, 100, this.tileSize, this.tileSize, null);
+            this.drawMap(graphics2d);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -59,12 +72,27 @@ public class GamePanel extends JPanel {
         graphics2d.dispose();
     }
 
-    private void drawMap(Graphics2D graphics2d) {
+    private void drawMap(Graphics2D graphics2d) throws IOException {
+        BufferedImage imgRoom = ImageIO.read(getClass().getResourceAsStream("/tiles/room.png"));
+        BufferedImage imgWall = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
         for(int x = 0; x<Map.MAP_SIZE; x++) {
             for(int y = 0; y<Map.MAP_SIZE; y++) {
-                if (loop.getMap().getTilesMap().containsKey(new TilePosition(x, y))) {
-                    
-                }
+                    BufferedImage img;
+                    // TileType currentTile = this.gameLoop.getMap().getTilesMap().get(new TilePosition(x, y));
+                    if (this.gameLoop.getMap().getTilesMap().containsKey(new TilePosition(x, y))) {
+                        switch (this.gameLoop.getMap().getTilesMap().get(new TilePosition(x, y))) {
+                            case ROOM:
+                                img = imgRoom;
+                                break;
+                            default:
+                                img = imgRoom;
+                                break;
+                        }
+                    } else {
+                        img = imgWall;
+                    }
+                    graphics2d.drawImage(img, x*TileType.TILE_DIMENSION*3, y*TileType.TILE_DIMENSION*3, this.tileSize, this.tileSize, null);
+                
             }
         }
         

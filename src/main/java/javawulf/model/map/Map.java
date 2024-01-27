@@ -21,7 +21,7 @@ public interface Map {
     /**
      * Width-tile dimension of the central biome
      */
-    public static int WIDTH_CENTRAL_BIOME = 12;
+    public static int WIDTH_CENTRAL_BIOME = 5;
 
     /**
      * Tile-dimension of the whole map
