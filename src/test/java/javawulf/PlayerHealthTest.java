@@ -52,5 +52,39 @@ public class PlayerHealthTest {
         assertEquals(health, this.hp.getHealth());
         assertEquals(health, this.hp.getMaxHealth());
     }
+
+    @Test
+    void testMaxHealthIncrease(){
+        this.hp.increaseMaxHealth(1);
+        assertEquals(health+1, this.hp.getMaxHealth());
+        assertEquals(health, this.hp.getHealth());
+    }
+
+    @Test
+    void testShield(){
+        this.hp.setShieldStatus(ShieldStatus.FULL);
+        assertEquals(ShieldStatus.FULL, this.hp.getShieldStatus());
+
+        this.hp.setHealth(-1);
+        assertEquals(health, this.hp.getHealth());
+        assertEquals(ShieldStatus.HALF, this.hp.getShieldStatus());
+
+        this.hp.setHealth(-1);
+        assertEquals(health, this.hp.getHealth());
+        assertEquals(ShieldStatus.NONE, this.hp.getShieldStatus());
+
+        this.hp.setHealth(-1);
+        assertEquals(health-1, this.hp.getHealth());
+        assertEquals(ShieldStatus.NONE, this.hp.getShieldStatus());
+    }
+
+    @Test
+    void testHealthChangeAndShield(){
+        this.hp.setHealth(-1);
+        this.hp.setShieldStatus(ShieldStatus.FULL);
+        this.hp.setHealth(-1);
+        assertEquals(health-1, this.hp.getHealth());
+        assertEquals(ShieldStatus.HALF, this.hp.getShieldStatus());
+    }
     
 }
