@@ -1,7 +1,5 @@
 package javawulf;
 
-import javawulf.controller.GameLoop;
-import javawulf.controller.GameLoopImpl;
 import javawulf.view.ViewImpl;
 
 public class JavaWulf {
