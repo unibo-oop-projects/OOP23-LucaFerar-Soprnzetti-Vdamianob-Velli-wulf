@@ -24,10 +24,8 @@ public interface Sword extends GameElement {
      * 
      * @param playerPosition The current position of player
      * @param playerDirection The direction the player is currently facing
-     * @param delta The current movement delta the player is subject to, multiplied by its
-     * current speed
      */
-    public void move(Coordinate playerPosition, Direction playerDirection, int delta);
+    public void move(Coordinate playerPosition, Direction playerDirection);
 
     /**
      * Activates the collision of the Sword allowing the player to attack

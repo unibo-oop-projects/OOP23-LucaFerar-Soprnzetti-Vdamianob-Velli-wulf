@@ -35,10 +35,10 @@ public class SwordImpl extends GameObject implements Sword {
     }
 
     @Override
-    public void move(Coordinate playerPosition, Direction playerDirection, int delta){
+    public void move(Coordinate playerPosition, Direction playerDirection){
         updateDirection(playerDirection);
-        this.getPosition().setPosition(playerPosition.getX() + (int)(this.swordDirection.getX()*delta),
-            playerPosition.getY() + (int)(this.swordDirection.getY()*delta));
+        this.getPosition().setPosition(playerPosition.getX() + (int)(this.swordDirection.getX()*GameObject.OBJECT_SIZE),
+            playerPosition.getY() + (int)(this.swordDirection.getY()*GameObject.OBJECT_SIZE));
         updateCollisionArea();
     }
 
