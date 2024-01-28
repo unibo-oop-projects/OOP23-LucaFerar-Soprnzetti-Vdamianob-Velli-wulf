@@ -27,6 +27,7 @@ public class SwordTest {
     Direction startDirection = Direction.DOWN;
     int delta = GameObject.OBJECT_SIZE;
     BoundingBox startBox;
+    Coordinate playerPosition;
 
     @BeforeEach
     void createPlayer(){
@@ -36,7 +37,7 @@ public class SwordTest {
         this.sword = this.player.getSword();
         this.startBox = new BoundingBoxImpl(startingX + (int)(startDirection.getX()*GameObject.OBJECT_SIZE),
             startingY + (int)(startDirection.getY()*GameObject.OBJECT_SIZE), GameObject.OBJECT_SIZE,
-            GameObject.OBJECT_SIZE, CollisionType.STUNNED);
+            GameObject.OBJECT_SIZE, CollisionType.INACTIVE);
     }
 
     @Test
@@ -52,10 +53,11 @@ public class SwordTest {
     void testSwordMovement() {
         Direction movementDirection = Direction.UP;
         this.player.move(movementDirection);
-        Coordinate playerPosition = this.player.getPosition();
+        playerPosition = this.player.getPosition();
         BoundingBox expectBox = new BoundingBoxImpl(playerPosition.getX() + (int)(movementDirection.getX()*delta),
             playerPosition.getY() + (int)(movementDirection.getY()*delta),  GameObject.OBJECT_SIZE,
-            GameObject.OBJECT_SIZE, CollisionType.STUNNED);
+            GameObject.OBJECT_SIZE, CollisionType.INACTIVE);
+        
         assertFalse(this.sword.getBounds().isCollidingWith(this.player.getBounds().getCollisionArea()));
         assertNotEquals(this.player.getPosition().getPosition(), this.sword.getPosition().getPosition());
         assertNotEquals(test.getPosition(), this.sword.getPosition().getPosition());
@@ -67,12 +69,13 @@ public class SwordTest {
     void testSwordDiagonalMovement() {
         Direction movementDirection = Direction.DOWN_LEFT;
         this.player.move(movementDirection);
-        Coordinate playerPosition = this.player.getPosition();
+        playerPosition = this.player.getPosition();
         Coordinate expectCoordinate = new CoordinateImpl(playerPosition.getX() + (int)(Direction.DOWN.getX()*delta),
             playerPosition.getY() + (int)(Direction.DOWN.getY()*delta));
         BoundingBox expectBox = new BoundingBoxImpl(playerPosition.getX() + (int)(Direction.DOWN.getX()*delta),
             playerPosition.getY() + (int)(Direction.DOWN.getY()*delta),  GameObject.OBJECT_SIZE,
-            GameObject.OBJECT_SIZE, CollisionType.STUNNED);
+            GameObject.OBJECT_SIZE, CollisionType.INACTIVE);
+        
         assertFalse(this.sword.getBounds().isCollidingWith(this.player.getBounds().getCollisionArea()));
         assertNotEquals(test.getPosition(), this.sword.getPosition().getPosition());
         assertNotEquals(startBox.getCollisionArea(), this.sword.getBounds().getCollisionArea());
@@ -84,17 +87,60 @@ public class SwordTest {
     void testSwordOppositeDiagonalMovement() {
         Direction movementDirection = Direction.UP_RIGHT;
         this.player.move(movementDirection);
-        Coordinate playerPosition = this.player.getPosition();
+        playerPosition = this.player.getPosition();
         Coordinate expectCoordinate = new CoordinateImpl(playerPosition.getX() + (int)(Direction.RIGHT.getX()*delta),
             playerPosition.getY() + (int)(Direction.RIGHT.getY()*delta));
         BoundingBox expectBox = new BoundingBoxImpl(playerPosition.getX() + (int)(Direction.RIGHT.getX()*delta),
             playerPosition.getY() + (int)(Direction.RIGHT.getY()*delta),  GameObject.OBJECT_SIZE,
-            GameObject.OBJECT_SIZE, CollisionType.STUNNED);
+            GameObject.OBJECT_SIZE, CollisionType.INACTIVE);
+        
         assertFalse(this.sword.getBounds().isCollidingWith(this.player.getBounds().getCollisionArea()));
         assertNotEquals(test.getPosition(), this.sword.getPosition().getPosition());
         assertNotEquals(startBox.getCollisionArea(), this.sword.getBounds().getCollisionArea());
         assertEquals(expectBox.getCollisionArea(), this.sword.getBounds().getCollisionArea());
         assertEquals(expectCoordinate.getPosition(), this.sword.getPosition().getPosition());
+    }
+
+    @Test
+    void testActivation(){
+        this.sword.activate();
+        assertEquals(CollisionType.SWORD, this.sword.getBounds().getCollisionType());
+
+        this.sword.deactivate();
+        assertNotEquals(CollisionType.SWORD, this.sword.getBounds().getCollisionType());
+    }
+
+    @Test
+    void testTypeChange(){
+        this.sword.changeSwordType();
+        assertEquals(SwordType.GREATSWORD, this.sword.getSwordType());
+
+        this.sword.changeSwordType();
+        assertNotEquals(SwordType.GREATSWORD, this.sword.getSwordType());
+    }
+
+    @Test
+    void testGreatSwordCollisionArea(){
+        this.sword.changeSwordType();
+        Direction movementDirection = Direction.RIGHT;
+        this.player.move(movementDirection);
+        playerPosition = this.player.getPosition();
+        int constantHeight = 1;
+        int constantWidth = 1;
+        if(Math.abs((int)movementDirection.getX()) > 0){
+            constantHeight = 3;
+        } else {
+            constantWidth = 3;
+        }
+        BoundingBox expectBox = new BoundingBoxImpl(playerPosition.getX() + (int)(movementDirection.getX()*delta),
+            playerPosition.getY() + (int)(movementDirection.getY()*delta),  GameObject.OBJECT_SIZE*constantWidth,
+            GameObject.OBJECT_SIZE*constantHeight, CollisionType.INACTIVE);
+        
+        assertFalse(this.sword.getBounds().isCollidingWith(this.player.getBounds().getCollisionArea()));
+        assertNotEquals(this.player.getPosition().getPosition(), this.sword.getPosition().getPosition());
+        assertNotEquals(test.getPosition(), this.sword.getPosition().getPosition());
+        assertNotEquals(startBox.getCollisionArea(), this.sword.getBounds().getCollisionArea());
+        assertEquals(expectBox.getCollisionArea(), this.sword.getBounds().getCollisionArea());
     }
 
 }
