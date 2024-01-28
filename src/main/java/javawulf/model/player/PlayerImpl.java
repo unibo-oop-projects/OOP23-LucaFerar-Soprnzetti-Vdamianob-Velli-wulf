@@ -48,7 +48,7 @@ public class PlayerImpl extends Entity implements Player {
         // var preview = this.getPosition();
         // preview.setPosition(current.getX() + (int)direction.getX()*delta,
         // current.getY() + (int)direction.getY()*delta);
-        if (isDefeated()) { // if wall, this will be changed later
+        if (this.isCollidingWithWall(null)) { // if wall, this will be changed later
             throw new IllegalStateException("There is a wall");
         } // else {
           // this.setPosition(preview);
@@ -57,7 +57,7 @@ public class PlayerImpl extends Entity implements Player {
                 current.getY() + (int) (direction.getY() * delta)));
         this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE,
                 OBJECT_SIZE);
-        this.sword.move(this.getPosition(), direction, delta);
+        this.sword.move(this.getPosition(), direction);
         this.setDirection(direction);
     }
 
