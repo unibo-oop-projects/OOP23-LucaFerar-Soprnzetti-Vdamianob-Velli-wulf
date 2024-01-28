@@ -28,7 +28,7 @@ public class SwordImpl extends GameObject implements Sword {
             position.getY()+(int)(direction.getY()*OBJECT_SIZE)),
             new BoundingBoxImpl(position.getX()+(int)(direction.getX()*OBJECT_SIZE),
             position.getY()+(int)(direction.getY()*OBJECT_SIZE), OBJECT_SIZE, OBJECT_SIZE,
-            CollisionType.STUNNED));
+            CollisionType.INACTIVE));
         this.strength = NORMAL;
         this.swordType = SwordType.NORMAL;
         this.swordDirection = direction;
@@ -93,7 +93,7 @@ public class SwordImpl extends GameObject implements Sword {
 
     @Override
     public void deactivate(){
-        this.getBounds().changeCollisionType(CollisionType.STUNNED);
+        this.getBounds().changeCollisionType(CollisionType.INACTIVE);
     }
 
     @Override
