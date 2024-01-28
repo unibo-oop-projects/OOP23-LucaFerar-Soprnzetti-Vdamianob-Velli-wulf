@@ -83,6 +83,8 @@ public class PlayerTest {
         assertEquals(CollisionType.STUNNED, player.getBounds().getCollisionType());
         assertFalse(new PlayerHealthImpl(health).equals(player.getPlayerHealth()));
         assertEquals(new PlayerHealthImpl(health-1).getHealth(), player.getPlayerHealth().getHealth());
+
+        assertFalse(player.isHit(enemy));
     }
 
     @Test
