@@ -48,9 +48,9 @@ public class PlayerImpl extends Entity implements Player {
         // var preview = this.getPosition();
         // preview.setPosition(current.getX() + (int)direction.getX()*delta,
         // current.getY() + (int)direction.getY()*delta);
-        if (this.isCollidingWithWall(null)) { // if wall, this will be changed later
-            throw new IllegalStateException("There is a wall");
-        } // else {
+        //if (this.isCollidingWithWall(null)) { // if wall, this will be changed later
+        //    throw new IllegalStateException("There is a wall");
+        //} // else {
           // this.setPosition(preview);
           // }
         this.setPosition(new CoordinateImpl(current.getX() + (int) (direction.getX() * delta),
