@@ -1,16 +1,14 @@
 package javawulf.controller;
 
-import javawulf.model.Entity;
 import javawulf.model.map.Biome;
 import javawulf.model.map.BiomeImpl;
 import javawulf.model.map.Map;
 import javawulf.model.map.MapImpl;
 import javawulf.model.map.Room;
 import javawulf.model.map.TilePosition;
-import javawulf.model.player.Player;
-import javawulf.model.player.PlayerImpl;
+// import javawulf.model.player.Player;
+// import javawulf.model.player.PlayerImpl;
 import javawulf.view.GamePanel;
-import javawulf.view.ViewImpl;
 
 public class GameLoopImpl implements GameLoop, Runnable {
 
@@ -25,7 +23,7 @@ public class GameLoopImpl implements GameLoop, Runnable {
     private int drawCount = 0;
     private GamePanel gamePanel;
     public Map mappa;
-    private Player giocatore;
+    // private Player giocatore;
 
 
     public GameLoopImpl(GamePanel panel) {
@@ -34,12 +32,7 @@ public class GameLoopImpl implements GameLoop, Runnable {
         this.gamePanel = panel;
     }
 
-    // public GameLoopImpl(GamePanel gamePanel) {
-    //     mapInit();
-    //     playerInit();
-    //     this.gamePanel = gamePanel;
-    // }
-
+    // TODO: implementare delle Map Factory per generare delle mappe di default
     private void mapInit() {
         Biome primoBioma, secondoBioma, terzoBioma, quartoBioma;
 
@@ -59,7 +52,7 @@ public class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void playerInit() {
-        this.giocatore = new PlayerImpl(100, 100, 3, 10);
+        // this.giocatore = new PlayerImpl(100, 100, 3, 10);
     }
 
     @Override
