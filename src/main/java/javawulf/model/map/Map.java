@@ -3,7 +3,6 @@ package javawulf.model.map;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.Set;
-import java.util.Map.Entry;
 
 import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
@@ -21,7 +20,7 @@ public interface Map {
     /**
      * Width-tile dimension of the central biome
      */
-    public static int WIDTH_CENTRAL_BIOME = 5;
+    public static int WIDTH_CENTRAL_BIOME = 10;
 
     /**
      * Tile-dimension of the whole map

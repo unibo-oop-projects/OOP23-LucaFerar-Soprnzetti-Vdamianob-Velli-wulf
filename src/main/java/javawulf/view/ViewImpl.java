@@ -2,9 +2,6 @@ package javawulf.view;
 
 import javax.swing.JFrame;
 
-import javawulf.controller.GameLoop;
-import javawulf.controller.GameLoopImpl;
-
 public class ViewImpl {
 
     // private GameLoop gameLoop;
