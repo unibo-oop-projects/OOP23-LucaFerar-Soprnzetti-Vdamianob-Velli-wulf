@@ -17,7 +17,6 @@ import javawulf.model.Direction;
 import javawulf.model.Entity;
 import javawulf.model.item.AmuletPiece;
 import javawulf.model.player.*;
-import javawulf.model.player.Sword.SwordType;
 
 public class PlayerTest {
 
@@ -40,7 +39,6 @@ public class PlayerTest {
         assertEquals(new BoundingBoxImpl(startingX, startingY, Entity.OBJECT_SIZE, Entity.OBJECT_SIZE,
                 CollisionType.PLAYER).getCollisionArea(), player.getBounds().getCollisionArea());
         assertTrue(new PlayerHealthImpl(health).equals(player.getPlayerHealth()));
-        assertEquals(SwordType.NORMAL, player.getSword().getSwordType());
         assertTrue(new ScoreImpl(startingPoints).equals(player.getScore()));
         assertEquals(0, player.getPieces().size());
     }
@@ -77,7 +75,10 @@ public class PlayerTest {
         assertFalse(player.isHit(item));
         assertNotEquals(CollisionType.STUNNED, player.getBounds().getCollisionType());
 
-        BoundingBox enemy = new BoundingBoxImpl(startingX, startingY, Entity.OBJECT_SIZE,
+        BoundingBox enemy = new BoundingBoxImpl(startingX + Entity.OBJECT_SIZE, startingY + Entity.OBJECT_SIZE,
+            Entity.OBJECT_SIZE, Entity.OBJECT_SIZE, CollisionType.ENEMY);
+        assertFalse(player.isHit(enemy));
+        enemy = new BoundingBoxImpl(startingX, startingY, Entity.OBJECT_SIZE,
             Entity.OBJECT_SIZE, CollisionType.ENEMY);
         assertTrue(player.isHit(enemy));
         assertEquals(CollisionType.STUNNED, player.getBounds().getCollisionType());
