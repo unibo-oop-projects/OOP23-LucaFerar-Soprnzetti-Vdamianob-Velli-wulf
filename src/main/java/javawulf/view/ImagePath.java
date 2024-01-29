@@ -3,6 +3,7 @@ package javawulf.view;
 public enum ImagePath {
     WALL_TILE("/tiles/wall.png"),
     ROOM_TILE("/tiles/room.png"),
+    CENTRAL_ROOM_TILE("/tiles/central_room.png"),
     CORRIDOR_TILE("/tiles/corridor.png"),
     PLAYER_DOWN_1("/player/player_up_1.png");
 

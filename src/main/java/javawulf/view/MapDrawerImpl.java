@@ -15,6 +15,7 @@ public class MapDrawerImpl implements MapDrawer {
     BufferedImage imgRoom;
     BufferedImage imgWall;
     BufferedImage imgCorridor;
+    BufferedImage imgCentralRoom;
 
     public MapDrawerImpl(Map map) {
         this.map = map;
@@ -22,6 +23,7 @@ public class MapDrawerImpl implements MapDrawer {
             this.imgRoom = ImageIO.read(getClass().getResourceAsStream(ImagePath.ROOM_TILE.getPath()));
             this.imgWall = ImageIO.read(getClass().getResourceAsStream(ImagePath.WALL_TILE.getPath()));
             this.imgCorridor = ImageIO.read(getClass().getResourceAsStream(ImagePath.CORRIDOR_TILE.getPath()));
+            this.imgCentralRoom = ImageIO.read(getClass().getResourceAsStream(ImagePath.CENTRAL_ROOM_TILE.getPath()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,6 +42,9 @@ public class MapDrawerImpl implements MapDrawer {
                     switch (this.map.getTilesMap().get(new TilePosition(x, y))) {
                         case ROOM:
                             img = imgRoom;
+                            break;
+                        case CENTRAL_ROOM:
+                            img = imgCentralRoom;
                             break;
                         case CORRIDOR:
                             img = imgCorridor;
