@@ -43,6 +43,7 @@ public class MapDrawerImpl implements MapDrawer {
                             break;
                         case CORRIDOR:
                             img = imgCorridor;
+                            break;
                         default:
                             img = imgRoom;
                             break;
