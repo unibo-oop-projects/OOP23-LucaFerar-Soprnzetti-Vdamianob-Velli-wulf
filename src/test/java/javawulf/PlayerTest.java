@@ -17,6 +17,7 @@ import javawulf.model.Direction;
 import javawulf.model.AbstractEntity;
 import javawulf.model.item.AmuletPiece;
 import javawulf.model.player.*;
+import javawulf.model.item.ItemFactoryImpl;
 
 public class PlayerTest {
 
@@ -91,7 +92,7 @@ public class PlayerTest {
     @Test
     void testObtainFragment(){
         List<AmuletPiece> fragments = new ArrayList<>();
-        AmuletPiece fragment = new AmuletPiece(test, startingPoints);
+        AmuletPiece fragment = new ItemFactoryImpl().createAmuletPiece(test);
         for (int i = 0; i < 4; i++) {
             fragments.add(fragment);
             player.collectAmuletPiece(fragments.get(i));
