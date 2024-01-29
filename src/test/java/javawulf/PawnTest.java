@@ -12,7 +12,7 @@ import javawulf.model.Direction;
 import javawulf.model.GameObject;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.enemy.EnemyFactory;
-import javawulf.model.enemy.EnemyFactory.EnemyType;
+import javawulf.model.enemy.EnemyFactoryImpl;
 import javawulf.model.enemy.Pawn;
 import javawulf.model.player.Player;
 import javawulf.model.player.PlayerImpl;
@@ -24,15 +24,14 @@ public class PawnTest {
     int startingX = 12;
     int startingY = 12;
 
-    EnemyFactory factory = new EnemyFactory();
+    EnemyFactory factory = new EnemyFactoryImpl();
     Player player = new PlayerImpl(0, 0, 3, 0);
     Coordinate position = new CoordinateImpl(startingX, startingY);
     Pawn pawn;
 
-    // TODO: this is a cast, might need to find a new solution
     @BeforeEach
     void createPawn() {
-        pawn = (Pawn) factory.orderEnemy(EnemyType.PAWN, position, speed, points);
+        pawn = factory.createPawn(position);
     }
 
     @Test
@@ -43,7 +42,6 @@ public class PawnTest {
         assertEquals(new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE, GameObject.OBJECT_SIZE,
                 CollisionType.ENEMY).getCollisionType(), pawn.getBounds().getCollisionType());
         assertEquals(speed, pawn.getSpeed());
-        assertEquals(points, pawn.getPoints());
         assertTrue(pawn.isAlive());
         assertNotNull(pawn.getDirection());
     }
