@@ -105,6 +105,31 @@ public class MapImpl implements Map {
 
             }
         }
+
+        this.buildCentralBiome();
+    }
+
+    private void buildCentralBiome() {
+        for (int x = Biome.SIZE; x <= Biome.SIZE -1 + this.WIDTH_CENTRAL_BIOME; x++) {
+            for (int y = Biome.SIZE/6; y < Biome.SIZE/6+2; y++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
+            }
+            for (int y = Biome.SIZE - Biome.SIZE/6; y < Biome.SIZE - Biome.SIZE/6+2; y++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
+            }
+            for (int y = this.MAP_SIZE - Biome.SIZE/6; y < this.MAP_SIZE - Biome.SIZE/6+2; y++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
+            }
+            for (int y = this.MAP_SIZE - Biome.SIZE/6; y < this.MAP_SIZE - Biome.SIZE/6+2; y++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
+            }
+        }
+
+        for (int x = Biome.SIZE + 2; x <= Biome.SIZE + this.WIDTH_CENTRAL_BIOME - 1 - 2; x++) {
+            for (int y = Biome.SIZE + 2; y <= Biome.SIZE + this.WIDTH_CENTRAL_BIOME - 1 - 2; y++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
+            }
+        }
     }
 
     private boolean isValidPosition(Coordinate pos) {
