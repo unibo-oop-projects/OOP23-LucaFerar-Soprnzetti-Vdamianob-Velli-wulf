@@ -57,8 +57,6 @@ public interface Player extends Entity {
 
     public void usePowerUp(PowerUp p);
 
-    public boolean isDefeated();
-
     /**
      * @return The current point total and point multiplier
      */

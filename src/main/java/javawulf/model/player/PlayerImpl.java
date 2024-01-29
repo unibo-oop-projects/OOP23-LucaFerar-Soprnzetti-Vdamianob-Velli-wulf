@@ -60,10 +60,15 @@ public class PlayerImpl extends AbstractEntity implements Player {
         this.setDirection(direction);
     }
 
+    @Override
     public boolean isHit(BoundingBox box) {
         if (super.isHit(box)) {
             this.health.setHealth(DAMAGE);
-            this.getBounds().changeCollisionType(CollisionType.STUNNED);
+            if (isDefeated()){
+                this.getBounds().changeCollisionType(CollisionType.INACTIVE);
+            } else {
+                this.getBounds().changeCollisionType(CollisionType.STUNNED);
+            }
             return true;
         } else {
             return false;
@@ -90,8 +95,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
         throw new UnsupportedOperationException("Unimplemented method 'usePowerUp'");
     }
 
-    @Override
-    public boolean isDefeated() {
+    private boolean isDefeated() {
         return this.health.getHealth() <= 0;
     }
 
