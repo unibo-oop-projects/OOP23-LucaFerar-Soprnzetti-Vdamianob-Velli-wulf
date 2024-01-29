@@ -3,6 +3,7 @@ package javawulf.model.enemy;
 import java.util.Random;
 
 import javawulf.model.Direction;
+import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
@@ -53,9 +54,10 @@ public class Pawn extends EnemyImpl {
 
     @Override
     public void takeHit(Player p) {
-        if (this.isHit(p.getSword())) {
+        if (super.isHit(p.getSword().getBounds())) {
             this.isAlive = false;
             p.getScore().addPoints(this.getPoints());
+            this.getBounds().changeCollisionType(CollisionType.INACTIVE);
         }
     }
 
