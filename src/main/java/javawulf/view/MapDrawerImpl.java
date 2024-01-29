@@ -14,12 +14,14 @@ public class MapDrawerImpl implements MapDrawer {
     private Map map;
     BufferedImage imgRoom;
     BufferedImage imgWall;
+    BufferedImage imgCorridor;
 
     public MapDrawerImpl(Map map) {
         this.map = map;
         try {
             this.imgRoom = ImageIO.read(getClass().getResourceAsStream(ImagePath.ROOM_TILE.getPath()));
             this.imgWall = ImageIO.read(getClass().getResourceAsStream(ImagePath.WALL_TILE.getPath()));
+            this.imgCorridor = ImageIO.read(getClass().getResourceAsStream(ImagePath.CORRIDOR_TILE.getPath()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,6 +41,8 @@ public class MapDrawerImpl implements MapDrawer {
                         case ROOM:
                             img = imgRoom;
                             break;
+                        case CORRIDOR:
+                            img = imgCorridor;
                         default:
                             img = imgRoom;
                             break;
