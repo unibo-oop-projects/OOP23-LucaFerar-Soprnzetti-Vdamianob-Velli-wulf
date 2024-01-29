@@ -16,7 +16,6 @@ import javawulf.model.item.AmuletPiece;
 public class PlayerImpl extends AbstractEntity implements Player {
 
     private static final int DAMAGE = -1;
-    private static final int PLAYER_DEFAULT_SPEED = 1;
     private PlayerHealth health;
     private Score score;
     private Sword sword;
@@ -26,7 +25,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
     private PlayerColor color;
 
     public PlayerImpl(int startingX, int startingY, int health, int startingPoints) {
-        super(new CoordinateImpl(startingX, startingY), CollisionType.PLAYER, PLAYER_DEFAULT_SPEED);
+        super(new CoordinateImpl(startingX, startingY), CollisionType.PLAYER, Player.DEFAULT_SPEED);
         this.score = new ScoreImpl(startingPoints);
         this.setDirection(Direction.DOWN);
         this.health = new PlayerHealthImpl(health);
