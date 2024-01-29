@@ -7,7 +7,5 @@ public interface Enemy extends Entity {
     
     public void move(Player p);
 
-    public boolean inflictDamage(Player p);
-
     public void takeHit(Player p);
 }

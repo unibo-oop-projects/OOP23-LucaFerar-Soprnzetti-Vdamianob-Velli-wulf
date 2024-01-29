@@ -5,7 +5,6 @@ import javawulf.model.AbstractEntity;
 import javawulf.model.Coordinate;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.player.Player;
-import javawulf.model.player.Sword;
 
 public abstract class EnemyImpl extends AbstractEntity implements Enemy {
 
@@ -26,15 +25,6 @@ public abstract class EnemyImpl extends AbstractEntity implements Enemy {
 
     public abstract void move(Player p);
 
-    public boolean inflictDamage(Player p) {
-       return p.isHit(this.getBounds());
-    }
-
     public abstract void takeHit(Player p);
-
-    protected boolean isHit(Sword s) {
-        return this.getBounds().isCollidingWith(s.getBounds().getCollisionArea())
-                && s.getBounds().getCollisionType() == CollisionType.SWORD;
-    }
 
 }
