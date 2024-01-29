@@ -36,4 +36,11 @@ public abstract class AbstractEntity extends GameObject implements Entity {
         var tile = m.getTileTypes(this.getBounds());
         return tile.contains(TileType.WALL);
     }
+
+    public boolean isHit(BoundingBox box){
+        return this.getBounds().isCollidingWith(box.getCollisionArea())
+            && control(box);
+    }
+
+    protected abstract boolean control(BoundingBox box);
 }
