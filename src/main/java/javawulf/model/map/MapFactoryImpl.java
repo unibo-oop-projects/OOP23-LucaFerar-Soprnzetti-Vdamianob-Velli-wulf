@@ -8,12 +8,12 @@ public class MapFactoryImpl implements MapFactory{
     @Override
     public Map defaultMap1() {
         this.firstBiome = new BiomeImpl();
-        firstBiome.addRoom(new TilePosition(1, 1), new Room(10, 10));
-        // firstBiome.addRoom(new TilePosition(11, 12), new Room(5, 5));
-        // firstBiome.addRoom(new TilePosition(35, 35), new Room(5, 5));
+        firstBiome.addRoom(new TilePosition(5, 5), new Room(5, 5));
+        firstBiome.addRoom(new TilePosition(20, 5), new Room(5, 5));
+        firstBiome.addCorridor(new TilePosition(10, 6), new Corridor(3, 10));
 
         this.secondBiome = new BiomeImpl();
-        secondBiome.addRoom(new TilePosition(1, 1), new Room(7, 7));
+        secondBiome.addRoom(new TilePosition(3, 3), new Room(5, 5));
         // secondBiome.addRoom(new TilePosition(10, 6), new Room(5, 5));
         // secondBiome.addRoom(new TilePosition(35, 35), new Room(5, 5));
 
