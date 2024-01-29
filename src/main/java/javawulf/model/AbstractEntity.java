@@ -7,16 +7,16 @@ import javawulf.model.map.TileType;
 public abstract class AbstractEntity extends GameObject implements Entity {
     
     public static final int MOVEMENT_DELTA = OBJECT_SIZE/8;
-    private Integer speed;
+    private int speed;
     private Direction direction;
 
-    public AbstractEntity(Coordinate position, CollisionType type, Integer speed) {
+    public AbstractEntity(Coordinate position, CollisionType type, int speed) {
         super(position, type);
         this.speed = speed;
         this.direction = Direction.DOWN;
     }
 
-    public Integer getSpeed() {
+    public int getSpeed() {
         return this.speed;
     }
 
@@ -24,7 +24,7 @@ public abstract class AbstractEntity extends GameObject implements Entity {
         return this.direction;
     }
 
-    public void setSpeed(Integer speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 
