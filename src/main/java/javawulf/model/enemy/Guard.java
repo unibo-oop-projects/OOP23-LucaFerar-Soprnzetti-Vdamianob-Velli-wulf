@@ -1,6 +1,7 @@
 package javawulf.model.enemy;
 
 import javawulf.model.Coordinate;
+import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.player.Player;
 
 public class Guard extends EnemyImpl {
@@ -65,11 +66,14 @@ public class Guard extends EnemyImpl {
 
     @Override
     public void takeHit(Player p) {
-        if (this.isKillable(p)) {
-            this.setAlive(false);
-            p.getScore().addPoints(this.getPoints());
-        } else {
-            this.stun(4);
-        }
+        if (super.isHit(p.getSword().getBounds())) {
+            if (this.isKillable(p)) {
+                this.setAlive(false);
+                p.getScore().addPoints(this.getPoints());
+                this.getBounds().changeCollisionType(CollisionType.INACTIVE);
+            } else {
+                this.stun(5);
+            }
+        } 
     }
 }
