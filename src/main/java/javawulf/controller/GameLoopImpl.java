@@ -1,12 +1,7 @@
 package javawulf.controller;
 
-import javawulf.model.map.Biome;
-import javawulf.model.map.BiomeImpl;
 import javawulf.model.map.Map;
 import javawulf.model.map.MapFactoryImpl;
-import javawulf.model.map.MapImpl;
-import javawulf.model.map.Room;
-import javawulf.model.map.TilePosition;
 // import javawulf.model.player.Player;
 // import javawulf.model.player.PlayerImpl;
 import javawulf.view.GamePanel;
