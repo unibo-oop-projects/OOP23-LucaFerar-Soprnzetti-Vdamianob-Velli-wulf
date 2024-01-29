@@ -1,6 +1,6 @@
 package javawulf.model;
 
-public interface Entity {
+public interface Entity extends GameElement {
 
     public static final int DEFAULT_SPEED=1;
     public static final int DOUBLE_SPEED=2;
