@@ -4,6 +4,7 @@ import javawulf.model.AbstractEntity;
 import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
 import javawulf.model.BoundingBox.CollisionType;
+import javawulf.model.map.Map;
 import javawulf.model.player.Player;
 
 public abstract class EnemyImpl extends AbstractEntity implements Enemy {
@@ -12,7 +13,7 @@ public abstract class EnemyImpl extends AbstractEntity implements Enemy {
         super(position, CollisionType.ENEMY, DEFAULT_SPEED);
     }
 
-    public abstract void move(Player p);
+    public abstract void move(Player p, Map m);
 
     public abstract void takeHit(Player p);
 
