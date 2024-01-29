@@ -16,7 +16,7 @@ public class BiomeImpl implements Biome {
 
     @Override
     public void addRoom(TilePosition biomePos, Room room) {
-        if(biomePos.getX() + room.getWidth() >= Biome.SIZE || biomePos.getY() + room.getHeight() >= Biome.SIZE ||
+        if(biomePos.getX() + room.getWidth() > Biome.SIZE || biomePos.getY() + room.getHeight() > Biome.SIZE ||
         biomePos.getX() < 0 || biomePos.getY() < 0) {
             throw new IllegalArgumentException("Room position & his width" + biomePos + " is out of tile SIZE ("+Biome.SIZE+") biome range");
         }
@@ -25,7 +25,7 @@ public class BiomeImpl implements Biome {
 
     @Override
     public void addCorridor(TilePosition biomePos, Corridor corridor) {
-        if(biomePos.getX() + corridor.getWidth() >= Biome.SIZE || biomePos.getY() + corridor.getHeight() >= Biome.SIZE ||
+        if(biomePos.getX() + corridor.getWidth() > Biome.SIZE || biomePos.getY() + corridor.getHeight() > Biome.SIZE ||
         biomePos.getX() < 0 || biomePos.getY() < 0) {
             throw new IllegalArgumentException("Corridor position & his width " + biomePos + " is out of tile SIZE ("+Biome.SIZE+") biome range");
         }
