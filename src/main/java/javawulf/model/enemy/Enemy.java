@@ -1,9 +1,9 @@
 package javawulf.model.enemy;
 
-import javawulf.model.GameElement;
+import javawulf.model.Entity;
 import javawulf.model.player.Player;
 
-public interface Enemy extends GameElement {
+public interface Enemy extends Entity {
     
     public void move(Player p);
 
