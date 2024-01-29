@@ -3,11 +3,17 @@ package javawulf.model.item;
 import javawulf.model.Coordinate;
 
 public class ItemFactory {
+    /**
+     * This enum contains all of the different types of items that can be created.
+     * Each type has a name and a create method that creates an item of that type.
+     * The create method is implemented in each enum value.
+     */
     public enum ItemType {
-        AMULET_FRAGMENTS("Amulet Fragments") {
+        
+        AMULET_PIECE("Amulet Piece") {
             @Override
             public Item create(Coordinate position, Integer points) {
-                return new AmuletFragments(position, points);
+                return new AmuletPiece(position, points);
             }
         },
         GREAT_SWORD("Great Sword") {
@@ -59,7 +65,13 @@ public class ItemFactory {
 
         public abstract Item create(Coordinate position, Integer points);
     }
-
+    /**
+     * This method creates an item of the type that it is called on.
+     * @param type The type of item to be created.
+     * @param position The position of the item.
+     * @param points The points that the item is worth.
+     * @return The item that was created.
+     */
     public Item orderItem(ItemType type, Coordinate position, Integer points) {
         return type.create(position, points);
     }

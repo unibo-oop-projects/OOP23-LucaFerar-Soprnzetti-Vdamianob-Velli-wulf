@@ -1,6 +1,8 @@
 package javawulf.model;
 
 import javawulf.model.BoundingBox.CollisionType;
+import javawulf.model.map.Map;
+import javawulf.model.map.TileType;
 
 public abstract class Entity extends GameObject {
     
@@ -30,4 +32,8 @@ public abstract class Entity extends GameObject {
         this.direction = direction;
     }
 
+    protected boolean isCollidingWithWall(Map m){
+        var tile = m.getTileTypes(this.getBounds());
+        return tile.contains(TileType.WALL);
+    }
 }

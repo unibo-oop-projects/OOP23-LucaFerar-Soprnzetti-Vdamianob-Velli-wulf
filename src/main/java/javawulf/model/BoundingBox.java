@@ -9,7 +9,8 @@ public interface BoundingBox {
         ENEMY,
         COLLECTABLE,
         SWORD,
-        STUNNED; //could get renamed in the future
+        STUNNED, //could get renamed in the future
+        INACTIVE; //could work also for defeated characters
     }
 
     public boolean isCollidingWith(Rectangle box);

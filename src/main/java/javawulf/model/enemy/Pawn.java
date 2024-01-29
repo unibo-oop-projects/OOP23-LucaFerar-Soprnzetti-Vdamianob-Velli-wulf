@@ -24,6 +24,10 @@ public class Pawn extends EnemyImpl {
         return isAlive;
     }
 
+    public int getTimeToWait() {
+        return timeToWait;
+    }
+
     @Override
     public void move(Player p) {
 

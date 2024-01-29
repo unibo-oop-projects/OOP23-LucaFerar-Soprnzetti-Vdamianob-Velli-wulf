@@ -4,6 +4,7 @@ import javawulf.model.BoundingBoxImpl;
 import javawulf.model.Direction;
 import javawulf.model.GameObject;
 import javawulf.model.Coordinate;
+import javawulf.model.CoordinateImpl;
 import javawulf.model.BoundingBox.CollisionType;
 
 public class SwordImpl extends GameObject implements Sword {
@@ -23,19 +24,21 @@ public class SwordImpl extends GameObject implements Sword {
      * @param direction The direction the sword must face when it is created
      */
     public SwordImpl(Coordinate position, Direction direction) {
-        super(position, new BoundingBoxImpl(position.getX()+(int)direction.getX()*OBJECT_SIZE,
-            position.getY()+(int)direction.getY()*OBJECT_SIZE, OBJECT_SIZE, OBJECT_SIZE,
-            CollisionType.STUNNED));
+        super(new CoordinateImpl(position.getX()+(int)(direction.getX()*OBJECT_SIZE),
+            position.getY()+(int)(direction.getY()*OBJECT_SIZE)),
+            new BoundingBoxImpl(position.getX()+(int)(direction.getX()*OBJECT_SIZE),
+            position.getY()+(int)(direction.getY()*OBJECT_SIZE), OBJECT_SIZE, OBJECT_SIZE,
+            CollisionType.INACTIVE));
         this.strength = NORMAL;
         this.swordType = SwordType.NORMAL;
         this.swordDirection = direction;
     }
 
     @Override
-    public void move(Coordinate playerPosition, Direction playerDirection, int delta){
+    public void move(Coordinate playerPosition, Direction playerDirection){
         updateDirection(playerDirection);
-        this.getPosition().setPosition(playerPosition.getX() + (int)this.swordDirection.getX()*delta,
-            playerPosition.getY() + (int)this.swordDirection.getY()*delta);
+        this.getPosition().setPosition(playerPosition.getX() + (int)(this.swordDirection.getX()*GameObject.OBJECT_SIZE),
+            playerPosition.getY() + (int)(this.swordDirection.getY()*GameObject.OBJECT_SIZE));
         updateCollisionArea();
     }
 
@@ -64,7 +67,7 @@ public class SwordImpl extends GameObject implements Sword {
     private void updateCollisionArea(){
         int constantWidth=1;
         int constantHeight=1;
-        if(getSwordType().equals(SwordType.GREATSWORD)){
+        if(this.getSwordType().equals(SwordType.GREATSWORD)){
             if(Math.abs((int)this.swordDirection.getX()) > 0){
                 constantHeight = 3;
             } else {
@@ -90,7 +93,7 @@ public class SwordImpl extends GameObject implements Sword {
 
     @Override
     public void deactivate(){
-        this.getBounds().changeCollisionType(CollisionType.STUNNED);
+        this.getBounds().changeCollisionType(CollisionType.INACTIVE);
     }
 
     @Override

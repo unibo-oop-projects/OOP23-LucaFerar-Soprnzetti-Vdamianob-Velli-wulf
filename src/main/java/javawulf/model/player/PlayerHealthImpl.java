@@ -45,7 +45,7 @@ public class PlayerHealthImpl implements PlayerHealth {
 
     private void damage(int health){
         if(this.getShieldStatus().equals(ShieldStatus.NONE)){
-            this.health = this.health - health;
+            this.health = this.health + health;
             System.out.println("Health remaining : " + this.getHealth());
         } else {
             if (this.getShieldStatus().equals(ShieldStatus.FULL)){
@@ -66,6 +66,11 @@ public class PlayerHealthImpl implements PlayerHealth {
     @Override
     public void setShieldStatus(ShieldStatus status) {
         this.shieldStatus = status;
+    }
+
+    public boolean equals(PlayerHealth hp){
+        return this.getHealth() == hp.getHealth() && this.getMaxHealth() == hp.getMaxHealth() &&
+            this.getShieldStatus() == hp.getShieldStatus();
     }
     
 }

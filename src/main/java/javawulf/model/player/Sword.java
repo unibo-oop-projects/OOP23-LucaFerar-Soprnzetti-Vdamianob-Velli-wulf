@@ -17,11 +17,24 @@ public interface Sword extends GameElement {
         NORMAL,
         GREATSWORD;
     }
-    
-    public void move(Coordinate playerPosition, Direction playerDirection, int delta);
 
+    /**
+     * Updates the position and direction of the Sword according to the player position
+     * and movement delta
+     * 
+     * @param playerPosition The current position of player
+     * @param playerDirection The direction the player is currently facing
+     */
+    public void move(Coordinate playerPosition, Direction playerDirection);
+
+    /**
+     * Activates the collision of the Sword allowing the player to attack
+     */
     public void activate();
 
+    /**
+     * Deactivates the collsion of the Sword
+     */
     public void deactivate();
 
     /**
