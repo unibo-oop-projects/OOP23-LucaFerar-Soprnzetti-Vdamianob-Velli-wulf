@@ -3,6 +3,7 @@ package javawulf.controller;
 import javawulf.model.map.Biome;
 import javawulf.model.map.BiomeImpl;
 import javawulf.model.map.Map;
+import javawulf.model.map.MapFactoryImpl;
 import javawulf.model.map.MapImpl;
 import javawulf.model.map.Room;
 import javawulf.model.map.TilePosition;
@@ -22,7 +23,7 @@ public class GameLoopImpl implements GameLoop, Runnable {
     private Thread gameLoopThread;
     private int drawCount = 0;
     private GamePanel gamePanel;
-    public Map mappa;
+    public Map gameMap;
     // private Player giocatore;
 
 
@@ -32,27 +33,27 @@ public class GameLoopImpl implements GameLoop, Runnable {
         this.gamePanel = panel;
     }
 
-    // TODO: implementare delle Map Factory per generare delle mappe di default
     private void mapInit() {
-        Biome primoBioma, secondoBioma, terzoBioma, quartoBioma;
+        this.gameMap = new MapFactoryImpl().defaultMap1();
+        // Biome primoBioma, secondoBioma, terzoBioma, quartoBioma;
 
-        primoBioma = new BiomeImpl();
-        primoBioma.addRoom(new TilePosition(1, 1), new Room(10, 10));
+        // primoBioma = new BiomeImpl();
+        // primoBioma.addRoom(new TilePosition(1, 1), new Room(10, 10));
 
-        secondoBioma = new BiomeImpl();
-        secondoBioma.addRoom(new TilePosition(1, 1), new Room(7, 7));
+        // secondoBioma = new BiomeImpl();
+        // secondoBioma.addRoom(new TilePosition(1, 1), new Room(7, 7));
 
-        terzoBioma = new BiomeImpl();
-        terzoBioma.addRoom(new TilePosition(1, 1), new Room(10, 10));
+        // terzoBioma = new BiomeImpl();
+        // terzoBioma.addRoom(new TilePosition(1, 1), new Room(10, 10));
 
-        quartoBioma = new BiomeImpl();
-        quartoBioma.addRoom(new TilePosition(1, 1), new Room(10, 10));
+        // quartoBioma = new BiomeImpl();
+        // quartoBioma.addRoom(new TilePosition(1, 1), new Room(10, 10));
 
-        this.mappa = new MapImpl(primoBioma, secondoBioma, terzoBioma, quartoBioma);
+        // this.mappa = new MapImpl(primoBioma, secondoBioma, terzoBioma, quartoBioma);
     }
 
     private void playerInit() {
-        // this.giocatore = new PlayerImpl(100, 100, 3, 10);
+        // this.gamePlayer = new PlayerImpl(100, 100, 3, 10);
     }
 
     @Override
@@ -103,7 +104,7 @@ public class GameLoopImpl implements GameLoop, Runnable {
     }
 
     public Map getMap() {
-        return mappa;
+        return gameMap;
     }
 
 
