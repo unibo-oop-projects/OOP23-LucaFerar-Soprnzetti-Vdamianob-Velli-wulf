@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javawulf.model.BoundingBox;
 import javawulf.model.Direction;
+import javawulf.model.Entity;
 import javawulf.model.GameElement;
 import javawulf.model.item.AmuletPiece;
 import javawulf.model.powerUp.PowerUp;
@@ -14,7 +15,7 @@ import javawulf.model.powerUp.PowerUp;
 /**
  * Player represents the playable character and its statitstics
  */
-public interface Player extends GameElement {
+public interface Player extends GameElement, Entity {
 
     public enum PlayerColor{
         RED(Optional.of(Color.RED)),

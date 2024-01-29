@@ -6,14 +6,14 @@ import java.util.Optional;
 
 import javawulf.model.BoundingBox;
 import javawulf.model.Direction;
-import javawulf.model.Entity;
+import javawulf.model.AbstractEntity;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.powerUp.PowerUp;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletPiece;
 
-public class PlayerImpl extends Entity implements Player {
+public class PlayerImpl extends AbstractEntity implements Player {
 
     private static final int DAMAGE = -1;
     private static final int PLAYER_DEFAULT_SPEED = 1;

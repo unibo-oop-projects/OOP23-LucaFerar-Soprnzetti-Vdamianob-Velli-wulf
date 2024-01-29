@@ -1,13 +1,13 @@
 package javawulf.model.enemy;
 
-import javawulf.model.Entity;
+import javawulf.model.AbstractEntity;
 
 import javawulf.model.Coordinate;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.player.Player;
 import javawulf.model.player.Sword;
 
-public abstract class EnemyImpl extends Entity implements Enemy {
+public abstract class EnemyImpl extends AbstractEntity implements Enemy {
 
     private int points;
 

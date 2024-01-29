@@ -14,7 +14,7 @@ import javawulf.model.BoundingBoxImpl;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.Direction;
-import javawulf.model.Entity;
+import javawulf.model.AbstractEntity;
 import javawulf.model.item.AmuletPiece;
 import javawulf.model.player.*;
 
@@ -36,7 +36,7 @@ public class PlayerTest {
     @Test
     void testStartingPlayerStatistics() {
         assertEquals(test.getPosition(), player.getPosition().getPosition());
-        assertEquals(new BoundingBoxImpl(startingX, startingY, Entity.OBJECT_SIZE, Entity.OBJECT_SIZE,
+        assertEquals(new BoundingBoxImpl(startingX, startingY, AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE,
                 CollisionType.PLAYER).getCollisionArea(), player.getBounds().getCollisionArea());
         assertTrue(new PlayerHealthImpl(health).equals(player.getPlayerHealth()));
         assertTrue(new ScoreImpl(startingPoints).equals(player.getScore()));
@@ -46,12 +46,12 @@ public class PlayerTest {
     @Test
     void testPlayerMovement() {
         Direction movementDirection = Direction.DOWN_LEFT;
-        int delta = Entity.MOVEMENT_DELTA;
+        int delta = AbstractEntity.MOVEMENT_DELTA;
         Coordinate expectedCoordinate = new CoordinateImpl(player.getPosition().getX() +
             (int) (movementDirection.getX()*delta), player.getPosition().getY() +
             (int) (movementDirection.getY()*delta));
         BoundingBox expectedBoundingBox = new BoundingBoxImpl(expectedCoordinate.getX(),
-            expectedCoordinate.getY(), Entity.OBJECT_SIZE, Entity.OBJECT_SIZE, CollisionType.PLAYER);
+            expectedCoordinate.getY(), AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.PLAYER);
         player.move(movementDirection);
         assertNotEquals(test.getPosition(), player.getPosition().getPosition());
         assertEquals(expectedCoordinate.getPosition(), player.getPosition().getPosition());
@@ -70,16 +70,16 @@ public class PlayerTest {
 
     @Test
     void testGettingHit(){
-        BoundingBox item = new BoundingBoxImpl(startingX, startingY, Entity.OBJECT_SIZE,
-            Entity.OBJECT_SIZE, CollisionType.COLLECTABLE);
+        BoundingBox item = new BoundingBoxImpl(startingX, startingY, AbstractEntity.OBJECT_SIZE,
+            AbstractEntity.OBJECT_SIZE, CollisionType.COLLECTABLE);
         assertFalse(player.isHit(item));
         assertNotEquals(CollisionType.STUNNED, player.getBounds().getCollisionType());
 
-        BoundingBox enemy = new BoundingBoxImpl(startingX + Entity.OBJECT_SIZE, startingY + Entity.OBJECT_SIZE,
-            Entity.OBJECT_SIZE, Entity.OBJECT_SIZE, CollisionType.ENEMY);
+        BoundingBox enemy = new BoundingBoxImpl(startingX + AbstractEntity.OBJECT_SIZE, startingY + AbstractEntity.OBJECT_SIZE,
+            AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY);
         assertFalse(player.isHit(enemy));
-        enemy = new BoundingBoxImpl(startingX, startingY, Entity.OBJECT_SIZE,
-            Entity.OBJECT_SIZE, CollisionType.ENEMY);
+        enemy = new BoundingBoxImpl(startingX, startingY, AbstractEntity.OBJECT_SIZE,
+            AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY);
         assertTrue(player.isHit(enemy));
         assertEquals(CollisionType.STUNNED, player.getBounds().getCollisionType());
         assertFalse(new PlayerHealthImpl(health).equals(player.getPlayerHealth()));

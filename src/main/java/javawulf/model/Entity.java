@@ -1,39 +1,12 @@
 package javawulf.model;
 
-import javawulf.model.BoundingBox.CollisionType;
-import javawulf.model.map.Map;
-import javawulf.model.map.TileType;
+public interface Entity {
 
-public abstract class Entity extends GameObject {
+    public static final int DEFAULT_SPEED=1;
+    public static final int DOUBLE_SPEED=2;
+
+    public void setSpeed(Integer speed);
+
+    public Direction getDirection();
     
-    public static final int MOVEMENT_DELTA = OBJECT_SIZE/8;
-    private Integer speed;
-    private Direction direction;
-
-    public Entity(Coordinate position, CollisionType type, Integer speed) {
-        super(position, type);
-        this.speed = speed;
-        this.direction = Direction.DOWN;
-    }
-
-    public Integer getSpeed() {
-        return this.speed;
-    }
-
-    public Direction getDirection() {
-        return this.direction;
-    }
-
-    public void setSpeed(Integer speed) {
-        this.speed = speed;
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
-    }
-
-    protected boolean isCollidingWithWall(Map m){
-        var tile = m.getTileTypes(this.getBounds());
-        return tile.contains(TileType.WALL);
-    }
 }
