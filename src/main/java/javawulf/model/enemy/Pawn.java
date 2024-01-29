@@ -9,12 +9,14 @@ import javawulf.model.player.Player;
 
 public class Pawn extends EnemyImpl {
 
+    private final static int POINTS = 100;
+
     private boolean isAlive;
     private long moveTime;
     private int timeToWait;
 
-    public Pawn(Coordinate position, Integer speed, int points) {
-        super(position, speed, points);
+    public Pawn(Coordinate position) {
+        super(position);
         this.isAlive = true;
         this.moveTime = System.currentTimeMillis();
         this.timeToWait = new Random().nextInt(4) + 1;
@@ -56,7 +58,7 @@ public class Pawn extends EnemyImpl {
     public void takeHit(Player p) {
         if (super.isHit(p.getSword().getBounds())) {
             this.isAlive = false;
-            p.getScore().addPoints(this.getPoints());
+            p.getScore().addPoints(POINTS);
             this.getBounds().changeCollisionType(CollisionType.INACTIVE);
         }
     }

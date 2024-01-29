@@ -7,12 +7,14 @@ import javawulf.model.player.Player;
 public class Guard extends EnemyImpl {
 
     private final static int KILLVALUE = 2;
+    private final static int POINTS = 500;
+
     private boolean isAlive;
     private boolean isStunned;
     private long stunTime;
 
-    public Guard(Coordinate position, Integer speed, int points) {
-        super(position, speed, points);
+    public Guard(Coordinate position) {
+        super(position);
         this.isAlive = true;
         this.isStunned = false;
     }
@@ -69,7 +71,7 @@ public class Guard extends EnemyImpl {
         if (super.isHit(p.getSword().getBounds())) {
             if (this.isKillable(p)) {
                 this.setAlive(false);
-                p.getScore().addPoints(this.getPoints());
+                p.getScore().addPoints(POINTS);
                 this.getBounds().changeCollisionType(CollisionType.INACTIVE);
             } else {
                 this.stun(5);
