@@ -5,9 +5,11 @@ import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
 public class Cure extends Collectable implements Item {
+    
+    private final static int POINTS = 100;
 
-    public Cure(Coordinate position, Integer points) {
-        super(position, points);
+    public Cure(Coordinate position) {
+        super(position, POINTS);
     }
 
     @Override

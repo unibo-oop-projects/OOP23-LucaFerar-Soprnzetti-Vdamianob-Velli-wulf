@@ -11,9 +11,11 @@ public class AmuletPiece extends Collectable implements Item {
         VERTICAL,
         NONE
     }
+    
+    private final static int POINTS = 500;
 
-    public AmuletPiece(Coordinate position, Integer points) {
-        super(position, points);
+    public AmuletPiece(Coordinate position) {
+        super(position, POINTS);
     }
 
     @Override

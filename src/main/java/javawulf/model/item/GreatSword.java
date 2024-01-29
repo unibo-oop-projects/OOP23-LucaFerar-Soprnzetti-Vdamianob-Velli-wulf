@@ -6,8 +6,10 @@ import javawulf.model.player.Player;
 
 public class GreatSword extends Collectable implements Item {
 
-    public GreatSword(Coordinate position, Integer points) {
-        super(position, points);
+    private final static int POINTS = 800;
+
+    public GreatSword(Coordinate position) {
+        super(position, POINTS);
     }
 
     @Override

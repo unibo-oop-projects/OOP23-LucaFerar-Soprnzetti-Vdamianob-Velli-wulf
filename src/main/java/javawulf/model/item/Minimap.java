@@ -6,8 +6,10 @@ import javawulf.model.player.Player;
 
 public class Minimap extends Collectable implements Item {
 
-    public Minimap(Coordinate position, Integer points) {
-        super(position, points);
+    private final static int POINTS = 600;
+
+    public Minimap(Coordinate position) {
+        super(position, POINTS);
         // TODO Auto-generated constructor stub
     }
 

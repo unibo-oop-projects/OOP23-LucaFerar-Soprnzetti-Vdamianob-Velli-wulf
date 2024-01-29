@@ -1,12 +1,15 @@
 package javawulf.model.item;
 
+import javawulf.model.Collectable;
 import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
-public class CureMax extends Cure {
+public class CureMax extends Collectable implements Item{
+    
+    private final static int POINTS = 400;
 
-    public CureMax(Coordinate position, Integer points) {
-        super(position, points);
+    public CureMax(Coordinate position) {
+        super(position, POINTS);
     }
 
     @Override

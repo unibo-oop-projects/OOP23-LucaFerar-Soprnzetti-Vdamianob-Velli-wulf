@@ -7,8 +7,10 @@ import javawulf.model.player.PlayerHealth.ShieldStatus;
 
 public class Shield extends Collectable implements Item {
 
-    public Shield(Coordinate position, Integer points) {
-        super(position, points);
+    private final static int POINTS = 800;
+
+    public Shield(Coordinate position) {
+        super(position, POINTS);
     }
 
     @Override
