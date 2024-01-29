@@ -8,5 +8,13 @@ public interface Entity extends GameElement {
     public void setSpeed(Integer speed);
 
     public Direction getDirection();
+
+    /**
+     * Check if the entity is getting hit by another. If it is the case, then the
+     * entity will be subject to damage
+     * 
+     * @param box BoundingBox that must be checked
+     */
+    public boolean isHit(BoundingBox box);
     
 }

@@ -60,11 +60,8 @@ public class PlayerImpl extends AbstractEntity implements Player {
         this.setDirection(direction);
     }
 
-    @Override
     public boolean isHit(BoundingBox box) {
-        if (this.getBounds().isCollidingWith(box.getCollisionArea())
-            && box.getCollisionType().equals(CollisionType.ENEMY)
-            && this.getBounds().getCollisionType().equals(CollisionType.PLAYER)) {
+        if (super.isHit(box)) {
             this.health.setHealth(DAMAGE);
             this.getBounds().changeCollisionType(CollisionType.STUNNED);
             return true;
@@ -121,6 +118,12 @@ public class PlayerImpl extends AbstractEntity implements Player {
     @Override
     public List<AmuletPiece> getPieces() {
         return this.piecesCollected;
+    }
+
+    @Override
+    protected boolean control(BoundingBox box) {
+        return box.getCollisionType().equals(CollisionType.ENEMY)
+            && this.getBounds().getCollisionType().equals(CollisionType.PLAYER);
     }
 
 }
