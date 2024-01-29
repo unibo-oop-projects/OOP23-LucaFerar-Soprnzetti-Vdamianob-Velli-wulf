@@ -112,4 +112,9 @@ public class MapImpl implements Map {
                 || (pos.getY() / TileType.TILE_DIMENSION) >= MAP_SIZE ? false : true);
     }
 
+    @Override
+    public HashMap<TilePosition, TileType> getTilesMap() {
+        return new HashMap<>(this.tiles);
+    }
+
 }
