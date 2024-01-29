@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javawulf.model.Direction;
 import javawulf.model.BoundingBox.CollisionType;
+import javawulf.model.map.Map;
 import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
@@ -32,7 +33,7 @@ public class Pawn extends EnemyImpl {
     }
 
     @Override
-    public void move(Player p) {
+    public void move(Player p, Map m) {
 
         if (System.currentTimeMillis() - this.moveTime >= timeToWait * 1000) {
             this.setDirection(Direction.values()[new Random().nextInt(4)]);
@@ -43,15 +44,11 @@ public class Pawn extends EnemyImpl {
         double newX = this.getPosition().getX() + this.getDirection().getX() * this.getSpeed() * MOVEMENT_DELTA;
         double newY = this.getPosition().getY() + this.getDirection().getY() * this.getSpeed() * MOVEMENT_DELTA;
 
-        this.getPosition().setPosition((int) Math.round(newX), (int) Math.round(newY));
-        this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE,
-                OBJECT_SIZE);
-        /*
-         * TODO: Fix collision detection
-         * if (!this.getBounds().isCollidingWith(newX, newY)){
-         * this.getPosition().setPosition(newX, newY);
-         * }
-         */
+        if (!this.isCollidingWithWall(m)) {
+            this.getPosition().setPosition((int) Math.round(newX), (int) Math.round(newY));
+            this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE,
+                    OBJECT_SIZE);
+        }
     }
 
     @Override
