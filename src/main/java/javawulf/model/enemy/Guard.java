@@ -51,11 +51,11 @@ public class Guard extends EnemyImpl {
             int diffY = p.getPosition().getY() - this.getPosition().getY(); 
 
             if (Math.abs(diffX) > Math.abs(diffY)) {
-                this.getPosition().setPosition(this.getPosition().getX() + (int)Math.signum(dx) * this.getSpeed() * MOVEMENT_DELTA, 
+                this.getPosition().setPosition(this.getPosition().getX() + (int)Math.signum(diffX) * this.getSpeed() * MOVEMENT_DELTA, 
                                            this.getPosition().getY());
             } else {
                 this.getPosition().setPosition(this.getPosition().getX(), 
-                                           this.getPosition().getY() + (int)Math.signum(dy) * this.getSpeed() * MOVEMENT_DELTA);
+                                           this.getPosition().getY() + (int)Math.signum(diffY) * this.getSpeed() * MOVEMENT_DELTA);
             }
 
             this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE,

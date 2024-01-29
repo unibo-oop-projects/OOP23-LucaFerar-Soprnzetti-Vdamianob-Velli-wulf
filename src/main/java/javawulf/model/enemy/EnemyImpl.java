@@ -26,8 +26,8 @@ public abstract class EnemyImpl extends Entity implements Enemy {
 
     public abstract void move(Player p);
 
-    public void inflictDamage(Player p) {
-        p.isHit(this.getBounds());
+    public boolean inflictDamage(Player p) {
+       return p.isHit(this.getBounds());
     }
 
     public abstract void takeHit(Player p);
