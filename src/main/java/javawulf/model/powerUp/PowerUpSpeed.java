@@ -4,11 +4,12 @@ import javawulf.model.Coordinate;
 
 public class PowerUpSpeed extends PowerUpImpl{
 
-    private final int DURATIONMILLI = 30_000;
-    private final int POINTS = 50;
-    private final String TYPE = "Speed";
+    private final static int DURATION = 30;
+    private final static int POINTS = 50;
+    private final static String TYPE = "Speed";
 
-    public PowerUpSpeed(Coordinate position, Integer points, String type, int durationInMilli) {
-        super(position, points, type, durationInMilli);
+    public PowerUpSpeed(Coordinate position) {
+        super(position, POINTS, TYPE, DURATION);
     }
+
 }

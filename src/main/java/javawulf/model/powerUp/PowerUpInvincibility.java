@@ -14,9 +14,4 @@ public class PowerUpInvincibility extends PowerUpImpl {
         //need to put all constants in the factory
     }
     
-        @Override
-        public void applyEffect(Player player) {
-            super.applyEffect(player);
-            //need to make player invincible
-        }
 }

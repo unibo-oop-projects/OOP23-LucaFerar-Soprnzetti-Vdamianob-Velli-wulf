@@ -1,9 +1,11 @@
 package javawulf.model.powerUp;
 
-public interface PowerUp {
+import javawulf.model.Collectable;
+
+public interface PowerUp extends Collectable{
 
     boolean stillActive();
 
-    void activateEffect();
+    void updateDuration();
 
 }
