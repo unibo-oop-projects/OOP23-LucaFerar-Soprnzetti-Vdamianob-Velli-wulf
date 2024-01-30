@@ -17,10 +17,25 @@ public class MapImpl implements Map {
     private final List<Biome> biomes = new ArrayList<>();
     private final java.util.Map<TilePosition, TileType> tiles = new HashMap<>();
 
+    /**
+     * Each element in BiomeQuadrant rapresent one of four biome of the map. Used for get their offset positions.
+     */
     enum BiomeQuadrant {
+        /**
+         * First biome (upper-left)
+         */
         FIRST(0, new TilePosition(0, 0)),
+        /**
+         * Second biome (upper-right)
+         */
         SECOND(1, new TilePosition(Biome.SIZE + WIDTH_CENTRAL_BIOME, 0)),
+        /**
+         * Third biome (downer-right)
+         */
         THIRD(2, new TilePosition(Biome.SIZE + WIDTH_CENTRAL_BIOME, Biome.SIZE + WIDTH_CENTRAL_BIOME)),
+        /**
+         * Fourth biome (downer-left)
+         */
         FOURTH(3, new TilePosition(0, Biome.SIZE + WIDTH_CENTRAL_BIOME));
 
         private final int pos;
@@ -40,6 +55,13 @@ public class MapImpl implements Map {
         }
     }
 
+    /**
+     * This is the constructor. Calling constructor, map will be built.
+     * @param firstBiome
+     * @param secondBiome
+     * @param thirdBiome
+     * @param fourthBiome
+     */
     public MapImpl(Biome firstBiome, Biome secondBiome, Biome thirdBiome, Biome fourthBiome) {
         this.biomes.addAll(List.of(firstBiome, secondBiome, thirdBiome, fourthBiome));
         build();

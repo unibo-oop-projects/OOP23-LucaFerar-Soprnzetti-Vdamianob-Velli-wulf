@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 import javafx.util.Pair;
 
+/**
+ * Implementation of Biome.
+ * You can add rooms and corridors in Biome, and you can use 4 biomes to compose a game Map.
+ */
 public class BiomeImpl implements Biome {
     private final List<Pair<TilePosition, Room>> rooms;
     private final List<Pair<TilePosition, Corridor>> corridors;
