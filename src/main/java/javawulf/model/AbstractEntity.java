@@ -5,49 +5,49 @@ import javawulf.model.map.Map;
 import javawulf.model.map.TileType;
 
 public abstract class AbstractEntity extends GameObject implements Entity {
-    
-    public static final int MOVEMENT_DELTA = OBJECT_SIZE/8;
+
+    public static final int MOVEMENT_DELTA = OBJECT_SIZE / 8;
     private int speed;
     private Direction direction;
     private int stun;
 
-    public AbstractEntity(Coordinate position, CollisionType type, int speed) {
+    public AbstractEntity(final Coordinate position, final CollisionType type, final int speed) {
         super(position, type);
         this.speed = speed;
         this.direction = Direction.DOWN;
     }
 
-    public int getSpeed() {
+    public final int getSpeed() {
         return this.speed;
     }
 
-    public Direction getDirection() {
+    public final Direction getDirection() {
         return this.direction;
     }
 
-    public void setSpeed(int speed) {
+    public final void setSpeed(int speed) {
         this.speed = speed;
     }
 
-    public void setDirection(Direction direction) {
+    public final void setDirection(Direction direction) {
         this.direction = direction;
     }
 
-    protected boolean isCollidingWithWall(Map m){
+    protected final boolean isCollidingWithWall(Map m) {
         var tile = m.getTileTypes(this.getBounds());
         return tile.contains(TileType.WALL);
     }
 
-    public boolean isHit(BoundingBox box){
+    public boolean isHit(BoundingBox box) {
         return this.getBounds().isCollidingWith(box.getCollisionArea())
-            && control(box);
+                && control(box);
     }
 
     protected abstract boolean control(BoundingBox box);
 
-    public void reduceStun(){
-        if (this.getBounds().getCollisionType().equals(CollisionType.STUNNED)){
-            if (stun==0){
+    public final void reduceStun() {
+        if (this.getBounds().getCollisionType().equals(CollisionType.STUNNED)) {
+            if (stun == 0) {
                 this.getBounds().changeCollisionType(originalCollisonType());
             } else {
                 this.stun--;
@@ -57,7 +57,7 @@ public abstract class AbstractEntity extends GameObject implements Entity {
 
     protected abstract CollisionType originalCollisonType();
 
-    public void setStun(int stun){
+    public final void setStun(int stun) {
         this.stun = stun;
     }
 }
