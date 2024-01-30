@@ -60,6 +60,8 @@ public class EnemyFactoryTest {
         assertEquals(startingY, guard.getPosition().getY());
         // Check if the guard is alive
         assertTrue(guard.isAlive());
+        // Check if the guard is not stunned
+        assertFalse(guard.isStunned());
         // Check the BoundingBox of the guard
         assertEquals(guard.getBounds(), new BoundingBoxImpl(startingX, startingY,
                 AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY));
