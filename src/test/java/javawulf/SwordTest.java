@@ -15,7 +15,12 @@ import javawulf.model.GameObject;
 import javawulf.model.player.*;
 import javawulf.model.player.Sword.SwordType;
 
-public final  class SwordTest {
+/**
+ * SwordTest's purpose is to check whether the implementation
+ * of Sword works as it should, considering also the movement
+ * of the Player character
+ */
+public final class SwordTest {
 
     private int health = 3;
     private int startingX = 12;

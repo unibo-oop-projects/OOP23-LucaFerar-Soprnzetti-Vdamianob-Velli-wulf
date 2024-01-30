@@ -8,6 +8,11 @@ import org.junit.jupiter.api.Test;
 import javawulf.model.player.*;
 import javawulf.model.player.Score.Multiplier;
 
+/**
+ * ScoreTest checks whether the implementation of Score increases
+ * and decreases the point total as it should, considering the
+ * current mulitplier
+ */
 public final class ScoreTest {
 
     private int health = 3;

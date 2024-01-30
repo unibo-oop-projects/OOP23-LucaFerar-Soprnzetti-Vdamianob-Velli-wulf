@@ -12,6 +12,10 @@ import javawulf.model.AbstractEntity;
 import javawulf.model.player.*;
 import javawulf.model.player.PlayerHealth.ShieldStatus;
 
+/**
+ * PlayerHealthTest tests whether the implementation of PlayerHealth
+ * works as it should
+ */
 public final class PlayerHealthTest {
 
     private int health = 3;

@@ -10,10 +10,16 @@ public interface Score {
     /**
      * Multiplier defines the current score multiplier applied to any added
      * points. It gets changed after obtaining a score boosting power-up.
-     * Normally it is set to DEFAULT
      */
     enum Multiplier {
+        /**
+         * DEFAULT represents the normal state of the score multiplier
+         */
         DEFAULT(1),
+        /**
+         * DOUBLE represents the state of the score multiplier after
+         * a score boosting power-up has been obtained
+         */
         DOUBLE(2);
 
         private final int value;

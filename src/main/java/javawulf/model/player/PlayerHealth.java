@@ -9,11 +9,23 @@ public interface PlayerHealth {
     /**
      * ShieldStatus defines the current status of the player's shield.
      * If FULL it protects the player from 2 hits, if HALF only from 1 hit.
-     * By default it is NONE
      */
     enum ShieldStatus {
+        /**
+         * NONE is the default state of the shield. It does not protect
+         * the player from any damage
+         */
         NONE(0),
+        /**
+         * NONE is the default state of the shield. It protects
+         * the player from one hit
+         */
         HALF(1),
+        /**
+         * FULL is the state of the shield after the right item
+         * has been . It protects
+         * the player from 2 hits
+         */
         FULL(2);
 
         private final int strength;
