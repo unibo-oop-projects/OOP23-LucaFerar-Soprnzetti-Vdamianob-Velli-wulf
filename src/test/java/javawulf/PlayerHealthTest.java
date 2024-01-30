@@ -18,10 +18,10 @@ import javawulf.model.player.PlayerHealth.ShieldStatus;
  */
 public final class PlayerHealthTest {
 
-    private int health = 3;
-    private int startingX = 12;
-    private int startingY = 12;
-    private int startingPoints = 0;
+    private final int health = 3;
+    private final int startingX = 12;
+    private final int startingY = 12;
+    private final int startingPoints = 0;
     private Player player;
     private PlayerHealth hp;
 

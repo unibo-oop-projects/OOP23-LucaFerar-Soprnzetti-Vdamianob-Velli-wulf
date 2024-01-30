@@ -25,10 +25,10 @@ import javawulf.model.item.ItemFactoryImpl;
  */
 public final class PlayerTest {
 
-    private int health = 3;
-    private int startingX = 12;
-    private int startingY = 12;
-    private int startingPoints = 0;
+    private final int health = 3;
+    private final int startingX = 12;
+    private final int startingY = 12;
+    private final int startingPoints = 0;
     private Player player;
     private Coordinate test;
 
@@ -104,6 +104,7 @@ public final class PlayerTest {
 
     @Test
     void testObtainFragment() {
+        final int wrongResult = 5;
         List<AmuletPiece> fragments = new ArrayList<>();
         AmuletPiece fragment = new ItemFactoryImpl().createAmuletPiece(test);
         for (int i = 0; i < 4; i++) {
@@ -112,6 +113,6 @@ public final class PlayerTest {
             assertEquals(i + 1, player.getPieces().size());
         }
         assertThrows(IllegalStateException.class, () -> player.collectAmuletPiece(fragment));
-        assertNotEquals(5, player.getPieces().size());
+        assertNotEquals(wrongResult, player.getPieces().size());
     }
 }

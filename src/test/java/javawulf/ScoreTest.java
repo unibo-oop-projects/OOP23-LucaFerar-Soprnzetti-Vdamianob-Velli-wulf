@@ -15,13 +15,13 @@ import javawulf.model.player.Score.Multiplier;
  */
 public final class ScoreTest {
 
-    private int health = 3;
-    private int startingX = 12;
-    private int startingY = 12;
-    private int startingPoints = 0;
+    private final int health = 3;
+    private final int startingX = 12;
+    private final int startingY = 12;
+    private final int startingPoints = 0;
     private Player player;
     private Score score;
-    private int increase = 100;
+    private final int increase = 100;
 
     @BeforeEach
     void createScore() {
