@@ -5,9 +5,11 @@ import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
 public class ExtraHeart extends Collectable implements Item {
+    
+    private final static int POINTS = 400;
 
-    public ExtraHeart(Coordinate position, Integer points) {
-        super(position, points);
+    public ExtraHeart(Coordinate position) {
+        super(position, POINTS);
     }
 
     @Override

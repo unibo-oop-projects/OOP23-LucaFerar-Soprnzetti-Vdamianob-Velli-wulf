@@ -5,16 +5,15 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import javawulf.model.BoundingBox;
 import javawulf.model.Direction;
-import javawulf.model.GameElement;
-import javawulf.model.item.AmuletFragments;
+import javawulf.model.Entity;
+import javawulf.model.item.AmuletPiece;
 import javawulf.model.powerUp.PowerUp;
 
 /**
  * Player represents the playable character and its statitstics
  */
-public interface Player extends GameElement {
+public interface Player extends Entity {
 
     public enum PlayerColor{
         RED(Optional.of(Color.RED)),
@@ -48,15 +47,7 @@ public interface Player extends GameElement {
      */
     public void move(Direction direction) throws IllegalStateException;
 
-    /**
-     * Check if player is getting hit by an enemy. If it is the case, then the player
-     * character will be subject to damage
-     * 
-     * @param box BoundingBox that must be checked
-     */
-    public boolean isHit(BoundingBox box);
-
-    public void collectAmuletPiece(AmuletFragments piece);
+    public void collectAmuletPiece(AmuletPiece piece);
 
     /**
      * @return The current health of the player character, including also the maximum
@@ -65,8 +56,6 @@ public interface Player extends GameElement {
     public PlayerHealth getPlayerHealth();
 
     public void usePowerUp(PowerUp p);
-
-    public boolean isDefeated();
 
     /**
      * @return The current point total and point multiplier
@@ -81,13 +70,7 @@ public interface Player extends GameElement {
     public PlayerColor getColor();
 
     public void setColor(PlayerColor color);
-    
-    public void setScore(Score score);
 
-    public void setSword(Sword sword);
-
-    public void setPlayerHealth(PlayerHealth health);
-
-    public List<AmuletFragments> getFragments();
+    public List<AmuletPiece> getPieces();
     
 }

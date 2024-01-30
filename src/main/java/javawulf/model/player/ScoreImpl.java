@@ -34,5 +34,9 @@ public class ScoreImpl implements Score{
     public void addPoints(int points) {
         this.points = this.points + points * this.getMultiplier();
     }
+
+    public boolean equals(Score score){
+        return this.points == score.getPoints() && this.getMultiplier() == score.getMultiplier();
+    }
     
 }
