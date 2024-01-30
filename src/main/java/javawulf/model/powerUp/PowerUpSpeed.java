@@ -1,5 +1,7 @@
 package javawulf.model.powerUp;
 
+import javawulf.model.Entity;
+
 import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
@@ -16,10 +18,9 @@ public class PowerUpSpeed extends PowerUpImpl{
     @Override
     public void applyEffect(Player p) {
         if(this.stillActive()) {
-            //speed is not a final number for now
-            p.setSpeed(2);
+            p.setSpeed(Entity.DOUBLE_SPEED);
         } else {
-            p.setSpeed(1);
+            p.setSpeed(Entity.DEFAULT_SPEED);
         }
     }
 
