@@ -17,7 +17,7 @@ public class MapImpl implements Map {
     private final List<Biome> biomes = new ArrayList<>();
     private final java.util.Map<TilePosition, TileType> tiles = new HashMap<>();
 
-    enum BiomeOffset {
+    enum BiomeQuadrant {
         // TODO: verificare correttezza degli offsets!
         FIRST(0, new TilePosition(0, 0)),
         SECOND(1, new TilePosition(Biome.SIZE + WIDTH_CENTRAL_BIOME, 0)),
@@ -27,7 +27,7 @@ public class MapImpl implements Map {
         private final int pos;
         private final TilePosition offset;
 
-        BiomeOffset(int pos, TilePosition offset) {
+        BiomeQuadrant(int pos, TilePosition offset) {
             this.pos = pos;
             this.offset = offset;
         }
@@ -83,7 +83,7 @@ public class MapImpl implements Map {
     }
 
     private void build() {
-        for (var biomeOffSet : BiomeOffset.values()) {
+        for (var biomeOffSet : BiomeQuadrant.values()) {
             for (var room : biomes.get(biomeOffSet.getPos()).getRooms()) {
                 for (int y = room.getKey().getY(); y < room.getKey().getY() + room.getValue().getHeight(); y++) {
                     for (int x = room.getKey().getX(); x < room.getKey().getX() + room.getValue().getWidth(); x++) {
@@ -94,7 +94,7 @@ public class MapImpl implements Map {
             }
         }
 
-        for (var biomeOffSet : BiomeOffset.values()) {
+        for (var biomeOffSet : BiomeQuadrant.values()) {
             for (var corridor : biomes.get(biomeOffSet.getPos()).getCorridors()) {
                 for (int y = corridor.getKey().getY(); y < corridor.getKey().getY() + corridor.getValue().getHeight(); y++) {
                     for (int x = corridor.getKey().getX(); x < corridor.getKey().getX() + corridor.getValue().getWidth(); x++) {
@@ -107,6 +107,10 @@ public class MapImpl implements Map {
         }
 
         this.buildCentralBiome();
+    }
+
+    private void drawSpace(Space space) {
+        // this.tiles
     }
 
     private void buildCentralBiome() {
