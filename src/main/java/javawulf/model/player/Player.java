@@ -59,6 +59,10 @@ public interface Player extends Entity {
      */
     PlayerHealth getPlayerHealth();
 
+    /**
+     * @return The current Power-Up Player is subject to and for how much
+     * longer it will last
+     */
     PowerUpHandler getPowerUpHandler();
 
     /**
