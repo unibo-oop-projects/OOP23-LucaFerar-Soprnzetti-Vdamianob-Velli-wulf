@@ -9,7 +9,14 @@ public class BiomeFactoryImpl implements BiomeFactory {
                 .addRoom(new TilePosition(9, 3), new RoomFactoryImpl().getSquaredRoom())
                 .addRoom(new TilePosition(8, 11), new RoomFactoryImpl().getSquaredRoom())
                 .addCorridor(new TilePosition(7, 4), new Corridor(2, 2))
-                .addCorridor(new TilePosition(10, 8), new Corridor(2, 3));
+                .addCorridor(new TilePosition(10, 8), new Corridor(2, 3))
+                .addCorridor(new TilePosition(14, 4), new Corridor(4, 2))
+                .addCorridor(new TilePosition(3, 7), new Corridor(2, 13))
+                .addCorridor(new TilePosition(18, 3), new Corridor(2, 3))
+                .addCorridor(new TilePosition(15, 15), new Corridor(2, 5))
+                .addCorridor(new TilePosition(17, 15), new Corridor(3, 2));
+
+
     }
 
     @Override
@@ -20,11 +27,15 @@ public class BiomeFactoryImpl implements BiomeFactory {
                 .addRoom(new TilePosition(12, 14), new RoomFactoryImpl().getSquaredRoom())
                 .addRoom(new TilePosition(1, 13), new RoomFactoryImpl().getSquaredRoom())
                 .addCorridor(new TilePosition(7, 4), new Corridor(6, 2))
+                .addCorridor(new TilePosition(0, 3), new Corridor(2, 2))
                 .addCorridor(new TilePosition(10, 6), new Corridor(2, 6))
                 .addCorridor(new TilePosition(14, 10), new Corridor(2, 4))
                 .addCorridor(new TilePosition(14, 10), new Corridor(2, 4))
                 .addCorridor(new TilePosition(12, 10), new Corridor(2, 2))
-                .addCorridor(new TilePosition(3, 7), new Corridor(2, 6));
+                .addCorridor(new TilePosition(3, 7), new Corridor(2, 6))
+                .addCorridor(new TilePosition(3, 18), new Corridor(2, 2))
+                .addCorridor(new TilePosition(15, 19), new Corridor(2, 1))
+                .addCorridor(new TilePosition(0, 15), new Corridor(1, 2));
     }
 
     @Override
@@ -35,10 +46,14 @@ public class BiomeFactoryImpl implements BiomeFactory {
                 .addRoom(new TilePosition(12, 14), new RoomFactoryImpl().getSquaredRoom())
                 .addRoom(new TilePosition(1, 13), new RoomFactoryImpl().getSquaredRoom())
                 .addCorridor(new TilePosition(6, 15), new Corridor(2, 2))
+                .addCorridor(new TilePosition(0, 3), new Corridor(2, 2))
                 .addCorridor(new TilePosition(8, 10), new Corridor(2, 7))
                 .addCorridor(new TilePosition(14, 7), new Corridor(2, 7))
                 .addCorridor(new TilePosition(14, 10), new Corridor(2, 4))
-                .addCorridor(new TilePosition(10, 10), new Corridor(4, 2));
+                .addCorridor(new TilePosition(10, 10), new Corridor(4, 2))
+                .addCorridor(new TilePosition(3, 0), new Corridor(2, 2))
+                .addCorridor(new TilePosition(15, 0), new Corridor(2, 2))
+                .addCorridor(new TilePosition(0, 15), new Corridor(1, 2));
     }
 
     @Override
@@ -50,11 +65,15 @@ public class BiomeFactoryImpl implements BiomeFactory {
                 .addRoom(new TilePosition(1, 13), new RoomFactoryImpl().getSquaredRoom())
                 .addCorridor(new TilePosition(7, 5), new Corridor(5, 2))
                 .addCorridor(new TilePosition(10, 3), new Corridor(3, 2))
+                .addCorridor(new TilePosition(18, 3), new Corridor(2, 2))
                 .addCorridor(new TilePosition(10, 6), new Corridor(2, 6))
                 .addCorridor(new TilePosition(14, 10), new Corridor(2, 4))
                 .addCorridor(new TilePosition(14, 10), new Corridor(2, 4))
                 .addCorridor(new TilePosition(12, 10), new Corridor(2, 2))
-                .addCorridor(new TilePosition(6, 15), new Corridor(6, 2));
+                .addCorridor(new TilePosition(6, 15), new Corridor(6, 2))
+                .addCorridor(new TilePosition(17, 15), new Corridor(3, 2))
+                .addCorridor(new TilePosition(3, 0), new Corridor(2, 4))
+                .addCorridor(new TilePosition(15, 0), new Corridor(2, 2));
     }
 
     @Override
