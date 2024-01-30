@@ -1,5 +1,8 @@
 package javawulf.model.player;
 
+/**
+ * Class that implements the Score interface.
+ */
 public final class ScoreImpl implements Score {
 
     private int points;
@@ -35,10 +38,6 @@ public final class ScoreImpl implements Score {
     @Override
     public void addPoints(final int points) {
         this.points = this.points + points * this.getMultiplier();
-    }
-
-    public boolean equals(final Score score) {
-        return this.points == score.getPoints() && this.getMultiplier() == score.getMultiplier();
     }
 
 }

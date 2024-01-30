@@ -1,5 +1,9 @@
 package javawulf.model.player;
 
+/**
+ * PlayerHealthImpl is a class implementing the PlayerHealth
+ * interface.
+ */
 public final class PlayerHealthImpl implements PlayerHealth {
 
     private int health;
@@ -66,11 +70,6 @@ public final class PlayerHealthImpl implements PlayerHealth {
     @Override
     public void setShieldStatus(final ShieldStatus status) {
         this.shieldStatus = status;
-    }
-
-    public boolean equals(final PlayerHealth hp) {
-        return this.getHealth() == hp.getHealth() && this.getMaxHealth() == hp.getMaxHealth()
-            && this.getShieldStatus() == hp.getShieldStatus();
     }
 
 }

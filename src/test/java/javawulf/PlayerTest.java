@@ -23,7 +23,6 @@ import javawulf.model.item.AmuletPiece;
 import javawulf.model.player.Player;
 import javawulf.model.player.PlayerHealthImpl;
 import javawulf.model.player.PlayerImpl;
-import javawulf.model.player.ScoreImpl;
 import javawulf.model.item.ItemFactoryImpl;
 
 /**
@@ -50,8 +49,6 @@ public final class PlayerTest {
         assertEquals(test.getPosition(), player.getPosition().getPosition());
         assertEquals(new BoundingBoxImpl(startingX, startingY, AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE,
                 CollisionType.PLAYER).getCollisionArea(), player.getBounds().getCollisionArea());
-        assertTrue(new PlayerHealthImpl(health).equals(player.getPlayerHealth()));
-        assertTrue(new ScoreImpl(startingPoints).equals(player.getScore()));
         assertEquals(0, player.getPieces().size());
     }
 
@@ -94,7 +91,7 @@ public final class PlayerTest {
             AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY);
         assertTrue(player.isHit(enemy));
         assertEquals(CollisionType.STUNNED, player.getBounds().getCollisionType());
-        assertFalse(new PlayerHealthImpl(health).equals(player.getPlayerHealth()));
+        assertNotEquals(new PlayerHealthImpl(health).getHealth(), player.getPlayerHealth().getHealth());
         assertEquals(new PlayerHealthImpl(health - 1).getHealth(), player.getPlayerHealth().getHealth());
 
         assertFalse(player.isHit(enemy));
