@@ -110,16 +110,31 @@ public class MapImpl implements Map {
 
     private void buildCentralBiome() {
         for (int x = Biome.SIZE; x <= Biome.SIZE -1 + WIDTH_CENTRAL_BIOME; x++) {
-            for (int y = Biome.SIZE/6; y < Biome.SIZE/6+2; y++) {
+            for (int y = 3; y < 5; y++) {
                 this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
             }
-            for (int y = Biome.SIZE - Biome.SIZE/6; y < Biome.SIZE - Biome.SIZE/6+2; y++) {
+            for (int y = 15; y < 17; y++) {
                 this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
             }
-            for (int y = MAP_SIZE - Biome.SIZE/6; y < MAP_SIZE - Biome.SIZE/6+2; y++) {
+            for (int y = Biome.SIZE+WIDTH_CENTRAL_BIOME+3; y < Biome.SIZE+WIDTH_CENTRAL_BIOME+5; y++) {
                 this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
             }
-            for (int y = MAP_SIZE - Biome.SIZE/6; y < MAP_SIZE - Biome.SIZE/6+2; y++) {
+            for (int y = Biome.SIZE+WIDTH_CENTRAL_BIOME+15; y < Biome.SIZE+WIDTH_CENTRAL_BIOME+17; y++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
+            }
+        }
+
+        for (int y = Biome.SIZE; y <= Biome.SIZE -1 + WIDTH_CENTRAL_BIOME; y++) {
+            for (int x = 3; x < 5; x++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
+            }
+            for (int x = 15; x < 17; x++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
+            }
+            for (int x = Biome.SIZE+WIDTH_CENTRAL_BIOME+3; x < Biome.SIZE+WIDTH_CENTRAL_BIOME+5; x++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
+            }
+            for (int x = Biome.SIZE+WIDTH_CENTRAL_BIOME+15; x < Biome.SIZE+WIDTH_CENTRAL_BIOME+17; x++) {
                 this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
             }
         }
