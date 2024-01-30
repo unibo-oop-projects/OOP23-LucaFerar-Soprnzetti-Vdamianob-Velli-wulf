@@ -1,6 +1,8 @@
 package javawulf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +14,9 @@ import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.Direction;
 import javawulf.model.GameObject;
-import javawulf.model.player.*;
+import javawulf.model.player.Player;
+import javawulf.model.player.PlayerImpl;
+import javawulf.model.player.Sword;
 import javawulf.model.player.Sword.SwordType;
 
 /**

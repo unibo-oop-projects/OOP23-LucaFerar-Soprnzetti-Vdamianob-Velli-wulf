@@ -1,6 +1,10 @@
 package javawulf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +20,10 @@ import javawulf.model.CoordinateImpl;
 import javawulf.model.Direction;
 import javawulf.model.AbstractEntity;
 import javawulf.model.item.AmuletPiece;
-import javawulf.model.player.*;
+import javawulf.model.player.Player;
+import javawulf.model.player.PlayerHealthImpl;
+import javawulf.model.player.PlayerImpl;
+import javawulf.model.player.ScoreImpl;
 import javawulf.model.item.ItemFactoryImpl;
 
 /**

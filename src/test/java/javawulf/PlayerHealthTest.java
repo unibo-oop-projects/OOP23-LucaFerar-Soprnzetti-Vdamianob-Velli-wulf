@@ -1,6 +1,6 @@
 package javawulf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,9 @@ import javawulf.model.BoundingBox;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.BoundingBoxImpl;
 import javawulf.model.AbstractEntity;
-import javawulf.model.player.*;
+import javawulf.model.player.Player;
+import javawulf.model.player.PlayerHealth;
+import javawulf.model.player.PlayerImpl;
 import javawulf.model.player.PlayerHealth.ShieldStatus;
 
 /**
