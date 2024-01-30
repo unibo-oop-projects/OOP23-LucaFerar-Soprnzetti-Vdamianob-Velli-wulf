@@ -4,33 +4,35 @@ import javawulf.model.AbstractCollectable;
 import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
-public class AmuletPiece extends AbstractCollectable {
+/**
+ * The AmuletPiece class represents a piece of the amulet that the player must
+ * collect to win the game. He should collect all 4 pieces.
+ */
+public final class AmuletPiece extends AbstractCollectable {
 
-    public enum Alignment {
-        HORIZONTAL,
-        VERTICAL,
-        NONE
-    }
-    
-    private final static int POINTS = 500;
+    private static final int POINTS = 500;
 
-    public AmuletPiece(Coordinate position) {
+    /**
+     * Creates a new AmuletPiece.
+     * @param position the position of the piece
+     */
+    public AmuletPiece(final Coordinate position) {
         super(position, POINTS);
     }
 
     @Override
-    public void applyEffect(Player p) {
+    public void applyEffect(final Player p) {
         p.collectAmuletPiece(this);
     }
 
-    public Alignment isPlayerAligned(Player p) {
-        if (p.getPosition().getX() == this.getPosition().getX()) {
-            return Alignment.HORIZONTAL;
-        } else if (p.getPosition().getY() == this.getPosition().getY()) {
-            return Alignment.VERTICAL;
-        } else {
-            return Alignment.NONE;
-        }
+    /**
+     * Checks if the player is aligned with the piece.
+     * @param p the player
+     * @return true if the player is aligned with the piece, false otherwise
+     */
+    public boolean isPlayerAligned(final Player p) {
+        return p.getPosition().getX().equals(this.getPosition().getX())
+                || p.getPosition().getY().equals(this.getPosition().getY());
     }
 
 }
