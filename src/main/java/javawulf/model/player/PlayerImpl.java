@@ -13,6 +13,9 @@ import javawulf.model.powerUp.PowerUpHandlerImpl;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletPiece;
 
+/**
+ * PlayerImpl is an implementation of Player
+ */
 public final class PlayerImpl extends AbstractEntity implements Player {
 
     private static final int DAMAGE = -1;
