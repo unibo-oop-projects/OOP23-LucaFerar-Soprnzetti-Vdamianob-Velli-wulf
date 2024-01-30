@@ -11,10 +11,17 @@ import javawulf.model.Coordinate;
 public interface Sword extends GameElement {
 
     /**
-     * SwordType defines the current type of sword. By default is is NORMAL.
+     * SwordType defines the current type of sword.
      */
     enum SwordType {
+        /**
+         * NORMAL is the default type of sword.
+         */
         NORMAL,
+        /**
+         * GREATSWORD is the stronger type of sword that can
+         * be obtained thorugh an item.
+         */
         GREATSWORD;
     }
 
