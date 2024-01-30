@@ -1,4 +1,6 @@
-package javawulf.model.map;
+package javawulf.model.map.factory;
+
+import javawulf.model.map.Room;
 
 public class RoomFactoryImpl implements RoomFactory {
 

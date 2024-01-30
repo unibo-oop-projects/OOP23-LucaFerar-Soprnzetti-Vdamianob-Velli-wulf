@@ -2,6 +2,8 @@ package javawulf;
 
 import javawulf.model.CoordinateImpl;
 import javawulf.model.map.*;
+import javawulf.model.map.factory.MapFactoryImpl;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 

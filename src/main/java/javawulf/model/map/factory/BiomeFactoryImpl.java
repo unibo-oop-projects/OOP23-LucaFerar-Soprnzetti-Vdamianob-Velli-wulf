@@ -1,4 +1,10 @@
-package javawulf.model.map;
+package javawulf.model.map.factory;
+
+import javawulf.model.map.Biome;
+import javawulf.model.map.BiomeImpl;
+import javawulf.model.map.Corridor;
+import javawulf.model.map.Room;
+import javawulf.model.map.TilePosition;
 
 public class BiomeFactoryImpl implements BiomeFactory {
 

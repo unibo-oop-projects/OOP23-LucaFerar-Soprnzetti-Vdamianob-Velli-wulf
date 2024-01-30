@@ -1,7 +1,7 @@
 package javawulf.controller;
 
 import javawulf.model.map.Map;
-import javawulf.model.map.MapFactoryImpl;
+import javawulf.model.map.factory.MapFactoryImpl;
 // import javawulf.model.player.Player;
 // import javawulf.model.player.PlayerImpl;
 import javawulf.view.GamePanel;

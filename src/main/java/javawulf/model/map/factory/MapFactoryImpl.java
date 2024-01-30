@@ -1,4 +1,8 @@
-package javawulf.model.map;
+package javawulf.model.map.factory;
+
+import javawulf.model.map.Biome;
+import javawulf.model.map.Map;
+import javawulf.model.map.MapImpl;
 
 public class MapFactoryImpl implements MapFactory {
 
