@@ -3,7 +3,7 @@ package javawulf.model.player;
 /**
  * The class Score's objective is to take care of the current point total gotten
  * by the player during the game by increasing it accordingly considering the
- * current score multiplier 
+ * current score multiplier.
  */
 public interface Score {
 
@@ -13,12 +13,12 @@ public interface Score {
      */
     enum Multiplier {
         /**
-         * DEFAULT represents the normal state of the score multiplier
+         * DEFAULT represents the normal state of the score multiplier.
          */
         DEFAULT(1),
         /**
          * DOUBLE represents the state of the score multiplier after
-         * a score boosting power-up has been obtained
+         * a score boosting power-up has been obtained.
          */
         DOUBLE(2);
 
@@ -51,7 +51,7 @@ public interface Score {
     /**
      * Add the point amount set as param. This amount is subject to the
      * current score multiplier, so the amount added is equal to
-     * points * multiplier
+     * points * multiplier.
      * @param points amount of points to add to the total
      */
     void addPoints(int points);

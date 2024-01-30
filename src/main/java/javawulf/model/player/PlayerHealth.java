@@ -2,7 +2,7 @@ package javawulf.model.player;
 
 /**
  *  PlayerHealth is a class which manages all that is related to the player's health
- *  including its loss (by damage) and its recovery (by obtaining certain items)
+ *  including its loss (by damage) and its recovery (by obtaining certain items).
  */
 public interface PlayerHealth {
 
@@ -66,7 +66,7 @@ public interface PlayerHealth {
     void setHealth(int health);
 
     /**
-     * Increase the maximum amount of health the player can have at once
+     * Increase the maximum amount of health the player can have at once.
      * 
      * @param increase The amount by which the maximum health of player has to increase 
      */

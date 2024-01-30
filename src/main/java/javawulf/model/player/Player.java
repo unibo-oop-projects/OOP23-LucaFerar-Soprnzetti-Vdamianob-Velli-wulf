@@ -11,7 +11,7 @@ import javawulf.model.item.AmuletPiece;
 import javawulf.model.powerUp.PowerUpHandler;
 
 /**
- * Player represents the playable character and its statitstics
+ * Player represents the playable character and its statitstics.
  */
 public interface Player extends Entity {
 
@@ -38,12 +38,12 @@ public interface Player extends Entity {
     }
 
     /**
-     * Activate the sword in order to attack
+     * Activate the sword in order to attack.
      */
     void attack();
 
     /**
-     * Move in the specified direction
+     * Move in the specified direction.
      * 
      * @param direction The direction the player character must move towards
      * @throws IllegalStateException If the character can't continue in that direction
