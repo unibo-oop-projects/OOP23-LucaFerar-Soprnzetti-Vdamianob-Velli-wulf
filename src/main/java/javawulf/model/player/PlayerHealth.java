@@ -17,8 +17,8 @@ public interface PlayerHealth {
          */
         NONE(0),
         /**
-         * NONE is the default state of the shield. It protects
-         * the player from one hit
+         * HALF is state of the shield after it got hit once. It protects
+         * the player from a hit
          */
         HALF(1),
         /**
