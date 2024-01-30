@@ -8,7 +8,7 @@ import java.util.Optional;
 import javawulf.model.Direction;
 import javawulf.model.Entity;
 import javawulf.model.item.AmuletPiece;
-import javawulf.model.powerUp.PowerUp;
+import javawulf.model.powerUp.PowerUpHandler;
 
 /**
  * Player represents the playable character and its statitstics
@@ -55,7 +55,7 @@ public interface Player extends Entity {
      */
     public PlayerHealth getPlayerHealth();
 
-    public void usePowerUp(PowerUp p);
+    public PowerUpHandler getPowerUpHandler();
 
     /**
      * @return The current point total and point multiplier
