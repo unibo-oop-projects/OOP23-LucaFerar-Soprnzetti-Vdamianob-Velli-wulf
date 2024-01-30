@@ -44,8 +44,10 @@ public class ItemFactoryTest {
         assertEquals(startingX, piece.getPosition().getX());
         assertEquals(startingY, piece.getPosition().getY());
         // Check the BoundingBox of the piece
-        assertEquals(piece.getBounds(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
-                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE));
+        assertEquals(piece.getBounds().getCollisionType(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
+                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE).getCollisionType());
+        assertEquals(piece.getBounds().getCollisionArea(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
+                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE).getCollisionArea());
     }
 
     @Test
@@ -60,8 +62,10 @@ public class ItemFactoryTest {
         assertEquals(startingX, cure.getPosition().getX());
         assertEquals(startingY, cure.getPosition().getY());
         // Check the BoundingBox of the cure
-        assertEquals(cure.getBounds(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
-                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE));
+        assertEquals(cure.getBounds().getCollisionType(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
+                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE).getCollisionType());
+        assertEquals(cure.getBounds().getCollisionArea(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
+                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE).getCollisionArea());
     }
 
     @Test
@@ -76,8 +80,10 @@ public class ItemFactoryTest {
         assertEquals(startingX, cureMax.getPosition().getX());
         assertEquals(startingY, cureMax.getPosition().getY());
         // Check the BoundingBox of the cureMax
-        assertEquals(cureMax.getBounds(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
-                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE));
+        assertEquals(cureMax.getBounds().getCollisionType(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
+                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE).getCollisionType());
+        assertEquals(cureMax.getBounds().getCollisionArea(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
+                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE).getCollisionArea());
     }
 
     @Test
@@ -92,8 +98,10 @@ public class ItemFactoryTest {
         assertEquals(startingX, heart.getPosition().getX());
         assertEquals(startingY, heart.getPosition().getY());
         // Check the BoundingBox of the heart
-        assertEquals(heart.getBounds(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
-                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE));
+        assertEquals(heart.getBounds().getCollisionType(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
+                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE).getCollisionType());
+        assertEquals(heart.getBounds().getCollisionArea(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
+                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE).getCollisionArea());
     }
 
     @Test
@@ -108,8 +116,10 @@ public class ItemFactoryTest {
         assertEquals(startingX, greatSword.getPosition().getX());
         assertEquals(startingY, greatSword.getPosition().getY());
         // Check the BoundingBox of the greatSword
-        assertEquals(greatSword.getBounds(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
-                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE));
+        assertEquals(greatSword.getBounds().getCollisionType(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
+                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE).getCollisionType());
+        assertEquals(greatSword.getBounds().getCollisionArea(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
+                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE).getCollisionArea());
     }
 
     @Test
@@ -129,8 +139,10 @@ public class ItemFactoryTest {
         assertEquals(startingX, shield.getPosition().getX());
         assertEquals(startingY, shield.getPosition().getY());
         // Check the BoundingBox of the shield
-        assertEquals(shield.getBounds(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
-                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE));
+        assertEquals(shield.getBounds().getCollisionType(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
+                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE).getCollisionType());
+        assertEquals(shield.getBounds().getCollisionArea(), new BoundingBoxImpl(startingX, startingY, GameObject.OBJECT_SIZE,
+                GameObject.OBJECT_SIZE, CollisionType.COLLECTABLE).getCollisionArea());
     }
 
 }
