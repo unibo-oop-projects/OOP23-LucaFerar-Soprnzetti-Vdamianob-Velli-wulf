@@ -7,7 +7,6 @@ public abstract class PowerUpImpl extends AbstractCollectable implements PowerUp
 
     protected int duration;
     protected String type;
-    protected long activationTimeInMilli;
 
     public PowerUpImpl(Coordinate position, Integer points, String type, int duration) {
         super(position, points);
@@ -15,6 +14,14 @@ public abstract class PowerUpImpl extends AbstractCollectable implements PowerUp
         this.duration = duration;
     }
     
+    public int getDuration() {
+        return this.duration;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
     @Override
     public boolean stillActive() {
         return duration > 0;
@@ -29,7 +36,7 @@ public abstract class PowerUpImpl extends AbstractCollectable implements PowerUp
 
     @Override
     public String toString() {
-        return "PowerUp: [duration=" + duration + ", type=" + type + ", pointsGiven=" + this.getPoints() + "]";
+        return "PowerUp: [duration=" + this.getDuration() + ", type=" + this.getType() + ", pointsGiven=" + this.getPoints() + "]";
     }
     
 }

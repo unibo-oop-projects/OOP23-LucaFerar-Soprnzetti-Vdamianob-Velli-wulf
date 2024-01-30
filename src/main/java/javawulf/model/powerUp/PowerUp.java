@@ -8,4 +8,9 @@ public interface PowerUp extends Collectable{
 
     void updateDuration();
 
+    int getPoints();
+
+    int getDuration();
+
+    String getType();
 }
