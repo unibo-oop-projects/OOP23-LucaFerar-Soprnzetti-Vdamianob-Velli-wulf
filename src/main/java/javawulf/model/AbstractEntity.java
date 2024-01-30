@@ -9,6 +9,7 @@ public abstract class AbstractEntity extends GameObject implements Entity {
     public static final int MOVEMENT_DELTA = OBJECT_SIZE/8;
     private int speed;
     private Direction direction;
+    private int stun;
 
     public AbstractEntity(Coordinate position, CollisionType type, int speed) {
         super(position, type);
@@ -43,4 +44,20 @@ public abstract class AbstractEntity extends GameObject implements Entity {
     }
 
     protected abstract boolean control(BoundingBox box);
+
+    public void reduceStun(){
+        if (this.getBounds().getCollisionType().equals(CollisionType.STUNNED)){
+            if (stun==0){
+                this.getBounds().changeCollisionType(originalCollisonType());
+            } else {
+                this.stun--;
+            }
+        }
+    }
+
+    protected abstract CollisionType originalCollisonType();
+
+    public void setStun(int stun){
+        this.stun = stun;
+    }
 }
