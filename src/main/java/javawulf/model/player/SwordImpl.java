@@ -24,10 +24,10 @@ public class SwordImpl extends GameObject implements Sword {
      * @param direction The direction the sword must face when it is created
      */
     public SwordImpl(Coordinate position, Direction direction) {
-        super(new CoordinateImpl(position.getX()+(int)(direction.getX()*OBJECT_SIZE),
-            position.getY()+(int)(direction.getY()*OBJECT_SIZE)),
-            new BoundingBoxImpl(position.getX()+(int)(direction.getX()*OBJECT_SIZE),
-            position.getY()+(int)(direction.getY()*OBJECT_SIZE), OBJECT_SIZE, OBJECT_SIZE,
+        super(new CoordinateImpl(position.getX() + (int)(direction.getX() * OBJECT_SIZE),
+            position.getY() + (int)(direction.getY() * OBJECT_SIZE)),
+            new BoundingBoxImpl(position.getX() + (int)(direction.getX() * OBJECT_SIZE),
+            position.getY() + (int)(direction.getY()*OBJECT_SIZE), OBJECT_SIZE, OBJECT_SIZE,
             CollisionType.INACTIVE));
         this.strength = NORMAL;
         this.swordType = SwordType.NORMAL;
@@ -35,17 +35,17 @@ public class SwordImpl extends GameObject implements Sword {
     }
 
     @Override
-    public void move(Coordinate playerPosition, Direction playerDirection){
+    public void move(Coordinate playerPosition, Direction playerDirection) {
         updateDirection(playerDirection);
-        this.getPosition().setPosition(playerPosition.getX() + (int)(this.swordDirection.getX()*GameObject.OBJECT_SIZE),
-            playerPosition.getY() + (int)(this.swordDirection.getY()*GameObject.OBJECT_SIZE));
+        this.getPosition().setPosition(playerPosition.getX() + (int)(this.swordDirection.getX() * GameObject.OBJECT_SIZE),
+            playerPosition.getY() + (int)(this.swordDirection.getY() * GameObject.OBJECT_SIZE));
         updateCollisionArea();
     }
 
-    private void updateDirection(Direction playerDirection){
+    private void updateDirection(Direction playerDirection) {
         Direction movementDirection = playerDirection;
-        if (checkIfDiagonal(playerDirection)){
-            if(checkIfOpposite(playerDirection)){
+        if (checkIfDiagonal(playerDirection)) {
+            if (checkIfOpposite(playerDirection)) {
                 movementDirection = (int) playerDirection.getX() < 0 ? Direction.LEFT : Direction.RIGHT;
             } else {
                 movementDirection = swordDirection;
@@ -54,32 +54,32 @@ public class SwordImpl extends GameObject implements Sword {
         this.swordDirection = movementDirection;
     }
 
-    private boolean checkIfDiagonal(Direction playerDirection){
-        return playerDirection.equals(Direction.DOWN_LEFT) || playerDirection.equals(Direction.DOWN_RIGHT) ||
-            playerDirection.equals(Direction.UP_LEFT) || playerDirection.equals(Direction.UP_RIGHT);
+    private boolean checkIfDiagonal(Direction playerDirection) {
+        return playerDirection.equals(Direction.DOWN_LEFT) || playerDirection.equals(Direction.DOWN_RIGHT)
+            || playerDirection.equals(Direction.UP_LEFT) || playerDirection.equals(Direction.UP_RIGHT);
     }
 
-    private boolean checkIfOpposite(Direction playerDirection){
-        return Math.signum(playerDirection.getX()) != Math.signum(this.swordDirection.getX()) &&
-            Math.signum(playerDirection.getY()) != Math.signum(this.swordDirection.getY());
+    private boolean checkIfOpposite(Direction playerDirection) {
+        return Math.signum(playerDirection.getX()) != Math.signum(this.swordDirection.getX())
+            && Math.signum(playerDirection.getY()) != Math.signum(this.swordDirection.getY());
     }
 
-    private void updateCollisionArea(){
+    private void updateCollisionArea() {
         int constantWidth=1;
         int constantHeight=1;
-        if(this.getSwordType().equals(SwordType.GREATSWORD)){
-            if(Math.abs((int)this.swordDirection.getX()) > 0){
+        if(this.getSwordType().equals(SwordType.GREATSWORD)) {
+            if(Math.abs((int)this.swordDirection.getX()) > 0) {
                 constantHeight = 3;
             } else {
                 constantWidth = 3;
             }
         }
         this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(),
-            constantWidth*OBJECT_SIZE, constantHeight*OBJECT_SIZE);
+            constantWidth * OBJECT_SIZE, constantHeight * OBJECT_SIZE);
     }
 
     @Override
-    public void activate(){
+    public void activate() {
         this.getBounds().changeCollisionType(CollisionType.SWORD);
         if (this.swordType.equals(SwordType.GREATSWORD)){
             this.consume();
@@ -92,7 +92,7 @@ public class SwordImpl extends GameObject implements Sword {
     }
 
     @Override
-    public void deactivate(){
+    public void deactivate() {
         this.getBounds().changeCollisionType(CollisionType.INACTIVE);
     }
 

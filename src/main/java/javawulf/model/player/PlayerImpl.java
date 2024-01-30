@@ -65,7 +65,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
     public boolean isHit(BoundingBox box) {
         if (super.isHit(box)) {
             this.health.setHealth(DAMAGE);
-            if (isDefeated()){
+            if (isDefeated()) {
                 this.getBounds().changeCollisionType(CollisionType.INACTIVE);
                 System.out.println("Oh no! You Died. GAME OVER");
             } else {
@@ -80,7 +80,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
 
     @Override
     public void collectAmuletPiece(AmuletPiece piece) throws IllegalStateException {
-        if (this.piecesCollected.size()==NUMBER_OF_PIECES){
+        if (this.piecesCollected.size() == NUMBER_OF_PIECES) {
             throw new IllegalStateException("Already gotten all fragments of the amulet");
         } else {
             this.piecesCollected.add(piece);

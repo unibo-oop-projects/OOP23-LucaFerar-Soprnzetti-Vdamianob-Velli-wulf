@@ -15,7 +15,7 @@ import javawulf.model.powerUp.PowerUpHandler;
  */
 public interface Player extends Entity {
 
-    public enum PlayerColor{
+    public enum PlayerColor {
         RED(Optional.of(Color.RED)),
         BLUE(Optional.of(Color.BLUE)),
         YELLOW(Optional.of(Color.YELLOW)),
@@ -24,11 +24,11 @@ public interface Player extends Entity {
 
         private final Optional<Color> color;
 
-        private PlayerColor(Optional<Color> color){
+        PlayerColor(Optional<Color> color) {
             this.color = color;
         }
 
-        public Color getColor() throws NoSuchElementException{
+        public Color getColor() throws NoSuchElementException {
             return this.color.orElseThrow();
         }
     }
@@ -36,7 +36,7 @@ public interface Player extends Entity {
     /**
      * Activate the sword in order to attack
      */
-    public void attack();
+    void attack();
 
     /**
      * Move in the specified direction
@@ -45,32 +45,32 @@ public interface Player extends Entity {
      * @throws IllegalStateException If the character can't continue in that direction
      * (due to a wall) 
      */
-    public void move(Direction direction) throws IllegalStateException;
+    void move(Direction direction) throws IllegalStateException;
 
-    public void collectAmuletPiece(AmuletPiece piece);
+    void collectAmuletPiece(AmuletPiece piece);
 
     /**
      * @return The current health of the player character, including also the maximum
      * amount of health currently obtainable and his shield
      */
-    public PlayerHealth getPlayerHealth();
+    PlayerHealth getPlayerHealth();
 
-    public PowerUpHandler getPowerUpHandler();
+    PowerUpHandler getPowerUpHandler();
 
     /**
      * @return The current point total and point multiplier
      */
-    public Score getScore();
+    Score getScore();
 
     /**
      * @return The player's sword
      */
-    public Sword getSword();
+    Sword getSword();
 
-    public PlayerColor getColor();
+    PlayerColor getColor();
 
-    public void setColor(PlayerColor color);
+    void setColor(PlayerColor color);
 
-    public List<AmuletPiece> getPieces();
-    
+    List<AmuletPiece> getPieces();
+
 }

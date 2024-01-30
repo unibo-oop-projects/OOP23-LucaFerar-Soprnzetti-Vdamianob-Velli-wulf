@@ -14,12 +14,12 @@ import javawulf.model.player.PlayerHealth.ShieldStatus;
 
 public class PlayerHealthTest {
 
-    int health = 3;
-    int startingX = 12;
-    int startingY = 12;
-    int startingPoints = 0;
-    Player player;
-    PlayerHealth hp;
+    private int health = 3;
+    private int startingX = 12;
+    private int startingY = 12;
+    private int startingPoints = 0;
+    private Player player;
+    private PlayerHealth hp;
 
     @BeforeEach
     void createPlayer(){

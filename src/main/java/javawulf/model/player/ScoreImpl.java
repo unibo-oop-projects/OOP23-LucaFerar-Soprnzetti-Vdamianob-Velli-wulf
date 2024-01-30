@@ -10,7 +10,7 @@ public class ScoreImpl implements Score{
      * If a certain amount has been specified it will be used as a strating point
      * for the point total (could be used as a bonus for choosing a harder difficulty)
      */
-    public ScoreImpl(int points){
+    public ScoreImpl(int points) {
         this.points = points;
         this.multiplier = Multiplier.DEFAULT;
     }
@@ -35,7 +35,7 @@ public class ScoreImpl implements Score{
         this.points = this.points + points * this.getMultiplier();
     }
 
-    public boolean equals(Score score){
+    public boolean equals(Score score) {
         return this.points == score.getPoints() && this.getMultiplier() == score.getMultiplier();
     }
     

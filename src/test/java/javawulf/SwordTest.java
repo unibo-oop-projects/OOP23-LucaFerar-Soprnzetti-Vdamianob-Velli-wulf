@@ -17,17 +17,17 @@ import javawulf.model.player.Sword.SwordType;
 
 public class SwordTest {
 
-    int health = 3;
-    int startingX = 12;
-    int startingY = 12;
-    int startingPoints = 0;
-    Sword sword;
-    Player player;
-    Coordinate test;
-    Direction startDirection = Direction.DOWN;
-    int delta = GameObject.OBJECT_SIZE;
-    BoundingBox startBox;
-    Coordinate playerPosition;
+    private int health = 3;
+    private int startingX = 12;
+    private int startingY = 12;
+    private int startingPoints = 0;
+    private Sword sword;
+    private Player player;
+    private Coordinate test;
+    private Direction startDirection = Direction.DOWN;
+    private int delta = GameObject.OBJECT_SIZE;
+    private BoundingBox startBox;
+    private Coordinate playerPosition;
 
     @BeforeEach
     void createPlayer(){
