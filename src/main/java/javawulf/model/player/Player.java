@@ -51,6 +51,12 @@ public interface Player extends Entity {
      */
     void move(Direction direction) throws IllegalStateException;
 
+    /**
+     * Adds an amulet piece to the Player's inventory. If it goes over the number
+     * of biomes it won't be added to the inventory
+     * 
+     * @param piece The amulet piece being added to the inventory
+     */
     void collectAmuletPiece(AmuletPiece piece);
 
     /**

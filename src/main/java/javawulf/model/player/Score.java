@@ -28,6 +28,9 @@ public interface Score {
             this.value = value;
         }
 
+        /**
+         * @return The value of the multiplier
+         */
         public int getValue() {
             return value;
         }
