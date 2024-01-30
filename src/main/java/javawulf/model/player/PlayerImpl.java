@@ -14,7 +14,7 @@ import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletPiece;
 
 /**
- * PlayerImpl is an implementation of Player
+ * PlayerImpl is an implementation of Player.
  */
 public final class PlayerImpl extends AbstractEntity implements Player {
 
@@ -29,7 +29,7 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     private static final int PLAYER_STUN = 4;
 
     /**
-     * Creates a new Player
+     * Creates a new Player.
      * 
      * @param startingX The starting position on the X axis of the Player
      * @param startingY The starting position on the Y axis of the Player
