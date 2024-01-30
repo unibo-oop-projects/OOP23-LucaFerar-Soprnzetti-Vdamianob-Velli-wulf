@@ -6,22 +6,22 @@ package javawulf.model.player;
  * current score multiplier 
  */
 public interface Score {
-    
+
     /**
      * Multiplier defines the current score multiplier applied to any added
      * points. It gets changed after obtaining a score boosting power-up.
      * Normally it is set to DEFAULT
      */
-    enum Multiplier{
+    enum Multiplier {
         DEFAULT(1),
         DOUBLE(2);
 
         private final int value;
 
-        Multiplier(int value) {
+        Multiplier(final int value) {
             this.value = value;
         }
-        
+
         public int getValue() {
             return value;
         }

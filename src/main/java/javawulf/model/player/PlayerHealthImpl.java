@@ -1,6 +1,6 @@
 package javawulf.model.player;
 
-public class PlayerHealthImpl implements PlayerHealth {
+public final class PlayerHealthImpl implements PlayerHealth {
 
     private int health;
     private int maxHealth;
@@ -35,15 +35,15 @@ public class PlayerHealthImpl implements PlayerHealth {
     }
 
     @Override
-    public void setHealth(int health) {
-        if (health<0){
+    public void setHealth(final int health) {
+        if (health < 0) {
             this.damage(health);
         } else {
             this.health = Math.min((this.health + health), this.maxHealth);
         }
     }
 
-    private void damage(int health) {
+    private void damage(final int health) {
         if (this.getShieldStatus().equals(ShieldStatus.NONE)) {
             this.health = this.health + health;
             System.out.println("Health remaining : " + this.getHealth());
@@ -59,18 +59,18 @@ public class PlayerHealthImpl implements PlayerHealth {
     }
 
     @Override
-    public void increaseMaxHealth(int increase) {
+    public void increaseMaxHealth(final int increase) {
         this.maxHealth = this.maxHealth + increase;
     }
 
     @Override
-    public void setShieldStatus(ShieldStatus status) {
+    public void setShieldStatus(final ShieldStatus status) {
         this.shieldStatus = status;
     }
 
-    public boolean equals(PlayerHealth hp) {
+    public boolean equals(final PlayerHealth hp) {
         return this.getHealth() == hp.getHealth() && this.getMaxHealth() == hp.getMaxHealth()
             && this.getShieldStatus() == hp.getShieldStatus();
     }
-    
+
 }
