@@ -21,7 +21,7 @@ import javawulf.model.item.ItemFactoryImpl;
 
 /**
  * The class PlayerTest it used to check if the implementation
- * of Player works according to the game rules
+ * of Player works according to the game rules.
  */
 public final class PlayerTest {
 

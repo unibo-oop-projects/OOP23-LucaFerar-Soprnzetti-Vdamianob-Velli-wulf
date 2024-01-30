@@ -14,7 +14,7 @@ import javawulf.model.player.PlayerHealth.ShieldStatus;
 
 /**
  * PlayerHealthTest tests whether the implementation of PlayerHealth
- * works as it should
+ * works as it should.
  */
 public final class PlayerHealthTest {
 

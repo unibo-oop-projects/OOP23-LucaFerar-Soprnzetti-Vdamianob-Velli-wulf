@@ -18,7 +18,7 @@ import javawulf.model.player.Sword.SwordType;
 /**
  * SwordTest's purpose is to check whether the implementation
  * of Sword works as it should, considering also the movement
- * of the Player character
+ * of the Player character.
  */
 public final class SwordTest {
 
