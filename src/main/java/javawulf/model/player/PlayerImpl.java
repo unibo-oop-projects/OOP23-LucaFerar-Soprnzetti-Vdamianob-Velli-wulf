@@ -23,6 +23,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
     private List<AmuletPiece> piecesCollected;
     private PlayerColor color;
     private PowerUpHandler powerUpHandler;
+    private static final int PLAYER_STUN = 4;
 
     public PlayerImpl(int startingX, int startingY, int health, int startingPoints) {
         super(new CoordinateImpl(startingX, startingY), CollisionType.PLAYER, Player.DEFAULT_SPEED);
@@ -66,8 +67,10 @@ public class PlayerImpl extends AbstractEntity implements Player {
             this.health.setHealth(DAMAGE);
             if (isDefeated()){
                 this.getBounds().changeCollisionType(CollisionType.INACTIVE);
+                System.out.println("Oh no! You Died. GAME OVER");
             } else {
                 this.getBounds().changeCollisionType(CollisionType.STUNNED);
+                this.setStun(PLAYER_STUN);
             }
             return true;
         } else {
@@ -127,6 +130,11 @@ public class PlayerImpl extends AbstractEntity implements Player {
     protected boolean control(BoundingBox box) {
         return box.getCollisionType().equals(CollisionType.ENEMY)
             && this.getBounds().getCollisionType().equals(CollisionType.PLAYER);
+    }
+
+    @Override
+    protected CollisionType originalCollisonType() {
+        return CollisionType.PLAYER;
     }
 
 }
