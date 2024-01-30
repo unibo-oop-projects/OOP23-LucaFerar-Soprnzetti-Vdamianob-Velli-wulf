@@ -1,6 +1,7 @@
 package javawulf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Optional;
 import java.util.Set;
@@ -12,6 +13,9 @@ import javawulf.model.BoundingBoxImpl;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.map.*;
 
+/**
+ * Some tests for try rooms, corridors, biomes, and getTileTypes
+ */
 public class MapTest {
     // @Test
     // void testTiles() {
