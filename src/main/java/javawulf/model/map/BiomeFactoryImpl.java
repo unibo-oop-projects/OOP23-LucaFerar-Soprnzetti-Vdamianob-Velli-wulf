@@ -57,4 +57,16 @@ public class BiomeFactoryImpl implements BiomeFactory {
                 .addCorridor(new TilePosition(6, 15), new Corridor(6, 2));
     }
 
+    @Override
+    public Biome getTestBiome() {
+        return new BiomeImpl()
+            .addRoom(new TilePosition(0, 0), new Room(Biome.SIZE, Biome.SIZE/3));
+    }
+
+    @Override
+    public Biome getRoomBiome() {
+        return new BiomeImpl()
+            .addRoom(new TilePosition(0, 0), new Room(Biome.SIZE, Biome.SIZE));
+    }
+
 }

@@ -17,4 +17,17 @@ public class MapFactoryImpl implements MapFactory {
         return new MapImpl(this.firstBiome, this.secondBiome, this.thirdBiome, this.fourthBiome);
     }
 
+    @Override
+    public Map getTestMap() {
+        this.firstBiome = new BiomeFactoryImpl().getTestBiome();
+
+        this.secondBiome = new BiomeFactoryImpl().getRoomBiome();
+
+        this.thirdBiome = new BiomeFactoryImpl().getRoomBiome();
+
+        this.fourthBiome = new BiomeFactoryImpl().getRoomBiome();
+
+        return new MapImpl(this.firstBiome, this.secondBiome, this.thirdBiome, this.fourthBiome);
+    }
+
 }

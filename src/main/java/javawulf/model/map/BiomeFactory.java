@@ -21,4 +21,16 @@ public interface BiomeFactory {
      * @return a particular biome with four 5x5 rooms, but one of it is linked only with other biomes.
      */
     Biome getBiomeD();
+
+    /**
+     * 
+     * @return a biome used for testing player and other entities.
+     */
+    Biome getTestBiome();
+
+    /**
+     * 
+     * @return a biome covered 100% with a room.
+     **/
+    Biome getRoomBiome();
 }

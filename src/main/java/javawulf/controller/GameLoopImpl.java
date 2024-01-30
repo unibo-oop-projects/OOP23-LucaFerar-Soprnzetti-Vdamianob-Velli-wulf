@@ -30,6 +30,8 @@ public class GameLoopImpl implements GameLoop, Runnable {
 
     private void mapInit() {
         this.gameMap = new MapFactoryImpl().getDefaultMap1();
+        // this.gameMap = new MapFactoryImpl().getTestMap();
+
         // Biome primoBioma, secondoBioma, terzoBioma, quartoBioma;
 
         // primoBioma = new BiomeImpl();
