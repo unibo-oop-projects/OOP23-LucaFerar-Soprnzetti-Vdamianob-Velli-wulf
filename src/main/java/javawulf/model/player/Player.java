@@ -15,7 +15,11 @@ import javawulf.model.powerUp.PowerUpHandler;
  */
 public interface Player extends Entity {
 
-    public enum PlayerColor {
+    /**
+     * PlayerColor defines the current color of the Player character.
+     * It changes depending on the current Power-Up the Player has
+     */
+    enum PlayerColor {
         RED(Optional.of(Color.RED)),
         BLUE(Optional.of(Color.BLUE)),
         YELLOW(Optional.of(Color.YELLOW)),
@@ -67,8 +71,14 @@ public interface Player extends Entity {
      */
     Sword getSword();
 
+    /**
+     * @return The color of the Player
+     */
     PlayerColor getColor();
 
+    /**
+     * @param color The color the Player character will now have
+     */
     void setColor(PlayerColor color);
 
     List<AmuletPiece> getPieces();
