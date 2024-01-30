@@ -17,8 +17,7 @@ public class MapImpl implements Map {
     private final List<Biome> biomes = new ArrayList<>();
     private final java.util.Map<TilePosition, TileType> tiles = new HashMap<>();
 
-    enum BiomeOffset {
-        // TODO: verificare correttezza degli offsets!
+    enum BiomeQuadrant {
         FIRST(0, new TilePosition(0, 0)),
         SECOND(1, new TilePosition(Biome.SIZE + WIDTH_CENTRAL_BIOME, 0)),
         THIRD(2, new TilePosition(Biome.SIZE + WIDTH_CENTRAL_BIOME, Biome.SIZE + WIDTH_CENTRAL_BIOME)),
@@ -27,7 +26,7 @@ public class MapImpl implements Map {
         private final int pos;
         private final TilePosition offset;
 
-        BiomeOffset(int pos, TilePosition offset) {
+        BiomeQuadrant(int pos, TilePosition offset) {
             this.pos = pos;
             this.offset = offset;
         }
@@ -83,10 +82,10 @@ public class MapImpl implements Map {
     }
 
     private void build() {
-        for (var biomeOffSet : BiomeOffset.values()) {
+        for (var biomeOffSet : BiomeQuadrant.values()) {
             for (var room : biomes.get(biomeOffSet.getPos()).getRooms()) {
-                for (int y = room.getKey().getY(); y < room.getValue().getHeight(); y++) {
-                    for (int x = room.getKey().getX(); x < room.getValue().getWidth(); x++) {
+                for (int y = room.getKey().getY(); y < room.getKey().getY() + room.getValue().getHeight(); y++) {
+                    for (int x = room.getKey().getX(); x < room.getKey().getX() + room.getValue().getWidth(); x++) {
                         this.tiles.put(new TilePosition(x + biomeOffSet.getOffset().getX(),
                                 y + biomeOffSet.getOffset().getY()), Room.defaultType);
                     }
@@ -94,10 +93,10 @@ public class MapImpl implements Map {
             }
         }
 
-        for (var biomeOffSet : BiomeOffset.values()) {
+        for (var biomeOffSet : BiomeQuadrant.values()) {
             for (var corridor : biomes.get(biomeOffSet.getPos()).getCorridors()) {
-                for (int y = corridor.getKey().getY(); y < corridor.getValue().getHeight(); y++) {
-                    for (int x = corridor.getKey().getX(); x < corridor.getValue().getWidth(); x++) {
+                for (int y = corridor.getKey().getY(); y < corridor.getKey().getY() + corridor.getValue().getHeight(); y++) {
+                    for (int x = corridor.getKey().getX(); x < corridor.getKey().getX() + corridor.getValue().getWidth(); x++) {
                         this.tiles.put(new TilePosition(x + biomeOffSet.getOffset().getX(),
                                 y + biomeOffSet.getOffset().getY()), Corridor.defaultType);
                     }
@@ -105,11 +104,41 @@ public class MapImpl implements Map {
 
             }
         }
+
+        this.buildCentralBiome();
+    }
+
+    private void buildCentralBiome() {
+        for (int x = Biome.SIZE; x <= Biome.SIZE -1 + WIDTH_CENTRAL_BIOME; x++) {
+            for (int y = Biome.SIZE/6; y < Biome.SIZE/6+2; y++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
+            }
+            for (int y = Biome.SIZE - Biome.SIZE/6; y < Biome.SIZE - Biome.SIZE/6+2; y++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
+            }
+            for (int y = MAP_SIZE - Biome.SIZE/6; y < MAP_SIZE - Biome.SIZE/6+2; y++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
+            }
+            for (int y = MAP_SIZE - Biome.SIZE/6; y < MAP_SIZE - Biome.SIZE/6+2; y++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
+            }
+        }
+
+        for (int x = Biome.SIZE + 2; x <= Biome.SIZE + WIDTH_CENTRAL_BIOME - 1 - 2; x++) {
+            for (int y = Biome.SIZE + 2; y <= Biome.SIZE + WIDTH_CENTRAL_BIOME - 1 - 2; y++) {
+                this.tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
+            }
+        }
     }
 
     private boolean isValidPosition(Coordinate pos) {
         return (pos.getX() < 0 || pos.getY() < 0 || (pos.getX() / TileType.TILE_DIMENSION) >= MAP_SIZE
                 || (pos.getY() / TileType.TILE_DIMENSION) >= MAP_SIZE ? false : true);
+    }
+
+    @Override
+    public HashMap<TilePosition, TileType> getTilesMap() {
+        return new HashMap<>(this.tiles);
     }
 
 }

@@ -16,7 +16,7 @@ public abstract class PowerUpImpl extends Collectable implements PowerUp {
         this.durationInMilli = durationInMilli;
     }
     
-    protected void activateEffect() {
+    public void activateEffect() {
         activationTimeInMilli = System.currentTimeMillis();
     }
 

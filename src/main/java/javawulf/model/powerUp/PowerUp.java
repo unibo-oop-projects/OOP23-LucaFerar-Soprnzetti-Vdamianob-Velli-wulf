@@ -4,4 +4,6 @@ public interface PowerUp {
 
     boolean stillActive();
 
+    void activateEffect();
+
 }

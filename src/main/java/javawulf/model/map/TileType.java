@@ -3,6 +3,7 @@ package javawulf.model.map;
 public enum TileType {
     WALL(false),
     ROOM(true),
+    CENTRAL_ROOM(true),
     DOOR(true),
     CORRIDOR(true);
     

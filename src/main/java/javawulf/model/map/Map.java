@@ -1,5 +1,6 @@
 package javawulf.model.map;
 
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public interface Map {
     /**
      * Width-tile dimension of the central biome
      */
-    public static int WIDTH_CENTRAL_BIOME = 12;
+    public static int WIDTH_CENTRAL_BIOME = 10;
 
     /**
      * Tile-dimension of the whole map
@@ -52,4 +53,6 @@ public interface Map {
      * In a second time, the entity is between room tiles and wall tiles: will be return Set = { ROOM, WALL }.
      */
     Set<TileType> getTileTypes(BoundingBox boundBoxEntity);
+
+    HashMap<TilePosition, TileType> getTilesMap();
 }

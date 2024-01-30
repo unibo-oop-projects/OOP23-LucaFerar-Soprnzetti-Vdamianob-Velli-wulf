@@ -10,15 +10,7 @@ import org.junit.jupiter.api.Test;
 import javawulf.model.BoundingBox;
 import javawulf.model.BoundingBoxImpl;
 import javawulf.model.CoordinateImpl;
-import javawulf.model.map.Biome;
-import javawulf.model.map.BiomeImpl;
-import javawulf.model.map.Corridor;
-import javawulf.model.map.Map;
-import javawulf.model.map.MapImpl;
-import javawulf.model.map.Room;
-import javawulf.model.map.Space;
-import javawulf.model.map.TilePosition;
-import javawulf.model.map.TileType;
+import javawulf.model.map.*;
 
 public class MapTest {
     // @Test
@@ -149,7 +141,5 @@ public class MapTest {
         
         // EntityBox passato è fuori dalla mappa: in tal caso, dovrebbe restituire un Set vuoto
         assertEquals(Set.of(), gameMapExample.getTileTypes(new BoundingBoxImpl(Map.MAP_SIZE * TileType.TILE_DIMENSION + 24, 0, 24, 24, BoundingBox.CollisionType.PLAYER)));
-
-
     }
 }
