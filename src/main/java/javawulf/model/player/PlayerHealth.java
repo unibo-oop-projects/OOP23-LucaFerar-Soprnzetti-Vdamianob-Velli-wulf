@@ -23,8 +23,7 @@ public interface PlayerHealth {
         HALF(1),
         /**
          * FULL is the state of the shield after the right item
-         * has been . It protects
-         * the player from 2 hits
+         * has been collected. It protects the player from 2 hits
          */
         FULL(2);
 
@@ -53,7 +52,7 @@ public interface PlayerHealth {
     int getMaxHealth();
 
     /**
-     * @return the current shield status 
+     * @return The current shield status 
      */
     ShieldStatus getShieldStatus();
 
