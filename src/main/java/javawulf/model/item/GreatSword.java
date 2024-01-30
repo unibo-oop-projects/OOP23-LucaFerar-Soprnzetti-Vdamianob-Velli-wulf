@@ -4,16 +4,24 @@ import javawulf.model.AbstractCollectable;
 import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
-public class GreatSword extends AbstractCollectable {
+/**
+ * The Greatsword strengthens the player's sword for a limited use.
+ */
+public final class GreatSword extends AbstractCollectable {
 
-    private final static int POINTS = 800;
+    private static final int POINTS = 800;
 
-    public GreatSword(Coordinate position) {
+    /**
+     * Creates a new greatsword.
+     * 
+     * @param position the position of the greatsword
+     */
+    public GreatSword(final Coordinate position) {
         super(position, POINTS);
     }
 
     @Override
-    public void applyEffect(Player p) {
+    public void applyEffect(final Player p) {
         p.getSword().changeSwordType();
     }
 }
