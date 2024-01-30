@@ -24,8 +24,8 @@ public class Guard extends EnemyImpl {
         return isAlive;
     }
 
-    public void setAlive(boolean isAlive) {
-        this.isAlive = isAlive;
+    public boolean isStunned() {
+        return isStunned;
     }
 
     public boolean isKillable(Player p) {
@@ -33,8 +33,7 @@ public class Guard extends EnemyImpl {
     }
 
     public boolean checkRoom(Player p) {
-        // TODO implement here Return true if player is in the same room as the guard,
-        // probably should be private
+        // TODO implement here Return true if player is in the same room as the guard, probably should be private
         return false;
     }
 
@@ -74,7 +73,7 @@ public class Guard extends EnemyImpl {
     public void takeHit(Player p) {
         if (super.isHit(p.getSword().getBounds())) {
             if (this.isKillable(p)) {
-                this.setAlive(false);
+                this.isAlive = false;
                 p.getScore().addPoints(POINTS);
                 this.getBounds().changeCollisionType(CollisionType.INACTIVE);
             } else {
