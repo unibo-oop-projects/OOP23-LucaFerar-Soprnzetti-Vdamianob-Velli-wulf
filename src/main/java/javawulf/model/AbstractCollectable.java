@@ -20,6 +20,7 @@ public abstract class AbstractCollectable extends GameObject {
         if (this.getBounds().isCollidingWith(p.getBounds().getCollisionArea())) {
             this.applyEffect(p);
             p.getScore().addPoints(this.points);
+            this.getBounds().changeCollisionType(CollisionType.INACTIVE);
         }
     };
 

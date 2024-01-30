@@ -9,13 +9,13 @@ public class PowerUpHandlerImpl implements PowerUpHandler{
     @Override
     public void collectPowerUp(PowerUp powerUpPicked) {
         this.powerUpActive = powerUpPicked;
-        powerUpPicked.activateEffect();
     }
 
     @Override
     public void update(Player player) {
+        player.getScore().addPoints(powerUpActive.getPoints());
         while (powerUpActive.stillActive()) {
-            //here i need to change player stats
+            powerUpActive.applyEffect(player);
         }
     }
     
