@@ -1,11 +1,12 @@
 package javawulf.model.item;
 
+import javawulf.model.AbstractCollectable;
 import javawulf.model.Collectable;
 import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
-public class CureMax extends Collectable implements Item{
-    
+public class CureMax extends AbstractCollectable implements Collectable {
+
     private final static int POINTS = 400;
 
     public CureMax(Coordinate position) {
@@ -16,5 +17,5 @@ public class CureMax extends Collectable implements Item{
     public void applyEffect(Player p) {
         p.getPlayerHealth().setHealth(p.getPlayerHealth().getMaxHealth());
     }
-    
+
 }

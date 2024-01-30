@@ -1,10 +1,10 @@
 package javawulf.model.powerUp;
 
-import javawulf.model.Collectable;
+import javawulf.model.AbstractCollectable;
 import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
-public abstract class PowerUpImpl extends Collectable implements PowerUp {
+public abstract class PowerUpImpl extends AbstractCollectable implements PowerUp {
 
     protected int durationInMilli;
     protected String type;
