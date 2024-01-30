@@ -3,7 +3,7 @@ package javawulf.model.map;
 /**
  * Room implementation of area.
  */
-public class Room extends AbstractSpace {
+public final class Room extends AbstractSpace {
 
     /**
      * Default rooms' tile-type

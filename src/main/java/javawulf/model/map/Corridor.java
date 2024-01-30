@@ -3,7 +3,7 @@ package javawulf.model.map;
 /**
  * Corridor implementation of area
  */
-public class Corridor extends AbstractSpace {
+public final class Corridor extends AbstractSpace {
 
     /**
      * Default corridors' tile-type

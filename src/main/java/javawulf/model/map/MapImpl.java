@@ -12,7 +12,7 @@ import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 
-public class MapImpl implements Map {
+public final class MapImpl implements Map {
 
     private final List<Biome> biomes = new ArrayList<>();
     private final java.util.Map<TilePosition, TileType> tiles = new HashMap<>();
