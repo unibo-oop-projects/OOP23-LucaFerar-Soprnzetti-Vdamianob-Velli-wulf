@@ -15,7 +15,7 @@ public enum TileType {
     
     private final boolean crossable;
     /** Default pixel dimension of a tile (both width and height, it's a square!) */
-    public static int TILE_DIMENSION = 24;
+    public static final int TILE_DIMENSION = 24;
 
     TileType(boolean crossable) {
         this.crossable = crossable;
