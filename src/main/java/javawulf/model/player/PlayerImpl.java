@@ -2,14 +2,14 @@ package javawulf.model.player;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Optional;
 
 import javawulf.model.BoundingBox;
 import javawulf.model.Direction;
 import javawulf.model.AbstractEntity;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
-import javawulf.model.powerUp.PowerUp;
+import javawulf.model.powerUp.PowerUpHandler;
+import javawulf.model.powerUp.PowerUpHandlerImpl;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletPiece;
 
@@ -21,8 +21,8 @@ public class PlayerImpl extends AbstractEntity implements Player {
     private Sword sword;
     private static final int NUMBER_OF_PIECES = 4;
     private List<AmuletPiece> piecesCollected;
-    private Optional<PowerUp> activePowerUp;
     private PlayerColor color;
+    private PowerUpHandler powerUpHandler;
 
     public PlayerImpl(int startingX, int startingY, int health, int startingPoints) {
         super(new CoordinateImpl(startingX, startingY), CollisionType.PLAYER, Player.DEFAULT_SPEED);
@@ -31,7 +31,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
         this.health = new PlayerHealthImpl(health);
         this.sword = new SwordImpl(this.getPosition(), this.getDirection());
         this.piecesCollected  = new ArrayList<>(NUMBER_OF_PIECES);
-        this.activePowerUp = Optional.empty();
+        this.powerUpHandler = new PowerUpHandlerImpl();
         this.color = PlayerColor.NONE;
     }
 
@@ -90,9 +90,8 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public void usePowerUp(PowerUp p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'usePowerUp'");
+    public PowerUpHandler getPowerUpHandler() {
+        return this.powerUpHandler;
     }
 
     private boolean isDefeated() {
