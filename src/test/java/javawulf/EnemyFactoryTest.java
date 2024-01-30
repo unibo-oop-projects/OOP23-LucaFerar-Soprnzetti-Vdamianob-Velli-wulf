@@ -41,8 +41,10 @@ public class EnemyFactoryTest {
         // Check if the pawn is alive
         assertTrue(pawn.isAlive());
         // Check the BoundingBox of the pawn
-        assertEquals(pawn.getBounds(), new BoundingBoxImpl(startingX, startingY,
-                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY));
+        assertEquals(pawn.getBounds().getCollisionType() , new BoundingBoxImpl(startingX, startingY,
+                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY).getCollisionType());
+        assertEquals(pawn.getBounds().getCollisionArea(), new BoundingBoxImpl(startingX, startingY,
+                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY).getCollisionArea());
         // Check pawn's speed
         assertEquals(AbstractEntity.DEFAULT_SPEED, pawn.getSpeed());
 
@@ -60,9 +62,13 @@ public class EnemyFactoryTest {
         assertEquals(startingY, guard.getPosition().getY());
         // Check if the guard is alive
         assertTrue(guard.isAlive());
+        // Check if the guard is not stunned
+        assertFalse(guard.isStunned());
         // Check the BoundingBox of the guard
-        assertEquals(guard.getBounds(), new BoundingBoxImpl(startingX, startingY,
-                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY));
+        assertEquals(guard.getBounds().getCollisionType() , new BoundingBoxImpl(startingX, startingY,
+                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY).getCollisionType());
+        assertEquals(guard.getBounds().getCollisionArea(), new BoundingBoxImpl(startingX, startingY,
+                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY).getCollisionArea());
         // Check guard's speed
         assertEquals(AbstractEntity.DEFAULT_SPEED, guard.getSpeed());
     }

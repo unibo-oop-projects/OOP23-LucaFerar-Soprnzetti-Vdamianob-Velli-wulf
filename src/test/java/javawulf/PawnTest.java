@@ -14,6 +14,9 @@ import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.enemy.EnemyFactory;
 import javawulf.model.enemy.EnemyFactoryImpl;
 import javawulf.model.enemy.Pawn;
+import javawulf.model.map.Map;
+import javawulf.model.map.MapFactory;
+import javawulf.model.map.MapFactoryImpl;
 import javawulf.model.player.Player;
 import javawulf.model.player.PlayerImpl;
 
@@ -27,6 +30,8 @@ public class PawnTest {
     EnemyFactory factory = new EnemyFactoryImpl();
     Player player = new PlayerImpl(0, 0, 3, 0);
     Coordinate position = new CoordinateImpl(startingX, startingY);
+    MapFactory mapFactory = new MapFactoryImpl();
+    Map map = mapFactory.getDefaultMap1();
     Pawn pawn;
 
     @BeforeEach
@@ -51,10 +56,10 @@ public class PawnTest {
         Direction originalDirection = pawn.getDirection();
         for (int i = 0; i < 100; i++){
             Thread.sleep((pawn.getTimeToWait() + 1) * 1000);
-            // pawn.move(this.player);
-            // if (pawn.getDirection() != originalDirection){
-            //     return;
-            // }
+            pawn.move(this.player, map);
+            if (pawn.getDirection() != originalDirection){
+                return;
+            }
         }
         fail("Pawn did not change direction after 100 seconds");
     }
