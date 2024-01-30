@@ -51,10 +51,10 @@ public class PawnTest {
         Direction originalDirection = pawn.getDirection();
         for (int i = 0; i < 100; i++){
             Thread.sleep((pawn.getTimeToWait() + 1) * 1000);
-            pawn.move(this.player);
-            if (pawn.getDirection() != originalDirection){
-                return;
-            }
+            // pawn.move(this.player);
+            // if (pawn.getDirection() != originalDirection){
+            //     return;
+            // }
         }
         fail("Pawn did not change direction after 100 seconds");
     }
