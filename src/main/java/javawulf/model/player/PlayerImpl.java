@@ -13,7 +13,7 @@ import javawulf.model.powerUp.PowerUpHandlerImpl;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletPiece;
 
-public class PlayerImpl extends AbstractEntity implements Player {
+public final class PlayerImpl extends AbstractEntity implements Player {
 
     private static final int DAMAGE = -1;
     private PlayerHealth health;
@@ -23,8 +23,9 @@ public class PlayerImpl extends AbstractEntity implements Player {
     private List<AmuletPiece> piecesCollected;
     private PlayerColor color;
     private PowerUpHandler powerUpHandler;
+    private static final int PLAYER_STUN = 4;
 
-    public PlayerImpl(int startingX, int startingY, int health, int startingPoints) {
+    public PlayerImpl(final int startingX, final int startingY, final int health, final int startingPoints) {
         super(new CoordinateImpl(startingX, startingY), CollisionType.PLAYER, Player.DEFAULT_SPEED);
         this.score = new ScoreImpl(startingPoints);
         this.setDirection(Direction.DOWN);
@@ -41,7 +42,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public void move(Direction direction) throws IllegalStateException {
+    public void move(final Direction direction) throws IllegalStateException {
         Coordinate current = this.getPosition();
         int delta = this.getSpeed() * MOVEMENT_DELTA;
         // var preview = this.getPosition();
@@ -61,13 +62,15 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public boolean isHit(BoundingBox box) {
+    public boolean isHit(final BoundingBox box) {
         if (super.isHit(box)) {
             this.health.setHealth(DAMAGE);
-            if (isDefeated()){
+            if (isDefeated()) {
                 this.getBounds().changeCollisionType(CollisionType.INACTIVE);
+                System.out.println("Oh no! You Died. GAME OVER");
             } else {
                 this.getBounds().changeCollisionType(CollisionType.STUNNED);
+                this.setStun(PLAYER_STUN);
             }
             return true;
         } else {
@@ -76,8 +79,8 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public void collectAmuletPiece(AmuletPiece piece) throws IllegalStateException {
-        if (this.piecesCollected.size()==NUMBER_OF_PIECES){
+    public void collectAmuletPiece(final AmuletPiece piece) throws IllegalStateException {
+        if (this.piecesCollected.size() == NUMBER_OF_PIECES) {
             throw new IllegalStateException("Already gotten all fragments of the amulet");
         } else {
             this.piecesCollected.add(piece);
@@ -114,7 +117,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public void setColor(PlayerColor color) {
+    public void setColor(final PlayerColor color) {
         this.color = color;
     }
 
@@ -124,9 +127,14 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    protected boolean control(BoundingBox box) {
+    protected boolean control(final BoundingBox box) {
         return box.getCollisionType().equals(CollisionType.ENEMY)
             && this.getBounds().getCollisionType().equals(CollisionType.PLAYER);
+    }
+
+    @Override
+    protected CollisionType originalCollisonType() {
+        return CollisionType.PLAYER;
     }
 
 }

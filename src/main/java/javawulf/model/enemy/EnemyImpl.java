@@ -23,4 +23,9 @@ public abstract class EnemyImpl extends AbstractEntity implements Enemy {
             && this.getBounds().getCollisionType().equals(CollisionType.ENEMY);
     }
 
+    @Override
+    protected CollisionType originalCollisonType(){
+        return CollisionType.ENEMY;
+    }
+
 }

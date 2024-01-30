@@ -16,5 +16,9 @@ public interface Entity extends GameElement {
      * @param box BoundingBox that must be checked
      */
     public boolean isHit(BoundingBox box);
+
+    public void reduceStun();
+
+    public void setStun(int stun);
     
 }
