@@ -5,7 +5,7 @@ package javawulf.model.player;
  *  including its loss (by damage) and its recovery (by obtaining certain items)
  */
 public interface PlayerHealth {
-    
+
     /**
      * ShieldStatus defines the current status of the player's shield.
      * If FULL it protects the player from 2 hits, if HALF only from 1 hit.

@@ -24,7 +24,7 @@ public interface Player extends Entity {
 
         private final Optional<Color> color;
 
-        PlayerColor(Optional<Color> color) {
+        PlayerColor(final Optional<Color> color) {
             this.color = color;
         }
 

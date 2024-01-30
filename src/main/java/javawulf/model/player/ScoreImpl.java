@@ -1,6 +1,6 @@
 package javawulf.model.player;
 
-public class ScoreImpl implements Score{
+public final class ScoreImpl implements Score {
 
     private int points;
     private Multiplier multiplier;
@@ -9,8 +9,10 @@ public class ScoreImpl implements Score{
      * Creates the score for the current game.
      * If a certain amount has been specified it will be used as a strating point
      * for the point total (could be used as a bonus for choosing a harder difficulty)
+     * 
+     * @param points The starting amount of points for the current game
      */
-    public ScoreImpl(int points) {
+    public ScoreImpl(final int points) {
         this.points = points;
         this.multiplier = Multiplier.DEFAULT;
     }
@@ -26,17 +28,17 @@ public class ScoreImpl implements Score{
     }
 
     @Override
-    public void setMultiplier(Multiplier multiplier) {
+    public void setMultiplier(final Multiplier multiplier) {
         this.multiplier = multiplier;
     }
 
     @Override
-    public void addPoints(int points) {
+    public void addPoints(final int points) {
         this.points = this.points + points * this.getMultiplier();
     }
 
-    public boolean equals(Score score) {
+    public boolean equals(final Score score) {
         return this.points == score.getPoints() && this.getMultiplier() == score.getMultiplier();
     }
-    
+
 }

@@ -9,7 +9,7 @@ import javawulf.model.Coordinate;
  * which are all linked to the player character's sword and its statistics
  */
 public interface Sword extends GameElement {
-    
+
     /**
      * SwordType defines the current type of sword. By default is is NORMAL
      */
