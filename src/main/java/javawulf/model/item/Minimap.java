@@ -1,11 +1,10 @@
 package javawulf.model.item;
 
 import javawulf.model.AbstractCollectable;
-import javawulf.model.Collectable;
 import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
-public class Minimap extends AbstractCollectable implements Collectable {
+public class Minimap extends AbstractCollectable {
 
     private final static int POINTS = 600;
 

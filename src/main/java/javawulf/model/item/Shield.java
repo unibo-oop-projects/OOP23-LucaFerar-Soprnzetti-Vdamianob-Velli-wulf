@@ -1,12 +1,11 @@
 package javawulf.model.item;
 
 import javawulf.model.AbstractCollectable;
-import javawulf.model.Collectable;
 import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 import javawulf.model.player.PlayerHealth.ShieldStatus;
 
-public class Shield extends AbstractCollectable implements Collectable {
+public class Shield extends AbstractCollectable {
 
     private final static int POINTS = 800;
 
