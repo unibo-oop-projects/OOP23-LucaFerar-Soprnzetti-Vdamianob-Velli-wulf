@@ -2,6 +2,9 @@ package javawulf.model.item;
 
 import javawulf.model.Coordinate;
 
+/**
+ * Implementation of the Item Factory.
+ */
 public final class ItemFactoryImpl implements ItemFactory {
 
     @Override
