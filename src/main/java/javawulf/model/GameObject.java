@@ -43,12 +43,12 @@ public abstract class GameObject implements GameElement {
     }
 
     @Override
-    public final void setBounds(BoundingBox b) {
+    public final void setBounds(final BoundingBox b) {
         this.collision = b;
     }
 
     @Override
-    public final void setPosition(Coordinate p) {
+    public final void setPosition(final Coordinate p) {
         this.position = p;
     }
 
