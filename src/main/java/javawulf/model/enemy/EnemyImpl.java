@@ -23,6 +23,7 @@ public abstract class EnemyImpl extends AbstractEntity implements Enemy {
 
     /**
      * Moves the enemy.
+     * 
      * @param p the player
      * @param m the map
      */
@@ -30,9 +31,18 @@ public abstract class EnemyImpl extends AbstractEntity implements Enemy {
 
     /**
      * Makes the enemy take a hit.
+     * 
      * @param p the player
      */
     public abstract void takeHit(Player p);
+
+    /**
+     * Updates the internal clock of the enemy.
+     */
+    @Override
+    public void tick() {
+
+    }
 
     @Override
     protected final boolean control(final BoundingBox box) {
