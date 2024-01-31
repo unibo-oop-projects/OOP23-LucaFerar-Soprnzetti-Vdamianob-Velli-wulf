@@ -21,8 +21,6 @@ public class BiomeFactoryImpl implements BiomeFactory {
                 .addCorridor(new TilePosition(18, 3), new Corridor(2, 3))
                 .addCorridor(new TilePosition(15, 15), new Corridor(2, 5))
                 .addCorridor(new TilePosition(17, 15), new Corridor(3, 2));
-
-
     }
 
     @Override
@@ -93,5 +91,4 @@ public class BiomeFactoryImpl implements BiomeFactory {
         return new BiomeImpl()
             .addRoom(new TilePosition(0, 0), new Room(Biome.SIZE, Biome.SIZE));
     }
-
 }

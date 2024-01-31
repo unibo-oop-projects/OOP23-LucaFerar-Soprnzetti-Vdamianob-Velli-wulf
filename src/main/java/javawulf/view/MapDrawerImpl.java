@@ -10,14 +10,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class MapDrawerImpl implements MapDrawer {
-    private Map map;
-    BufferedImage imgRoom;
-    BufferedImage imgWall;
-    BufferedImage imgCorridor;
-    BufferedImage imgCentralRoom;
+public final class MapDrawerImpl implements MapDrawer {
+    private final Map map;
+    private BufferedImage imgRoom;
+    private BufferedImage imgWall;
+    private BufferedImage imgCorridor;
+    private BufferedImage imgCentralRoom;
 
-    public MapDrawerImpl(Map map) {
+    public MapDrawerImpl(final Map map) {
         this.map = map;
         try {
             this.imgRoom = ImageIO.read(getClass().getResourceAsStream(ImagePath.ROOM_TILE.getPath()));
@@ -31,13 +31,11 @@ public class MapDrawerImpl implements MapDrawer {
     }
 
     @Override
-    public void draw(Graphics2D graphics) {
+    public void draw(final Graphics2D graphics) {
 
         for (int x = 0; x < Map.MAP_SIZE; x++) {
             for (int y = 0; y < Map.MAP_SIZE; y++) {
                 BufferedImage img;
-                // TileType currentTile = this.gameLoop.getMap().getTilesMap().get(new
-                // TilePosition(x, y));
                 if (this.map.getTilesMap().containsKey(new TilePosition(x, y))) {
                     switch (this.map.getTilesMap().get(new TilePosition(x, y))) {
                         case ROOM:

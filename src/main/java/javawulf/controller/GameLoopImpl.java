@@ -18,8 +18,8 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private Thread gameLoopThread;
     private int drawCount = 0;
     private final GamePanel gamePanel;
-    public Map gameMap;
-    // private Player player;
+    private Map gameMap;
+    // private Player gamePlayer;
 
 
     public GameLoopImpl(final GamePanel panel) {
@@ -30,23 +30,6 @@ public final class GameLoopImpl implements GameLoop, Runnable {
 
     private void mapInit() {
         this.gameMap = new MapFactoryImpl().getDefaultMap1();
-        // this.gameMap = new MapFactoryImpl().getTestMap();
-
-        // Biome primoBioma, secondoBioma, terzoBioma, quartoBioma;
-
-        // primoBioma = new BiomeImpl();
-        // primoBioma.addRoom(new TilePosition(1, 1), new Room(10, 10));
-
-        // secondoBioma = new BiomeImpl();
-        // secondoBioma.addRoom(new TilePosition(1, 1), new Room(7, 7));
-
-        // terzoBioma = new BiomeImpl();
-        // terzoBioma.addRoom(new TilePosition(1, 1), new Room(10, 10));
-
-        // quartoBioma = new BiomeImpl();
-        // quartoBioma.addRoom(new TilePosition(1, 1), new Room(10, 10));
-
-        // this.mappa = new MapImpl(primoBioma, secondoBioma, terzoBioma, quartoBioma);
     }
 
     private void playerInit() {
