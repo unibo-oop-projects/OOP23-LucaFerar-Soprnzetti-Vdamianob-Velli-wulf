@@ -10,11 +10,11 @@ public interface Space {
      * 
      * @return width (in tile) of the space
      */
-    public int getWidth();
+    int getWidth();
 
     /**
      * 
      * @return height (in tile) of the space
      */
-    public int getHeight();
+    int getHeight();
 }

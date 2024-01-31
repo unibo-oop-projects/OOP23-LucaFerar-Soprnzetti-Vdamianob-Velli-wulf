@@ -54,6 +54,10 @@ public final class MapTilesBuilder {
         }
     }
 
+    private MapTilesBuilder() {
+        throw new UnsupportedOperationException("This class cannot be instantiated (Utility class)");
+    }
+
     /**
      * 
      * @param biomes is a list that have four biomes of tiles map to be build.
@@ -67,13 +71,16 @@ public final class MapTilesBuilder {
         final HashMap<TilePosition, TileType> tiles = new HashMap<>();
         for (var biomeOffSet : BiomeQuadrant.values()) {
             buildSpacesBiome(tiles, biomeOffSet, biomes.get(biomeOffSet.getPos()).getRooms(), Room.DEFAULT_TYPE);
-            buildSpacesBiome(tiles, biomeOffSet, biomes.get(biomeOffSet.getPos()).getCorridors(), Corridor.DEFAULT_TYPE);
+            buildSpacesBiome(tiles, biomeOffSet, biomes.get(biomeOffSet.getPos()).getCorridors(),
+                    Corridor.DEFAULT_TYPE);
         }
         buildCentralBiome(tiles);
         return tiles;
     }
 
-    private static void buildSpacesBiome(final HashMap<TilePosition, TileType> tiles, BiomeQuadrant biomeQuadrant, List<Pair<TilePosition, Space>> spaces, TileType defaultSpaceTile) {
+    private static void buildSpacesBiome(final HashMap<TilePosition, TileType> tiles, 
+            final BiomeQuadrant biomeQuadrant, final List<Pair<TilePosition, Space>> spaces,
+            final TileType defaultSpaceTile) {
         for (var space : spaces) {
             for (int y = space.getKey().getY(); y < space.getKey().getY() + space.getValue().getHeight(); y++) {
                 for (int x = space.getKey().getX(); x < space.getKey().getX() + space.getValue().getWidth(); x++) {
@@ -95,7 +102,8 @@ public final class MapTilesBuilder {
             for (int y = Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 3; y < Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 5; y++) {
                 tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
             }
-            for (int y = Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 15; y < Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 17; y++) {
+            for (int y = Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 15; y < Biome.SIZE + Map.WIDTH_CENTRAL_BIOME
+                    + 17; y++) {
                 tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
             }
         }
@@ -121,7 +129,8 @@ public final class MapTilesBuilder {
                 tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
             }
         }
-        for (int x = Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1; x < Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 + 1; x++) {
+        for (int x = Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1; x < Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2
+                + 1; x++) {
             for (int y = Biome.SIZE - 3; y < Biome.SIZE + 2; y++) {
                 tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
             }
@@ -129,7 +138,8 @@ public final class MapTilesBuilder {
                 tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
             }
         }
-        for (int y = Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1; y < Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 + 1; y++) {
+        for (int y = Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1; y < Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2
+                + 1; y++) {
             for (int x = Biome.SIZE - 3; x < Biome.SIZE + 2; x++) {
                 tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
             }
