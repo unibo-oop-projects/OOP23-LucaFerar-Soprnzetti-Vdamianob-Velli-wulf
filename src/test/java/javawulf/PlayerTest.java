@@ -49,7 +49,7 @@ public final class PlayerTest {
         assertEquals(test.getPosition(), player.getPosition().getPosition());
         assertEquals(new BoundingBoxImpl(startingX, startingY, AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE,
                 CollisionType.PLAYER).getCollisionArea(), player.getBounds().getCollisionArea());
-        assertEquals(0, player.getPieces().size());
+        assertEquals(0, player.getNumberOfPieces());
     }
 
     @Test
@@ -114,9 +114,9 @@ public final class PlayerTest {
         for (int i = 0; i < 4; i++) {
             fragments.add(fragment);
             player.collectAmuletPiece(fragments.get(i));
-            assertEquals(i + 1, player.getPieces().size());
+            assertEquals(i + 1, player.getNumberOfPieces());
         }
         assertThrows(IllegalStateException.class, () -> player.collectAmuletPiece(fragment));
-        assertNotEquals(wrongResult, player.getPieces().size());
+        assertNotEquals(wrongResult, player.getNumberOfPieces());
     }
 }
