@@ -8,7 +8,7 @@ public final class Corridor extends AbstractSpace {
     /**
      * Default corridors' tile-type
      */
-    public static TileType defaultType = TileType.CORRIDOR;
+    public static TileType DEFAULT_TYPE = TileType.CORRIDOR;
 
     /**
      * 

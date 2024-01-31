@@ -41,13 +41,13 @@ public interface Biome {
      * @return a defensive copy of a list of room positions and their relative rooms
      *         [ (tile x, y) - ROOM ]
      */
-    List<Pair<TilePosition, Room>> getRooms();
+    List<Pair<TilePosition, Space>> getRooms();
 
     /**
      * 
      * @return a defensive copy of a list of corridor positions and their relative
      *         corridors [ (tile x, y) - CORRIDOR ]
      */
-    List<Pair<TilePosition, Corridor>> getCorridors();
+    List<Pair<TilePosition, Space>> getCorridors();
 
 }

@@ -30,7 +30,7 @@ public class MapTest {
 
     @Test
     void testRooms() {
-        assertEquals(TileType.ROOM, Room.defaultType);
+        assertEquals(TileType.ROOM, Room.DEFAULT_TYPE);
 
         Space roomA = new Room(10, 10);
         assertEquals(10, roomA.getWidth());
@@ -43,7 +43,7 @@ public class MapTest {
 
     @Test
     void testCorridors() {
-        assertEquals(TileType.CORRIDOR, Corridor.defaultType);
+        assertEquals(TileType.CORRIDOR, Corridor.DEFAULT_TYPE);
 
         Space corridor1 = new Corridor(10, 5);
         assertEquals(10, corridor1.getWidth());
