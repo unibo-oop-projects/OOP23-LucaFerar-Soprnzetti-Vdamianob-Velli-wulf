@@ -26,19 +26,19 @@ public class CommandListener implements KeyListener {
             up = true;
             System.out.println("Pressed UP");
         }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN){
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             down = true;
             System.out.println("Pressed DOWN");
         }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT){
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             left = true;
             System.out.println("Pressed LEFT");
         }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             right = true;
             System.out.println("Pressed RIGHT");
         }
-        if (e.getKeyCode() == KeyEvent.VK_COMMA){
+        if (e.getKeyCode() == KeyEvent.VK_COMMA) {
             attack = true;
             System.out.println("Pressed ATTACK");
         }
@@ -48,29 +48,29 @@ public class CommandListener implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            up = true;
+            up = false;
             System.out.println("Released UP");
         }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN){
-            down = true;
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            down = false;
             System.out.println("Released DOWN");
         }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT){
-            left = true;
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            left = false;
             System.out.println("Released LEFT");
         }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-            right = true;
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            right = false;
             System.out.println("Released RIGHT");
         }
-        if (e.getKeyCode() == KeyEvent.VK_COMMA){
-            attack = true;
+        if (e.getKeyCode() == KeyEvent.VK_COMMA) {
+            attack = false;
             System.out.println("Released ATTACK");
         }
         communicateToController();
     }
 
-    private void communicateToController(){
+    private void communicateToController() {
         //controller.update(up,down,left,right,attack);
     }
 
