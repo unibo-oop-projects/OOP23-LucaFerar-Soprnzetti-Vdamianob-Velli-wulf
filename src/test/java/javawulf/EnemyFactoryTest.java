@@ -1,6 +1,8 @@
 package javawulf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,13 +17,16 @@ import javawulf.model.enemy.EnemyFactoryImpl;
 import javawulf.model.enemy.Guard;
 import javawulf.model.enemy.Pawn;
 
-public class EnemyFactoryTest {
+/**
+ * Test class for EnemyFactory.
+ */
+public final class EnemyFactoryTest {
 
-    int startingX = 12;
-    int startingY = 12;
+    private static final int STARTING_X = 12;
+    private static final int STARTING_Y = 12;
 
-    EnemyFactory factory;
-    Coordinate position = new CoordinateImpl(startingX, startingY);
+    private EnemyFactory factory;
+    private Coordinate position = new CoordinateImpl(STARTING_X, STARTING_Y);
 
     @BeforeEach
     void setUpFactory() {
@@ -36,13 +41,15 @@ public class EnemyFactoryTest {
         // Check if the pawn is instantiated as a Pawn
         assertTrue(pawn instanceof Pawn);
         // Check the coordinates of the pawn
-        assertEquals(startingX, pawn.getPosition().getX());
-        assertEquals(startingY, pawn.getPosition().getY());
+        assertEquals(STARTING_X, pawn.getPosition().getX());
+        assertEquals(STARTING_Y, pawn.getPosition().getY());
         // Check if the pawn is alive
         assertTrue(pawn.isAlive());
         // Check the BoundingBox of the pawn
-        assertEquals(pawn.getBounds(), new BoundingBoxImpl(startingX, startingY,
-                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY));
+        assertEquals(pawn.getBounds().getCollisionType(), new BoundingBoxImpl(STARTING_X, STARTING_Y,
+                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY).getCollisionType());
+        assertEquals(pawn.getBounds().getCollisionArea(), new BoundingBoxImpl(STARTING_X, STARTING_Y,
+                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY).getCollisionArea());
         // Check pawn's speed
         assertEquals(AbstractEntity.DEFAULT_SPEED, pawn.getSpeed());
 
@@ -56,13 +63,15 @@ public class EnemyFactoryTest {
         // Check if the guard is instantiated as a Guard
         assertTrue(guard instanceof Guard);
         // Check the coordinates of the guard
-        assertEquals(startingX, guard.getPosition().getX());
-        assertEquals(startingY, guard.getPosition().getY());
+        assertEquals(STARTING_X, guard.getPosition().getX());
+        assertEquals(STARTING_Y, guard.getPosition().getY());
         // Check if the guard is alive
         assertTrue(guard.isAlive());
         // Check the BoundingBox of the guard
-        assertEquals(guard.getBounds(), new BoundingBoxImpl(startingX, startingY,
-                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY));
+        assertEquals(guard.getBounds().getCollisionType(), new BoundingBoxImpl(STARTING_X, STARTING_Y,
+                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY).getCollisionType());
+        assertEquals(guard.getBounds().getCollisionArea(), new BoundingBoxImpl(STARTING_X, STARTING_Y,
+                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY).getCollisionArea());
         // Check guard's speed
         assertEquals(AbstractEntity.DEFAULT_SPEED, guard.getSpeed());
     }

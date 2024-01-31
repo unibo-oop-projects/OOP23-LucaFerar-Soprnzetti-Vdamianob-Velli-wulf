@@ -4,51 +4,61 @@ import javawulf.model.Coordinate;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.map.Map;
 import javawulf.model.player.Player;
+import javawulf.model.player.Sword;
 
-public class Guard extends EnemyImpl {
+/**
+ * The guard defends the room he is in and will attack the player
+ * if he is in the same room. It guards the items.
+ */
+public final class Guard extends EnemyImpl {
 
-    private final static int KILLVALUE = 2;
-    private final static int POINTS = 500;
+    private static final int KILLVALUE = 2;
+    private static final int STUN_TIME = 5;
+    private static final int POINTS = 500;
 
     private boolean isAlive;
-    private boolean isStunned;
-    private long stunTime;
 
-    public Guard(Coordinate position) {
+    /**
+     * Creates a guard.
+     * 
+     * @param position the position of the guard when created
+     */
+    public Guard(final Coordinate position) {
         super(position);
         this.isAlive = true;
-        this.isStunned = false;
     }
 
+    /**
+     * @return true if the guard is alive, false otherwise
+     */
     public boolean isAlive() {
         return isAlive;
     }
 
-    public void setAlive(boolean isAlive) {
-        this.isAlive = isAlive;
+    /**
+     * @param s the sword that the player is using
+     * @return true if the guard can be killed, false otherwise
+     */
+    public boolean isKillable(final Sword s) {
+        return s.getSwordStrength() == KILLVALUE;
     }
 
-    public boolean isKillable(Player p) {
-        return p.getSword().getSwordStrength() == KILLVALUE;
-    }
-
-    public boolean checkRoom(Player p) {
+    /**
+     * Checks if the player is in the room.
+     * 
+     * @param p the player
+     * @return true if the player is in the room, false otherwise
+     */
+    public boolean checkRoom(final Player p) {
         // TODO implement here Return true if player is in the same room as the guard,
         // probably should be private
         return false;
     }
 
-    public void stun(Integer time) {
-        this.isStunned = true;
-        this.stunTime = System.currentTimeMillis() + time * 1000;
-    }
-
     @Override
-    public void move(Player p, Map m) {
-        if (this.isStunned || !this.checkRoom(p)) {
-            if (System.currentTimeMillis() >= this.stunTime) {
-                this.isStunned = false;
-            }
+    public void move(final Player p, final Map m) {
+        if (this.getBounds().getCollisionType().equals(CollisionType.STUNNED) || !this.checkRoom(p)) {
+            this.reduceStun();
         } else {
 
             int diffX = p.getPosition().getX() - this.getPosition().getX();
@@ -71,14 +81,14 @@ public class Guard extends EnemyImpl {
     }
 
     @Override
-    public void takeHit(Player p) {
+    public void takeHit(final Player p) {
         if (super.isHit(p.getSword().getBounds())) {
-            if (this.isKillable(p)) {
-                this.setAlive(false);
+            if (this.isKillable(p.getSword())) {
+                this.isAlive = false;
                 p.getScore().addPoints(POINTS);
                 this.getBounds().changeCollisionType(CollisionType.INACTIVE);
             } else {
-                this.stun(5);
+                this.setStun(STUN_TIME);
             }
         }
     }

@@ -2,11 +2,11 @@ package javawulf.model;
 
 import java.awt.Point;
 
-public class CoordinateImpl implements Coordinate {
-    
+public final class CoordinateImpl implements Coordinate {
+
     private Point position;
 
-    public CoordinateImpl(int x, int y){
+    public CoordinateImpl(final int x, final int y) {
         this.position = new Point(x, y);
     }
 
@@ -14,7 +14,7 @@ public class CoordinateImpl implements Coordinate {
         return this.position;
     }
 
-    public void setPosition(int x, int y) {
+    public void setPosition(final int x, final int y) {
         this.position = new Point(x, y);
     }
 
