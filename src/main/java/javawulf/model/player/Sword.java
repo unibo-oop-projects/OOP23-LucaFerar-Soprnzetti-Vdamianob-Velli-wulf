@@ -56,7 +56,6 @@ public interface Sword extends GameElement {
 
     /**
      * @param durability the sword changes into
-     * @return The current direction of the player's sword
      */
     void setDurability(int durability);
 
