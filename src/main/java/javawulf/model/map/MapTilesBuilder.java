@@ -19,26 +19,26 @@ public final class MapTilesBuilder {
      */
     enum BiomeQuadrant {
         /**
-         * First biome (upper-left)
+         * First biome (upper-left).
          */
         FIRST(0, new TilePosition(0, 0)),
         /**
-         * Second biome (upper-right)
+         * Second biome (upper-right).
          */
         SECOND(1, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME, 0)),
         /**
-         * Third biome (downer-right)
+         * Third biome (downer-right).
          */
         THIRD(2, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME)),
         /**
-         * Fourth biome (downer-left)
+         * Fourth biome (downer-left).
          */
         FOURTH(3, new TilePosition(0, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME));
 
         private final int pos;
         private final TilePosition offset;
 
-        BiomeQuadrant(int pos, TilePosition offset) {
+        BiomeQuadrant(final int pos, final TilePosition offset) {
             this.pos = pos;
             this.offset = offset;
         }
@@ -52,6 +52,11 @@ public final class MapTilesBuilder {
         }
     }
 
+    /**
+     * 
+     * @param biomes that have four biomes of tiles map to be build.
+     * @return a built map tiles.
+     */
     public static HashMap<TilePosition, TileType> buildTiles(final List<Biome> biomes) {
         return build(biomes);
     }
@@ -88,7 +93,7 @@ public final class MapTilesBuilder {
         return tiles;
     }
 
-    private static void buildCentralBiome(HashMap<TilePosition, TileType> tiles) {
+    private static void buildCentralBiome(final HashMap<TilePosition, TileType> tiles) {
         for (int x = Biome.SIZE; x <= Biome.SIZE - 1 + Map.WIDTH_CENTRAL_BIOME; x++) {
             for (int y = 3; y < 5; y++) {
                 tiles.put(new TilePosition(x, y), TileType.CORRIDOR);

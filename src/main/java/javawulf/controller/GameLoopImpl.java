@@ -6,10 +6,10 @@ import javawulf.model.map.factory.MapFactoryImpl;
 // import javawulf.model.player.PlayerImpl;
 import javawulf.view.GamePanel;
 
-public class GameLoopImpl implements GameLoop, Runnable {
+public final class GameLoopImpl implements GameLoop, Runnable {
 
-    private final static int FPS = 60;
-    private final static int NANOSECONDS = 1_000_000_000;
+    private static final int FPS = 60;
+    private static final int NANOSECONDS = 1_000_000_000;
     private long lastTime;
     private long currentTime;
     private long timer;
@@ -17,12 +17,12 @@ public class GameLoopImpl implements GameLoop, Runnable {
     private double interval;
     private Thread gameLoopThread;
     private int drawCount = 0;
-    private GamePanel gamePanel;
+    private final GamePanel gamePanel;
     public Map gameMap;
-    // private Player giocatore;
+    // private Player player;
 
 
-    public GameLoopImpl(GamePanel panel) {
+    public GameLoopImpl(final GamePanel panel) {
         mapInit();
         playerInit();
         this.gamePanel = panel;
