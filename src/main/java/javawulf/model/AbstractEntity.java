@@ -9,6 +9,11 @@ import javawulf.model.map.TileType;
  */
 public abstract class AbstractEntity extends GameObject implements Entity {
 
+    /**
+     * MOVEMENT_DELTA defines the scalar constant that will be multiplied
+     * by the direction vector and the speed of the Entity in order
+     * to define its movement.
+     */
     public static final int MOVEMENT_DELTA = OBJECT_SIZE / 8;
     private int speed;
     private Direction direction;
@@ -75,8 +80,14 @@ public abstract class AbstractEntity extends GameObject implements Entity {
                 && control(box);
     }
 
+    /**
+     * @param box The boundingBox that must be checked
+     * @return true if the type of the box is the one that damages the Entity,
+     * otherwise it will return false
+     */
     protected abstract boolean control(BoundingBox box);
 
+    @Override
     public final void reduceStun() {
         if (this.getBounds().getCollisionType().equals(CollisionType.STUNNED)) {
             if (stun == 0) {
@@ -87,8 +98,12 @@ public abstract class AbstractEntity extends GameObject implements Entity {
         }
     }
 
+    /**
+     * @return The collision type of the Entity
+     */
     protected abstract CollisionType originalCollisonType();
 
+    @Override
     public final void setStun(final int stun) {
         this.stun = stun;
     }
