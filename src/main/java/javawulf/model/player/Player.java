@@ -1,9 +1,6 @@
 package javawulf.model.player;
 
-import java.awt.Color;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import javawulf.model.Direction;
 import javawulf.model.Entity;
@@ -20,20 +17,42 @@ public interface Player extends Entity {
      * It changes depending on the current Power-Up the Player has
      */
     enum PlayerColor {
-        RED(Optional.of(Color.RED)),
-        BLUE(Optional.of(Color.BLUE)),
-        YELLOW(Optional.of(Color.YELLOW)),
-        GREEN(Optional.of(Color.GREEN)),
-        NONE(Optional.empty());
+        /**
+         * The color the Player changes into when he collects a strength boosting
+         * Power-Up.
+         */
+        STRENGTH("red"),
+        /**
+         * The color the Player changes into when he collects a invincibility
+         * Power-Up.
+         */
+        INVULNERABILITY("blue"),
+        /**
+         * The color the Player changes into when he collects a points boosting
+         * Power-Up.
+         */
+        DOUBLE_POINTS("yellow"),
+        /**
+         * The color the Player changes into when he collects a speed boosting
+         * Power-Up.
+         */
+        SPEED("green"),
+        /**
+         * The color the Player has by default and has no Power-Up activated.
+         */
+        NONE("none");
 
-        private final Optional<Color> color;
+        private final String color;
 
-        PlayerColor(final Optional<Color> color) {
+        PlayerColor(final String color) {
             this.color = color;
         }
 
-        public Color getColor() throws NoSuchElementException {
-            return this.color.orElseThrow();
+        /**
+         * @return The string corrisponding to the color
+         */
+        public String getColor() {
+            return this.color;
         }
     }
 
@@ -84,7 +103,7 @@ public interface Player extends Entity {
     /**
      * @return The color of the Player
      */
-    PlayerColor getColor();
+    String getColor();
 
     /**
      * @param color The color the Player character will now have
