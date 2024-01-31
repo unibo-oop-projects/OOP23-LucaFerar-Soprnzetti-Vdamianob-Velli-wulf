@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 public interface BoundingBox {
 
-    public enum CollisionType{
+    enum CollisionType {
         PLAYER,
         ENEMY,
         COLLECTABLE,
@@ -13,13 +13,13 @@ public interface BoundingBox {
         INACTIVE; //could work also for defeated characters
     }
 
-    public boolean isCollidingWith(Rectangle box);
+    boolean isCollidingWith(Rectangle box);
 
-    public Rectangle getCollisionArea();
+    Rectangle getCollisionArea();
 
-    public void setCollisionArea(int x, int y, int width, int height);
+    void setCollisionArea(int x, int y, int width, int height);
 
-    public CollisionType getCollisionType();
+    CollisionType getCollisionType();
 
-    public void changeCollisionType(CollisionType type);
+    void changeCollisionType(CollisionType type);
 }

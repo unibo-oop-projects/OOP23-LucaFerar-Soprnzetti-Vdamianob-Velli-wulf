@@ -3,12 +3,12 @@ package javawulf.model;
 import java.awt.Point;
 
 public interface Coordinate {
-    
-    public Point getPosition();
 
-    public void setPosition(int x, int y);
+    Point getPosition();
 
-    public Integer getX();
+    void setPosition(int x, int y);
 
-    public Integer getY();
+    Integer getX();
+
+    Integer getY();
 }
