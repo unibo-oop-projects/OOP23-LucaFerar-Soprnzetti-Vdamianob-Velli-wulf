@@ -17,8 +17,8 @@ public final class Pawn extends EnemyImpl {
     private static final int POINTS = 100;
 
     private boolean isAlive;
-    private long moveTime;
     private int timeToWait;
+    private int tickCount;
 
     /**
      * Creates a pawn.
@@ -28,9 +28,9 @@ public final class Pawn extends EnemyImpl {
     public Pawn(final Coordinate position) {
         super(position);
         this.isAlive = true;
-        this.moveTime = System.currentTimeMillis();
         this.timeToWait = new Random().nextInt(4) + 1;
         this.setDirection(Direction.values()[new Random().nextInt(4)]);
+        this.tickCount = 0;
     }
 
     /**
@@ -50,19 +50,15 @@ public final class Pawn extends EnemyImpl {
     @Override
     public void move(final Player p, final Map m) {
 
-        if (System.currentTimeMillis() - this.moveTime >= timeToWait * 1000) {
-            this.setDirection(Direction.values()[new Random().nextInt(4)]);
-            this.moveTime = System.currentTimeMillis();
-            this.timeToWait = new Random().nextInt(4) + 1;
-        }
-
         double newX = this.getPosition().getX() + this.getDirection().getX() * this.getSpeed() * MOVEMENT_DELTA;
         double newY = this.getPosition().getY() + this.getDirection().getY() * this.getSpeed() * MOVEMENT_DELTA;
 
-        if (!this.isCollidingWithWall(m)) {
-            this.getPosition().setPosition((int) Math.round(newX), (int) Math.round(newY));
-            this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE,
-                    OBJECT_SIZE);
+        this.getPosition().setPosition((int) Math.round(newX), (int) Math.round(newY));
+        this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE,
+                OBJECT_SIZE);
+
+        if (this.isCollidingWithWall(m)) {
+            this.setDirection(Direction.values()[new Random().nextInt(4)]);
         }
     }
 
@@ -72,6 +68,18 @@ public final class Pawn extends EnemyImpl {
             this.isAlive = false;
             p.getScore().addPoints(POINTS);
             this.getBounds().changeCollisionType(CollisionType.INACTIVE);
+        }
+    }
+
+    @Override
+    public void tick() {
+
+        this.tickCount++;
+
+        if (this.tickCount >= this.timeToWait) {
+            this.setDirection(Direction.values()[new Random().nextInt(4)]);
+            this.timeToWait = new Random().nextInt(4) + 1;
+            this.tickCount = 0;
         }
     }
 
