@@ -1,6 +1,8 @@
 package javawulf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,24 +22,28 @@ import javawulf.model.player.PlayerImpl;
 import javawulf.model.player.PlayerHealth.ShieldStatus;
 import javawulf.model.player.Sword.SwordType;
 
-public class ItemTest {
-    
-    int startingX = 12;
-    int startingY = 12;
-    int startingHealth = 3;
+/**
+ * Test class for Items' effect.
+ */
+public final class ItemTest {
 
-    ItemFactory factory = new ItemFactoryImpl();
-    Coordinate test;
-    Player player;
+    private static final int STARTING_X = 12;
+    private static final int STARTING_Y = 12;
+    private static final int STARTING_HEALTH = 3;
+    private static final int DAMAGED_PLAYER = -2;
+
+    private ItemFactory factory = new ItemFactoryImpl();
+    private Coordinate test;
+    private Player player;
 
     @BeforeEach
-    void setUp(){
-        this.player = new PlayerImpl(startingX, startingX, startingHealth, 0);
-        this.test = new CoordinateImpl(startingX, startingY);
+    void setUp() {
+        this.player = new PlayerImpl(STARTING_X, STARTING_Y, STARTING_HEALTH, 0);
+        this.test = new CoordinateImpl(STARTING_X, STARTING_Y);
     }
 
     @Test
-    void testCollection(){
+    void testCollection() {
         // Creating an item (any item will do for this test)
         Shield shield = factory.createShield(test);
         // Checking that the player meets the requirements to collect the item
@@ -49,7 +55,7 @@ public class ItemTest {
     }
 
     @Test
-    void testAmuletPiece(){
+    void testAmuletPiece() {
         AmuletPiece piece = factory.createAmuletPiece(test);
         // Player collect the item
         piece.collect(player);
@@ -58,9 +64,9 @@ public class ItemTest {
     }
 
     @Test
-    void testCure(){
+    void testCure() {
         Cure cure = factory.createCure(test);
-        player.getPlayerHealth().setHealth(-2);
+        player.getPlayerHealth().setHealth(DAMAGED_PLAYER);
         // Player collect the item
         cure.collect(player);
         // Checking that the effect has been applied
@@ -68,9 +74,9 @@ public class ItemTest {
     }
 
     @Test
-    void testCureMax(){
+    void testCureMax() {
         CureMax cure = factory.createCureMax(test);
-        player.getPlayerHealth().setHealth(-2);
+        player.getPlayerHealth().setHealth(DAMAGED_PLAYER);
         // Player collect the item
         cure.collect(player);
         // Checking that the effect has been applied
@@ -78,32 +84,32 @@ public class ItemTest {
     }
 
     @Test
-    void testExtraHeart(){
+    void testExtraHeart() {
         ExtraHeart heart = factory.createExtraHeart(test);
         // Player collect the item
         heart.collect(player);
         // Checking that the effect has been applied correctly
-        assertEquals(startingHealth + 1, player.getPlayerHealth().getMaxHealth());
+        assertEquals(STARTING_HEALTH + 1, player.getPlayerHealth().getMaxHealth());
         assertNotEquals(player.getPlayerHealth().getMaxHealth(), player.getPlayerHealth().getHealth());
     }
 
     @Test
-    void testGreatSword(){
+    void testGreatSword() {
         GreatSword greatSword = factory.createGreatSword(test);
         // Player collect the item
         greatSword.collect(player);
         // Checking that the effect has been applied correctly
-        assertEquals( SwordType.GREATSWORD, player.getSword().getSwordType() );
-        assertEquals(2,player.getSword().getSwordStrength());
+        assertEquals(SwordType.GREATSWORD, player.getSword().getSwordType());
+        assertEquals(2, player.getSword().getSwordStrength());
     }
 
     @Test
-    void testMinimap(){
-        //TODO: Implement minimap
+    void testMinimap() {
+        // TODO: Implement minimap
     }
 
     @Test
-    void testShield(){
+    void testShield() {
         Shield shield = factory.createShield(test);
         // Player collect the item
         shield.collect(player);
