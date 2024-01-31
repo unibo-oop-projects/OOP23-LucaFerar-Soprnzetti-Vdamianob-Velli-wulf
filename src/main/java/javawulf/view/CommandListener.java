@@ -3,6 +3,11 @@ package javawulf.view;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * CommandListener is a class whose purpose is to communicate
+ * to the controller when a key related to the game has been pressed
+ * or not.
+ */
 public class CommandListener implements KeyListener {
 
     private boolean up = false;
