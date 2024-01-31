@@ -3,6 +3,8 @@ package javawulf.model.map;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.util.Pair;
+
 /**
  * An Utility class that creates a HashMap<TilePosition, TileType> from four
  * biomes.
@@ -54,7 +56,7 @@ public final class MapTilesBuilder {
 
     /**
      * 
-     * @param biomes that have four biomes of tiles map to be build.
+     * @param biomes is a list that have four biomes of tiles map to be build.
      * @return a built map tiles.
      */
     public static HashMap<TilePosition, TileType> buildTiles(final List<Biome> biomes) {
@@ -64,33 +66,22 @@ public final class MapTilesBuilder {
     private static HashMap<TilePosition, TileType> build(final List<Biome> biomes) {
         final HashMap<TilePosition, TileType> tiles = new HashMap<>();
         for (var biomeOffSet : BiomeQuadrant.values()) {
-            for (var room : biomes.get(biomeOffSet.getPos()).getRooms()) {
-                for (int y = room.getKey().getY(); y < room.getKey().getY() + room.getValue().getHeight(); y++) {
-                    for (int x = room.getKey().getX(); x < room.getKey().getX() + room.getValue().getWidth(); x++) {
-                        tiles.put(new TilePosition(x + biomeOffSet.getOffset().getX(),
-                                y + biomeOffSet.getOffset().getY()), Room.defaultType);
-                    }
-                }
-            }
+            buildSpacesBiome(tiles, biomeOffSet, biomes.get(biomeOffSet.getPos()).getRooms(), Room.DEFAULT_TYPE);
+            buildSpacesBiome(tiles, biomeOffSet, biomes.get(biomeOffSet.getPos()).getCorridors(), Corridor.DEFAULT_TYPE);
         }
-
-        for (var biomeOffSet : BiomeQuadrant.values()) {
-            for (var corridor : biomes.get(biomeOffSet.getPos()).getCorridors()) {
-                for (int y = corridor.getKey().getY(); y < corridor.getKey().getY()
-                        + corridor.getValue().getHeight(); y++) {
-                    for (int x = corridor.getKey().getX(); x < corridor.getKey().getX()
-                            + corridor.getValue().getWidth(); x++) {
-                        tiles.put(new TilePosition(x + biomeOffSet.getOffset().getX(),
-                                y + biomeOffSet.getOffset().getY()), Corridor.defaultType);
-                    }
-                }
-
-            }
-        }
-
         buildCentralBiome(tiles);
-
         return tiles;
+    }
+
+    private static void buildSpacesBiome(final HashMap<TilePosition, TileType> tiles, BiomeQuadrant biomeQuadrant, List<Pair<TilePosition, Space>> spaces, TileType defaultSpaceTile) {
+        for (var space : spaces) {
+            for (int y = space.getKey().getY(); y < space.getKey().getY() + space.getValue().getHeight(); y++) {
+                for (int x = space.getKey().getX(); x < space.getKey().getX() + space.getValue().getWidth(); x++) {
+                    tiles.put(new TilePosition(x + biomeQuadrant.getOffset().getX(),
+                            y + biomeQuadrant.getOffset().getY()), defaultSpaceTile);
+                }
+            }
+        }
     }
 
     private static void buildCentralBiome(final HashMap<TilePosition, TileType> tiles) {
@@ -147,5 +138,4 @@ public final class MapTilesBuilder {
             }
         }
     }
-
 }
