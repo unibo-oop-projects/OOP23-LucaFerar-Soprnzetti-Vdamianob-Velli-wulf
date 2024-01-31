@@ -1,7 +1,7 @@
 package javawulf.model;
 
 /**
- * Entity defines a GameElement with the ability to move
+ * Entity defines a GameElement with the ability to move.
  */
 public interface Entity extends GameElement {
 

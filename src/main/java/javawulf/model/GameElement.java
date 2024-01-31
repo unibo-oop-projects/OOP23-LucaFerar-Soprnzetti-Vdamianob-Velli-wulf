@@ -1,12 +1,12 @@
 package javawulf.model;
 
 public interface GameElement {
-    
-    public BoundingBox getBounds();
 
-    public Coordinate getPosition();
+    BoundingBox getBounds();
 
-    public void setBounds(BoundingBox b);
+    Coordinate getPosition();
 
-    public void setPosition(Coordinate p);
+    void setBounds(BoundingBox b);
+
+    void setPosition(Coordinate p);
 }
