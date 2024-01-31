@@ -37,6 +37,7 @@ public abstract class AbstractCollectable extends GameObject implements Collecta
      * 
      * @param p
      */
+    @Override
     public final void collect(final Player p) {
         if (this.getBounds().isCollidingWith(p.getBounds().getCollisionArea())) {
             this.applyEffect(p);
@@ -50,6 +51,7 @@ public abstract class AbstractCollectable extends GameObject implements Collecta
      * 
      * @param p the player who gets the effect of the object
      */
+    @Override
     public abstract void applyEffect(Player p);
 
 }
