@@ -49,8 +49,14 @@ public interface Sword extends GameElement {
      */
     int getSwordStrength();
 
+    /**
+     * @return The current durability of the player's sword
+     */
     int getDurability();
 
+    /**
+     * @param durability the sword changes into
+     */
     void setDurability(int durability);
 
     /**

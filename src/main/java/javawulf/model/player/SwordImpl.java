@@ -136,7 +136,7 @@ public final class SwordImpl extends GameObject implements Sword {
     }
 
     /**
-     * reduces the durability of the sword by one each time
+     * Reduces the durability of the sword by one each time.
      */
     private void consume() {
         this.durability--;
