@@ -91,7 +91,7 @@ public abstract class AbstractEntity extends GameObject implements Entity {
     public final void reduceStun() {
         if (this.getBounds().getCollisionType().equals(CollisionType.STUNNED)) {
             if (stun == 0) {
-                this.getBounds().changeCollisionType(originalCollisonType());
+                this.getBounds().changeCollisionType(originalCollisionType());
             } else {
                 this.stun--;
             }
@@ -101,7 +101,7 @@ public abstract class AbstractEntity extends GameObject implements Entity {
     /**
      * @return The collision type of the Entity
      */
-    protected abstract CollisionType originalCollisonType();
+    protected abstract CollisionType originalCollisionType();
 
     @Override
     public final void setStun(final int stun) {

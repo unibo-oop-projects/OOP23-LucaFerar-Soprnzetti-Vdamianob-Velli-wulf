@@ -41,7 +41,7 @@ public abstract class EnemyImpl extends AbstractEntity implements Enemy {
     }
 
     @Override
-    protected final CollisionType originalCollisonType() {
+    protected final CollisionType originalCollisionType() {
         return CollisionType.ENEMY;
     }
 

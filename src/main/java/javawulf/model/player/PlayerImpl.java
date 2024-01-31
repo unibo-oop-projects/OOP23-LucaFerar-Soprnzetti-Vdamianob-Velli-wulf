@@ -144,7 +144,7 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    protected CollisionType originalCollisonType() {
+    protected CollisionType originalCollisionType() {
         return CollisionType.PLAYER;
     }
 
