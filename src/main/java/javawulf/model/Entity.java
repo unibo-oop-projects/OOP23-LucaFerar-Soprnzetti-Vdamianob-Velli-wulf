@@ -1,20 +1,34 @@
 package javawulf.model;
 
+/**
+ * Entity defines a GameElement with the ability to move.
+ */
 public interface Entity extends GameElement {
 
-    public static final int DEFAULT_SPEED=1;
-    public static final int DOUBLE_SPEED=2;
+    int DEFAULT_SPEED = 1;
+    int DOUBLE_SPEED = 2;
 
-    public void setSpeed(int speed);
+    void setSpeed(int speed);
 
-    public Direction getDirection();
+    Direction getDirection();
 
     /**
-     * Check if the entity is getting hit by another. If it is the case, then the
-     * entity will be subject to damage
+     * Checks if the Entity is getting hit by another. If it is the case, then the
+     * Entity will be subject to damage
      * 
      * @param box BoundingBox that must be checked
+     * @return true if the Entity got hit, otherwise false
      */
-    public boolean isHit(BoundingBox box);
-    
+    boolean isHit(BoundingBox box);
+
+    /**
+     * Reduces the stun duration of the Entity by one unit.
+     */
+    void reduceStun();
+
+    /**
+     * @param stun The value stun must be set to
+     */
+    void setStun(int stun);
+
 }

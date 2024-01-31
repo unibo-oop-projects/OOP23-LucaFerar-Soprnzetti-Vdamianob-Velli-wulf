@@ -2,18 +2,21 @@ package javawulf.model.player;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Optional;
 
 import javawulf.model.BoundingBox;
 import javawulf.model.Direction;
 import javawulf.model.AbstractEntity;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
-import javawulf.model.powerUp.PowerUp;
+import javawulf.model.powerUp.PowerUpHandler;
+import javawulf.model.powerUp.PowerUpHandlerImpl;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletPiece;
 
-public class PlayerImpl extends AbstractEntity implements Player {
+/**
+ * PlayerImpl is an implementation of Player.
+ */
+public final class PlayerImpl extends AbstractEntity implements Player {
 
     private static final int DAMAGE = -1;
     private PlayerHealth health;
@@ -21,17 +24,26 @@ public class PlayerImpl extends AbstractEntity implements Player {
     private Sword sword;
     private static final int NUMBER_OF_PIECES = 4;
     private List<AmuletPiece> piecesCollected;
-    private Optional<PowerUp> activePowerUp;
     private PlayerColor color;
+    private PowerUpHandler powerUpHandler;
+    private static final int PLAYER_STUN = 4;
 
-    public PlayerImpl(int startingX, int startingY, int health, int startingPoints) {
+    /**
+     * Creates a new Player.
+     * 
+     * @param startingX The starting position on the X axis of the Player
+     * @param startingY The starting position on the Y axis of the Player
+     * @param health The amount of healtg the player starts the game with
+     * @param startingPoints The amount of points the player starts the game with
+     */
+    public PlayerImpl(final int startingX, final int startingY, final int health, final int startingPoints) {
         super(new CoordinateImpl(startingX, startingY), CollisionType.PLAYER, Player.DEFAULT_SPEED);
         this.score = new ScoreImpl(startingPoints);
         this.setDirection(Direction.DOWN);
         this.health = new PlayerHealthImpl(health);
         this.sword = new SwordImpl(this.getPosition(), this.getDirection());
         this.piecesCollected  = new ArrayList<>(NUMBER_OF_PIECES);
-        this.activePowerUp = Optional.empty();
+        this.powerUpHandler = new PowerUpHandlerImpl();
         this.color = PlayerColor.NONE;
     }
 
@@ -41,7 +53,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public void move(Direction direction) throws IllegalStateException {
+    public void move(final Direction direction) throws IllegalStateException {
         Coordinate current = this.getPosition();
         int delta = this.getSpeed() * MOVEMENT_DELTA;
         // var preview = this.getPosition();
@@ -61,13 +73,15 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public boolean isHit(BoundingBox box) {
+    public boolean isHit(final BoundingBox box) {
         if (super.isHit(box)) {
             this.health.setHealth(DAMAGE);
-            if (isDefeated()){
+            if (isDefeated()) {
                 this.getBounds().changeCollisionType(CollisionType.INACTIVE);
+                System.out.println("Oh no! You Died. GAME OVER");
             } else {
                 this.getBounds().changeCollisionType(CollisionType.STUNNED);
+                this.setStun(PLAYER_STUN);
             }
             return true;
         } else {
@@ -76,8 +90,8 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public void collectAmuletPiece(AmuletPiece piece) throws IllegalStateException {
-        if (this.piecesCollected.size()==NUMBER_OF_PIECES){
+    public void collectAmuletPiece(final AmuletPiece piece) throws IllegalStateException {
+        if (this.piecesCollected.size() == NUMBER_OF_PIECES) {
             throw new IllegalStateException("Already gotten all fragments of the amulet");
         } else {
             this.piecesCollected.add(piece);
@@ -90,9 +104,8 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public void usePowerUp(PowerUp p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'usePowerUp'");
+    public PowerUpHandler getPowerUpHandler() {
+        return this.powerUpHandler;
     }
 
     private boolean isDefeated() {
@@ -115,7 +128,7 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public void setColor(PlayerColor color) {
+    public void setColor(final PlayerColor color) {
         this.color = color;
     }
 
@@ -125,9 +138,14 @@ public class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    protected boolean control(BoundingBox box) {
+    protected boolean control(final BoundingBox box) {
         return box.getCollisionType().equals(CollisionType.ENEMY)
             && this.getBounds().getCollisionType().equals(CollisionType.PLAYER);
+    }
+
+    @Override
+    protected CollisionType originalCollisionType() {
+        return CollisionType.PLAYER;
     }
 
 }

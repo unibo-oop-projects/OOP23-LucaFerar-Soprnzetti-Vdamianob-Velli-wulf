@@ -8,14 +8,18 @@ import java.util.Optional;
 import javawulf.model.Direction;
 import javawulf.model.Entity;
 import javawulf.model.item.AmuletPiece;
-import javawulf.model.powerUp.PowerUp;
+import javawulf.model.powerUp.PowerUpHandler;
 
 /**
- * Player represents the playable character and its statitstics
+ * Player represents the playable character and its statitstics.
  */
 public interface Player extends Entity {
 
-    public enum PlayerColor{
+    /**
+     * PlayerColor defines the current color of the Player character.
+     * It changes depending on the current Power-Up the Player has
+     */
+    enum PlayerColor {
         RED(Optional.of(Color.RED)),
         BLUE(Optional.of(Color.BLUE)),
         YELLOW(Optional.of(Color.YELLOW)),
@@ -24,53 +28,69 @@ public interface Player extends Entity {
 
         private final Optional<Color> color;
 
-        private PlayerColor(Optional<Color> color){
+        PlayerColor(final Optional<Color> color) {
             this.color = color;
         }
 
-        public Color getColor() throws NoSuchElementException{
+        public Color getColor() throws NoSuchElementException {
             return this.color.orElseThrow();
         }
     }
 
     /**
-     * Activate the sword in order to attack
+     * Activate the sword in order to attack.
      */
-    public void attack();
+    void attack();
 
     /**
-     * Move in the specified direction
+     * Move in the specified direction.
      * 
      * @param direction The direction the player character must move towards
      * @throws IllegalStateException If the character can't continue in that direction
      * (due to a wall) 
      */
-    public void move(Direction direction) throws IllegalStateException;
+    void move(Direction direction) throws IllegalStateException;
 
-    public void collectAmuletPiece(AmuletPiece piece);
+    /**
+     * Adds an amulet piece to the Player's inventory. If it goes over the number
+     * of biomes it won't be added to the inventory
+     * 
+     * @param piece The amulet piece being added to the inventory
+     */
+    void collectAmuletPiece(AmuletPiece piece);
 
     /**
      * @return The current health of the player character, including also the maximum
      * amount of health currently obtainable and his shield
      */
-    public PlayerHealth getPlayerHealth();
+    PlayerHealth getPlayerHealth();
 
-    public void usePowerUp(PowerUp p);
+    /**
+     * @return The current Power-Up Player is subject to and for how much
+     * longer it will last
+     */
+    PowerUpHandler getPowerUpHandler();
 
     /**
      * @return The current point total and point multiplier
      */
-    public Score getScore();
+    Score getScore();
 
     /**
      * @return The player's sword
      */
-    public Sword getSword();
+    Sword getSword();
 
-    public PlayerColor getColor();
+    /**
+     * @return The color of the Player
+     */
+    PlayerColor getColor();
 
-    public void setColor(PlayerColor color);
+    /**
+     * @param color The color the Player character will now have
+     */
+    void setColor(PlayerColor color);
 
-    public List<AmuletPiece> getPieces();
-    
+    List<AmuletPiece> getPieces();
+
 }

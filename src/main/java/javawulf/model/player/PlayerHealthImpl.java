@@ -1,6 +1,10 @@
 package javawulf.model.player;
 
-public class PlayerHealthImpl implements PlayerHealth {
+/**
+ * PlayerHealthImpl is a class implementing the PlayerHealth
+ * interface.
+ */
+public final class PlayerHealthImpl implements PlayerHealth {
 
     private int health;
     private int maxHealth;
@@ -13,7 +17,7 @@ public class PlayerHealthImpl implements PlayerHealth {
      * 
      * @param startingHealth The amount of health the player starts the game with 
      */
-    public PlayerHealthImpl(int startingHealth){
+    public PlayerHealthImpl(final int startingHealth) {
         this.health = startingHealth;
         this.maxHealth = startingHealth;
         this.shieldStatus = ShieldStatus.NONE;
@@ -35,20 +39,20 @@ public class PlayerHealthImpl implements PlayerHealth {
     }
 
     @Override
-    public void setHealth(int health) {
-        if (health<0){
+    public void setHealth(final int health) {
+        if (health < 0) {
             this.damage(health);
         } else {
             this.health = Math.min((this.health + health), this.maxHealth);
         }
     }
 
-    private void damage(int health){
-        if(this.getShieldStatus().equals(ShieldStatus.NONE)){
+    private void damage(final int health) {
+        if (this.getShieldStatus().equals(ShieldStatus.NONE)) {
             this.health = this.health + health;
             System.out.println("Health remaining : " + this.getHealth());
         } else {
-            if (this.getShieldStatus().equals(ShieldStatus.FULL)){
+            if (this.getShieldStatus().equals(ShieldStatus.FULL)) {
                 this.setShieldStatus(ShieldStatus.HALF);
                 System.out.println("Shield hits remaining :" + this.getShieldStatus().getStrength());
             } else {
@@ -59,18 +63,13 @@ public class PlayerHealthImpl implements PlayerHealth {
     }
 
     @Override
-    public void increaseMaxHealth(int increase) {
+    public void increaseMaxHealth(final int increase) {
         this.maxHealth = this.maxHealth + increase;
     }
 
     @Override
-    public void setShieldStatus(ShieldStatus status) {
+    public void setShieldStatus(final ShieldStatus status) {
         this.shieldStatus = status;
     }
 
-    public boolean equals(PlayerHealth hp){
-        return this.getHealth() == hp.getHealth() && this.getMaxHealth() == hp.getMaxHealth() &&
-            this.getShieldStatus() == hp.getShieldStatus();
-    }
-    
 }

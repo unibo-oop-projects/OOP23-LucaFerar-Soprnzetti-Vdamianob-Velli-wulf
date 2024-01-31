@@ -1,38 +1,42 @@
 package javawulf.model.powerUp;
 
-import javawulf.model.Collectable;
+import javawulf.model.AbstractCollectable;
 import javawulf.model.Coordinate;
-import javawulf.model.player.Player;
 
-public abstract class PowerUpImpl extends Collectable implements PowerUp {
+public abstract class PowerUpImpl extends AbstractCollectable implements PowerUp {
 
-    protected int durationInMilli;
+    protected int duration;
     protected String type;
-    protected long activationTimeInMilli;
 
-    public PowerUpImpl(Coordinate position, Integer points, String type, int durationInMilli) {
+    public PowerUpImpl(Coordinate position, Integer points, String type, int duration) {
         super(position, points);
         this.type = type;
-        this.durationInMilli = durationInMilli;
+        this.duration = duration;
     }
     
-    public void activateEffect() {
-        activationTimeInMilli = System.currentTimeMillis();
+    public int getDuration() {
+        return this.duration;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     @Override
-    public void applyEffect(Player player) {
-        activateEffect();
+    public boolean stillActive() {
+        return duration > 0;
     }
     
     @Override
-    public boolean stillActive() {
-        return activationTimeInMilli + durationInMilli < System.currentTimeMillis();
+    public void updateDuration() {
+        if (duration > 0) {
+            duration--;
+        }
     }
-    
+
     @Override
     public String toString() {
-        return "PowerUp: [durationInMilli=" + durationInMilli + ", type=" + type + ", pointsGiven=" + this.getPoints() + "]";
+        return "PowerUp: [duration=" + this.getDuration() + ", type=" + this.getType() + ", pointsGiven=" + this.getPoints() + "]";
     }
     
 }
