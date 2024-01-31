@@ -75,6 +75,10 @@ public abstract class AbstractEntity extends GameObject implements Entity {
         return tile.contains(TileType.WALL);
     }
 
+    /**
+     * Must be extended using the implementation in this class.
+     */
+    @Override
     public boolean isHit(final BoundingBox box) {
         return this.getBounds().isCollidingWith(box.getCollisionArea())
                 && control(box);
