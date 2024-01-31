@@ -1,7 +1,5 @@
 package javawulf.model.player;
 
-import java.util.List;
-
 import javawulf.model.Direction;
 import javawulf.model.Entity;
 import javawulf.model.item.AmuletPiece;
@@ -110,6 +108,9 @@ public interface Player extends Entity {
      */
     void setColor(PlayerColor color);
 
-    List<AmuletPiece> getPieces();
+    /**
+     * @return The amount of amulet pieces Player has collected
+     */
+    int getNumberOfPieces();
 
 }

@@ -133,8 +133,8 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public List<AmuletPiece> getPieces() {
-        return this.piecesCollected;
+    public int getNumberOfPieces() {
+        return this.piecesCollected.size();
     }
 
     @Override
