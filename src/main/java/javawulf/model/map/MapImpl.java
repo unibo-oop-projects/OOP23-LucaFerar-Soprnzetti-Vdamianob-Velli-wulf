@@ -18,7 +18,7 @@ public final class MapImpl implements Map {
     private final java.util.Map<TilePosition, TileType> tiles = new HashMap<>();
 
     /**
-     * Each element in BiomeQuadrant rapresent one of four biome of the map. Used for get their offset positions.
+     * Each element in BiomeQuadrant represent one of four biome of the map. Used for get their offset positions.
      */
     enum BiomeQuadrant {
         /**
