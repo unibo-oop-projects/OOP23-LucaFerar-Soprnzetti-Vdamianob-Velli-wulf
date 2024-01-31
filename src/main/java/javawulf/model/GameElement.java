@@ -6,6 +6,11 @@ package javawulf.model;
 public interface GameElement {
 
     /**
+     * The size of an element.
+     */
+    int OBJECT_SIZE = 24;
+
+    /**
      * @return The BoundingBox of the element
      */
     BoundingBox getBounds();
