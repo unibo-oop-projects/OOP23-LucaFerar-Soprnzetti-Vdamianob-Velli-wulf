@@ -61,6 +61,8 @@ public final class GameLoopImpl implements GameLoop, Runnable {
 
         if (this.timer >= NANOSECONDS) {
             System.out.println("FPS: " + drawCount);
+            System.out.println("GP height: " + this.gamePanel.getHeight());
+            System.out.println("GP width: " + this.gamePanel.getWidth());
             this.drawCount = 0;
             this.timer = 0;
         }
