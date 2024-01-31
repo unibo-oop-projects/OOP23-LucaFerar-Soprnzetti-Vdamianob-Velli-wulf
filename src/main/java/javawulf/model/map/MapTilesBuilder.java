@@ -8,7 +8,7 @@ import java.util.List;
  * biomes.
  * The HashMap associates for each position a tile-type, thus composing the game
  * map.
- * The class that extends from this interface, will be exclusively used by
+ * This class will be exclusively used by
  * MapImpl for the sole purpose of making, internally, the map.
  */
 public final class MapTilesBuilder {
