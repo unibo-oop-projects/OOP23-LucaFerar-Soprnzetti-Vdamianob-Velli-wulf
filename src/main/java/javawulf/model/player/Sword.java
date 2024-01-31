@@ -11,6 +11,16 @@ import javawulf.model.Coordinate;
 public interface Sword extends GameElement {
 
     /**
+     * The strength a Sword normally has.
+     */
+    int NORMAL = 1;
+    /**
+     * The strength a Sword has when it has a strength boosting Power-Up or
+     * a certain item.
+     */
+    int STRONG = 2;
+
+    /**
      * SwordType defines the current type of sword.
      */
     enum SwordType {
@@ -49,8 +59,14 @@ public interface Sword extends GameElement {
      */
     int getSwordStrength();
 
+    /**
+     * @return The current durability of the player's sword
+     */
     int getDurability();
 
+    /**
+     * @param durability the sword changes into
+     */
     void setDurability(int durability);
 
     /**

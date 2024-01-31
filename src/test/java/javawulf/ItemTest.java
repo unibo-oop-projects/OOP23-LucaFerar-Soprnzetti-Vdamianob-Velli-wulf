@@ -60,7 +60,7 @@ public final class ItemTest {
         // Player collect the item
         piece.collect(player);
         // Checking that the effect has been applied
-        assertTrue(player.getPieces().contains(piece));
+        assertEquals(1, player.getNumberOfPieces());
     }
 
     @Test

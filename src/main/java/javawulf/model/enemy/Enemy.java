@@ -23,4 +23,9 @@ public interface Enemy extends Entity {
      * @param p the player
      */
     void takeHit(Player p);
+
+    /**
+     * Updates the internal clock of the enemy.
+     */
+    void tick();
 }

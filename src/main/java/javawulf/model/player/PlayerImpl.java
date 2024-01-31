@@ -123,8 +123,8 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public PlayerColor getColor() {
-        return this.color;
+    public String getColor() {
+        return this.color.getColor();
     }
 
     @Override
@@ -133,8 +133,8 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public List<AmuletPiece> getPieces() {
-        return this.piecesCollected;
+    public int getNumberOfPieces() {
+        return this.piecesCollected.size();
     }
 
     @Override

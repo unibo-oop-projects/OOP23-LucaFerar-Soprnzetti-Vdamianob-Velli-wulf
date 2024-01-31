@@ -13,6 +13,7 @@ public class ViewImpl {
 
     public ViewImpl() throws InterruptedException {
         this.gamePanel = new GamePanel();
+        gamePanel.addKeyListener(new CommandListener());
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // window.setResizable(false);
