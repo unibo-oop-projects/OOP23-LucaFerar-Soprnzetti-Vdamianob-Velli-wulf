@@ -59,8 +59,11 @@ public final class Pawn extends EnemyImpl {
         this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE,
                 OBJECT_SIZE);
 
-        if (this.isCollidingWithWall(m)) {
-            this.setDirection(Direction.values()[random.nextInt(4)]);
+        if (this.isCollidingWithWall(m) || p.isHit(getBounds())) {
+            Direction actualDirection = this.getDirection();
+            do {
+                this.setDirection(Direction.values()[random.nextInt(4)]);
+            } while (actualDirection.equals(this.getDirection()));
         }
     }
 
