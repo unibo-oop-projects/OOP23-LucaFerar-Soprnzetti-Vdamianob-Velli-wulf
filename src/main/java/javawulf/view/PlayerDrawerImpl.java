@@ -23,15 +23,17 @@ public final class PlayerDrawerImpl implements PlayerDrawer {
     private BufferedImage sword;
     private Player player;
     private Sword playerSword;
+    private GamePanel gamePanel;
 
     /**
      * The Player coming from the Controller.
      * 
      * @param player The Player character that must be drawn
      */
-    public PlayerDrawerImpl(final Player player) {
+    public PlayerDrawerImpl(final Player player, GamePanel gamePanel) {
         this.player = player;
         this.playerSword = this.player.getSword();
+        this.gamePanel = gamePanel;
         try {
             this.playerUp = ImageIO.read(getClass().getResourceAsStream(ImagePath.PLAYER_UP.getPath()));
             this.playerDown = ImageIO.read(getClass().getResourceAsStream(ImagePath.PLAYER_DOWN.getPath()));
@@ -66,9 +68,10 @@ public final class PlayerDrawerImpl implements PlayerDrawer {
                 break;
         }
 
-        graphics.drawImage(img, 
-            (int) this.player.getBounds().getCollisionArea().getX() * GamePanel.scale,
-            (int) this.player.getBounds().getCollisionArea().getY() * GamePanel.scale,
+        int playerX = this.gamePanel.getWidth()/2 - Player.OBJECT_SIZE/2;
+        int playerY = this.gamePanel.getHeight()/2 - Player.OBJECT_SIZE/2;
+
+        graphics.drawImage(img, playerX, playerY,
             GamePanel.tileSize, GamePanel.tileSize, null);
 
         if (this.playerSword.getBounds().getCollisionType().equals(CollisionType.SWORD)) {
@@ -78,9 +81,12 @@ public final class PlayerDrawerImpl implements PlayerDrawer {
             if (this.playerSword.getSwordType().equals(SwordType.GREATSWORD)) {
                 imgSword = this.sword;
             }
+
+            int swordX = playerX - this.player.getPosition().getX() + this.player.getSword().getPosition().getX();
+            int swordY = playerY - this.player.getPosition().getY() + this.player.getSword().getPosition().getY();
             graphics.drawImage(imgSword,
-                (int) this.playerSword.getBounds().getCollisionArea().getX() * GamePanel.scale,
-                (int) this.playerSword.getBounds().getCollisionArea().getY() * GamePanel.scale,
+                swordX,
+                swordY,
                 width, height, null);
         }
     }
