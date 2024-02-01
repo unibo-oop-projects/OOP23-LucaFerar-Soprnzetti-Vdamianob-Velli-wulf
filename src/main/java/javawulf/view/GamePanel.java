@@ -44,10 +44,6 @@ public class GamePanel extends JPanel {
         super.paintComponent(graphics);
         Graphics2D graphics2d = (Graphics2D)graphics;
 
-        // player.draw(graphics2d);
-        // graphics2d.setColor(Color.red);
-        // graphics2d.fillRect(100, 100, this.tileSize, this.tileSize);
-
         this.mapDrawer.draw(graphics2d);
         this.playerDrawer.draw(graphics2d);
 
