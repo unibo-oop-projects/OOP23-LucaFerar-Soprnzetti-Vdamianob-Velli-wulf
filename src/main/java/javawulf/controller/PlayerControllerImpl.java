@@ -46,6 +46,8 @@ public class PlayerControllerImpl implements PlayerController {
             } else {
                 this.movementDirection = Optional.empty();
             }
+        } else {
+            this.movementDirection = Optional.empty();
         }
     }
 
