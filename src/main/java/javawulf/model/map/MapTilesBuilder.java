@@ -117,6 +117,17 @@ public final class MapTilesBuilder {
     }
 
     private static void buildCentralBiome(final HashMap<TilePosition, TileType> tiles) {
+        buildSpace(tiles, new TilePosition(Biome.SIZE, 3), new Corridor(Map.WIDTH_CENTRAL_BIOME, 2), TileType.CORRIDOR);
+        buildSpace(tiles, new TilePosition(Biome.SIZE, 15), new Corridor(Map.WIDTH_CENTRAL_BIOME, 2), TileType.CORRIDOR);
+        buildSpace(tiles, new TilePosition(Biome.SIZE, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 3), new Corridor(Map.WIDTH_CENTRAL_BIOME, 2), TileType.CORRIDOR);
+        buildSpace(tiles, new TilePosition(Biome.SIZE, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 15), new Corridor(Map.WIDTH_CENTRAL_BIOME, 2), TileType.CORRIDOR);
+
+        buildSpace(tiles, new TilePosition(3, Biome.SIZE), new Corridor(2, Map.WIDTH_CENTRAL_BIOME), TileType.CORRIDOR);
+        buildSpace(tiles, new TilePosition(15, Biome.SIZE), new Corridor(2, Map.WIDTH_CENTRAL_BIOME), TileType.CORRIDOR);
+        buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 3, Biome.SIZE), new Corridor(2, Map.WIDTH_CENTRAL_BIOME), TileType.CORRIDOR);
+        buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 15, Biome.SIZE), new Corridor(2, Map.WIDTH_CENTRAL_BIOME), TileType.CORRIDOR);
+
+
         // for (int x = Biome.SIZE; x <= Biome.SIZE - 1 + Map.WIDTH_CENTRAL_BIOME; x++) {
         //     for (int y = 3; y < 5; y++) {
         //         tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
