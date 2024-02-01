@@ -7,12 +7,8 @@ import javawulf.model.player.SwordImpl;
 
 public class PowerUpAttack extends PowerUpImpl {
     
-    private final static int DURATION = 20;
-    private final static int POINTS = 50;
-    private final static String TYPE = "Attack";
-    
-    public PowerUpAttack(Coordinate position) {
-        super(position, POINTS, TYPE, DURATION);
+    public PowerUpAttack(Coordinate position, int duration, int points, String type) {
+        super(position, points, type, duration);
     }
 
     @Override
@@ -26,4 +22,5 @@ public class PowerUpAttack extends PowerUpImpl {
             p.getSword().setSwordStrength(SwordImpl.NORMAL);
         }
     }
+    
 }

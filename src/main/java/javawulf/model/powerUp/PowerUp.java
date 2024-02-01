@@ -13,4 +13,5 @@ public interface PowerUp extends Collectable{
     public int getDuration();
 
     public String getType();
+    
 }
