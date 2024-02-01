@@ -60,6 +60,11 @@ public interface BoundingBox {
     void setCollisionArea(int x, int y, int width, int height);
 
     /**
+     * @param area The new area of the CollisionArea.
+     */
+    void setCollisionArea(Rectangle area);
+
+    /**
      * @return The current collisionType of the game element
      */
     CollisionType getCollisionType();

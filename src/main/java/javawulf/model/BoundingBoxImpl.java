@@ -51,4 +51,9 @@ public final class BoundingBoxImpl implements BoundingBox {
         this.type = type;
     }
 
+    @Override
+    public void setCollisionArea(Rectangle area) {
+        this.area = Optional.of(area);
+    }
+
 }
