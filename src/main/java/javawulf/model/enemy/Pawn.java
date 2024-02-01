@@ -6,6 +6,7 @@ import javawulf.model.Direction;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.map.Map;
 import javawulf.model.Coordinate;
+import javawulf.model.CoordinateImpl;
 import javawulf.model.player.Player;
 
 /**
@@ -30,7 +31,7 @@ public final class Pawn extends EnemyImpl {
     public Pawn(final Coordinate position) {
         super(position);
         this.isAlive = true;
-        this.timeToWait = new Random().nextInt(4) + 1;
+        this.timeToWait = random.nextInt(4) + 1;
         this.setDirection(Direction.values()[random.nextInt(4)]);
         this.tickCount = 0;
     }
@@ -49,17 +50,26 @@ public final class Pawn extends EnemyImpl {
         return timeToWait;
     }
 
+    /**
+     * @return the tick count
+     */
+    public int getTickCount() {
+        return this.tickCount;
+    }
+
     @Override
     public void move(final Player p, final Map m) {
 
-        double newX = this.getPosition().getX() + this.getDirection().getX() * this.getSpeed() * MOVEMENT_DELTA;
-        double newY = this.getPosition().getY() + this.getDirection().getY() * this.getSpeed() * MOVEMENT_DELTA;
+        int delta = this.getSpeed() * MOVEMENT_DELTA;
 
-        this.getPosition().setPosition((int) Math.round(newX), (int) Math.round(newY));
-        this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE,
-                OBJECT_SIZE);
+        int newX = this.getPosition().getX() + (int) (this.getDirection().getX() * delta);
+        int newY = this.getPosition().getY() + (int) (this.getDirection().getY() * delta);
 
-        if (this.isCollidingWithWall(m) || p.isHit(getBounds())) {
+        this.setPosition(new CoordinateImpl(newX, newY));
+        this.getBounds().setCollisionArea(this.getPosition().getX(),
+                this.getPosition().getY(), OBJECT_SIZE, OBJECT_SIZE);
+
+        if (this.isCollidingWithWall(m)) {
             Direction actualDirection = this.getDirection();
             do {
                 this.setDirection(Direction.values()[random.nextInt(4)]);
@@ -80,9 +90,12 @@ public final class Pawn extends EnemyImpl {
     public void tick() {
 
         this.tickCount++;
+        Direction directionToChange = this.getDirection();
 
         if (this.tickCount >= this.timeToWait) {
-            this.setDirection(Direction.values()[random.nextInt(4)]);
+            do {
+                this.setDirection(Direction.values()[random.nextInt(4)]);
+            } while (directionToChange.equals(this.getDirection()));
             this.timeToWait = random.nextInt(4) + 1;
             this.tickCount = 0;
         }
