@@ -59,9 +59,10 @@ public class PlayerDrawerImpl implements PlayerDrawer {
                 break;
         }
 
-        graphics.drawImage(img, (int) this.player.getBounds().getCollisionArea().getWidth() * GamePanel.scale,
-            (int) this.player.getBounds().getCollisionArea().getWidth() * GamePanel.scale, GamePanel.tileSize,
-            GamePanel.tileSize, null);
+        graphics.drawImage(img, 
+            this.player.getPosition().getX() + (int) this.player.getBounds().getCollisionArea().getWidth() * GamePanel.scale,
+            this.player.getPosition().getY() + (int) this.player.getBounds().getCollisionArea().getWidth() * GamePanel.scale,
+            GamePanel.tileSize, GamePanel.tileSize, null);
     }
     
 }
