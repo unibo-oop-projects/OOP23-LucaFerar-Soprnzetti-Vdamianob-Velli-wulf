@@ -29,4 +29,9 @@ public interface GameLoop {
      * @return The Player character
      */
     Player getPlayer();
+
+    /**
+     * @return The PlayerController
+     */
+    PlayerController getPlayerController();
 }

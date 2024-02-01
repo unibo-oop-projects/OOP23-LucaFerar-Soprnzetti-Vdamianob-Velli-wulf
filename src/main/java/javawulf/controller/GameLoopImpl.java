@@ -22,7 +22,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private final GamePanel gamePanel;
     private Map gameMap;
     private Player gamePlayer;
-    private Player player;
+    private PlayerController playerController;
 
 /**
  * 
@@ -31,6 +31,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     public GameLoopImpl(final GamePanel panel) {
         playerInit();
         mapInit();
+        this.playerController = new PlayerControllerImpl();
         this.gamePanel = panel;
     }
 
@@ -75,6 +76,15 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void update() {
+        if (this.playerController.getDirection().isPresent()){
+            this.gamePlayer.move(this.playerController.getDirection().get());
+        }
+        if (this.playerController.isAttack()){
+            this.gamePlayer.attack();
+        } else {
+            this.gamePlayer.getSword().deactivate();
+        }
+        
         // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
     }
 
@@ -96,7 +106,12 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     public Player getPlayer(){
-        return this.player;
+        return this.gamePlayer;
+    }
+
+    @Override
+    public PlayerController getPlayerController() {
+        return this.playerController;
     }
 
 }
