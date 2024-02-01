@@ -90,12 +90,6 @@ public final class MapTilesBuilder {
             final TileType defaultSpaceTile) {
         for (var space : spaces) {
             buildSpace(tiles, new TilePosition(space.getKey().getX() + biomeQuadrant.getOffset().getX(), space.getKey().getY() + biomeQuadrant.getOffset().getY()), space.getValue(), defaultSpaceTile);
-            // for (int y = space.getKey().getY(); y < space.getKey().getY() + space.getValue().getHeight(); y++) {
-            //     for (int x = space.getKey().getX(); x < space.getKey().getX() + space.getValue().getWidth(); x++) {
-            //         tiles.put(new TilePosition(x + biomeQuadrant.getOffset().getX(),
-            //                 y + biomeQuadrant.getOffset().getY()), defaultSpaceTile);
-            //     }
-            // }
         }
     }
 
@@ -127,61 +121,10 @@ public final class MapTilesBuilder {
         buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 3, Biome.SIZE), new Corridor(2, Map.WIDTH_CENTRAL_BIOME), TileType.CORRIDOR);
         buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 15, Biome.SIZE), new Corridor(2, Map.WIDTH_CENTRAL_BIOME), TileType.CORRIDOR);
 
-
-        // for (int x = Biome.SIZE; x <= Biome.SIZE - 1 + Map.WIDTH_CENTRAL_BIOME; x++) {
-        //     for (int y = 3; y < 5; y++) {
-        //         tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-        //     }
-        //     for (int y = 15; y < 17; y++) {
-        //         tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-        //     }
-        //     for (int y = Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 3; y < Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 5; y++) {
-        //         tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-        //     }
-        //     for (int y = Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 15; y < Biome.SIZE + Map.WIDTH_CENTRAL_BIOME
-        //             + 17; y++) {
-        //         tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-        //     }
-        // }
-
-        // for (int y = Biome.SIZE; y <= Biome.SIZE - 1 + Map.WIDTH_CENTRAL_BIOME; y++) {
-        //     for (int x = 3; x < 5; x++) {
-        //         tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-        //     }
-        //     for (int x = 15; x < 17; x++) {
-        //         tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-        //     }
-        //     for (int x = Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 3; x < Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 5; x++) {
-        //         tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-        //     }
-        //     for (int x = Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 15; x < Biome.SIZE + Map.WIDTH_CENTRAL_BIOME
-        //             + 17; x++) {
-        //         tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-        //     }
-        // }
-
-        // for (int x = Biome.SIZE + 2; x <= Biome.SIZE + Map.WIDTH_CENTRAL_BIOME - 1 - 2; x++) {
-        //     for (int y = Biome.SIZE + 2; y <= Biome.SIZE + Map.WIDTH_CENTRAL_BIOME - 1 - 2; y++) {
-        //         tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
-        //     }
-        // }
-        // for (int x = Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1; x < Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2
-        //         + 1; x++) {
-        //     for (int y = Biome.SIZE - 3; y < Biome.SIZE + 2; y++) {
-        //         tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
-        //     }
-        //     for (int y = Biome.SIZE + 8; y < Biome.SIZE + 13; y++) {
-        //         tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
-        //     }
-        // }
-        // for (int y = Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1; y < Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2
-        //         + 1; y++) {
-        //     for (int x = Biome.SIZE - 3; x < Biome.SIZE + 2; x++) {
-        //         tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
-        //     }
-        //     for (int x = Biome.SIZE + 8; x < Biome.SIZE + 13; x++) {
-        //         tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
-        //     }
-        // }
+        buildSpace(tiles, new TilePosition(Biome.SIZE + 2, Biome.SIZE + 2), new Room(Map.WIDTH_CENTRAL_BIOME-2*2, Map.WIDTH_CENTRAL_BIOME-2*2), TileType.CENTRAL_ROOM);
+        buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1, Biome.SIZE - 3), new Room(2, 5), TileType.CENTRAL_ROOM);
+        buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1, Biome.SIZE + 8), new Room(2, 5), TileType.CENTRAL_ROOM);
+        buildSpace(tiles, new TilePosition(Biome.SIZE - 3, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1), new Room(5, 2), TileType.CENTRAL_ROOM);
+        buildSpace(tiles, new TilePosition(Biome.SIZE + 8, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1), new Room(5, 2), TileType.CENTRAL_ROOM);
     }
 }
