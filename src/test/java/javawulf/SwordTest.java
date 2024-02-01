@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import javawulf.model.BoundingBox;
 import javawulf.model.BoundingBox.CollisionType;
+import javawulf.model.map.Map;
+import javawulf.model.map.factory.MapFactoryImpl;
 import javawulf.model.BoundingBoxImpl;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
@@ -37,6 +39,7 @@ public final class SwordTest {
     private int delta = GameObject.OBJECT_SIZE;
     private BoundingBox startBox;
     private Coordinate playerPosition;
+    private Map map;
 
     @BeforeEach
     void createPlayer() {
@@ -47,6 +50,7 @@ public final class SwordTest {
         this.startBox = new BoundingBoxImpl(startingX + (int) (startDirection.getX() * GameObject.OBJECT_SIZE),
             startingY + (int) (startDirection.getY() * GameObject.OBJECT_SIZE), GameObject.OBJECT_SIZE,
             GameObject.OBJECT_SIZE, CollisionType.INACTIVE);
+        this.map = new MapFactoryImpl().getTestMap(player);
     }
 
     @Test
@@ -61,7 +65,7 @@ public final class SwordTest {
     @Test
     void testSwordMovement() {
         Direction movementDirection = Direction.UP;
-        this.player.move(movementDirection);
+        this.player.move(movementDirection, map);
         playerPosition = this.player.getPosition();
         BoundingBox expectBox = new BoundingBoxImpl(playerPosition.getX() + (int) (movementDirection.getX() * delta),
             playerPosition.getY() + (int) (movementDirection.getY() * delta),  GameObject.OBJECT_SIZE,
@@ -77,7 +81,7 @@ public final class SwordTest {
     @Test
     void testSwordDiagonalMovement() {
         Direction movementDirection = Direction.DOWN_LEFT;
-        this.player.move(movementDirection);
+        this.player.move(movementDirection, map);
         playerPosition = this.player.getPosition();
         Coordinate expectCoordinate = new CoordinateImpl(playerPosition.getX() + (int) (Direction.DOWN.getX() * delta),
             playerPosition.getY() + (int) (Direction.DOWN.getY() * delta));
@@ -95,7 +99,7 @@ public final class SwordTest {
     @Test
     void testSwordOppositeDiagonalMovement() {
         Direction movementDirection = Direction.UP_RIGHT;
-        this.player.move(movementDirection);
+        this.player.move(movementDirection, map);
         playerPosition = this.player.getPosition();
         Coordinate expectCoordinate = new CoordinateImpl(playerPosition.getX() + (int) (Direction.RIGHT.getX() * delta),
             playerPosition.getY() + (int) (Direction.RIGHT.getY() * delta));
@@ -132,7 +136,7 @@ public final class SwordTest {
     void testGreatSwordCollisionArea() {
         this.sword.changeSwordType();
         Direction movementDirection = Direction.RIGHT;
-        this.player.move(movementDirection);
+        this.player.move(movementDirection, map);
         playerPosition = this.player.getPosition();
         int constantHeight = 1;
         int constantWidth = 1;
