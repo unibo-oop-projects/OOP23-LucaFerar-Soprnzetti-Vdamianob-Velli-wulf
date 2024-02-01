@@ -133,8 +133,9 @@ public final class PawnTest {
         initialTime = pawn.getTimeToWait();
         Direction initialDirection = pawn.getDirection();
         int counter = 0;
-        // Call the tick method until the pawn changes direction or the counter reaches 100
-        while (pawn.getDirection().equals(initialDirection) && counter < 100){
+        // Call the tick method until the pawn changes direction or the counter reaches
+        // 100
+        while (pawn.getDirection().equals(initialDirection) && counter < 100) {
             pawn.tick();
             counter++;
         }
