@@ -31,7 +31,7 @@ public class PawnTest {
     Player player = new PlayerImpl(0, 0, 3, 0);
     Coordinate position = new CoordinateImpl(startingX, startingY);
     MapFactory mapFactory = new MapFactoryImpl();
-    Map map = mapFactory.getDefaultMap1();
+    Map map = mapFactory.getDefaultMap1(null);
     Pawn pawn;
 
     @BeforeEach

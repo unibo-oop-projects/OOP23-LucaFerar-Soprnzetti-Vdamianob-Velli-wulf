@@ -2,6 +2,8 @@ package javawulf.controller;
 
 import javawulf.model.map.Map;
 import javawulf.model.map.factory.MapFactoryImpl;
+import javawulf.model.player.Player;
+import javawulf.model.player.PlayerImpl;
 // import javawulf.model.player.Player;
 // import javawulf.model.player.PlayerImpl;
 import javawulf.view.GamePanel;
@@ -19,31 +21,31 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private int drawCount = 0;
     private final GamePanel gamePanel;
     private Map gameMap;
-    // private Player gamePlayer;
+    private Player gamePlayer;
 
 
     public GameLoopImpl(final GamePanel panel) {
-        mapInit();
         playerInit();
+        mapInit();
         this.gamePanel = panel;
     }
 
     private void mapInit() {
-        this.gameMap = new MapFactoryImpl().getDefaultMap1();
+        this.gameMap = new MapFactoryImpl().getDefaultMap1(this.gamePlayer);
     }
 
     private void playerInit() {
-        // this.gamePlayer = new PlayerImpl(100, 100, 3, 10);
+        this.gamePlayer = new PlayerImpl(24, 24, 3, 0);
     }
 
     @Override
     public void run() {
-            this.interval = NANOSECONDS / FPS;
-            lastTime = System.nanoTime();
+        this.interval = NANOSECONDS / FPS;
+        lastTime = System.nanoTime();
 
-            while (this.gameLoopThread != null) {
-                this.gameLoopBody();
-            }
+        while (this.gameLoopThread != null) {
+            this.gameLoopBody();
+        }
     }
 
     private void gameLoopBody() {    
@@ -61,8 +63,8 @@ public final class GameLoopImpl implements GameLoop, Runnable {
 
         if (this.timer >= NANOSECONDS) {
             System.out.println("FPS: " + drawCount);
-            System.out.println("GP height: " + this.gamePanel.getHeight());
-            System.out.println("GP width: " + this.gamePanel.getWidth());
+            System.out.println("GP height: " + this.gamePanel.getHeight()
+            + " GP width: " + this.gamePanel.getWidth());
             this.drawCount = 0;
             this.timer = 0;
         }

@@ -86,7 +86,7 @@ public class MapTest {
         fourthBiome = new BiomeImpl();
         fourthBiome.addRoom(new TilePosition(1, 1), new Room(10, 10));
 
-        this.gameMapExample = new MapImpl(firstBiome, secondBiome, thirdBiome, fourthBiome);
+        this.gameMapExample = new MapImpl(null, firstBiome, secondBiome, thirdBiome, fourthBiome);
     }
 
     @Test

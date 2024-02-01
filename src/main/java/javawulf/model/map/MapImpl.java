@@ -12,7 +12,6 @@ import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.player.Player;
-import javawulf.model.player.PlayerImpl;
 
 /**
  * Implementation of Map interface.
@@ -33,12 +32,10 @@ public final class MapImpl implements Map {
      * @param thirdBiome
      * @param fourthBiome
      */
-    public MapImpl(final Biome firstBiome, final Biome secondBiome, final Biome thirdBiome, final Biome fourthBiome) {
+    public MapImpl(final Player player, final Biome firstBiome, final Biome secondBiome, final Biome thirdBiome, final Biome fourthBiome) {
         this.biomes.addAll(List.of(firstBiome, secondBiome, thirdBiome, fourthBiome));
         this.tiles = MapTilesBuilder.buildTiles(this.biomes);
-        // TODO: to edit
-        final int defaultPlayerValue = 1;
-        this.player = new PlayerImpl(TileType.TILE_DIMENSION, TileType.TILE_DIMENSION, defaultPlayerValue, defaultPlayerValue);
+        this.player = player;
     }
 
     @Override
