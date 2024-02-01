@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.player.Player;
 
 /**
@@ -59,9 +60,19 @@ public class PlayerDrawerImpl implements PlayerDrawer {
                 break;
         }
 
-        graphics.drawImage(img, (int) this.player.getBounds().getCollisionArea().getWidth() * GamePanel.scale,
-            (int) this.player.getBounds().getCollisionArea().getWidth() * GamePanel.scale, GamePanel.tileSize,
-            GamePanel.tileSize, null);
+        graphics.drawImage(img, 
+            this.player.getPosition().getX() + (int) this.player.getBounds().getCollisionArea().getWidth() * GamePanel.scale,
+            this.player.getPosition().getY() + (int) this.player.getBounds().getCollisionArea().getHeight() * GamePanel.scale,
+            GamePanel.tileSize, GamePanel.tileSize, null);
+        
+        if (this.player.getSword().getBounds().getCollisionType().equals(CollisionType.SWORD)) {
+            graphics.drawImage(this.sword,
+            (int) this.player.getSword().getBounds().getCollisionArea().getCenterX() + (int)
+                this.player.getSword().getBounds().getCollisionArea().getWidth() * GamePanel.scale,
+            (int) this.player.getSword().getBounds().getCollisionArea().getCenterY() + (int)
+                this.player.getSword().getBounds().getCollisionArea().getHeight() * GamePanel.scale,
+            GamePanel.tileSize, GamePanel.tileSize, null);
+        }
     }
     
 }

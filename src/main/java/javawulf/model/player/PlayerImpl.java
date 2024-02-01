@@ -68,8 +68,8 @@ public final class PlayerImpl extends AbstractEntity implements Player {
                 current.getY() + (int) (direction.getY() * delta)));
         this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE,
                 OBJECT_SIZE);
-        this.sword.move(this.getPosition(), direction);
         this.setDirection(direction);
+        this.sword.move(this.getPosition(), direction);
     }
 
     @Override
