@@ -3,10 +3,12 @@ package javawulf.view;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javawulf.controller.PlayerController;
+
 /**
  * CommandListener is a class whose purpose is to communicate
  * to the controller when a key related to the game has been pressed
- * or not.
+ * or released.
  */
 public class CommandListener implements KeyListener {
 
@@ -15,6 +17,7 @@ public class CommandListener implements KeyListener {
     private boolean left = false;
     private boolean right = false;
     private boolean attack = false;
+    private PlayerController controller;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -23,23 +26,23 @@ public class CommandListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            up = true;
+            this.up = true;
             System.out.println("Pressed UP");
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            down = true;
+            this.down = true;
             System.out.println("Pressed DOWN");
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            left = true;
+            this.left = true;
             System.out.println("Pressed LEFT");
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            right = true;
+            this.right = true;
             System.out.println("Pressed RIGHT");
         }
         if (e.getKeyCode() == KeyEvent.VK_COMMA) {
-            attack = true;
+            this.attack = true;
             System.out.println("Pressed ATTACK");
         }
         communicateToController();
@@ -48,30 +51,30 @@ public class CommandListener implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            up = false;
+            this.up = false;
             System.out.println("Released UP");
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            down = false;
+            this.down = false;
             System.out.println("Released DOWN");
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            left = false;
+            this.left = false;
             System.out.println("Released LEFT");
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            right = false;
+            this.right = false;
             System.out.println("Released RIGHT");
         }
         if (e.getKeyCode() == KeyEvent.VK_COMMA) {
-            attack = false;
+            this.attack = false;
             System.out.println("Released ATTACK");
         }
         communicateToController();
     }
 
     private void communicateToController() {
-        //controller.update(up,down,left,right,attack);
+        this.controller.updatePlayerStatus(up,down,left,right,attack);
     }
 
 }
