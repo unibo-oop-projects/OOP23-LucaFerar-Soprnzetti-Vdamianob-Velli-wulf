@@ -98,7 +98,7 @@ public final class PawnTest {
          * pawn
          */
         this.player = new PlayerImpl(STARTING_X * 3, STARTING_Y, STARTING_HEALTH, 0);
-        player.move(Direction.LEFT);
+        player.move(Direction.LEFT, map);
         // Hit the pawn
         player.attack();
 
