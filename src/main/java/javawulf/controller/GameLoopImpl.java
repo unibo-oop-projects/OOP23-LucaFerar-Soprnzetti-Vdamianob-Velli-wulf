@@ -67,6 +67,8 @@ public final class GameLoopImpl implements GameLoop, Runnable {
         }
 
         if (this.timer >= NANOSECONDS) {
+            System.out.println("Player position" + this.gamePlayer.getPosition().getPosition());
+            System.out.println("Sword position" + this.gamePlayer.getSword().getBounds().getCollisionType());
             System.out.println("FPS: " + drawCount);
             System.out.println("GP height: " + this.gamePanel.getHeight()
             + " GP width: " + this.gamePanel.getWidth());
