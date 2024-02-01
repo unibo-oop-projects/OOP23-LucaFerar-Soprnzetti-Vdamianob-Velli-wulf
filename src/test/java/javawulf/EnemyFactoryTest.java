@@ -52,6 +52,8 @@ public final class EnemyFactoryTest {
                 AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY).getCollisionArea());
         // Check pawn's speed
         assertEquals(AbstractEntity.DEFAULT_SPEED, pawn.getSpeed());
+        // Check the pawn's tick is set to 0
+        assertEquals(0, pawn.getTickCount());
 
     }
 
