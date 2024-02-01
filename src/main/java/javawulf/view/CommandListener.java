@@ -19,6 +19,10 @@ public class CommandListener implements KeyListener {
     private boolean attack = false;
     private PlayerController controller;
 
+    public CommandListener(PlayerController controller) {
+        this.controller = controller;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -74,7 +78,8 @@ public class CommandListener implements KeyListener {
     }
 
     private void communicateToController() {
-        this.controller.updatePlayerStatus(up,down,left,right,attack);
+        this.controller.updatePlayerStatus(up,down,left,right);
+        this.controller.updateSwordStatus(attack);
     }
 
 }

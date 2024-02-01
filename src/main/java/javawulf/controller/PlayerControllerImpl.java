@@ -3,55 +3,55 @@ package javawulf.controller;
 import java.util.Optional;
 
 import javawulf.model.Direction;
-import javawulf.model.player.Player;
 
 /**
  * Implementation of PlayerController.
  */
 public class PlayerControllerImpl implements PlayerController {
 
-    private Player player;
+    private Optional<Direction> movementDirection = Optional.empty();
+    private boolean attack = false;
+    
+    public Optional<Direction> getDirection() {
+        return this.movementDirection;
+    }
 
-    /**
-     * @param player The instance of Player coming from the Model.
-     */
-    public PlayerControllerImpl(Player player) {
-        this.player = player;
+    public boolean isAttack() {
+        return this.attack;
     }
 
     @Override
-    public void updatePlayerStatus(boolean up, boolean down, boolean left, boolean right, boolean attack) {
-        Optional<Direction> movementDirection = Optional.empty();
+    public void updatePlayerStatus(boolean up, boolean down, boolean left, boolean right) {
         if (!((up && down) || (left && right))) {
             if (up) {
                 if (right) {
-                    movementDirection = Optional.of(Direction.UP_RIGHT);
+                    this.movementDirection = Optional.of(Direction.UP_RIGHT);
                 } else if (left) {
-                    movementDirection = Optional.of(Direction.UP_LEFT);
+                    this.movementDirection = Optional.of(Direction.UP_LEFT);
                 } else {
-                    movementDirection = Optional.of(Direction.UP);
+                    this.movementDirection = Optional.of(Direction.UP);
                 }
             } else if (down) {
                 if (right) {
-                    movementDirection = Optional.of(Direction.DOWN_RIGHT);
+                    this.movementDirection = Optional.of(Direction.DOWN_RIGHT);
                 } else if (left) {
-                    movementDirection = Optional.of(Direction.DOWN_LEFT);
+                    this.movementDirection = Optional.of(Direction.DOWN_LEFT);
                 } else {
-                    movementDirection = Optional.of(Direction.DOWN);
+                    this.movementDirection = Optional.of(Direction.DOWN);
                 }
             } else if (right) {
-                movementDirection = Optional.of(Direction.RIGHT);
+                this.movementDirection = Optional.of(Direction.RIGHT);
             } else if (left) {
-                movementDirection = Optional.of(Direction.LEFT);
+                this.movementDirection = Optional.of(Direction.LEFT);
+            } else {
+                this.movementDirection = Optional.empty();
             }
+        }
+    }
 
-            if (movementDirection.isPresent()) {
-                this.player.move(movementDirection.get());
-            }
-        }
-        if (attack) {
-            this.player.attack();
-        }
+    @Override
+    public void updateSwordStatus(boolean attack) {
+        this.attack = attack;
     }
     
 }
