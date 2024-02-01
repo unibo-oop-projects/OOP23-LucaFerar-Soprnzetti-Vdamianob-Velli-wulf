@@ -22,6 +22,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private final GamePanel gamePanel;
     private Map gameMap;
     private Player gamePlayer;
+    private Player player;
 
 /**
  * 
@@ -91,8 +92,11 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     public Map getMap() {
-        return gameMap;
+        return this.gameMap;
     }
 
+    public Player getPlayer(){
+        return this.player;
+    }
 
 }
