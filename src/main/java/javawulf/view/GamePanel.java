@@ -34,7 +34,7 @@ public class GamePanel extends JPanel {
         // this.addKeyListener(keyHandler);
         this.setFocusable(true);
         this.mapDrawer = new MapDrawerImpl(gameLoopController.getMap());
-        this.playerDrawer = new PlayerDrawerImpl(gameLoopController.getMap().getPlayer());
+        this.playerDrawer = new PlayerDrawerImpl(gameLoopController.getPlayer());
         gameLoopController.startGameLoopThread();
     }
 
