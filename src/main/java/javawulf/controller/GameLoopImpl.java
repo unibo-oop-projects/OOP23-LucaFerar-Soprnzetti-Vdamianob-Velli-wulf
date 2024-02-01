@@ -4,13 +4,13 @@ import javawulf.model.map.Map;
 import javawulf.model.map.factory.MapFactoryImpl;
 import javawulf.model.player.Player;
 import javawulf.model.player.PlayerImpl;
-// import javawulf.model.player.Player;
-// import javawulf.model.player.PlayerImpl;
 import javawulf.view.GamePanel;
 
+/**
+ * @see GameLoop
+ */
 public final class GameLoopImpl implements GameLoop, Runnable {
 
-    private static final int FPS = 60;
     private static final int NANOSECONDS = 1_000_000_000;
     private long lastTime;
     private long currentTime;
@@ -23,7 +23,10 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private Map gameMap;
     private Player gamePlayer;
 
-
+/**
+ * 
+ * @param panel's view.
+ */
     public GameLoopImpl(final GamePanel panel) {
         playerInit();
         mapInit();
