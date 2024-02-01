@@ -16,6 +16,8 @@ public final class Pawn extends EnemyImpl {
 
     private static final int POINTS = 100;
 
+    private final Random random = new Random();
+
     private boolean isAlive;
     private int timeToWait;
     private int tickCount;
@@ -29,7 +31,7 @@ public final class Pawn extends EnemyImpl {
         super(position);
         this.isAlive = true;
         this.timeToWait = new Random().nextInt(4) + 1;
-        this.setDirection(Direction.values()[new Random().nextInt(4)]);
+        this.setDirection(Direction.values()[random.nextInt(4)]);
         this.tickCount = 0;
     }
 
@@ -57,8 +59,11 @@ public final class Pawn extends EnemyImpl {
         this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE,
                 OBJECT_SIZE);
 
-        if (this.isCollidingWithWall(m)) {
-            this.setDirection(Direction.values()[new Random().nextInt(4)]);
+        if (this.isCollidingWithWall(m) || p.isHit(getBounds())) {
+            Direction actualDirection = this.getDirection();
+            do {
+                this.setDirection(Direction.values()[random.nextInt(4)]);
+            } while (actualDirection.equals(this.getDirection()));
         }
     }
 
@@ -77,8 +82,8 @@ public final class Pawn extends EnemyImpl {
         this.tickCount++;
 
         if (this.tickCount >= this.timeToWait) {
-            this.setDirection(Direction.values()[new Random().nextInt(4)]);
-            this.timeToWait = new Random().nextInt(4) + 1;
+            this.setDirection(Direction.values()[random.nextInt(4)]);
+            this.timeToWait = random.nextInt(4) + 1;
             this.tickCount = 0;
         }
     }
