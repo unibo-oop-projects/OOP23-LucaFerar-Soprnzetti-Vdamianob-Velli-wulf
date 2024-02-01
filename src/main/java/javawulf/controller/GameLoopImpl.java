@@ -22,6 +22,9 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private final GamePanel gamePanel;
     private Map gameMap;
     private Player gamePlayer;
+    private boolean attacking = false;
+    private long swordTime;
+    private PlayerController playerController;
 
 /**
  * 
@@ -30,6 +33,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     public GameLoopImpl(final GamePanel panel) {
         playerInit();
         mapInit();
+        this.playerController = new PlayerControllerImpl();
         this.gamePanel = panel;
     }
 
@@ -38,7 +42,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void playerInit() {
-        this.gamePlayer = new PlayerImpl(24, 24, 3, 0);
+        this.gamePlayer = new PlayerImpl(70, 70, 3, 0);
     }
 
     @Override
@@ -74,6 +78,24 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void update() {
+        if (this.playerController.getDirection().isPresent() && !this.attacking){
+            try {
+                this.gamePlayer.move(this.playerController.getDirection().get(), this.gameMap);   
+            } catch (Exception e) {
+                System.out.println("There is a wall");
+            }
+        } else if (this.playerController.isAttack() && !this.attacking){
+            this.gamePlayer.attack();
+            this.attacking = true;
+            this.swordTime = System.nanoTime();
+        }
+
+        if (System.nanoTime() - this.swordTime >= NANOSECONDS / 2 && attacking) {
+            this.gamePlayer.getSword().deactivate();
+            this.attacking = false;
+            this.swordTime = 0;
+        }
+        
         // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
     }
 
@@ -91,8 +113,16 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     public Map getMap() {
-        return gameMap;
+        return this.gameMap;
     }
 
+    public Player getPlayer(){
+        return this.gamePlayer;
+    }
+
+    @Override
+    public PlayerController getPlayerController() {
+        return this.playerController;
+    }
 
 }

@@ -1,6 +1,7 @@
 package javawulf.controller;
 
 import javawulf.model.map.Map;
+import javawulf.model.player.Player;
 
 /**
  * GameLoop is an important Controller element: determines the game Time.
@@ -18,9 +19,19 @@ public interface GameLoop {
      * GameLoop thread will be start only after this method is invoked.
      */
     void startGameLoopThread();
+    
     /**
-     * 
      * @return game Map.
      */
     Map getMap();
+
+    /**
+     * @return The Player character
+     */
+    Player getPlayer();
+
+    /**
+     * @return The PlayerController
+     */
+    PlayerController getPlayerController();
 }

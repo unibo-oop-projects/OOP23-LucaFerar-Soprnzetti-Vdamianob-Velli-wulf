@@ -3,6 +3,7 @@ package javawulf.model.player;
 import javawulf.model.Direction;
 import javawulf.model.Entity;
 import javawulf.model.item.AmuletPiece;
+import javawulf.model.map.Map;
 import javawulf.model.powerUp.PowerUpHandler;
 
 /**
@@ -63,10 +64,12 @@ public interface Player extends Entity {
      * Move in the specified direction.
      * 
      * @param direction The direction the player character must move towards
+     * @param map The map, whose tiles will be checked in order to
+     * understand whether the Player is going towards a wall
      * @throws IllegalStateException If the character can't continue in that direction
      * (due to a wall) 
      */
-    void move(Direction direction) throws IllegalStateException;
+    void move(Direction direction, Map map) throws IllegalStateException;
 
     /**
      * Adds an amulet piece to the Player's inventory. If it goes over the number
