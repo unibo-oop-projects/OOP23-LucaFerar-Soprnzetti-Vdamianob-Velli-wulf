@@ -13,8 +13,16 @@ public enum ImagePath {
     CENTRAL_ROOM_TILE("/tiles/central_room.png"),
     /**<img src="../../../resources/tiles/corridor.png"> Corridor tile.*/
     CORRIDOR_TILE("/tiles/corridor.png"),
-    /**<img src="../../../resources/player/player_up_1.png"> Player up first sequence.*/
-    PLAYER_DOWN_1("/player/player_up_1.png");
+    /**<img src="../../../resources/player/player_up.png"> Player up.*/
+    PLAYER_UP("/player/player_up.png"),
+    /**<img src="../../../resources/player/player_down.png"> Player down.*/
+    PLAYER_DOWN("/player/player_down.png"),
+    /**<img src="../../../resources/player/player_left.png"> Player left.*/
+    PLAYER_LEFT("/player/player_left.png"),
+    /**<img src="../../../resources/player/player_right.png"> Player right.*/
+    PLAYER_RIGHT("/player/player_right.png"),
+    /**<img src="../../../resources/player/player/sword.png"> Sword.*/
+    SWORD("/player/sword.png");
 
     private final String path;
 
