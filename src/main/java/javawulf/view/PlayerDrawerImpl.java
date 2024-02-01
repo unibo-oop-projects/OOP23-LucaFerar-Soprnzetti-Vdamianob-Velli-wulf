@@ -8,6 +8,9 @@ import javax.imageio.ImageIO;
 
 import javawulf.model.player.Player;
 
+/**
+ * Implementation of PlayerDrawer.
+ */
 public class PlayerDrawerImpl implements PlayerDrawer {
 
     private BufferedImage playerUp;
@@ -17,6 +20,9 @@ public class PlayerDrawerImpl implements PlayerDrawer {
     private BufferedImage sword;
     private Player player;
 
+    /**
+     * The Player coming from the Controller.
+     */
     public PlayerDrawerImpl(Player player) {
         this.player = player;
         try {
