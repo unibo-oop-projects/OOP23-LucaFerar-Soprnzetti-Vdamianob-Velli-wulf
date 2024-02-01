@@ -22,6 +22,7 @@ public class GamePanel extends JPanel {
     final int ScreenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
 
+    private CommandListener listener;
     private GameLoop gameLoopController;
     private MapDrawer mapDrawer;
     private PlayerDrawerImpl playerDrawer;
@@ -31,7 +32,8 @@ public class GamePanel extends JPanel {
         this.setPreferredSize(new Dimension(this.ScreenWidth, this.screenHeight));
         this.setBackground(java.awt.Color.WHITE);
         this.setDoubleBuffered(true);
-        this.addKeyListener(new CommandListener(this.gameLoopController.getPlayerController()));
+        this.listener = new CommandListener(this.gameLoopController.getPlayerController());
+        this.addKeyListener(this.listener);
         this.setFocusable(true);
         this.mapDrawer = new MapDrawerImpl(gameLoopController.getMap());
         this.playerDrawer = new PlayerDrawerImpl(gameLoopController.getPlayer());
