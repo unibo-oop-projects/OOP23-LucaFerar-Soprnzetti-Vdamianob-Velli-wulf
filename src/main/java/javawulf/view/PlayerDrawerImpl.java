@@ -87,7 +87,7 @@ public final class PlayerDrawerImpl implements PlayerDrawer {
             graphics.drawImage(imgSword,
                 swordX,
                 swordY,
-                width, height, null);
+                width * GamePanel.scale, height * GamePanel.scale, null);
         }
     }
 
