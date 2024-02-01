@@ -26,8 +26,10 @@ public final class PlayerDrawerImpl implements PlayerDrawer {
 
     /**
      * The Player coming from the Controller.
+     * 
+     * @param player The Player character that must be drawn
      */
-    public PlayerDrawerImpl(Player player) {
+    public PlayerDrawerImpl(final Player player) {
         this.player = player;
         this.playerSword = this.player.getSword();
         try {
@@ -42,10 +44,10 @@ public final class PlayerDrawerImpl implements PlayerDrawer {
     }
 
     @Override
-    public void draw(Graphics2D graphics) {
+    public void draw(final Graphics2D graphics) {
         BufferedImage img = this.sword;
-        
-        switch (this.player.getDirection()){
+
+        switch (this.player.getDirection()) {
             case UP_RIGHT:
             case RIGHT:
             case DOWN_RIGHT:
@@ -59,7 +61,7 @@ public final class PlayerDrawerImpl implements PlayerDrawer {
             case UP:
                 img = this.playerUp;
                 break;
-            case DOWN:
+            default:
                 img = this.playerDown;
                 break;
         }
@@ -68,7 +70,7 @@ public final class PlayerDrawerImpl implements PlayerDrawer {
             (int) this.player.getBounds().getCollisionArea().getX() * GamePanel.scale,
             (int) this.player.getBounds().getCollisionArea().getY() * GamePanel.scale,
             GamePanel.tileSize, GamePanel.tileSize, null);
-        
+
         if (this.playerSword.getBounds().getCollisionType().equals(CollisionType.SWORD)) {
             int width = (int) this.playerSword.getBounds().getCollisionArea().getWidth();
             int height = (int) this.playerSword.getBounds().getCollisionArea().getHeight();
@@ -82,5 +84,5 @@ public final class PlayerDrawerImpl implements PlayerDrawer {
                 width, height, null);
         }
     }
-    
+
 }
