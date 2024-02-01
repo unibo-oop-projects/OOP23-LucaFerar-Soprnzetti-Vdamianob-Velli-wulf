@@ -18,6 +18,7 @@ public class CommandListener implements KeyListener {
     private boolean right = false;
     private boolean attack = false;
     private PlayerController controller;
+    private boolean isMoving = false;
 
     public CommandListener(PlayerController controller) {
         this.controller = controller;
@@ -29,6 +30,7 @@ public class CommandListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        this.isMoving = true;
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             this.up = true;
         }
@@ -49,6 +51,7 @@ public class CommandListener implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        this.isMoving = false;
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             this.up = false;
         }
@@ -71,5 +74,11 @@ public class CommandListener implements KeyListener {
         this.controller.updatePlayerStatus(up,down,left,right);
         this.controller.updateSwordStatus(attack);
     }
+
+    public boolean isMoving() {
+        return this.isMoving;
+    }
+
+
 
 }
