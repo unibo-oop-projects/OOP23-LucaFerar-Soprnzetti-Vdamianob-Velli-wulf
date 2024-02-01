@@ -8,11 +8,13 @@ import javax.imageio.ImageIO;
 
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.player.Player;
+import javawulf.model.player.Sword;
+import javawulf.model.player.Sword.SwordType;
 
 /**
  * Implementation of PlayerDrawer.
  */
-public class PlayerDrawerImpl implements PlayerDrawer {
+public final class PlayerDrawerImpl implements PlayerDrawer {
 
     private BufferedImage playerUp;
     private BufferedImage playerDown;
@@ -20,12 +22,14 @@ public class PlayerDrawerImpl implements PlayerDrawer {
     private BufferedImage playerRight;
     private BufferedImage sword;
     private Player player;
+    private Sword playerSword;
 
     /**
      * The Player coming from the Controller.
      */
     public PlayerDrawerImpl(Player player) {
         this.player = player;
+        this.playerSword = this.player.getSword();
         try {
             this.playerUp = ImageIO.read(getClass().getResourceAsStream(ImagePath.PLAYER_UP.getPath()));
             this.playerDown = ImageIO.read(getClass().getResourceAsStream(ImagePath.PLAYER_DOWN.getPath()));
@@ -61,17 +65,21 @@ public class PlayerDrawerImpl implements PlayerDrawer {
         }
 
         graphics.drawImage(img, 
-            this.player.getPosition().getX() + (int) this.player.getBounds().getCollisionArea().getWidth() * GamePanel.scale,
-            this.player.getPosition().getY() + (int) this.player.getBounds().getCollisionArea().getHeight() * GamePanel.scale,
+            (int) this.player.getBounds().getCollisionArea().getX() * GamePanel.scale,
+            (int) this.player.getBounds().getCollisionArea().getY() * GamePanel.scale,
             GamePanel.tileSize, GamePanel.tileSize, null);
         
-        if (this.player.getSword().getBounds().getCollisionType().equals(CollisionType.SWORD)) {
-            graphics.drawImage(this.sword,
-            (int) this.player.getSword().getBounds().getCollisionArea().getCenterX() + (int)
-                this.player.getSword().getBounds().getCollisionArea().getWidth() * GamePanel.scale,
-            (int) this.player.getSword().getBounds().getCollisionArea().getCenterY() + (int)
-                this.player.getSword().getBounds().getCollisionArea().getHeight() * GamePanel.scale,
-            GamePanel.tileSize, GamePanel.tileSize, null);
+        if (this.playerSword.getBounds().getCollisionType().equals(CollisionType.SWORD)) {
+            int width = (int) this.playerSword.getBounds().getCollisionArea().getWidth();
+            int height = (int) this.playerSword.getBounds().getCollisionArea().getHeight();
+            BufferedImage imgSword = this.sword;
+            if (this.playerSword.getSwordType().equals(SwordType.GREATSWORD)) {
+                imgSword = this.sword;
+            }
+            graphics.drawImage(imgSword,
+                (int) this.playerSword.getBounds().getCollisionArea().getX() * GamePanel.scale,
+                (int) this.playerSword.getBounds().getCollisionArea().getY() * GamePanel.scale,
+                width, height, null);
         }
     }
     
