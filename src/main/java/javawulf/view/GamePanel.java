@@ -13,14 +13,14 @@ import java.awt.Graphics2D;
 public class GamePanel extends JPanel {
     // Screen settings
     public static final int originalTileSize = 24; // Celle da 16x16px (standard per diversi retro-game)
-    public static final int scale = 1; // Fattore di scala (può essere proporzionale alla risoluzione dello schermo)
+    public static final int scale = 4; // Fattore di scala (può essere proporzionale alla risoluzione dello schermo)
     public static final int tileSize = originalTileSize * scale; // Dimensione finale effettiva delle celle (48x48px)
     // Numero massimo di celle (h e w) da visualizzare in gioco
-    final int maxScreenCol = 16;
-    final int maxScreenRow = 12;
+    public static final int maxScreenCol = 16;
+    public static final int maxScreenRow = 12;
     // Dimensione (h e w) dello schermo
-    final int ScreenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
+    public static final int screenWidth = tileSize * maxScreenCol;
+    public static final int screenHeight = tileSize * maxScreenRow;
 
     private CommandListener listener;
     private GameLoop gameLoopController;
@@ -29,13 +29,13 @@ public class GamePanel extends JPanel {
 
     public GamePanel() {
         this.gameLoopController = new GameLoopImpl(this);
-        this.setPreferredSize(new Dimension(this.ScreenWidth, this.screenHeight));
+        this.setPreferredSize(new Dimension(this.screenWidth, this.screenHeight));
         this.setBackground(java.awt.Color.WHITE);
         this.setDoubleBuffered(true);
         this.listener = new CommandListener(this.gameLoopController.getPlayerController());
         this.addKeyListener(this.listener);
         this.setFocusable(true);
-        this.mapDrawer = new MapDrawerImpl(gameLoopController.getMap());
+        this.mapDrawer = new MapDrawerImpl(gameLoopController.getMap(), this);
         this.playerDrawer = new PlayerDrawerImpl(gameLoopController.getPlayer());
         gameLoopController.startGameLoopThread();
     }
