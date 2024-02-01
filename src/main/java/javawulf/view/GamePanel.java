@@ -31,7 +31,7 @@ public class GamePanel extends JPanel {
         this.setPreferredSize(new Dimension(this.ScreenWidth, this.screenHeight));
         this.setBackground(java.awt.Color.WHITE);
         this.setDoubleBuffered(true);
-        // this.addKeyListener(keyHandler);
+        this.addKeyListener(new CommandListener(this.gameLoopController.getPlayerController()));
         this.setFocusable(true);
         this.mapDrawer = new MapDrawerImpl(gameLoopController.getMap());
         this.playerDrawer = new PlayerDrawerImpl(gameLoopController.getPlayer());
