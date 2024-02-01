@@ -6,6 +6,7 @@ import javawulf.controller.GameLoopImpl;
 import javawulf.model.map.Map;
 import javawulf.model.map.TilePosition;
 import javawulf.model.map.TileType;
+import javawulf.model.player.Player;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -17,7 +18,7 @@ public final class MapDrawerImpl implements MapDrawer {
     private BufferedImage imgWall;
     private BufferedImage imgCorridor;
     private BufferedImage imgCentralRoom;
-    private final GamePanel gamePanel;
+    private GamePanel gamePanel;
 
     public MapDrawerImpl(final Map map, GamePanel gamePanel) {
         this.map = map;
@@ -57,8 +58,8 @@ public final class MapDrawerImpl implements MapDrawer {
                 } else {
                     img = imgWall;
                 }
-                graphics.drawImage(img, x * TileType.TILE_DIMENSION * GamePanel.scale + (gamePanel.getWidth()/2) - map.getPlayer().getPosition().getX(),
-                        y * TileType.TILE_DIMENSION * GamePanel.scale + (gamePanel.getHeight()/2) - map.getPlayer().getPosition().getY(), GamePanel.tileSize, GamePanel.tileSize, null);
+                graphics.drawImage(img, x * GamePanel.tileSize + (this.gamePanel.getWidth()/2 - Player.OBJECT_SIZE/2) - (int) map.getPlayer().getBounds().getCollisionArea().getX() * GamePanel.scale,
+                        y * GamePanel.tileSize + (this.gamePanel.getHeight()/2 - Player.OBJECT_SIZE/2) - (int) map.getPlayer().getBounds().getCollisionArea().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
             }
         }
         // for (int x = 0; x < Map.MAP_SIZE; x++) {
