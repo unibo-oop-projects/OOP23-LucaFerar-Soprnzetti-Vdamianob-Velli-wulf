@@ -1,11 +1,15 @@
 package javawulf.model.powerUp;
 
-public abstract class PowerUpFactory {
-    
-    public PowerUp orderPowerUp(){
-        PowerUp powerUp = createPowerUp();
-        return powerUp;
-    }
+import javawulf.model.Coordinate;
 
-    public abstract PowerUp createPowerUp();
+public interface PowerUpFactory {
+
+    public PowerUpAttack createPowerUpAttack(Coordinate coordinates);
+
+    public PowerUpDoublePoints createPowerUpDoublePoints(Coordinate coordinates);
+
+    public PowerUpInvincibility createPowerUpInvincibility(Coordinate coordinates);
+
+    public PowerUpSpeed createPowerUpSpeed(Coordinate coordinates);
+    
 }

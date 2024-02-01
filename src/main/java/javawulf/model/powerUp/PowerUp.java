@@ -4,13 +4,13 @@ import javawulf.model.Collectable;
 
 public interface PowerUp extends Collectable{
 
-    boolean stillActive();
+    public boolean stillActive();
 
-    void updateDuration();
+    public void updateDuration();
 
-    int getPoints();
+    public int getPoints();
 
-    int getDuration();
+    public int getDuration();
 
-    String getType();
+    public String getType();
 }
