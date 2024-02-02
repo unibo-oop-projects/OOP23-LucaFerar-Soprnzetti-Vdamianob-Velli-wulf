@@ -1,6 +1,7 @@
 package javawulf.model.map;
 
 import java.util.List;
+
 import java.util.ArrayList;
 
 import javawulf.model.GameElement;
@@ -31,6 +32,11 @@ public abstract class AbstractSpace implements Space {
     @Override
     public void addGameElement(GameElement element) {
         this.elements.add(element);
+    }
+
+    @Override
+    public List<GameElement> getElements() {
+        return this.elements;
     }
 
 }
