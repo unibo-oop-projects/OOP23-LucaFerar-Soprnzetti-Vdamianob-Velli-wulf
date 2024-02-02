@@ -55,7 +55,7 @@ public class HUDDrawerImpl implements HUDDrawer {
             graphics.drawImage(img, x + img.getWidth() * GamePanel.scale * i,
                     y, GamePanel.tileSize, GamePanel.tileSize, null);
         }
-        if (sword == 1) {
+        if(sword == 1){
             img = this.sword;
         } else {
             img = this.greatsword;
