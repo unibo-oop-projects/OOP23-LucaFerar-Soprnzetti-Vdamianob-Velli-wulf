@@ -11,6 +11,7 @@ import java.awt.Rectangle;
 import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
+import javawulf.model.GameElement;
 import javawulf.model.player.Player;
 
 /**
@@ -20,7 +21,7 @@ import javawulf.model.player.Player;
  */
 public final class MapImpl implements Map {
 
-    private final List<Biome> biomes = new ArrayList<>();
+    private ArrayList<Biome> biomes = new ArrayList<>();
     private final java.util.Map<TilePosition, TileType> tiles;
     private final Player player;
 
@@ -74,6 +75,21 @@ public final class MapImpl implements Map {
         return intersectedTileTypes;
     }
 
+    private Set<TilePosition> getTiles(final BoundingBox boundBoxEntity) {
+        Rectangle entityRect = boundBoxEntity.getCollisionArea();
+        HashSet<TilePosition> intersectedTiles = new HashSet<>();
+        if (!isValidPosition(new CoordinateImpl(entityRect.x, entityRect.y))) {
+            return intersectedTiles;
+        }
+
+        for (int x = entityRect.x; x < entityRect.x + entityRect.width; x++) {
+            for (int y = entityRect.y; y < entityRect.y + entityRect.height; y++) {
+                intersectedTiles.add(this.getTilePosition(new CoordinateImpl(x, y)).get());
+            }
+        }
+        return intersectedTiles;
+    }
+
     private boolean isValidPosition(final Coordinate pos) {
         return (pos.getX() < 0 || pos.getY() < 0 || (pos.getX() / TileType.TILE_DIMENSION) >= MAP_SIZE
                 || (pos.getY() / TileType.TILE_DIMENSION) >= MAP_SIZE ? false : true);
@@ -87,6 +103,43 @@ public final class MapImpl implements Map {
     @Override
     public Player getPlayer() {
         return this.player;
+    }
+
+    public ArrayList<Biome> getBiomes() {
+        return this.biomes;
+    }
+
+    public Optional<Space> getPlayerRoom() {
+        for (var playerTile : this.getTiles(this.player.getBounds())) {
+            Optional<BiomeQuadrant> quadrant = getBiomeQuadrant(playerTile);
+            if (quadrant.isPresent()) {
+                return this.biomes.get(quadrant.get().getPos()).getRoom(new TilePosition(playerTile.getX() + quadrant.get().getOffset().getX(), playerTile.getY() + quadrant.get().getOffset().getY()));
+            }
+        }
+        return Optional.empty();
+    }
+
+    private Optional<BiomeQuadrant> getBiomeQuadrant(TilePosition tilePos) {
+        for (var quadrant : BiomeQuadrant.values()) {
+        if (tilePos.getX() >= quadrant.getOffset().getX() && tilePos.getY() >= quadrant.getOffset().getY()
+            &&
+            tilePos.getX() < quadrant.getOffset().getX() + Biome.SIZE && tilePos.getY() < quadrant.getOffset().getY() + Biome.SIZE
+            ) {
+                return Optional.of(quadrant);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public List<GameElement> getRoomEntities(Space room) {
+        for(var biome : biomes) {
+            for (var biomeRoom : biome.getRooms()) {
+                if (room.equals(biomeRoom.getValue())) {
+                    return biomeRoom.getValue().getElements();
+                }
+            }
+        }
+        return List.of();
     }
 
 }

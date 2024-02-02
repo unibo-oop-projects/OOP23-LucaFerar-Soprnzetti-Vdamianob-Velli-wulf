@@ -2,6 +2,7 @@ package javawulf.model.map;
 
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.ArrayList;
 import java.util.Set;
 
 import javawulf.model.BoundingBox;
@@ -67,4 +68,11 @@ public interface Map {
      * @return the player held by the map.
      */
     Player getPlayer();
+
+    /**
+     * 
+     * @return a biomes ordered list of the map (0 UPPER-LEFT, 1 UPPER-RIGHT, 2 DOWNER-RIGHT, 3 DOWNER-LEFT).
+     * Central biome isn't included.
+     */
+    ArrayList<Biome> getBiomes();
 }
