@@ -129,11 +129,6 @@ public final class ItemFactoryTest {
     }
 
     @Test
-    void testCreateMinimap() {
-        //TODO: First need to implement the minimap
-    }
-
-    @Test
     void testCreateShield() {
         Shield shield = factory.createShield(position);
         // Check if the shield is correctly created
