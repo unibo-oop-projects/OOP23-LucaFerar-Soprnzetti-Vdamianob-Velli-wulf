@@ -2,11 +2,13 @@ package javawulf.model.map;
 
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 
 import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
+import javawulf.model.GameElement;
 import javawulf.model.player.Player;
 
 /**
@@ -75,4 +77,17 @@ public interface Map {
      * Central biome isn't included.
      */
     ArrayList<Biome> getBiomes();
+
+    /**
+     * 
+     * @param room
+     * @return all elements of a specific room.
+     */
+    public List<GameElement> getRoomElements(Space room);
+
+    /**
+     * 
+     * @return a list of all elements inside map.
+     */
+    public List<GameElement> getAllElements();
 }

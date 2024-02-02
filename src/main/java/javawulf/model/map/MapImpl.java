@@ -131,7 +131,8 @@ public final class MapImpl implements Map {
         return Optional.empty();
     }
 
-    public List<GameElement> getRoomEntities(Space room) {
+    @Override
+    public List<GameElement> getRoomElements(Space room) {
         for(var biome : biomes) {
             for (var biomeRoom : biome.getRooms()) {
                 if (room.equals(biomeRoom.getValue())) {
@@ -140,6 +141,20 @@ public final class MapImpl implements Map {
             }
         }
         return List.of();
+    }
+
+    @Override
+    public List<GameElement> getAllElements() {
+        List<GameElement> allEntities = new ArrayList<>();
+        for (var biome : biomes) {
+            for (var room : biome.getRooms()) {
+                allEntities.addAll(room.getValue().getElements());
+            }
+            for (var corridor : biome.getCorridors()) {
+                allEntities.addAll(corridor.getValue().getElements());
+            }
+        }
+        return allEntities;
     }
 
 }
