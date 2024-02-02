@@ -21,11 +21,11 @@ public final class ItemDrawer implements Drawer {
     private BufferedImage greatswordPic;
     private BufferedImage shieldPic;
 
-    private Cure cure;
-    private CureMax cureMax;
-    private ExtraHeart extraHeart;
-    private GreatSword greatsword;
-    private Shield shield;
+    private final Cure cure;
+    private final CureMax cureMax;
+    private final ExtraHeart extraHeart;
+    private final GreatSword greatsword;
+    private final Shield shield;
 
     /**
      * The items coming from the Controller.

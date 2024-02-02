@@ -18,7 +18,7 @@ public final class PawnDrawer implements Drawer {
     private BufferedImage pawnLeft;
     private BufferedImage pawnRight;
 
-    private List<Pawn> pawns;
+    private final List<Pawn> pawns;
 
     /**
      * The Pawns coming from the Controller.
@@ -40,7 +40,7 @@ public final class PawnDrawer implements Drawer {
 
     @Override
     public void draw(final Graphics2D graphics) {
-        for (Pawn pawn : this.pawns) {
+        for (final Pawn pawn : this.pawns) {
             BufferedImage imgPawn;
             switch (pawn.getDirection()) {
                 case UP:

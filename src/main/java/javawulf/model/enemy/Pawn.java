@@ -60,7 +60,7 @@ public final class Pawn extends EnemyImpl {
     @Override
     public void move(final Player p, final Map m) {
 
-        int delta = this.getSpeed() * MOVEMENT_DELTA;
+        final int delta = this.getSpeed() * MOVEMENT_DELTA;
 
         int newX = this.getPosition().getX() + (int) (this.getDirection().getX() * delta);
         int newY = this.getPosition().getY() + (int) (this.getDirection().getY() * delta);

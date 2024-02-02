@@ -27,6 +27,7 @@ public abstract class EnemyImpl extends AbstractEntity implements Enemy {
      * @param p the player
      * @param m the map
      */
+    @Override
     public abstract void move(Player p, Map m);
 
     /**
@@ -34,6 +35,7 @@ public abstract class EnemyImpl extends AbstractEntity implements Enemy {
      * 
      * @param p the player
      */
+    @Override
     public abstract void takeHit(Player p);
 
     /**
