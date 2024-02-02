@@ -12,6 +12,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+/**
+ * Used in GamePanel for drawing Map (Game World).
+ */
 public final class MapDrawerImpl implements MapDrawer {
     private final Map map;
     private BufferedImage imgRoom;
