@@ -3,6 +3,7 @@ package javawulf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import javawulf.model.BoundingBox;
 import javawulf.model.BoundingBoxImpl;
 import javawulf.model.CoordinateImpl;
+import javawulf.model.GameElement;
 import javawulf.model.enemy.Pawn;
 import javawulf.model.map.*;
 
@@ -170,5 +172,6 @@ public class MapTest {
     void testEntitiesInMap() {
         this.setUpWithEntities();
         assertEquals(1, gameMapExample.getAllElements().size());
+        assertEquals(Pawn.class, gameMapExample.getAllElements().get(0).getClass());
     }
 }
