@@ -2,6 +2,7 @@ package javawulf.model.map;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javafx.util.Pair;
 
@@ -48,5 +49,16 @@ public final class BiomeImpl implements Biome {
     @Override
     public List<Pair<TilePosition, Space>> getCorridors() {
         return new ArrayList<>(this.corridors);
+    }
+
+    public Optional<Space> getRoom(TilePosition tilePos) {
+        for (var room : rooms) {
+            if (tilePos.getX() >= room.getKey().getX() && tilePos.getY() >= room.getKey().getX()
+            && tilePos.getX() < room.getKey().getX()  + room.getValue().getWidth() && tilePos.getY() >= room.getKey().getX() + room.getValue().getHeight()) {
+                return Optional.of(room.getValue());
+            }
+
+        }
+        return Optional.empty();
     }
 }
