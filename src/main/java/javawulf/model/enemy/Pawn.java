@@ -60,7 +60,7 @@ public final class Pawn extends EnemyImpl {
     @Override
     public void move(final Player p, final Map m) {
 
-        int delta = this.getSpeed() * MOVEMENT_DELTA;
+        final int delta = this.getSpeed() * MOVEMENT_DELTA;
 
         int newX = this.getPosition().getX() + (int) (this.getDirection().getX() * delta);
         int newY = this.getPosition().getY() + (int) (this.getDirection().getY() * delta);
@@ -76,7 +76,7 @@ public final class Pawn extends EnemyImpl {
         this.setPosition(new CoordinateImpl(newX, newY));
         this.getBounds().setCollisionArea(this.getPosition().getX(),
                 this.getPosition().getY(), OBJECT_SIZE, OBJECT_SIZE);
-                
+
     }
 
     @Override
@@ -99,7 +99,7 @@ public final class Pawn extends EnemyImpl {
     }
 
     /**
-     * Turns the pawn in a random direction that is different from the current
+     * Turns the pawn in a random direction that is different from the current.
      * 
      * @param d the current direction
      */
