@@ -48,14 +48,6 @@ public interface ItemFactory {
     GreatSword createGreatSword(Coordinate position);
 
     /**
-     * Creates a minimap.
-     * 
-     * @param position the position of the minimap when created
-     * @return the minimap
-     */
-    Minimap createMinimap(Coordinate position);
-
-    /**
      * Creates a shield.
      * 
      * @param position the position of the shield when created

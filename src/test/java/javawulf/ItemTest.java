@@ -104,11 +104,6 @@ public final class ItemTest {
     }
 
     @Test
-    void testMinimap() {
-        // TODO: Implement minimap
-    }
-
-    @Test
     void testShield() {
         Shield shield = factory.createShield(test);
         // Player collect the item
