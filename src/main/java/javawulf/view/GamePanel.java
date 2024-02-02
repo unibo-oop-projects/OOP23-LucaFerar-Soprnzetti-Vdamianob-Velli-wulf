@@ -26,6 +26,7 @@ public class GamePanel extends JPanel {
     private GameLoop gameLoopController;
     private MapDrawer mapDrawer;
     private PlayerDrawerImpl playerDrawer;
+    private HUDDrawerImpl hudDrawer;
 
     public GamePanel() {
         this.gameLoopController = new GameLoopImpl(this);
@@ -37,6 +38,7 @@ public class GamePanel extends JPanel {
         this.setFocusable(true);
         this.mapDrawer = new MapDrawerImpl(gameLoopController.getMap(), this);
         this.playerDrawer = new PlayerDrawerImpl(gameLoopController.getPlayer(), this);
+        this.hudDrawer = new HUDDrawerImpl(gameLoopController.getPlayer(), this);
         gameLoopController.startGameLoopThread();
     }
 
@@ -46,7 +48,7 @@ public class GamePanel extends JPanel {
 
         this.mapDrawer.draw(graphics2d);
         this.playerDrawer.draw(graphics2d);
-
+        this.hudDrawer.draw(graphics2d);
         graphics2d.dispose();
     }
 }
