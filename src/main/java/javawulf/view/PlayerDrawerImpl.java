@@ -31,8 +31,9 @@ public final class PlayerDrawerImpl implements PlayerDrawer {
      * The Player coming from the Controller.
      * 
      * @param player The Player character that must be drawn
+     * @param gamePanel The panel that must be updated
      */
-    public PlayerDrawerImpl(final Player player, GamePanel gamePanel) {
+    public PlayerDrawerImpl(final Player player, final GamePanel gamePanel) {
         this.player = player;
         this.playerSword = this.player.getSword();
         this.gamePanel = gamePanel;
@@ -75,8 +76,8 @@ public final class PlayerDrawerImpl implements PlayerDrawer {
                 break;
         }
 
-        int playerX = this.gamePanel.getWidth()/2 - Player.OBJECT_SIZE/2;
-        int playerY = this.gamePanel.getHeight()/2 - Player.OBJECT_SIZE/2;
+        int playerX = this.gamePanel.getWidth() / 2 - Player.OBJECT_SIZE / 2;
+        int playerY = this.gamePanel.getHeight() / 2 - Player.OBJECT_SIZE / 2;
 
         graphics.drawImage(img, playerX, playerY,
             GamePanel.tileSize, GamePanel.tileSize, null);
@@ -96,20 +97,20 @@ public final class PlayerDrawerImpl implements PlayerDrawer {
         }
     }
 
-    private BufferedImage rotateImage(BufferedImage startingImage, String direction) {
+    private BufferedImage rotateImage(final BufferedImage startingImage, final String direction) {
         AffineTransform tx = new AffineTransform();
         AffineTransformOp op;
         BufferedImage finalImage = startingImage;
-        double theta=0;
+        double theta = 0;
 
         if (direction.equals("up")) {
             theta = 0;
         } else if (direction.equals("down")) {
             theta = Math.PI;
         } else if (direction.equals("right")) {
-            theta = Math.PI/2;
+            theta = Math.PI / 2;
         } else {
-            theta = -Math.PI/2;
+            theta = -Math.PI / 2;
         }
         tx.rotate(theta, finalImage.getWidth() / 2, finalImage.getHeight() / 2);
         op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);

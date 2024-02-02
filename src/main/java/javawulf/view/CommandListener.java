@@ -10,7 +10,7 @@ import javawulf.controller.PlayerController;
  * to the controller when a key related to the game has been pressed
  * or released.
  */
-public class CommandListener implements KeyListener {
+public final class CommandListener implements KeyListener {
 
     private boolean up = false;
     private boolean down = false;
@@ -20,16 +20,21 @@ public class CommandListener implements KeyListener {
     private PlayerController controller;
     private boolean isMoving = false;
 
-    public CommandListener(PlayerController controller) {
+    /**
+     * Creates a new CommandListener.
+     * 
+     * @param controller The controller that gets updated by the inputs
+     */
+    public CommandListener(final PlayerController controller) {
         this.controller = controller;
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(final KeyEvent e) {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(final KeyEvent e) {
         this.isMoving = true;
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             this.up = true;
@@ -50,7 +55,7 @@ public class CommandListener implements KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(final KeyEvent e) {
         this.isMoving = false;
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             this.up = false;
@@ -71,14 +76,15 @@ public class CommandListener implements KeyListener {
     }
 
     private void communicateToController() {
-        this.controller.updatePlayerStatus(up,down,left,right);
+        this.controller.updatePlayerStatus(up, down, left, right);
         this.controller.updateSwordStatus(attack);
     }
 
+    /**
+     * @return True if the Player is moving
+     */
     public boolean isMoving() {
         return this.isMoving;
     }
-
-
 
 }

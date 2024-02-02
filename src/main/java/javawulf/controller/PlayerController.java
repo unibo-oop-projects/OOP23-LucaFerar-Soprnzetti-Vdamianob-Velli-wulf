@@ -9,7 +9,7 @@ import javawulf.model.Direction;
  * coming from the user.
  */
 public interface PlayerController {
-    
+
     /**
      * Update the status of Player.
      * 
@@ -25,7 +25,13 @@ public interface PlayerController {
      */
     void updateSwordStatus(boolean attack);
 
-    public Optional<Direction> getDirection();
+    /**
+     * @return The direction of Player
+     */
+    Optional<Direction> getDirection();
 
-    public boolean isAttack();
+    /**
+     * @return True if the Player character is attacking
+     */
+    boolean isAttack();
 }

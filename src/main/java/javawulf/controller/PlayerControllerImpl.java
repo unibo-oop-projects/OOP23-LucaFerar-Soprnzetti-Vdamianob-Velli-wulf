@@ -7,21 +7,23 @@ import javawulf.model.Direction;
 /**
  * Implementation of PlayerController.
  */
-public class PlayerControllerImpl implements PlayerController {
+public final class PlayerControllerImpl implements PlayerController {
 
     private Optional<Direction> movementDirection = Optional.empty();
     private boolean attack = false;
-    
+
+    @Override
     public Optional<Direction> getDirection() {
         return this.movementDirection;
     }
 
+    @Override
     public boolean isAttack() {
         return this.attack;
     }
 
     @Override
-    public void updatePlayerStatus(boolean up, boolean down, boolean left, boolean right) {
+    public void updatePlayerStatus(final boolean up, final boolean down, final boolean left, final boolean right) {
         if (!((up && down) || (left && right))) {
             if (up) {
                 if (right) {
@@ -52,8 +54,8 @@ public class PlayerControllerImpl implements PlayerController {
     }
 
     @Override
-    public void updateSwordStatus(boolean attack) {
+    public void updateSwordStatus(final boolean attack) {
         this.attack = attack;
     }
-    
+
 }
