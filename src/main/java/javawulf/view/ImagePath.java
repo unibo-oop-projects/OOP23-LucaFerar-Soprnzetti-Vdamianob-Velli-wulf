@@ -30,7 +30,25 @@ public enum ImagePath {
 
     MAX_HEALTH("/player/recoverable_health.png"),
 
-    SHIELD("/player/shield.png");
+    PLAYER_SHIELD("/player/shield.png"),
+
+    PAWN_UP("/enemies/pawn/pawn_up.png"),
+    /** <img src="../../../resources/enemies/pawn/pawn_down.png"> Pawn down. */
+    PAWN_DOWN("/enemies/pawn/pawn_down.png"),
+    /** <img src="../../../resources/enemies/pawn/pawn_left.png"> Pawn left. */
+    PAWN_LEFT("/enemies/pawn/pawn_left.png"),
+    /** <img src="../../../resources/enemies/pawn/pawn_right.png"> Pawn right. */
+    PAWN_RIGHT("/enemies/pawn/pawn_right.png"),
+    /** <img src="../../../resources/items/cure_max.png"> Max Cure. */
+    CURE_MAX("/items/cure_max.png"),
+    /** <img src="../../../resources/items/cure.png"> Cure. */
+    CURE("/items/cure.png"),
+    /** <img src="../../../resources/items/extra_heart.png"> Extra heart. */
+    EXTRA_HEART("/items/extra_heart.png"),
+    /** <img src="../../../resources/items/great_sword.png"> Greatsword. */
+    GREAT_SWORD("/items/great_sword.png"),
+    /** <img src="../../../resources/items/shield.png"> Shield. */
+    SHIELD("/items/shield.png");
 
     private final String path;
 
