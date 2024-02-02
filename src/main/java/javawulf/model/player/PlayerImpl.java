@@ -81,7 +81,6 @@ public final class PlayerImpl extends AbstractEntity implements Player {
                 this.getBounds().changeCollisionType(CollisionType.INACTIVE);
                 System.out.println("Oh no! You Died. GAME OVER");
             } else {
-                this.getBounds().changeCollisionType(CollisionType.STUNNED);
                 this.setStun(PLAYER_STUN);
             }
             return true;

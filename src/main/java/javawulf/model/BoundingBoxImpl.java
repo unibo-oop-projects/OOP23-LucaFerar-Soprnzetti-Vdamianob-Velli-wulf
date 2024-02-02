@@ -52,7 +52,7 @@ public final class BoundingBoxImpl implements BoundingBox {
     }
 
     @Override
-    public void setCollisionArea(Rectangle area) {
+    public void setCollisionArea(final Rectangle area) {
         this.area = Optional.of(area);
     }
 
