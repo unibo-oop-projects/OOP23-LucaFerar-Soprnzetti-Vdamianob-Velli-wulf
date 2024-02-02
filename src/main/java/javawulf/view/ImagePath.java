@@ -22,7 +22,15 @@ public enum ImagePath {
     /**<img src="../../../resources/player/player_right.png"> Player right.*/
     PLAYER_RIGHT("/player/player_right.png"),
     /**<img src="../../../resources/player/player/sword.png"> Sword.*/
-    SWORD("/player/sword.png");
+    SWORD("/player/sword.png"),
+
+    GREATSWORD("/player/greatsword.png"),
+
+    HEALTH("/player/health.png"),
+
+    MAX_HEALTH("/player/recoverable_health.png"),
+
+    SHIELD("/player/shield.png");
 
     private final String path;
 
