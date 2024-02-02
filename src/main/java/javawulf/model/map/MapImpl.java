@@ -109,6 +109,7 @@ public final class MapImpl implements Map {
         return this.biomes;
     }
 
+    @Override
     public Optional<Space> getPlayerRoom() {
         for (var playerTile : this.getTiles(this.player.getBounds())) {
             Optional<BiomeQuadrant> quadrant = getBiomeQuadrant(playerTile);
