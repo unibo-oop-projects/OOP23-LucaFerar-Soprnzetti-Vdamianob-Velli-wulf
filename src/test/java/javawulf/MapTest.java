@@ -146,4 +146,9 @@ public class MapTest {
         // EntityBox passato è fuori dalla mappa: in tal caso, dovrebbe restituire un Set vuoto
         assertEquals(Set.of(), gameMapExample.getTileTypes(new BoundingBoxImpl(Map.MAP_SIZE * TileType.TILE_DIMENSION + 24, 0, 24, 24, BoundingBox.CollisionType.PLAYER)));
     }
+
+    @Test
+    void testEntitiesInMap() {
+        
+    }
 }
