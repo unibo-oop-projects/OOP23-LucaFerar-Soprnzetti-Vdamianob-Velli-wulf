@@ -32,10 +32,10 @@ public final class AmuletPiecesDrawer implements Drawer {
     }
 
     @Override
-    public void draw(Graphics2D graphics) {
-        for (AmuletPiece Piece : amuletPieces) {
-            graphics.drawImage(this.amuletPiece, Piece.getPosition().getX() * GamePanel.scale,
-                    Piece.getPosition().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
+    public void draw(final Graphics2D graphics) {
+        for (AmuletPiece piece : amuletPieces) {
+            graphics.drawImage(this.amuletPiece, piece.getPosition().getX() * GamePanel.scale,
+                    piece.getPosition().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
         }
     }
 }

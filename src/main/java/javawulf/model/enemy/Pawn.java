@@ -76,7 +76,7 @@ public final class Pawn extends EnemyImpl {
         this.setPosition(new CoordinateImpl(newX, newY));
         this.getBounds().setCollisionArea(this.getPosition().getX(),
                 this.getPosition().getY(), OBJECT_SIZE, OBJECT_SIZE);
-                
+
     }
 
     @Override
@@ -99,7 +99,7 @@ public final class Pawn extends EnemyImpl {
     }
 
     /**
-     * Turns the pawn in a random direction that is different from the current
+     * Turns the pawn in a random direction that is different from the current.
      * 
      * @param d the current direction
      */

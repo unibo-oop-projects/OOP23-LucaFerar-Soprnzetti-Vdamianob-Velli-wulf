@@ -10,6 +10,9 @@ import javawulf.model.item.ExtraHeart;
 import javawulf.model.item.GreatSword;
 import javawulf.model.item.Shield;
 
+/**
+ * Implementation to draw the items collectable.
+ */
 public final class ItemDrawer implements Drawer {
 
     private BufferedImage curePic;
@@ -24,6 +27,15 @@ public final class ItemDrawer implements Drawer {
     private GreatSword greatsword;
     private Shield shield;
 
+    /**
+     * The items coming from the Controller.
+     * 
+     * @param cure       The cure that must be drawn
+     * @param cureMax    The cure max that must be drawn
+     * @param extraHeart The extra heart that must be drawn
+     * @param greatsword The great sword that must be drawn
+     * @param shield     The shield that must be drawn
+     */
     public ItemDrawer(final Cure cure, final CureMax cureMax, final ExtraHeart extraHeart, final GreatSword greatsword,
             final Shield shield) {
         this.cure = cure;
@@ -43,7 +55,7 @@ public final class ItemDrawer implements Drawer {
     }
 
     @Override
-    public void draw(Graphics2D graphics) {
+    public void draw(final Graphics2D graphics) {
         if (this.cure != null) {
             graphics.drawImage(this.curePic, this.cure.getPosition().getX() * GamePanel.scale,
                     this.cure.getPosition().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
