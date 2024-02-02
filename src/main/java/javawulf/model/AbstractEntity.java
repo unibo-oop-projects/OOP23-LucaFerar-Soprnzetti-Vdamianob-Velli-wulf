@@ -110,5 +110,6 @@ public abstract class AbstractEntity extends GameObject implements Entity {
     @Override
     public final void setStun(final int stun) {
         this.stun = stun;
+        this.getBounds().changeCollisionType(CollisionType.STUNNED);
     }
 }
