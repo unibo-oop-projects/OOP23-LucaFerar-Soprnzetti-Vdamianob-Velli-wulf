@@ -10,7 +10,7 @@ import javawulf.model.player.Sword;
 import javawulf.model.player.Sword.SwordType;
 
 /**
- * Implementation of PlayerDrawer.
+ * Class used to draw Player.
  */
 public final class PlayerDrawer extends AbstractDrawer {
 
