@@ -65,16 +65,18 @@ public final class Pawn extends EnemyImpl {
         int newX = this.getPosition().getX() + (int) (this.getDirection().getX() * delta);
         int newY = this.getPosition().getY() + (int) (this.getDirection().getY() * delta);
 
+        this.getBounds().setCollisionArea(newX, newY, OBJECT_SIZE, OBJECT_SIZE);
+
+        if (this.isCollidingWithWall(m)) {
+            this.turnPawn(this.getDirection());
+            newX = this.getPosition().getX() + (int) (this.getDirection().getX() * delta);
+            newY = this.getPosition().getY() + (int) (this.getDirection().getY() * delta);
+        }
+
         this.setPosition(new CoordinateImpl(newX, newY));
         this.getBounds().setCollisionArea(this.getPosition().getX(),
                 this.getPosition().getY(), OBJECT_SIZE, OBJECT_SIZE);
-
-        if (this.isCollidingWithWall(m)) {
-            Direction actualDirection = this.getDirection();
-            do {
-                this.setDirection(Direction.values()[random.nextInt(4)]);
-            } while (actualDirection.equals(this.getDirection()));
-        }
+                
     }
 
     @Override
@@ -90,15 +92,23 @@ public final class Pawn extends EnemyImpl {
     public void tick() {
 
         this.tickCount++;
-        Direction directionToChange = this.getDirection();
 
         if (this.tickCount >= this.timeToWait) {
-            do {
-                this.setDirection(Direction.values()[random.nextInt(4)]);
-            } while (directionToChange.equals(this.getDirection()));
-            this.timeToWait = random.nextInt(4) + 1;
-            this.tickCount = 0;
+            this.turnPawn(this.getDirection());
         }
+    }
+
+    /**
+     * Turns the pawn in a random direction that is different from the current
+     * 
+     * @param d the current direction
+     */
+    private void turnPawn(final Direction d) {
+        do {
+            this.setDirection(Direction.values()[random.nextInt(4)]);
+        } while (d.equals(this.getDirection()));
+        this.timeToWait = random.nextInt(4) + 1;
+        this.tickCount = 0;
     }
 
 }
