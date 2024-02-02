@@ -71,11 +71,11 @@ public final class MapDrawerImpl implements MapDrawer {
 
     private void drawCorners(final Graphics2D graphics) {
         graphics.setColor(Color.white);
-        int thicknessCorners = TileType.TILE_DIMENSION*this.gamePanel.scale*2;
-        graphics.fillRect(this.gamePanel.getWidth()/2 - (16*TileType.TILE_DIMENSION*this.gamePanel.scale)/2, 0, thicknessCorners, this.gamePanel.getHeight());
-        graphics.fillRect(0, this.gamePanel.getHeight()/2 - (16*TileType.TILE_DIMENSION*this.gamePanel.scale)/2, this.gamePanel.getWidth(), thicknessCorners);
-        graphics.fillRect(this.gamePanel.getWidth()/2 + (14*TileType.TILE_DIMENSION*this.gamePanel.scale)/2, 0, thicknessCorners, this.gamePanel.getHeight());
-        graphics.fillRect(0, this.gamePanel.getHeight()/2 + (14*TileType.TILE_DIMENSION*this.gamePanel.scale)/2, this.gamePanel.getWidth(), thicknessCorners);
+        int thicknessCorners = TileType.TILE_DIMENSION*GamePanel.scale*2;
+        graphics.fillRect(this.gamePanel.getWidth()/2 - (16*TileType.TILE_DIMENSION*GamePanel.scale)/2, 0, thicknessCorners, this.gamePanel.getHeight());
+        graphics.fillRect(0, this.gamePanel.getHeight()/2 - (16*TileType.TILE_DIMENSION*GamePanel.scale)/2, this.gamePanel.getWidth(), thicknessCorners);
+        graphics.fillRect(this.gamePanel.getWidth()/2 + (14*TileType.TILE_DIMENSION*GamePanel.scale)/2, 0, thicknessCorners, this.gamePanel.getHeight());
+        graphics.fillRect(0, this.gamePanel.getHeight()/2 + (14*TileType.TILE_DIMENSION*GamePanel.scale)/2, this.gamePanel.getWidth(), thicknessCorners);
     }
 
 }
