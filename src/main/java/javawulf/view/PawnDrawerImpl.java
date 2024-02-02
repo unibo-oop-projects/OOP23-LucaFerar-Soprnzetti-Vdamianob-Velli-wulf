@@ -18,7 +18,6 @@ public final class PawnDrawerImpl implements PawnDrawer {
     private BufferedImage pawnLeft;
     private BufferedImage pawnRight;
     private List<Pawn> pawns;
-    private GamePanel gamePanel;
 
     /**
      * The Pawns coming from the Controller.
@@ -28,7 +27,6 @@ public final class PawnDrawerImpl implements PawnDrawer {
      */
     public PawnDrawerImpl(final List<Pawn> pawns, final GamePanel gamePanel) {
         this.pawns = pawns;
-        this.gamePanel = gamePanel;
         try {
             this.pawnUp = ImageIO.read(getClass().getResourceAsStream(ImagePath.PAWN_UP.getPath()));
             this.pawnDown = ImageIO.read(getClass().getResourceAsStream(ImagePath.PAWN_DOWN.getPath()));
@@ -41,8 +39,27 @@ public final class PawnDrawerImpl implements PawnDrawer {
 
     @Override
     public void draw(Graphics2D graphics) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'draw'");
+        for (Pawn pawn : this.pawns) {
+            BufferedImage imgPawn;
+            switch (pawn.getDirection()) {
+                case UP:
+                    imgPawn = this.pawnUp;
+                    break;
+                case DOWN:
+                    imgPawn = this.pawnDown;
+                    break;
+                case LEFT:
+                    imgPawn = this.pawnLeft;
+                    break;
+                case RIGHT:
+                    imgPawn = this.pawnRight;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid direction");
+            }
+            graphics.drawImage(imgPawn, pawn.getPosition().getX() * GamePanel.scale,
+                    pawn.getPosition().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
+        }
     }
 
 }
