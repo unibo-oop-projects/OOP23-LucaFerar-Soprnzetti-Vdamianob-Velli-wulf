@@ -2,18 +2,29 @@ package javawulf.model.player;
 
 /**
  *  PlayerHealth is a class which manages all that is related to the player's health
- *  including its loss (by damage) and its recovery (by obtaining certain items)
+ *  including its loss (by damage) and its recovery (by obtaining certain items).
  */
 public interface PlayerHealth {
 
     /**
      * ShieldStatus defines the current status of the player's shield.
      * If FULL it protects the player from 2 hits, if HALF only from 1 hit.
-     * By default it is NONE
      */
     enum ShieldStatus {
+        /**
+         * NONE is the default state of the shield. It does not protect
+         * the player from any damage
+         */
         NONE(0),
+        /**
+         * HALF is state of the shield after it got hit once. It protects
+         * the player from a hit
+         */
         HALF(1),
+        /**
+         * FULL is the state of the shield after the right item
+         * has been collected. It protects the player from 2 hits
+         */
         FULL(2);
 
         private final int strength;
@@ -41,7 +52,7 @@ public interface PlayerHealth {
     int getMaxHealth();
 
     /**
-     * @return the current shield status 
+     * @return The current shield status 
      */
     ShieldStatus getShieldStatus();
 
@@ -55,7 +66,7 @@ public interface PlayerHealth {
     void setHealth(int health);
 
     /**
-     * Increase the maximum amount of health the player can have at once
+     * Increase the maximum amount of health the player can have at once.
      * 
      * @param increase The amount by which the maximum health of player has to increase 
      */

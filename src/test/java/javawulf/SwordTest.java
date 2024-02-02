@@ -1,6 +1,8 @@
 package javawulf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,15 +14,22 @@ import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.Direction;
 import javawulf.model.GameObject;
-import javawulf.model.player.*;
+import javawulf.model.player.Player;
+import javawulf.model.player.PlayerImpl;
+import javawulf.model.player.Sword;
 import javawulf.model.player.Sword.SwordType;
 
-public final  class SwordTest {
+/**
+ * SwordTest's purpose is to check whether the implementation
+ * of Sword works as it should, considering also the movement
+ * of the Player character.
+ */
+public final class SwordTest {
 
-    private int health = 3;
-    private int startingX = 12;
-    private int startingY = 12;
-    private int startingPoints = 0;
+    private final int health = 3;
+    private final int startingX = 12;
+    private final int startingY = 12;
+    private final int startingPoints = 0;
     private Sword sword;
     private Player player;
     private Coordinate test;

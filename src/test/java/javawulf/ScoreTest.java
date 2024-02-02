@@ -1,22 +1,30 @@
 package javawulf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javawulf.model.player.*;
+import javawulf.model.player.Player;
+import javawulf.model.player.PlayerImpl;
+import javawulf.model.player.Score;
 import javawulf.model.player.Score.Multiplier;
 
+/**
+ * ScoreTest checks whether the implementation of Score increases
+ * and decreases the point total as it should, considering the
+ * current mulitplier.
+ */
 public final class ScoreTest {
 
-    private int health = 3;
-    private int startingX = 12;
-    private int startingY = 12;
-    private int startingPoints = 0;
+    private final int health = 3;
+    private final int startingX = 12;
+    private final int startingY = 12;
+    private final int startingPoints = 0;
     private Player player;
     private Score score;
-    private int increase = 100;
+    private final int increase = 100;
 
     @BeforeEach
     void createScore() {

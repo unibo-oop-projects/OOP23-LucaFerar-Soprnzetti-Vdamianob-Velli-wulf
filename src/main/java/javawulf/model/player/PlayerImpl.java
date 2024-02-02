@@ -13,6 +13,9 @@ import javawulf.model.powerUp.PowerUpHandlerImpl;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletPiece;
 
+/**
+ * PlayerImpl is an implementation of Player.
+ */
 public final class PlayerImpl extends AbstractEntity implements Player {
 
     private static final int DAMAGE = -1;
@@ -25,6 +28,14 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     private PowerUpHandler powerUpHandler;
     private static final int PLAYER_STUN = 4;
 
+    /**
+     * Creates a new Player.
+     * 
+     * @param startingX The starting position on the X axis of the Player
+     * @param startingY The starting position on the Y axis of the Player
+     * @param health The amount of healtg the player starts the game with
+     * @param startingPoints The amount of points the player starts the game with
+     */
     public PlayerImpl(final int startingX, final int startingY, final int health, final int startingPoints) {
         super(new CoordinateImpl(startingX, startingY), CollisionType.PLAYER, Player.DEFAULT_SPEED);
         this.score = new ScoreImpl(startingPoints);
@@ -133,7 +144,7 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    protected CollisionType originalCollisonType() {
+    protected CollisionType originalCollisionType() {
         return CollisionType.PLAYER;
     }
 

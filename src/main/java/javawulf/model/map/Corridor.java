@@ -1,9 +1,20 @@
 package javawulf.model.map;
 
-public class Corridor extends AbstractSpace {
+/**
+ * Corridor implementation of area
+ */
+public final class Corridor extends AbstractSpace {
 
+    /**
+     * Default corridors' tile-type
+     */
     public static TileType defaultType = TileType.CORRIDOR;
 
+    /**
+     * 
+     * @param width of the corridor
+     * @param height of the corridor
+     */
     public Corridor(int width, int height) {
         super(width, height);
     }

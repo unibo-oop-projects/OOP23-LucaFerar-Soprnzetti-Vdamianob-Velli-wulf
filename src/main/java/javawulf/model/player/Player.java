@@ -11,11 +11,15 @@ import javawulf.model.item.AmuletPiece;
 import javawulf.model.powerUp.PowerUpHandler;
 
 /**
- * Player represents the playable character and its statitstics
+ * Player represents the playable character and its statitstics.
  */
 public interface Player extends Entity {
 
-    public enum PlayerColor {
+    /**
+     * PlayerColor defines the current color of the Player character.
+     * It changes depending on the current Power-Up the Player has
+     */
+    enum PlayerColor {
         RED(Optional.of(Color.RED)),
         BLUE(Optional.of(Color.BLUE)),
         YELLOW(Optional.of(Color.YELLOW)),
@@ -34,12 +38,12 @@ public interface Player extends Entity {
     }
 
     /**
-     * Activate the sword in order to attack
+     * Activate the sword in order to attack.
      */
     void attack();
 
     /**
-     * Move in the specified direction
+     * Move in the specified direction.
      * 
      * @param direction The direction the player character must move towards
      * @throws IllegalStateException If the character can't continue in that direction
@@ -47,6 +51,12 @@ public interface Player extends Entity {
      */
     void move(Direction direction) throws IllegalStateException;
 
+    /**
+     * Adds an amulet piece to the Player's inventory. If it goes over the number
+     * of biomes it won't be added to the inventory
+     * 
+     * @param piece The amulet piece being added to the inventory
+     */
     void collectAmuletPiece(AmuletPiece piece);
 
     /**
@@ -55,6 +65,10 @@ public interface Player extends Entity {
      */
     PlayerHealth getPlayerHealth();
 
+    /**
+     * @return The current Power-Up Player is subject to and for how much
+     * longer it will last
+     */
     PowerUpHandler getPowerUpHandler();
 
     /**
@@ -67,8 +81,14 @@ public interface Player extends Entity {
      */
     Sword getSword();
 
+    /**
+     * @return The color of the Player
+     */
     PlayerColor getColor();
 
+    /**
+     * @param color The color the Player character will now have
+     */
     void setColor(PlayerColor color);
 
     List<AmuletPiece> getPieces();

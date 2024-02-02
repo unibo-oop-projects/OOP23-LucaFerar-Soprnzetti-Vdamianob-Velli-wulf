@@ -8,15 +8,24 @@ import javawulf.model.map.Map;
 import javawulf.model.Coordinate;
 import javawulf.model.player.Player;
 
-public class Pawn extends EnemyImpl {
+/**
+ * The pawn represents the most basic enemy in the game, it
+ * moves randomly around the map.
+ */
+public final class Pawn extends EnemyImpl {
 
-    private final static int POINTS = 100;
+    private static final int POINTS = 100;
 
     private boolean isAlive;
     private long moveTime;
     private int timeToWait;
 
-    public Pawn(Coordinate position) {
+    /**
+     * Creates a pawn.
+     * 
+     * @param position the position of the pawn when created
+     */
+    public Pawn(final Coordinate position) {
         super(position);
         this.isAlive = true;
         this.moveTime = System.currentTimeMillis();
@@ -24,16 +33,22 @@ public class Pawn extends EnemyImpl {
         this.setDirection(Direction.values()[new Random().nextInt(4)]);
     }
 
+    /**
+     * @return true if the pawn is alive, false otherwise
+     */
     public boolean isAlive() {
         return isAlive;
     }
 
+    /**
+     * @return the time to wait before changing direction
+     */
     public int getTimeToWait() {
         return timeToWait;
     }
 
     @Override
-    public void move(Player p, Map m) {
+    public void move(final Player p, final Map m) {
 
         if (System.currentTimeMillis() - this.moveTime >= timeToWait * 1000) {
             this.setDirection(Direction.values()[new Random().nextInt(4)]);
@@ -52,7 +67,7 @@ public class Pawn extends EnemyImpl {
     }
 
     @Override
-    public void takeHit(Player p) {
+    public void takeHit(final Player p) {
         if (super.isHit(p.getSword().getBounds())) {
             this.isAlive = false;
             p.getScore().addPoints(POINTS);

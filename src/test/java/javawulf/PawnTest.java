@@ -15,8 +15,8 @@ import javawulf.model.enemy.EnemyFactory;
 import javawulf.model.enemy.EnemyFactoryImpl;
 import javawulf.model.enemy.Pawn;
 import javawulf.model.map.Map;
-import javawulf.model.map.MapFactory;
-import javawulf.model.map.MapFactoryImpl;
+import javawulf.model.map.factory.MapFactory;
+import javawulf.model.map.factory.MapFactoryImpl;
 import javawulf.model.player.Player;
 import javawulf.model.player.PlayerImpl;
 

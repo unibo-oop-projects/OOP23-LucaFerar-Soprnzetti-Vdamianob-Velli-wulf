@@ -1,6 +1,6 @@
 package javawulf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,15 +9,21 @@ import javawulf.model.BoundingBox;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.BoundingBoxImpl;
 import javawulf.model.AbstractEntity;
-import javawulf.model.player.*;
+import javawulf.model.player.Player;
+import javawulf.model.player.PlayerHealth;
+import javawulf.model.player.PlayerImpl;
 import javawulf.model.player.PlayerHealth.ShieldStatus;
 
+/**
+ * PlayerHealthTest tests whether the implementation of PlayerHealth
+ * works as it should.
+ */
 public final class PlayerHealthTest {
 
-    private int health = 3;
-    private int startingX = 12;
-    private int startingY = 12;
-    private int startingPoints = 0;
+    private final int health = 3;
+    private final int startingX = 12;
+    private final int startingY = 12;
+    private final int startingPoints = 0;
     private Player player;
     private PlayerHealth hp;
 

@@ -1,5 +1,8 @@
 package javawulf.model.map;
 
+/**
+ * A space in the biome. It has a 'width' and a 'height'
+ */
 public abstract class AbstractSpace implements Space {
     private final int width;
     private final int height;

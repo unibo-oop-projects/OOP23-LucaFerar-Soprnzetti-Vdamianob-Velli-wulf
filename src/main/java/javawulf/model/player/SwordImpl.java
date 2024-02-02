@@ -7,6 +7,9 @@ import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.BoundingBox.CollisionType;
 
+/**
+ * Class that implements the Sword interface.
+ */
 public final class SwordImpl extends GameObject implements Sword {
 
     public static final int NORMAL = 1;
@@ -18,7 +21,7 @@ public final class SwordImpl extends GameObject implements Sword {
     private Direction swordDirection;
 
     /**
-     * Creates a new sword by using the specified position
+     * Creates a new sword by using the specified position.
      * 
      * @param position The exact position the sword must be in when it is created
      * @param direction The direction the sword must face when it is created

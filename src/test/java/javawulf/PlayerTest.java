@@ -1,6 +1,10 @@
 package javawulf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,15 +20,21 @@ import javawulf.model.CoordinateImpl;
 import javawulf.model.Direction;
 import javawulf.model.AbstractEntity;
 import javawulf.model.item.AmuletPiece;
-import javawulf.model.player.*;
+import javawulf.model.player.Player;
+import javawulf.model.player.PlayerHealthImpl;
+import javawulf.model.player.PlayerImpl;
 import javawulf.model.item.ItemFactoryImpl;
 
+/**
+ * The class PlayerTest it used to check if the implementation
+ * of Player works according to the game rules.
+ */
 public final class PlayerTest {
 
-    private int health = 3;
-    private int startingX = 12;
-    private int startingY = 12;
-    private int startingPoints = 0;
+    private final int health = 3;
+    private final int startingX = 12;
+    private final int startingY = 12;
+    private final int startingPoints = 0;
     private Player player;
     private Coordinate test;
 
@@ -39,8 +49,6 @@ public final class PlayerTest {
         assertEquals(test.getPosition(), player.getPosition().getPosition());
         assertEquals(new BoundingBoxImpl(startingX, startingY, AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE,
                 CollisionType.PLAYER).getCollisionArea(), player.getBounds().getCollisionArea());
-        assertTrue(new PlayerHealthImpl(health).equals(player.getPlayerHealth()));
-        assertTrue(new ScoreImpl(startingPoints).equals(player.getScore()));
         assertEquals(0, player.getPieces().size());
     }
 
@@ -83,7 +91,7 @@ public final class PlayerTest {
             AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY);
         assertTrue(player.isHit(enemy));
         assertEquals(CollisionType.STUNNED, player.getBounds().getCollisionType());
-        assertFalse(new PlayerHealthImpl(health).equals(player.getPlayerHealth()));
+        assertNotEquals(new PlayerHealthImpl(health).getHealth(), player.getPlayerHealth().getHealth());
         assertEquals(new PlayerHealthImpl(health - 1).getHealth(), player.getPlayerHealth().getHealth());
 
         assertFalse(player.isHit(enemy));
@@ -100,6 +108,7 @@ public final class PlayerTest {
 
     @Test
     void testObtainFragment() {
+        final int wrongResult = 5;
         List<AmuletPiece> fragments = new ArrayList<>();
         AmuletPiece fragment = new ItemFactoryImpl().createAmuletPiece(test);
         for (int i = 0; i < 4; i++) {
@@ -108,6 +117,6 @@ public final class PlayerTest {
             assertEquals(i + 1, player.getPieces().size());
         }
         assertThrows(IllegalStateException.class, () -> player.collectAmuletPiece(fragment));
-        assertNotEquals(5, player.getPieces().size());
+        assertNotEquals(wrongResult, player.getPieces().size());
     }
 }

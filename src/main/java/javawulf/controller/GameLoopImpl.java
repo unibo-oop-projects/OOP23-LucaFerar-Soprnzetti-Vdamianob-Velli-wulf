@@ -1,7 +1,7 @@
 package javawulf.controller;
 
 import javawulf.model.map.Map;
-import javawulf.model.map.MapFactoryImpl;
+import javawulf.model.map.factory.MapFactoryImpl;
 // import javawulf.model.player.Player;
 // import javawulf.model.player.PlayerImpl;
 import javawulf.view.GamePanel;
@@ -30,6 +30,8 @@ public class GameLoopImpl implements GameLoop, Runnable {
 
     private void mapInit() {
         this.gameMap = new MapFactoryImpl().getDefaultMap1();
+        // this.gameMap = new MapFactoryImpl().getTestMap();
+
         // Biome primoBioma, secondoBioma, terzoBioma, quartoBioma;
 
         // primoBioma = new BiomeImpl();
