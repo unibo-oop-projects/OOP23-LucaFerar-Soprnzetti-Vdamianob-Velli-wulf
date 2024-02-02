@@ -16,24 +16,28 @@ public final class BiomeImpl implements Biome {
 
     @Override
     public Biome addRoom(final TilePosition biomePos, final Room room) {
-        if (biomePos.getX() + room.getWidth() > Biome.SIZE || biomePos.getY() + room.getHeight() > Biome.SIZE
-                || biomePos.getX() < 0 || biomePos.getY() < 0) {
-            throw new IllegalArgumentException(
-                    "Room position & his width" + biomePos + " is out of tile SIZE (" + Biome.SIZE + ") biome range");
-        }
-        this.rooms.add(new Pair<TilePosition, Space>(biomePos, room));
+        this.addSpace(biomePos, room, true);
         return this;
     }
 
     @Override
     public Biome addCorridor(final TilePosition biomePos, final Corridor corridor) {
-        if (biomePos.getX() + corridor.getWidth() > Biome.SIZE || biomePos.getY() + corridor.getHeight() > Biome.SIZE
-                || biomePos.getX() < 0 || biomePos.getY() < 0) {
-            throw new IllegalArgumentException("Corridor position & his width " + biomePos + " is out of tile SIZE ("
-                    + Biome.SIZE + ") biome range");
-        }
-        this.corridors.add(new Pair<TilePosition, Space>(biomePos, corridor));
+        this.addSpace(biomePos, corridor, false);
         return this;
+    }
+
+    private Biome addSpace(final TilePosition biomePos, final Space space, boolean isRoom) {
+        if (biomePos.getX() + space.getWidth() > Biome.SIZE || biomePos.getY() + space.getHeight() > Biome.SIZE
+            || biomePos.getX() < 0 || biomePos.getY() < 0) {
+            throw new IllegalArgumentException("Space position & his width " + biomePos + " is out of tile SIZE ("
+            + Biome.SIZE + ") biome range");
+        }
+        Pair<TilePosition, Space> SpaceWithPos = new Pair<>(biomePos, space);
+        if (isRoom) {
+            this.rooms.add(SpaceWithPos);
+        } else {
+            this.corridors.add(SpaceWithPos);
+        }    return this;
     }
 
     @Override
@@ -45,5 +49,4 @@ public final class BiomeImpl implements Biome {
     public List<Pair<TilePosition, Space>> getCorridors() {
         return new ArrayList<>(this.corridors);
     }
-
 }
