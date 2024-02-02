@@ -2,10 +2,9 @@ package javawulf.view;
 
 import java.awt.Graphics2D;
 
-import javawulf.controller.GameLoopImpl;
 import javawulf.model.map.Map;
 import javawulf.model.map.TilePosition;
-import javawulf.model.map.TileType;
+
 import javawulf.model.player.Player;
 
 import java.awt.image.BufferedImage;
@@ -62,32 +61,6 @@ public final class MapDrawerImpl implements MapDrawer {
                         y * GamePanel.tileSize + (this.gamePanel.getHeight()/2 - Player.OBJECT_SIZE/2) - (int) map.getPlayer().getBounds().getCollisionArea().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
             }
         }
-        // for (int x = 0; x < Map.MAP_SIZE; x++) {
-        //     for (int y = 0; y < Map.MAP_SIZE; y++) {
-                // BufferedImage img;
-                // if (this.map.getTilesMap().containsKey(new TilePosition(x, y))) {
-                //     switch (this.map.getTilesMap().get(new TilePosition(x, y))) {
-                //         case ROOM:
-                //             img = imgRoom;
-                //             break;
-                //         case CENTRAL_ROOM:
-                //             img = imgCentralRoom;
-                //             break;
-                //         case CORRIDOR:
-                //             img = imgCorridor;
-                //             break;
-                //         default:
-                //             img = imgRoom;
-                //             break;
-                //     }
-                // } else {
-                //     img = imgWall;
-                // }
-                // graphics.drawImage(img, x * TileType.TILE_DIMENSION * GamePanel.scale,
-                //         y * TileType.TILE_DIMENSION * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
-
-        //     }
-        // }
     }
 
 }
