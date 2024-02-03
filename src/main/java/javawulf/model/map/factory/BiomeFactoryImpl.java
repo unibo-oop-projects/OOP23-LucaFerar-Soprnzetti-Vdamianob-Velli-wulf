@@ -1,5 +1,7 @@
 package javawulf.model.map.factory;
 
+import javawulf.model.CoordinateImpl;
+import javawulf.model.enemy.Pawn;
 import javawulf.model.map.Biome;
 import javawulf.model.map.BiomeImpl;
 import javawulf.model.map.Corridor;
@@ -16,7 +18,7 @@ public final class BiomeFactoryImpl implements BiomeFactory {
     @SuppressWarnings("checkstyle:magicnumber")
     public Biome getBiomeA() {
         return new BiomeImpl()
-                .addRoom(new TilePosition(2, 2), new RoomFactoryImpl().getSquaredRoom())
+                .addRoom(new TilePosition(2, 2), new RoomFactoryImpl().getSquaredRoom().addGameElement(new Pawn(new CoordinateImpl(0, 0))))
                 .addRoom(new TilePosition(9, 3), new RoomFactoryImpl().getSquaredRoom())
                 .addRoom(new TilePosition(8, 11), new RoomFactoryImpl().getSquaredRoom())
                 .addCorridor(new TilePosition(7, 4), new Corridor(2, 2))
