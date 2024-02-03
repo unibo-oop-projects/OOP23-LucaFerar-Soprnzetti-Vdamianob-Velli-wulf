@@ -2,8 +2,12 @@ package javawulf.view;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javawulf.controller.PlayerStatus;
+import javawulf.model.Collectable;
 import javawulf.model.item.Cure;
 import javawulf.model.item.CureMax;
 import javawulf.model.item.ExtraHeart;
@@ -13,72 +17,41 @@ import javawulf.model.item.Shield;
 /**
  * Implementation to draw the items collectable.
  */
-public final class ItemDrawer implements Drawer {
+public final class ItemDrawer extends AbstractDrawer {
 
-    private BufferedImage curePic;
-    private BufferedImage cureMaxPic;
-    private BufferedImage extraHeartPic;
-    private BufferedImage greatswordPic;
-    private BufferedImage shieldPic;
-
-    private final Cure cure;
-    private final CureMax cureMax;
-    private final ExtraHeart extraHeart;
-    private final GreatSword greatsword;
-    private final Shield shield;
+    private final Map<Class<? extends Collectable>, BufferedImage> images = new HashMap<>();
+    private final List<Collectable> items;
 
     /**
-     * The items coming from the Controller.
+     * Builds the items passed from the Controller.
      * 
-     * @param cure       The cure that must be drawn
-     * @param cureMax    The cure max that must be drawn
-     * @param extraHeart The extra heart that must be drawn
-     * @param greatsword The great sword that must be drawn
-     * @param shield     The shield that must be drawn
+     * @param gamePanel the Game Panel where the items must be drawn
+     * @param items     a list of all the items to draw
+     * @param player    the current status of the Player character
      */
-    public ItemDrawer(final Cure cure, final CureMax cureMax, final ExtraHeart extraHeart, final GreatSword greatsword,
-            final Shield shield) {
-        this.cure = cure;
-        this.cureMax = cureMax;
-        this.extraHeart = extraHeart;
-        this.greatsword = greatsword;
-        this.shield = shield;
+    public ItemDrawer(final GamePanel gamePanel, final List<Collectable> items, final PlayerStatus player) {
+        super(gamePanel, player);
+        this.items = items;
         try {
-            this.curePic = ImageIO.read(getClass().getResourceAsStream(ImagePath.CURE.getPath()));
-            this.cureMaxPic = ImageIO.read(getClass().getResourceAsStream(ImagePath.CURE_MAX.getPath()));
-            this.extraHeartPic = ImageIO.read(getClass().getResourceAsStream(ImagePath.EXTRA_HEART.getPath()));
-            this.greatswordPic = ImageIO.read(getClass().getResourceAsStream(ImagePath.GREAT_SWORD.getPath()));
-            this.shieldPic = ImageIO.read(getClass().getResourceAsStream(ImagePath.SHIELD_ITEM.getPath()));
+            images.put(Cure.class, this.imageLoader(ImagePath.CURE));
+            images.put(CureMax.class, this.imageLoader(ImagePath.CURE_MAX));
+            images.put(ExtraHeart.class, this.imageLoader(ImagePath.EXTRA_HEART));
+            images.put(GreatSword.class, this.imageLoader(ImagePath.GREATSWORD));
+            images.put(Shield.class, this.imageLoader(ImagePath.CURE));
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
     public void draw(final Graphics2D graphics) {
-        if (this.cure != null) {
-            graphics.drawImage(this.curePic, this.cure.getPosition().getX() * GamePanel.scale,
-                    this.cure.getPosition().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
-        }
-        if (this.cureMax != null) {
-            graphics.drawImage(this.cureMaxPic, this.cureMax.getPosition().getX() * GamePanel.scale,
-                    this.cureMax.getPosition().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize,
-                    null);
-        }
-        if (this.extraHeart != null) {
-            graphics.drawImage(this.extraHeartPic, this.extraHeart.getPosition().getX() * GamePanel.scale,
-                    this.extraHeart.getPosition().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize,
-                    null);
-        }
-        if (this.greatsword != null) {
-            graphics.drawImage(this.greatswordPic, this.greatsword.getPosition().getX() * GamePanel.scale,
-                    this.greatsword.getPosition().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize,
-                    null);
-        }
-        if (this.shield != null) {
-            graphics.drawImage(this.shieldPic, this.shield.getPosition().getX() * GamePanel.scale,
-                    this.shield.getPosition().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize,
-                    null);
+        for (final Collectable item : items) {
+            BufferedImage image = images.get(item.getClass());
+            if (image != null) {
+                this.drawImage(graphics, image, (int) item.getBounds().getCollisionArea().getX(),
+                        (int) item.getBounds().getCollisionArea().getY());
+            }
         }
     }
 

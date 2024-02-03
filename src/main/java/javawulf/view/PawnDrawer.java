@@ -4,35 +4,30 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-
+import javawulf.controller.PlayerStatus;
 import javawulf.model.enemy.Pawn;
 
 /**
  * Implementation to draw the pawn.
  */
-public final class PawnDrawer implements Drawer {
+public final class PawnDrawer extends AbstractDrawer {
 
-    private BufferedImage pawnUp;
-    private BufferedImage pawnDown;
-    private BufferedImage pawnLeft;
-    private BufferedImage pawnRight;
+    private BufferedImage pawn;
 
     private final List<Pawn> pawns;
 
     /**
-     * The Pawns coming from the Controller.
+     * The Pawn Drawer.
      * 
-     * @param pawns     The Pawns that must be drawn
-     * @param gamePanel The game panel that must be updated
+     * @param gamePanel the Game Panel where the pawn must be drawn
+     * @param player    the current status of the Player character
+     * @param pawns     a list of all the pawns to draw
      */
-    public PawnDrawer(final List<Pawn> pawns, final GamePanel gamePanel) {
+    public PawnDrawer(final GamePanel gamePanel, final PlayerStatus player, final List<Pawn> pawns) {
+        super(gamePanel, player);
         this.pawns = pawns;
         try {
-            this.pawnUp = ImageIO.read(getClass().getResourceAsStream(ImagePath.PAWN_UP.getPath()));
-            this.pawnDown = ImageIO.read(getClass().getResourceAsStream(ImagePath.PAWN_DOWN.getPath()));
-            this.pawnLeft = ImageIO.read(getClass().getResourceAsStream(ImagePath.PAWN_LEFT.getPath()));
-            this.pawnRight = ImageIO.read(getClass().getResourceAsStream(ImagePath.PAWN_RIGHT.getPath()));
+            this.pawn = this.imageLoader(ImagePath.PAWN_UP);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,25 +36,27 @@ public final class PawnDrawer implements Drawer {
     @Override
     public void draw(final Graphics2D graphics) {
         for (final Pawn pawn : this.pawns) {
-            BufferedImage imgPawn;
+            BufferedImage imgPawn = this.pawn;
+            String direction;
             switch (pawn.getDirection()) {
                 case UP:
-                    imgPawn = this.pawnUp;
+                    direction = "up";
                     break;
                 case DOWN:
-                    imgPawn = this.pawnDown;
+                    direction = "down";
                     break;
                 case LEFT:
-                    imgPawn = this.pawnLeft;
+                    direction = "left";
                     break;
                 case RIGHT:
-                    imgPawn = this.pawnRight;
+                    direction = "right";
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid direction");
             }
-            graphics.drawImage(imgPawn, pawn.getPosition().getX() * GamePanel.scale,
-                    pawn.getPosition().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
+            imgPawn = this.rotateImage(imgPawn, direction);
+            this.drawImage(graphics, imgPawn, (int) pawn.getBounds().getCollisionArea().getX(),
+                    (int) pawn.getBounds().getCollisionArea().getY());
         }
     }
 

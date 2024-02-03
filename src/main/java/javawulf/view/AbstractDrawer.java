@@ -1,5 +1,6 @@
 package javawulf.view;
 
+import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -7,6 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import javawulf.controller.PlayerStatus;
 import javawulf.model.player.Player;
 
 /**
@@ -15,12 +17,15 @@ import javawulf.model.player.Player;
 public abstract class AbstractDrawer implements Drawer {
 
     private final GamePanel gamePanel;
+    private final PlayerStatus player;
 
     /**
-     * @param gamePanel The gamepanel the game must be drawn into.
+     * @param gamePanel The gamepanel the game must be drawn into
+     * @param player The current status of the Player character
      */
-    public AbstractDrawer(final GamePanel gamePanel) {
+    public AbstractDrawer(final GamePanel gamePanel, final PlayerStatus player) {
         this.gamePanel = gamePanel;
+        this.player = player;
     }
 
     /**
@@ -73,5 +78,37 @@ public abstract class AbstractDrawer implements Drawer {
         op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 
         return op.filter(finalImage, null);
+    }
+
+    /**
+     * This method draws on the screen the sprites in the correct spot considering the Player's position.
+     * This variant is used if the sprite made isn't a square, but a rectangle, so the width and height
+     * must be specified
+     * 
+     * @param graphics Where component must be drawn
+     * @param img The image to be drawn
+     * @param elementX The position of the element in the game on the X-axis
+     * @param elementY The position of the element in the game on the Y-axis
+     * @param width The width the sprite should have
+     * @param height The height the sprite should have
+     */
+    protected void drawImage(final Graphics2D graphics, final BufferedImage img, final int elementX, final int elementY,
+        final int width, final int height) {
+        final int x = this.getPlayerX() - (this.player.getPlayerX() - elementX) * GamePanel.scale;
+        final int y = this.getPlayerY() - (this.player.getPlayerY() - elementY) * GamePanel.scale;
+        graphics.drawImage(img, x, y, width * GamePanel.scale, height * GamePanel.scale, null);
+    }
+
+    /**
+     * This method draws on the screen the sprites in the correct spot considering the Player's position.
+     * 
+     * @param graphics Where component must be drawn
+     * @param img The image to be drawn
+     * @param elementX The position of the element in the game on the X-axis
+     * @param elementY The position of the element in the game on the Y-axis
+     */
+    protected void drawImage(final Graphics2D graphics, final BufferedImage img, final int elementX, final int elementY) {
+        this.drawImage(graphics, img, elementX, elementY,
+            GamePanel.tileSize / GamePanel.scale, GamePanel.tileSize / GamePanel.scale);
     }
 }

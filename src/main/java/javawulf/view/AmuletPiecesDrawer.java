@@ -4,28 +4,24 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-
+import javawulf.controller.PlayerStatus;
 import javawulf.model.item.AmuletPiece;
 
 /**
  * Implementation to draw the amulet pieces.
  */
-public final class AmuletPiecesDrawer implements Drawer {
+public final class AmuletPiecesDrawer extends AbstractDrawer {
 
     private BufferedImage amuletPiece;
 
     private final List<AmuletPiece> amuletPieces;
 
-    /**
-     * The AmuletPieces coming from the Controller.
-     * 
-     * @param amuletPieces A list of th Amulet Pieces that must be drawn
-     */
-    public AmuletPiecesDrawer(final List<AmuletPiece> amuletPieces) {
+    public AmuletPiecesDrawer(final GamePanel gamePanel, final PlayerStatus player,
+            final List<AmuletPiece> amuletPieces) {
+        super(gamePanel, player);
         this.amuletPieces = amuletPieces;
         try {
-            this.amuletPiece = ImageIO.read(getClass().getResourceAsStream(ImagePath.AMULET_PIECE.getPath()));
+            this.amuletPiece = this.imageLoader(ImagePath.AMULET_PIECE);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,8 +30,8 @@ public final class AmuletPiecesDrawer implements Drawer {
     @Override
     public void draw(final Graphics2D graphics) {
         for (final AmuletPiece piece : amuletPieces) {
-            graphics.drawImage(this.amuletPiece, piece.getPosition().getX() * GamePanel.scale,
-                    piece.getPosition().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
+            this.drawImage(graphics, this.amuletPiece, (int) piece.getBounds().getCollisionArea().getX(),
+                    (int) piece.getBounds().getCollisionArea().getY());
         }
     }
 }
