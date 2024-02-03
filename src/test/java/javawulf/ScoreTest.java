@@ -16,47 +16,46 @@ import javawulf.model.player.Score.Multiplier;
  * and decreases the point total as it should, considering the
  * current mulitplier.
  */
-public final class ScoreTest {
+final class ScoreTest {
 
-    private final int health = 3;
-    private final int startingX = 12;
-    private final int startingY = 12;
-    private final int startingPoints = 0;
-    private Player player;
+    private static final int HEALTH = 3;
+    private static final int STARTING_X = 12;
+    private static final int STARTING_Y = 12;
+    private static final int STARTING_POINTS = 0;
     private Score score;
-    private final int increase = 100;
+    private static final int INCREASE = 100;
 
     @BeforeEach
     void createScore() {
-        this.player = new PlayerImpl(startingX, startingY, health, startingPoints);
-        this.score = this.player.getScore();
+        final Player player = new PlayerImpl(STARTING_X, STARTING_Y, HEALTH, STARTING_POINTS);
+        this.score = player.getScore();
     }
 
     @Test
     void testStartingScore() {
-        assertEquals(startingPoints, this.score.getPoints());
+        assertEquals(STARTING_POINTS, this.score.getPoints());
         assertEquals(Multiplier.DEFAULT.getValue(), this.score.getMultiplier());
     }
 
     @Test
     void testIncrease() {
-        score.addPoints(increase);
-        assertNotEquals(startingPoints, this.score.getPoints());
-        assertEquals(increase, this.score.getPoints());
+        score.addPoints(INCREASE);
+        assertNotEquals(STARTING_POINTS, this.score.getPoints());
+        assertEquals(INCREASE, this.score.getPoints());
     }
 
     @Test
     void testIncreaseWithMultiplier() {
         score.setMultiplier(Multiplier.DOUBLE);
-        score.addPoints(increase);
+        score.addPoints(INCREASE);
         assertNotEquals(Multiplier.DEFAULT.getValue(), this.score.getMultiplier());
-        assertNotEquals(increase, this.score.getPoints());
-        assertEquals(increase * 2, this.score.getPoints());
+        assertNotEquals(INCREASE, this.score.getPoints());
+        assertEquals(INCREASE * 2, this.score.getPoints());
 
         score.setMultiplier(Multiplier.DEFAULT);
-        score.addPoints(increase);
+        score.addPoints(INCREASE);
         assertEquals(Multiplier.DEFAULT.getValue(), this.score.getMultiplier());
-        assertNotEquals(increase * 2, this.score.getPoints());
-        assertEquals(increase * 3, this.score.getPoints());
+        assertNotEquals(INCREASE * 2, this.score.getPoints());
+        assertEquals(INCREASE * 3, this.score.getPoints());
     }
 }
