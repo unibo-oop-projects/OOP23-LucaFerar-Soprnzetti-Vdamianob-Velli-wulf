@@ -13,7 +13,7 @@ public class PowerUpHandlerImpl implements PowerUpHandler{
     }
 
     @Override
-    public void collectPowerUp(PowerUp powerUpPicked) {
+    public void collectPowerUp(final PowerUp powerUpPicked) {
         this.powerUpActive = Optional.of(powerUpPicked);
     }
 

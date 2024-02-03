@@ -7,7 +7,7 @@ import javawulf.model.player.Player;
 
 public class PowerUpSpeed extends PowerUpImpl {
 
-    public PowerUpSpeed(Coordinate position, int duration, int points, String type) {
+    public PowerUpSpeed(final Coordinate position, final int duration, final int points, final String type) {
         super(position, points, type, duration);
     }
 
