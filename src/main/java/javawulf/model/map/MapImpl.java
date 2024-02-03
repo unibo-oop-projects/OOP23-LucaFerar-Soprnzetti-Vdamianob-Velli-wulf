@@ -117,8 +117,8 @@ public final class MapImpl implements Map {
             Optional<BiomeQuadrant> quadrant = getBiomeQuadrant(playerTile);
             if (quadrant.isPresent()) {
                 // System.out.println("Biome: " + quadrant.get() + " - " + quadrant.get().getOffset());
-                System.out.println("Relative to Biome Tile-position: " + new TilePosition(playerTile.getX() + quadrant.get().getOffset().getX(), playerTile.getY() + quadrant.get().getOffset().getY()));
-                return this.biomes.get(quadrant.get().getPos()).getRoom(new TilePosition(playerTile.getX() + quadrant.get().getOffset().getX(), playerTile.getY() + quadrant.get().getOffset().getY()));
+                System.out.println("Relative to Biome Tile-position: " + new TilePosition(playerTile.getX() - quadrant.get().getOffset().getX(), playerTile.getY() - quadrant.get().getOffset().getY()));
+                return this.biomes.get(quadrant.get().getPos()).getRoom(new TilePosition(playerTile.getX() - quadrant.get().getOffset().getX(), playerTile.getY() - quadrant.get().getOffset().getY()));
             }
         }
         return Optional.empty();
