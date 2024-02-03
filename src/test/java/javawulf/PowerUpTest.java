@@ -65,6 +65,7 @@ public class PowerUpTest {
         // test if now power up is colliding with player
         assertTrue(player.getBounds().isCollidingWith(powerUpAttack.getBounds().getCollisionArea()));
         player.getPowerUpHandler().collectPowerUp(powerUpAttack);
+        powerUpAttack.collect(player);
         // test wich powerup is active in now
         assertEquals(player.getPowerUpHandler().getPowerUpActive().get(), powerUpAttack);
     }
@@ -77,6 +78,7 @@ public class PowerUpTest {
         //test powerUp activation
         assertTrue(player.getPowerUpHandler().getPowerUpActive().get().stillActive());
         player.getPowerUpHandler().update(player);
+        powerUpAttack.collect(player);
         //test powerUp stats changing
         assertEquals(player.getSword().getSwordStrength(), SwordImpl.STRONG);
         assertEquals(player.getPowerUpHandler().getPowerUpActive().get().getDuration(), powerUpAttack.getDuration()); 
@@ -92,6 +94,7 @@ public class PowerUpTest {
         //test powerUp activation
         assertTrue(player.getPowerUpHandler().getPowerUpActive().get().stillActive());
         player.getPowerUpHandler().update(player);
+        powerUpDoublePoints.collect(player);
         //test powerUp stats changing
         assertEquals(player.getScore().getMultiplier(), Score.Multiplier.DOUBLE.getValue());
         assertEquals(player.getPowerUpHandler().getPowerUpActive().get().getDuration(), powerUpDoublePoints.getDuration()); 
@@ -107,6 +110,7 @@ public class PowerUpTest {
         //test powerUp activation
         assertTrue(player.getPowerUpHandler().getPowerUpActive().get().stillActive());
         player.getPowerUpHandler().update(player);
+        powerUpInvincibility.collect(player);
         //test powerUp stats changing
         assertEquals(CollisionType.STUNNED, player.getBounds().getCollisionType());
         assertEquals(player.getPowerUpHandler().getPowerUpActive().get().getDuration(), powerUpInvincibility.getDuration()); 
@@ -122,6 +126,7 @@ public class PowerUpTest {
         // Test powerUp activation
         assertTrue(player.getPowerUpHandler().getPowerUpActive().get().stillActive());
         player.getPowerUpHandler().update(player);
+        powerUpSpeed.collect(player);
         // Test powerUp stats changing
         Direction movementDirection = Direction.RIGHT;
         player.move(movementDirection, map);
