@@ -2,6 +2,9 @@ package javawulf.model.map.factory;
 
 import javawulf.model.map.Biome;
 
+/**
+ * A Factory used to build 4 different default biomes.
+ */
 public interface BiomeFactory {
     /**
      * 
