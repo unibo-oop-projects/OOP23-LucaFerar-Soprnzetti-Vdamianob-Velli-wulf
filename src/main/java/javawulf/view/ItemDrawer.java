@@ -27,7 +27,7 @@ public final class ItemDrawer extends AbstractDrawer {
      * 
      * @param gamePanel the Game Panel where the items must be drawn
      * @param items     a list of all the items to draw
-     * @param player
+     * @param player    the current status of the Player character
      */
     public ItemDrawer(final GamePanel gamePanel, final List<Collectable> items, final PlayerStatus player) {
         super(gamePanel, player);
@@ -49,10 +49,8 @@ public final class ItemDrawer extends AbstractDrawer {
         for (final Collectable item : items) {
             BufferedImage image = images.get(item.getClass());
             if (image != null) {
-                // TODO waiting for the utility method in AbstractDrawer
-                int itemX = 0;
-                int itemY = 0;
-                graphics.drawImage(image, itemX, itemY, GamePanel.tileSize, GamePanel.tileSize, null);
+                this.drawImage(graphics, image, (int) item.getBounds().getCollisionArea().getX(),
+                        (int) item.getBounds().getCollisionArea().getY());
             }
         }
     }
