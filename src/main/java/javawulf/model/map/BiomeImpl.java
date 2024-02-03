@@ -53,8 +53,8 @@ public final class BiomeImpl implements Biome {
 
     public Optional<Space> getRoom(TilePosition tilePos) {
         for (var room : rooms) {
-            if (tilePos.getX() >= room.getKey().getX() && tilePos.getY() >= room.getKey().getX()
-            && tilePos.getX() < room.getKey().getX() + room.getValue().getWidth() && tilePos.getY() < room.getKey().getX() + room.getValue().getHeight()) {
+            if (tilePos.getX() >= room.getKey().getX() && tilePos.getY() >= room.getKey().getY()
+            && tilePos.getX() < room.getKey().getX() + room.getValue().getWidth() && tilePos.getY() < room.getKey().getY() + room.getValue().getHeight()) {
                 return Optional.of(room.getValue());
             }
 
