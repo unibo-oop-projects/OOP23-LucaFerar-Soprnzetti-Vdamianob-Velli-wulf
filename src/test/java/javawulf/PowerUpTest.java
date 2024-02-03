@@ -14,6 +14,7 @@ import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.player.Player;
 import javawulf.model.player.PlayerImpl;
 import javawulf.model.player.Score;
+import javawulf.model.player.Sword;
 import javawulf.model.player.SwordImpl;
 import javawulf.model.powerUp.PowerUpAttack;
 import javawulf.model.powerUp.PowerUpDoublePoints;
@@ -139,8 +140,25 @@ public class PowerUpTest {
     void testPowerUpDuration() {
         // Create a powerUp colliding with player
         PowerUpAttack powerUpAttack = powerUpFactory.createPowerUpAttack(coordinatesPlayer);
+        // powerUp gets collected and activated
         player.getPowerUpHandler().collectPowerUp(powerUpAttack);
+        player.getPowerUpHandler().update(player);
         powerUpAttack.collect(player);
+
+        assertEquals(powerUpAttack.getDuration(), 19);
+        assertEquals(Player.PlayerColor.STRENGTH.getColor(), player.getColor());
+        assertEquals(Sword.STRONG, player.getSword().getSwordStrength());
+
+
+        for (int i = 0; i < 18; i++) {
+            player.getPowerUpHandler().update(player);
+            assertEquals(Player.PlayerColor.STRENGTH.getColor(), player.getColor());
+            assertEquals(Sword.STRONG, player.getSword().getSwordStrength());
+        }
+
+        player.getPowerUpHandler().update(player);
+        assertEquals(Player.PlayerColor.NONE.getColor(), player.getColor());
+        assertEquals(Sword.NORMAL, player.getSword().getSwordStrength());
 
     }
 

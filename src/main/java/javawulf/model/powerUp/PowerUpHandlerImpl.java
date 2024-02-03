@@ -21,9 +21,11 @@ public class PowerUpHandlerImpl implements PowerUpHandler{
     public void update(Player player) {
         if (powerUpActive.isPresent()) {
             powerUpActive.get().updateDuration();
-            this.checkPowerUpActive();
+            if (checkPowerUpActive()) {
+                powerUpActive.get().applyEffect(player);
+                powerUpActive = Optional.empty();
+            }
         }
-        powerUpActive.get().applyEffect(player);
         changePlayerColor(player);
     }
 
@@ -32,10 +34,8 @@ public class PowerUpHandlerImpl implements PowerUpHandler{
         return powerUpActive;
     }
 
-    private void checkPowerUpActive() {
-        if (!powerUpActive.get().stillActive()) {
-            powerUpActive = Optional.empty();
-        }
+    private boolean checkPowerUpActive() {
+        return !powerUpActive.get().stillActive();
     }
 
     private void changePlayerColor(Player player) {
