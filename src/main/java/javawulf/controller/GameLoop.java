@@ -11,6 +11,7 @@ import javawulf.model.player.Player;
  * 
  */
 public interface GameLoop {
+
     /**
      * How many ticks per second the game state and the View representation will be refredhed.
      */
@@ -19,7 +20,7 @@ public interface GameLoop {
      * GameLoop thread will be start only after this method is invoked.
      */
     void startGameLoopThread();
-    
+
     /**
      * @return game Map.
      */
