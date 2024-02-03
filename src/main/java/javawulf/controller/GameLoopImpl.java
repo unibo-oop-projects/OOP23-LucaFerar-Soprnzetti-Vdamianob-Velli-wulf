@@ -59,7 +59,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
 
     private void mapInit() {
         this.gameMap = new MapFactoryImpl().getDefaultMap1(this.gamePlayer);
-        var elements = this.gameMap.getAllElements();
+        final var elements = this.gameMap.getAllElements();
         this.items.addAll(elements.stream()
                 .filter(this::isItem)
                 .map(e -> (Collectable) e)

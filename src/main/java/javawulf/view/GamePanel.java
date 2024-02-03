@@ -27,9 +27,9 @@ public class GamePanel extends JPanel {
     private Drawer mapDrawer;
     private Drawer playerDrawer;
     private Drawer hudDrawer;
-    private Drawer pawnDrawer;
-    private Drawer itemDrawer;
-    private Drawer amuletPiecesDrawer;
+    private final Drawer pawnDrawer;
+    private final Drawer itemDrawer;
+    private final Drawer amuletPiecesDrawer;
     private PlayerStatus playerStatus;
 
     public GamePanel() {
@@ -50,9 +50,10 @@ public class GamePanel extends JPanel {
         gameLoopController.startGameLoopThread();
     }
 
+    @Override
     public void paintComponent(final Graphics graphics) {
         super.paintComponent(graphics);
-        Graphics2D graphics2d = (Graphics2D) graphics;
+        final Graphics2D graphics2d = (Graphics2D) graphics;
 
         this.mapDrawer.draw(graphics2d);
         this.playerDrawer.draw(graphics2d);
