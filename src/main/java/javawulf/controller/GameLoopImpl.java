@@ -74,8 +74,6 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             // + " GP width: " + this.gamePanel.getWidth());
             this.drawCount = 0;
             this.timer = 0;
-            System.out.println("Room: " + this.gameMap.getPlayerRoom());
-            if(this.gameMap.getPlayerRoom().isPresent()) System.out.println("Gameobjects: " + this.getMap().getRoomElements(this.gameMap.getPlayerRoom().get()));
             // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
         }
     }
