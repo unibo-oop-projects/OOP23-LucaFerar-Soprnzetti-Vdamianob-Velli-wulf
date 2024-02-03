@@ -111,8 +111,9 @@ public final class MapImpl implements Map {
 
     @Override
     public Optional<Space> getPlayerRoom() {
+        System.out.println("Player tiles: " + this.getTiles(this.player.getBounds()));
         for (var playerTile : this.getTiles(this.player.getBounds())) {
-            System.out.println("PlayerTile: " + playerTile);
+            // System.out.println("PlayerTile: " + playerTile);
             Optional<BiomeQuadrant> quadrant = getBiomeQuadrant(playerTile);
             if (quadrant.isPresent()) {
                 System.out.println("Biome: " + quadrant);
