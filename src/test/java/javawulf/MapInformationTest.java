@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import javawulf.view.ViewImpl;
 
-public class MapInformationTest {
+public final class MapInformationTest {
 
     @Test
     public void inGameTest() throws InterruptedException {

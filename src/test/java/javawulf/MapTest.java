@@ -3,7 +3,6 @@ package javawulf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -13,7 +12,6 @@ import javawulf.model.BoundingBox;
 import javawulf.model.BoundingBoxImpl;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
-import javawulf.model.GameElement;
 import javawulf.model.enemy.Pawn;
 import javawulf.model.map.*;
 import javawulf.model.map.factory.MapFactoryImpl;
@@ -22,17 +20,7 @@ import javawulf.model.player.PlayerImpl;
 /**
  * Some tests for try rooms, corridors, biomes, and getTileTypes
  */
-public class MapTest {
-    // @Test
-    // void testTiles() {
-    // Tile firstTile = new TileImpl(TileType.CORRIDOR);
-    // assertEquals(TileType.CORRIDOR, firstTile.getType());
-    // assertTrue(firstTile.getType().isCrossable());
-
-    // Tile secondTile = new TileImpl(TileType.WALL);
-    // assertEquals(TileType.WALL, secondTile.getType());
-    // assertFalse(secondTile.getType().isCrossable());
-    // }
+public final class MapTest {
 
     @Test
     void testRooms() {
