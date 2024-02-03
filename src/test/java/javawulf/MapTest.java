@@ -180,22 +180,31 @@ public class MapTest {
 
     @Test
     void testEntitiesInMap() {
-        this.setUpWithEntities();
-        assertEquals(1, gameMapExample.getAllElements().size());
+
+        // La mappa inizializzata su setUp() non ha elementi (0)
+        this.setUp();
+        final int numberOfElements = 0;
+        assertEquals(numberOfElements, gameMapExample.getAllElements().size());
+
+        // Aggiunto un elemento Pawn (enemy) nella prima stanza del primo bioma: Ci si
+        // aspetta l'elemento corrispondente.
+        gameMapExample.getBiomes().get(BiomeQuadrant.FIRST.getPos()).getRooms().get(0).getValue()
+                .addGameElement(new Pawn(new CoordinateImpl(0, 0)));
         assertEquals(Pawn.class, gameMapExample.getAllElements().get(0).getClass());
 
-        Coordinate playerStartingPos = new CoordinateImpl(36, 36);
+        Coordinate playerStartingPos = new CoordinateImpl(TileType.TILE_DIMENSION*3, TileType.TILE_DIMENSION*3);
         int health = 2;
         int startingPoints = 1;
-        // Nella mappa di default #1, sono presenti complessivamente 15 stanze
+        // Si noti che nella mappa di default #1, sono presenti complessivamente 15 stanze,
         // distribuite nei 4 biomi.
         Map gameMapExample2 = new MapFactoryImpl().getDefaultMap1(
                 new PlayerImpl(playerStartingPos.getX(), playerStartingPos.getY(), health, startingPoints));
 
-        // Viene aggiunto un elemento per ciascuna delle 15 stanze (quindi gli elementi dovrebbero essere 15)
-        int expectedGameElem = 15;
+        // Viene quindi aggiunto un elemento per ciascuna delle 15 stanze (gli elementi
+        // attesi dovrebbero essere 15)
+        final int expectedGameElem = 15;
         gameMapExample2.getBiomes().forEach(biome -> biome.getRooms()
                 .forEach(roomPair -> roomPair.getValue().addGameElement(new Pawn(new CoordinateImpl(0, 0)))));
-        assertEquals(expectedGameElem, gameMapExample.getAllElements().size());
+        assertEquals(expectedGameElem, gameMapExample2.getAllElements().size());
     }
 }
