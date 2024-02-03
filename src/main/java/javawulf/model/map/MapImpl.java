@@ -112,8 +112,10 @@ public final class MapImpl implements Map {
     @Override
     public Optional<Space> getPlayerRoom() {
         for (var playerTile : this.getTiles(this.player.getBounds())) {
+            System.out.println("PlayerTile: " + playerTile);
             Optional<BiomeQuadrant> quadrant = getBiomeQuadrant(playerTile);
             if (quadrant.isPresent()) {
+                System.out.println("Biome: " + quadrant);
                 return this.biomes.get(quadrant.get().getPos()).getRoom(new TilePosition(playerTile.getX() + quadrant.get().getOffset().getX(), playerTile.getY() + quadrant.get().getOffset().getY()));
             }
         }

@@ -68,12 +68,14 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             this.drawCount++;
         }
 
-        if (this.timer >= NANOSECONDS) {
-            System.out.println("FPS: " + drawCount);
-            System.out.println("GP height: " + this.gamePanel.getHeight()
-            + " GP width: " + this.gamePanel.getWidth());
+        if (this.timer >= NANOSECONDS*2) {
+            // System.out.println("FPS: " + drawCount);
+            // System.out.println("GP height: " + this.gamePanel.getHeight()
+            // + " GP width: " + this.gamePanel.getWidth());
             this.drawCount = 0;
             this.timer = 0;
+            System.out.println("Room: " + this.gameMap.getPlayerRoom());
+            // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
         }
     }
 
@@ -96,7 +98,6 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             this.swordTime = 0;
         }
         
-        // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
     }
 
     private void reDraw() {
