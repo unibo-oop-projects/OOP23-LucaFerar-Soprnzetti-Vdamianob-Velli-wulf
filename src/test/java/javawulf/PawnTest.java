@@ -31,6 +31,8 @@ public final class PawnTest {
     private static final int STARTING_X = 24;
     private static final int STARTING_Y = 24;
     private static final int STARTING_HEALTH = 3;
+    private static final int PAWN_NEAR_WALL_Y_MULTIPLIER = 6;
+    private static final int WALL_POSITION_Y_MULTIPLIER = 7;
 
     private EnemyFactory factory = new EnemyFactoryImpl();
     private Player player = new PlayerImpl(STARTING_X * 3, STARTING_Y * 3, STARTING_HEALTH, 0);
@@ -85,9 +87,7 @@ public final class PawnTest {
 
         // Put the pawn near a wall
         pawn.setPosition(testPos);
-        int tilesBeforeWallY = 6;
-        int tileOfWallY = 7;
-        pawn.setPosition(new CoordinateImpl(STARTING_X, STARTING_Y * tilesBeforeWallY));
+        pawn.setPosition(new CoordinateImpl(STARTING_X, STARTING_Y * PAWN_NEAR_WALL_Y_MULTIPLIER));
         pawn.getBounds().setCollisionArea(pawn.getPosition().getX(), pawn.getPosition().getY(),
                 AbstractEntity.OBJECT_SIZE,
                 AbstractEntity.OBJECT_SIZE);
@@ -96,7 +96,7 @@ public final class PawnTest {
         // Check if the pawn changes direction after colliding with a wall
         pawn.move(player, map);
         assertNotEquals(Direction.DOWN, pawn.getDirection());
-        Coordinate wallPosition = new CoordinateImpl(STARTING_X, STARTING_Y * tileOfWallY);
+        Coordinate wallPosition = new CoordinateImpl(STARTING_X, STARTING_Y * WALL_POSITION_Y_MULTIPLIER);
         assertNotEquals(wallPosition, pawn.getPosition());
     }
 

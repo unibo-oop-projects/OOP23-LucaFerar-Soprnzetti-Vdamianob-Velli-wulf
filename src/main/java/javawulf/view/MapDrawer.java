@@ -1,11 +1,9 @@
 package javawulf.view;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 import javawulf.model.map.Map;
 import javawulf.model.map.TilePosition;
-import javawulf.model.map.TileType;
 import javawulf.model.player.Player;
 
 import java.awt.image.BufferedImage;
@@ -40,7 +38,7 @@ public final class MapDrawer implements Drawer {
     @Override
     public void draw(final Graphics2D graphics) {
         TilePosition playerPos = this.map.getTilePosition(this.map.getPlayer().getPosition()).get();
-        for (int x = playerPos.getX() - 7; x < playerPos.getX() + 8; x++) {
+        for (int x = playerPos.getX() - 8; x < playerPos.getX() + 8; x++) {
             for (int y = playerPos.getY() - 7; y < playerPos.getY() + 8; y++) {
                 BufferedImage img;
                 if (this.map.getTilesMap().containsKey(new TilePosition(x, y))) {
@@ -65,17 +63,6 @@ public final class MapDrawer implements Drawer {
                         y * GamePanel.tileSize + (this.gamePanel.getHeight()/2 - Player.OBJECT_SIZE/2) - (int) map.getPlayer().getBounds().getCollisionArea().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
             }
         }
-
-        this.drawCorners(graphics);
-    }
-
-    private void drawCorners(final Graphics2D graphics) {
-        graphics.setColor(Color.white);
-        int thicknessCorners = TileType.TILE_DIMENSION*GamePanel.scale*2;
-        graphics.fillRect(this.gamePanel.getWidth()/2 - (16*TileType.TILE_DIMENSION*GamePanel.scale)/2, 0, thicknessCorners, this.gamePanel.getHeight());
-        graphics.fillRect(0, this.gamePanel.getHeight()/2 - (16*TileType.TILE_DIMENSION*GamePanel.scale)/2, this.gamePanel.getWidth(), thicknessCorners);
-        graphics.fillRect(this.gamePanel.getWidth()/2 + (14*TileType.TILE_DIMENSION*GamePanel.scale)/2, 0, thicknessCorners, this.gamePanel.getHeight());
-        graphics.fillRect(0, this.gamePanel.getHeight()/2 + (14*TileType.TILE_DIMENSION*GamePanel.scale)/2, this.gamePanel.getWidth(), thicknessCorners);
     }
 
 }
