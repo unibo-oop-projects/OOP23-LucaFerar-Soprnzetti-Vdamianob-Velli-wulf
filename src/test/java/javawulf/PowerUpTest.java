@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.Direction;
+import javawulf.model.map.Map;
+import javawulf.model.map.factory.MapFactoryImpl;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.player.Player;
 import javawulf.model.player.PlayerHealth;
@@ -41,6 +43,7 @@ public class PowerUpTest {
     private Coordinate coordinatesPlayer;
     private Coordinate coordinatesPlayerSpeed;
     private PowerUpFactory powerUpFactory = new PowerUpFactoryImpl();
+    private Map map;
 
     @BeforeEach
     void setUpPlayerAndCoordinates() {
@@ -48,6 +51,7 @@ public class PowerUpTest {
         this.coordinatesPlayer = new CoordinateImpl(X_COORDINATE_PLAYER, Y_COORDINATE_PLAYER);
         this.coordinatesPlayerSpeed = new CoordinateImpl(X_COORDINATE_PLAYER_SPEED, Y_COORDINATE_PLAYER_SPEED);
         this.coordinatesPowerUp = new CoordinateImpl(X_COORDINATE_POWERUP, Y_COORDINATE_POWERUP);
+        this.map = new MapFactoryImpl().getTestMap(player);
     }
 
     @Test
@@ -57,7 +61,7 @@ public class PowerUpTest {
         // test if the power up doesnt get pick up if its far away
         assertFalse(player.getBounds().isCollidingWith(powerUpAttack.getBounds().getCollisionArea()));
         Direction movementDirection = Direction.RIGHT;
-        player.move(movementDirection);
+        player.move(movementDirection, map);
         // test if now power up is colliding with player
         assertTrue(player.getBounds().isCollidingWith(powerUpAttack.getBounds().getCollisionArea()));
         player.getPowerUpHandler().collectPowerUp(powerUpAttack);
@@ -120,7 +124,7 @@ public class PowerUpTest {
         player.getPowerUpHandler().update(player);
         // Test powerUp stats changing
         Direction movementDirection = Direction.RIGHT;
-        player.move(movementDirection);
+        player.move(movementDirection, map);
         assertEquals(player.getPosition().getX(), coordinatesPlayerSpeed.getX());
         assertEquals(player.getPowerUpHandler().getPowerUpActive().get().getDuration(), powerUpSpeed.getDuration()); 
         // Test score

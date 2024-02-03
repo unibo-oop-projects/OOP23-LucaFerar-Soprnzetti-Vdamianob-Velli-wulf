@@ -41,16 +41,16 @@ public class PowerUpHandlerImpl implements PowerUpHandler{
     private void changePlayerColor(Player player) {
         if (this.getPowerUpActive().isPresent()) {
             if (powerUpActive.get().getType() == "Attack") {
-                player.setColor(Player.PlayerColor.RED);
+                player.setColor(Player.PlayerColor.STRENGTH);
             }
             if (powerUpActive.get().getType() == "DoublePoints") {
-                player.setColor(Player.PlayerColor.YELLOW);
+                player.setColor(Player.PlayerColor.DOUBLE_POINTS);
             }
             if (powerUpActive.get().getType() == "Invincibility") {
-                player.setColor(Player.PlayerColor.BLUE);
+                player.setColor(Player.PlayerColor.INVULNERABILITY);
             }
             if (powerUpActive.get().getType() == "Speed") {
-                player.setColor(Player.PlayerColor.GREEN);
+                player.setColor(Player.PlayerColor.SPEED);
             }
         } else {
             player.setColor(Player.PlayerColor.NONE);
