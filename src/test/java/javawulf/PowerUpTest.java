@@ -12,7 +12,6 @@ import javawulf.model.map.Map;
 import javawulf.model.map.factory.MapFactoryImpl;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.player.Player;
-import javawulf.model.player.PlayerHealth;
 import javawulf.model.player.PlayerImpl;
 import javawulf.model.player.Score;
 import javawulf.model.player.SwordImpl;
@@ -141,7 +140,7 @@ public class PowerUpTest {
         // Create a powerUp colliding with player
         PowerUpAttack powerUpAttack = powerUpFactory.createPowerUpAttack(coordinatesPlayer);
         player.getPowerUpHandler().collectPowerUp(powerUpAttack);
-
+        powerUpAttack.collect(player);
 
     }
 
