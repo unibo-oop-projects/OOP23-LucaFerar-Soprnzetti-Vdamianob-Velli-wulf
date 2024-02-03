@@ -43,7 +43,7 @@ public final class PlayerHealthImpl implements PlayerHealth {
         if (health < 0) {
             this.damage(health);
         } else {
-            this.health = Math.min((this.health + health), this.maxHealth);
+            this.health = Math.min(this.health + health, this.maxHealth);
         }
     }
 

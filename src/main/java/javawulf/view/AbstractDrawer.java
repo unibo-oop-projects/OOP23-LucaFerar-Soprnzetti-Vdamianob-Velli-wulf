@@ -55,16 +55,16 @@ public abstract class AbstractDrawer implements Drawer {
      * @return The image rotated 
      */
     protected BufferedImage rotateImage(final BufferedImage startingImage, final String direction) {
-        AffineTransform tx = new AffineTransform();
+        final AffineTransform tx = new AffineTransform();
         AffineTransformOp op;
-        BufferedImage finalImage = startingImage;
-        double theta = 0;
+        final BufferedImage finalImage = startingImage;
+        double theta;
 
-        if (direction.equals("up")) {
+        if ("up".equals(direction)) {
             theta = 0;
-        } else if (direction.equals("down")) {
+        } else if ("down".equals(direction)) {
             theta = Math.PI;
-        } else if (direction.equals("right")) {
+        } else if ("right".equals(direction)) {
             theta = Math.PI / 2;
         } else {
             theta = -Math.PI / 2;
