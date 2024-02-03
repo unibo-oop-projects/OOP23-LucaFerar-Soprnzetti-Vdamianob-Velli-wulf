@@ -4,6 +4,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import javawulf.view.ViewImpl;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
@@ -12,12 +15,12 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 public class GameMenuView extends JPanel {
 
-    private static int BORDERS = 100;
+    private static final int BUTTON_WIDTH = 800;
+    private static final int BUTTON_HEIGHT = 120;
+    private static final int BORDERS = 100;
 
     public GameMenuView() throws InterruptedException {
         CreateMenuGUI();
@@ -39,14 +42,40 @@ public class GameMenuView extends JPanel {
         JButton exitButton = new JButton("Exit");
 
         // To limit Max button sixing
-        Dimension maxButtonSize = new Dimension(600, 100);
+        Dimension maxButtonSize = new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT);
         startButton.setMaximumSize(maxButtonSize);
         leaderboardButton.setMaximumSize(maxButtonSize);
         guideButton.setMaximumSize(maxButtonSize);
         exitButton.setMaximumSize(maxButtonSize);
 
+        // Start Game
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                try {
+                    new ViewImpl();
+                } catch (final Exception exceptionViewImpl) {
+                    exceptionViewImpl.printStackTrace();
+                }
+            }
+        });
+        // Show LeaderBoard
+        leaderboardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "needToCreateLeaderBoard");
+            }
+        });
+        // Show Guide
+        guideButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "needToCreateAguide");
+            }
+        });
+        // Exit 
         exitButton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 int choice = JOptionPane.showConfirmDialog(frame,
