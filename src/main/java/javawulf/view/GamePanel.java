@@ -8,21 +8,19 @@ import javawulf.controller.PlayerStatus;
 import javawulf.controller.PlayerStatusImpl;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 // import java.awt.Color;
 
 public class GamePanel extends JPanel {
     // Screen settings
-    public static final int originalTileSize = 24; // Celle da 16x16px (standard per diversi retro-game)
-    public static final int scale = 2; // Fattore di scala (può essere proporzionale alla risoluzione dello schermo)
-    public static final int tileSize = originalTileSize * scale; // Dimensione finale effettiva delle celle (48x48px)
+    public static final int originalTileSize = 24; // Celle da 24x24px (standard per diversi retro-game)
+    public static int scale = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/400; // Fattore di scala (può essere proporzionale alla risoluzione dello schermo)
+    public static int tileSize = originalTileSize * scale; // Dimensione finale effettiva delle celle (scalata)
     // Numero massimo di celle (h e w) da visualizzare in gioco
-    public static final int maxScreenCol = 16;
-    public static final int maxScreenRow = 12;
-    // Dimensione (h e w) dello schermo
-    private int screenWidth = tileSize * maxScreenCol;
-    private int screenHeight = tileSize * maxScreenRow;
+    public static final int maxScreenCol = 15;
+    public static final int maxScreenRow = 15;
 
     private CommandListener listener;
     private GameLoop gameLoopController;
@@ -33,7 +31,7 @@ public class GamePanel extends JPanel {
 
     public GamePanel() {
         this.gameLoopController = new GameLoopImpl(this);
-        this.setPreferredSize(new Dimension(this.screenWidth, this.screenHeight));
+        this.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
         this.setBackground(java.awt.Color.WHITE);
         this.setDoubleBuffered(true);
         this.listener = new CommandListener(this.gameLoopController.getPlayerController());
