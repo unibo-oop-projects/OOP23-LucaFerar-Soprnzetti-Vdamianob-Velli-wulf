@@ -46,8 +46,8 @@ public final class HUDDrawer extends AbstractDrawer {
     @Override
     public void draw(final Graphics2D graphics) {
         this.drawCorners(graphics);
-        final int x = this.gamePanel.getHeight() / 9 - GamePanel.tileSize / 2;
-        final int y = this.gamePanel.getHeight() / 9 - GamePanel.tileSize / 2;
+        final int x = this.gamePanel.getWidth()/2 - (18*TileType.TILE_DIMENSION*GamePanel.scale)/2 + TileType.TILE_DIMENSION*GamePanel.scale*2;
+        final int y = this.gamePanel.getHeight()/2 - (16*TileType.TILE_DIMENSION*GamePanel.scale)/2 + TileType.TILE_DIMENSION*GamePanel.scale*2;
 
         final int max = this.player.getMaxHealth();
         final int current = this.player.getHealth();
@@ -75,7 +75,7 @@ public final class HUDDrawer extends AbstractDrawer {
             GamePanel.tileSize, null);
     }
 
-        private void drawCorners(final Graphics2D graphics) {
+    private void drawCorners(final Graphics2D graphics) {
         graphics.setColor(Color.white);
         int thicknessCorners = TileType.TILE_DIMENSION*GamePanel.scale*2;
         graphics.fillRect(this.gamePanel.getWidth()/2 - (18*TileType.TILE_DIMENSION*GamePanel.scale)/2, 0, thicknessCorners, this.gamePanel.getHeight());

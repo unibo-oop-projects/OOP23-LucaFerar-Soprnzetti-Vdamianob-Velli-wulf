@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 
 import javawulf.model.map.Map;
 import javawulf.model.map.TilePosition;
-import javawulf.model.map.TileType;
 import javawulf.model.player.Player;
 
 import java.awt.image.BufferedImage;
