@@ -23,16 +23,28 @@ public abstract class EnemyImpl extends AbstractEntity implements Enemy {
 
     /**
      * Moves the enemy.
+     * 
      * @param p the player
      * @param m the map
      */
+    @Override
     public abstract void move(Player p, Map m);
 
     /**
      * Makes the enemy take a hit.
+     * 
      * @param p the player
      */
+    @Override
     public abstract void takeHit(Player p);
+
+    /**
+     * Updates the internal clock of the enemy.
+     */
+    @Override
+    public void tick() {
+
+    }
 
     @Override
     protected final boolean control(final BoundingBox box) {

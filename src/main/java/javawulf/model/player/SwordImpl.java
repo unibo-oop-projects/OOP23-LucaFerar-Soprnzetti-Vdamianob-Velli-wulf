@@ -12,8 +12,6 @@ import javawulf.model.BoundingBox.CollisionType;
  */
 public final class SwordImpl extends GameObject implements Sword {
 
-    public static final int NORMAL = 1;
-    public static final int STRONG = 2;
     private static final int DURABILITY = 50;
     private int strength;
     private int durability;
@@ -136,7 +134,7 @@ public final class SwordImpl extends GameObject implements Sword {
     }
 
     /**
-     * reduces the durability of the sword by one each time
+     * Reduces the durability of the sword by one each time.
      */
     private void consume() {
         this.durability--;

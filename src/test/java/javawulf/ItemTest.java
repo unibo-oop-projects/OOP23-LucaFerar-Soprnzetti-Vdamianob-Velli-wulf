@@ -60,7 +60,7 @@ public final class ItemTest {
         // Player collect the item
         piece.collect(player);
         // Checking that the effect has been applied
-        assertTrue(player.getPieces().contains(piece));
+        assertEquals(1, player.getNumberOfPieces());
     }
 
     @Test
@@ -101,11 +101,6 @@ public final class ItemTest {
         // Checking that the effect has been applied correctly
         assertEquals(SwordType.GREATSWORD, player.getSword().getSwordType());
         assertEquals(2, player.getSword().getSwordStrength());
-    }
-
-    @Test
-    void testMinimap() {
-        // TODO: Implement minimap
     }
 
     @Test

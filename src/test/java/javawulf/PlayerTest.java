@@ -24,6 +24,8 @@ import javawulf.model.player.Player;
 import javawulf.model.player.PlayerHealthImpl;
 import javawulf.model.player.PlayerImpl;
 import javawulf.model.item.ItemFactoryImpl;
+import javawulf.model.map.Map;
+import javawulf.model.map.factory.MapFactoryImpl;
 
 /**
  * The class PlayerTest it used to check if the implementation
@@ -49,19 +51,20 @@ public final class PlayerTest {
         assertEquals(test.getPosition(), player.getPosition().getPosition());
         assertEquals(new BoundingBoxImpl(startingX, startingY, AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE,
                 CollisionType.PLAYER).getCollisionArea(), player.getBounds().getCollisionArea());
-        assertEquals(0, player.getPieces().size());
+        assertEquals(0, player.getNumberOfPieces());
     }
 
     @Test
     void testPlayerMovement() {
         Direction movementDirection = Direction.DOWN_LEFT;
+        Map map = new MapFactoryImpl().getTestMap(player);
         int delta = AbstractEntity.MOVEMENT_DELTA;
         Coordinate expectedCoordinate = new CoordinateImpl(player.getPosition().getX()
             + (int) (movementDirection.getX() * delta), player.getPosition().getY()
             + (int) (movementDirection.getY() * delta));
         BoundingBox expectedBoundingBox = new BoundingBoxImpl(expectedCoordinate.getX(),
             expectedCoordinate.getY(), AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.PLAYER);
-        player.move(movementDirection);
+        player.move(movementDirection, map);
         assertNotEquals(test.getPosition(), player.getPosition().getPosition());
         assertEquals(expectedCoordinate.getPosition(), player.getPosition().getPosition());
         assertEquals(expectedBoundingBox.getCollisionArea(), player.getBounds().getCollisionArea());
@@ -114,9 +117,9 @@ public final class PlayerTest {
         for (int i = 0; i < 4; i++) {
             fragments.add(fragment);
             player.collectAmuletPiece(fragments.get(i));
-            assertEquals(i + 1, player.getPieces().size());
+            assertEquals(i + 1, player.getNumberOfPieces());
         }
         assertThrows(IllegalStateException.class, () -> player.collectAmuletPiece(fragment));
-        assertNotEquals(wrongResult, player.getPieces().size());
+        assertNotEquals(wrongResult, player.getNumberOfPieces());
     }
 }

@@ -6,9 +6,14 @@ import javawulf.model.map.Corridor;
 import javawulf.model.map.Room;
 import javawulf.model.map.TilePosition;
 
-public class BiomeFactoryImpl implements BiomeFactory {
+/**
+ * Each public method of this class factory returns a different pre-setted
+ * biome; they can be used to compose a new map.
+ */
+public final class BiomeFactoryImpl implements BiomeFactory {
 
     @Override
+    @SuppressWarnings("checkstyle:magicnumber")
     public Biome getBiomeA() {
         return new BiomeImpl()
                 .addRoom(new TilePosition(2, 2), new RoomFactoryImpl().getSquaredRoom())
@@ -21,8 +26,6 @@ public class BiomeFactoryImpl implements BiomeFactory {
                 .addCorridor(new TilePosition(18, 3), new Corridor(2, 3))
                 .addCorridor(new TilePosition(15, 15), new Corridor(2, 5))
                 .addCorridor(new TilePosition(17, 15), new Corridor(3, 2));
-
-
     }
 
     @Override
@@ -85,13 +88,12 @@ public class BiomeFactoryImpl implements BiomeFactory {
     @Override
     public Biome getTestBiome() {
         return new BiomeImpl()
-            .addRoom(new TilePosition(0, 0), new Room(Biome.SIZE, Biome.SIZE/3));
+                .addRoom(new TilePosition(0, 0), new Room(Biome.SIZE, Biome.SIZE / 3));
     }
 
     @Override
     public Biome getRoomBiome() {
         return new BiomeImpl()
-            .addRoom(new TilePosition(0, 0), new Room(Biome.SIZE, Biome.SIZE));
+                .addRoom(new TilePosition(0, 0), new Room(Biome.SIZE, Biome.SIZE));
     }
-
 }

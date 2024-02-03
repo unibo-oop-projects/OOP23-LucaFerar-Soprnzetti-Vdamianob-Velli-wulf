@@ -1,5 +1,9 @@
 package javawulf.model.map;
 
+import javawulf.model.GameElement;
+import java.util.List;
+import java.util.Collection;
+
 /**
  * Generic concept of Space: a rectangular area in the map where player and enemies can walk.
  * Spaces can be rooms and corridors.
@@ -8,13 +12,31 @@ public interface Space {
 
     /**
      * 
-     * @return width (in tile) of the space
+     * @return width (in tile) of the space.
      */
-    public int getWidth();
+    int getWidth();
 
     /**
      * 
-     * @return height (in tile) of the space
+     * @return height (in tile) of the space.
      */
-    public int getHeight();
+    int getHeight();
+
+    /**
+     * 
+     * @param element to add in the Space.
+     */
+    void addGameElement(GameElement element);
+
+    /**
+     * 
+     * @param elements to add in the Space
+     */
+    void addGameElements(Collection<GameElement> elements);
+
+    /**
+     * 
+     * @return a list of gameElements referred to this space.
+     */
+    List<GameElement> getElements();
 }

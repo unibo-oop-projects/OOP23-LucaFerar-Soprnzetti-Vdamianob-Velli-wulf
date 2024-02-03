@@ -11,64 +11,36 @@ import java.awt.Rectangle;
 import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
+import javawulf.model.GameElement;
+import javawulf.model.player.Player;
 
+/**
+ * Implementation of Map interface.
+ * All important details are written in the interface: please, visit {@link Map} javadoc
+ * @see Map
+ */
 public final class MapImpl implements Map {
 
-    private final List<Biome> biomes = new ArrayList<>();
-    private final java.util.Map<TilePosition, TileType> tiles = new HashMap<>();
-
-    /**
-     * Each element in BiomeQuadrant rapresent one of four biome of the map. Used for get their offset positions.
-     */
-    enum BiomeQuadrant {
-        /**
-         * First biome (upper-left)
-         */
-        FIRST(0, new TilePosition(0, 0)),
-        /**
-         * Second biome (upper-right)
-         */
-        SECOND(1, new TilePosition(Biome.SIZE + WIDTH_CENTRAL_BIOME, 0)),
-        /**
-         * Third biome (downer-right)
-         */
-        THIRD(2, new TilePosition(Biome.SIZE + WIDTH_CENTRAL_BIOME, Biome.SIZE + WIDTH_CENTRAL_BIOME)),
-        /**
-         * Fourth biome (downer-left)
-         */
-        FOURTH(3, new TilePosition(0, Biome.SIZE + WIDTH_CENTRAL_BIOME));
-
-        private final int pos;
-        private final TilePosition offset;
-
-        BiomeQuadrant(int pos, TilePosition offset) {
-            this.pos = pos;
-            this.offset = offset;
-        }
-
-        public TilePosition getOffset() {
-            return this.offset;
-        }
-
-        public int getPos() {
-            return this.pos;
-        }
-    }
+    private ArrayList<Biome> biomes = new ArrayList<>();
+    private final java.util.Map<TilePosition, TileType> tiles;
+    private final Player player;
 
     /**
      * This is the constructor. Calling constructor, map will be built.
+     * 
      * @param firstBiome
      * @param secondBiome
      * @param thirdBiome
      * @param fourthBiome
      */
-    public MapImpl(Biome firstBiome, Biome secondBiome, Biome thirdBiome, Biome fourthBiome) {
+    public MapImpl(final Player player, final Biome firstBiome, final Biome secondBiome, final Biome thirdBiome, final Biome fourthBiome) {
         this.biomes.addAll(List.of(firstBiome, secondBiome, thirdBiome, fourthBiome));
-        build();
+        this.tiles = MapTilesBuilder.buildTiles(this.biomes);
+        this.player = player;
     }
 
     @Override
-    public Optional<TilePosition> getTilePosition(Coordinate position) {
+    public Optional<TilePosition> getTilePosition(final Coordinate position) {
         if (!this.isValidPosition(position)) {
             return Optional.empty();
         }
@@ -77,7 +49,7 @@ public final class MapImpl implements Map {
     }
 
     @Override
-    public Optional<TileType> getTileType(Coordinate position) {
+    public Optional<TileType> getTileType(final Coordinate position) {
         var tilePos = this.getTilePosition(position);
         if (tilePos.isEmpty()) {
             return Optional.empty();
@@ -88,103 +60,37 @@ public final class MapImpl implements Map {
     }
 
     @Override
-    public Set<TileType> getTileTypes(BoundingBox boundBoxEntity) {
+    public Set<TileType> getTileTypes(final BoundingBox boundBoxEntity) {
         Rectangle entityRect = boundBoxEntity.getCollisionArea();
         HashSet<TileType> intersectedTileTypes = new HashSet<>();
-        if (!isValidPosition(new CoordinateImpl(entityRect.x,entityRect.y))) {
+        if (!isValidPosition(new CoordinateImpl(entityRect.x, entityRect.y))) {
             return intersectedTileTypes;
         }
 
-        for (int x = entityRect.x; x < entityRect.x + entityRect.width /* entityRect.x + (entityRect.width / TileType.TILE_DIMENSION) */; x++) {
-            for (int y = entityRect.y; y < entityRect.y + entityRect.height /* entityRect.y + (entityRect.height / TileType.TILE_DIMENSION) */; y++) {
+        for (int x = entityRect.x; x < entityRect.x + entityRect.width; x++) {
+            for (int y = entityRect.y; y < entityRect.y + entityRect.height; y++) {
                 intersectedTileTypes.add(this.getTileType(new CoordinateImpl(x, y)).get());
             }
         }
         return intersectedTileTypes;
     }
 
-    private void build() {
-        for (var biomeOffSet : BiomeQuadrant.values()) {
-            for (var room : biomes.get(biomeOffSet.getPos()).getRooms()) {
-                for (int y = room.getKey().getY(); y < room.getKey().getY() + room.getValue().getHeight(); y++) {
-                    for (int x = room.getKey().getX(); x < room.getKey().getX() + room.getValue().getWidth(); x++) {
-                        this.tiles.put(new TilePosition(x + biomeOffSet.getOffset().getX(),
-                                y + biomeOffSet.getOffset().getY()), Room.defaultType);
-                    }
-                }
-            }
+    private Set<TilePosition> getTiles(final BoundingBox boundBoxEntity) {
+        Rectangle entityRect = boundBoxEntity.getCollisionArea();
+        HashSet<TilePosition> intersectedTiles = new HashSet<>();
+        if (!isValidPosition(new CoordinateImpl(entityRect.x, entityRect.y))) {
+            return intersectedTiles;
         }
 
-        for (var biomeOffSet : BiomeQuadrant.values()) {
-            for (var corridor : biomes.get(biomeOffSet.getPos()).getCorridors()) {
-                for (int y = corridor.getKey().getY(); y < corridor.getKey().getY() + corridor.getValue().getHeight(); y++) {
-                    for (int x = corridor.getKey().getX(); x < corridor.getKey().getX() + corridor.getValue().getWidth(); x++) {
-                        this.tiles.put(new TilePosition(x + biomeOffSet.getOffset().getX(),
-                                y + biomeOffSet.getOffset().getY()), Corridor.defaultType);
-                    }
-                }
-
+        for (int x = entityRect.x; x < entityRect.x + entityRect.width; x++) {
+            for (int y = entityRect.y; y < entityRect.y + entityRect.height; y++) {
+                intersectedTiles.add(this.getTilePosition(new CoordinateImpl(x, y)).get());
             }
         }
-
-        this.buildCentralBiome();
+        return intersectedTiles;
     }
 
-    private void buildCentralBiome() {
-        for (int x = Biome.SIZE; x <= Biome.SIZE -1 + WIDTH_CENTRAL_BIOME; x++) {
-            for (int y = 3; y < 5; y++) {
-                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-            }
-            for (int y = 15; y < 17; y++) {
-                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-            }
-            for (int y = Biome.SIZE+WIDTH_CENTRAL_BIOME+3; y < Biome.SIZE+WIDTH_CENTRAL_BIOME+5; y++) {
-                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-            }
-            for (int y = Biome.SIZE+WIDTH_CENTRAL_BIOME+15; y < Biome.SIZE+WIDTH_CENTRAL_BIOME+17; y++) {
-                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-            }
-        }
-
-        for (int y = Biome.SIZE; y <= Biome.SIZE -1 + WIDTH_CENTRAL_BIOME; y++) {
-            for (int x = 3; x < 5; x++) {
-                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-            }
-            for (int x = 15; x < 17; x++) {
-                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-            }
-            for (int x = Biome.SIZE+WIDTH_CENTRAL_BIOME+3; x < Biome.SIZE+WIDTH_CENTRAL_BIOME+5; x++) {
-                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-            }
-            for (int x = Biome.SIZE+WIDTH_CENTRAL_BIOME+15; x < Biome.SIZE+WIDTH_CENTRAL_BIOME+17; x++) {
-                this.tiles.put(new TilePosition(x, y), TileType.CORRIDOR);
-            }
-        }
-
-        for (int x = Biome.SIZE + 2; x <= Biome.SIZE + WIDTH_CENTRAL_BIOME - 1 - 2; x++) {
-            for (int y = Biome.SIZE + 2; y <= Biome.SIZE + WIDTH_CENTRAL_BIOME - 1 - 2; y++) {
-                this.tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
-            }
-        }
-        for (int x = Biome.SIZE + WIDTH_CENTRAL_BIOME/2 - 1; x < Biome.SIZE + WIDTH_CENTRAL_BIOME/2+1; x++) {
-            for (int y = Biome.SIZE - 3; y < Biome.SIZE + 2; y++) {
-                this.tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
-            }
-            for (int y = Biome.SIZE + 8; y < Biome.SIZE + 13; y++) {
-                this.tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
-            }
-        }
-        for (int y = Biome.SIZE + WIDTH_CENTRAL_BIOME/2 - 1; y < Biome.SIZE + WIDTH_CENTRAL_BIOME/2+1; y++) {
-            for (int x = Biome.SIZE - 3; x < Biome.SIZE + 2; x++) {
-                this.tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
-            }
-            for (int x = Biome.SIZE + 8; x < Biome.SIZE + 13; x++) {
-                this.tiles.put(new TilePosition(x, y), TileType.CENTRAL_ROOM);
-            }
-        }
-    }
-
-    private boolean isValidPosition(Coordinate pos) {
+    private boolean isValidPosition(final Coordinate pos) {
         return (pos.getX() < 0 || pos.getY() < 0 || (pos.getX() / TileType.TILE_DIMENSION) >= MAP_SIZE
                 || (pos.getY() / TileType.TILE_DIMENSION) >= MAP_SIZE ? false : true);
     }
@@ -192,6 +98,63 @@ public final class MapImpl implements Map {
     @Override
     public HashMap<TilePosition, TileType> getTilesMap() {
         return new HashMap<>(this.tiles);
+    }
+
+    @Override
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public ArrayList<Biome> getBiomes() {
+        return this.biomes;
+    }
+
+    public Optional<Space> getPlayerRoom() {
+        for (var playerTile : this.getTiles(this.player.getBounds())) {
+            Optional<BiomeQuadrant> quadrant = getBiomeQuadrant(playerTile);
+            if (quadrant.isPresent()) {
+                return this.biomes.get(quadrant.get().getPos()).getRoom(new TilePosition(playerTile.getX() + quadrant.get().getOffset().getX(), playerTile.getY() + quadrant.get().getOffset().getY()));
+            }
+        }
+        return Optional.empty();
+    }
+
+    private Optional<BiomeQuadrant> getBiomeQuadrant(TilePosition tilePos) {
+        for (var quadrant : BiomeQuadrant.values()) {
+        if (tilePos.getX() >= quadrant.getOffset().getX() && tilePos.getY() >= quadrant.getOffset().getY()
+            &&
+            tilePos.getX() < quadrant.getOffset().getX() + Biome.SIZE && tilePos.getY() < quadrant.getOffset().getY() + Biome.SIZE
+            ) {
+                return Optional.of(quadrant);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<GameElement> getRoomElements(Space room) {
+        for(var biome : biomes) {
+            for (var biomeRoom : biome.getRooms()) {
+                if (room.equals(biomeRoom.getValue())) {
+                    return biomeRoom.getValue().getElements();
+                }
+            }
+        }
+        return List.of();
+    }
+
+    @Override
+    public List<GameElement> getAllElements() {
+        List<GameElement> allEntities = new ArrayList<>();
+        for (var biome : biomes) {
+            for (var room : biome.getRooms()) {
+                allEntities.addAll(room.getValue().getElements());
+            }
+            for (var corridor : biome.getCorridors()) {
+                allEntities.addAll(corridor.getValue().getElements());
+            }
+        }
+        return allEntities;
     }
 
 }

@@ -33,11 +33,6 @@ public final class ItemFactoryImpl implements ItemFactory {
     }
 
     @Override
-    public Minimap createMinimap(final Coordinate position) {
-        return new Minimap(position);
-    }
-
-    @Override
     public Shield createShield(final Coordinate position) {
         return new Shield(position);
     }

@@ -8,7 +8,7 @@ public final class Room extends AbstractSpace {
     /**
      * Default rooms' tile-type
      */
-    public static TileType defaultType = TileType.ROOM;
+    public static TileType DEFAULT_TYPE = TileType.ROOM;
 
     /**
      * 

@@ -30,7 +30,7 @@ public class MapTest {
 
     @Test
     void testRooms() {
-        assertEquals(TileType.ROOM, Room.defaultType);
+        assertEquals(TileType.ROOM, Room.DEFAULT_TYPE);
 
         Space roomA = new Room(10, 10);
         assertEquals(10, roomA.getWidth());
@@ -43,7 +43,7 @@ public class MapTest {
 
     @Test
     void testCorridors() {
-        assertEquals(TileType.CORRIDOR, Corridor.defaultType);
+        assertEquals(TileType.CORRIDOR, Corridor.DEFAULT_TYPE);
 
         Space corridor1 = new Corridor(10, 5);
         assertEquals(10, corridor1.getWidth());
@@ -86,7 +86,7 @@ public class MapTest {
         fourthBiome = new BiomeImpl();
         fourthBiome.addRoom(new TilePosition(1, 1), new Room(10, 10));
 
-        this.gameMapExample = new MapImpl(firstBiome, secondBiome, thirdBiome, fourthBiome);
+        this.gameMapExample = new MapImpl(null, firstBiome, secondBiome, thirdBiome, fourthBiome);
     }
 
     @Test
@@ -145,5 +145,10 @@ public class MapTest {
         
         // EntityBox passato è fuori dalla mappa: in tal caso, dovrebbe restituire un Set vuoto
         assertEquals(Set.of(), gameMapExample.getTileTypes(new BoundingBoxImpl(Map.MAP_SIZE * TileType.TILE_DIMENSION + 24, 0, 24, 24, BoundingBox.CollisionType.PLAYER)));
+    }
+
+    @Test
+    void testEntitiesInMap() {
+        
     }
 }

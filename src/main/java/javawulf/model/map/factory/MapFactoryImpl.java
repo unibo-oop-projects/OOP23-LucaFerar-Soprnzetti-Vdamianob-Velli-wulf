@@ -3,13 +3,14 @@ package javawulf.model.map.factory;
 import javawulf.model.map.Biome;
 import javawulf.model.map.Map;
 import javawulf.model.map.MapImpl;
+import javawulf.model.player.Player;
 
 public class MapFactoryImpl implements MapFactory {
 
     private Biome firstBiome, secondBiome, thirdBiome, fourthBiome;
 
     @Override
-    public Map getDefaultMap1() {
+    public Map getDefaultMap1(final Player player) {
         this.firstBiome = new BiomeFactoryImpl().getBiomeA();
 
         this.secondBiome = new BiomeFactoryImpl().getBiomeB();
@@ -18,11 +19,11 @@ public class MapFactoryImpl implements MapFactory {
 
         this.fourthBiome = new BiomeFactoryImpl().getBiomeD();
 
-        return new MapImpl(this.firstBiome, this.secondBiome, this.thirdBiome, this.fourthBiome);
+        return new MapImpl(player, this.firstBiome, this.secondBiome, this.thirdBiome, this.fourthBiome);
     }
 
     @Override
-    public Map getTestMap() {
+    public Map getTestMap(final Player player) {
         this.firstBiome = new BiomeFactoryImpl().getTestBiome();
 
         this.secondBiome = new BiomeFactoryImpl().getRoomBiome();
@@ -31,7 +32,7 @@ public class MapFactoryImpl implements MapFactory {
 
         this.fourthBiome = new BiomeFactoryImpl().getRoomBiome();
 
-        return new MapImpl(this.firstBiome, this.secondBiome, this.thirdBiome, this.fourthBiome);
+        return new MapImpl(player, this.firstBiome, this.secondBiome, this.thirdBiome, this.fourthBiome);
     }
 
 }

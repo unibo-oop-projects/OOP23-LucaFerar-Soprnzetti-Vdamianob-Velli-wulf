@@ -42,6 +42,7 @@ public abstract class AbstractEntity extends GameObject implements Entity {
     /**
      * @return the direction of the entity.
      */
+    @Override
     public final Direction getDirection() {
         return this.direction;
     }
@@ -51,6 +52,7 @@ public abstract class AbstractEntity extends GameObject implements Entity {
      * 
      * @param speed the new speed the entity will have
      */
+    @Override
     public final void setSpeed(final int speed) {
         this.speed = speed;
     }
@@ -71,10 +73,14 @@ public abstract class AbstractEntity extends GameObject implements Entity {
      * @return true if the entity is colliding with a wall, false otherwise
      */
     protected final boolean isCollidingWithWall(final Map m) {
-        var tile = m.getTileTypes(this.getBounds());
+        final var tile = m.getTileTypes(this.getBounds());
         return tile.contains(TileType.WALL);
     }
 
+    /**
+     * Must be extended using the implementation in this class.
+     */
+    @Override
     public boolean isHit(final BoundingBox box) {
         return this.getBounds().isCollidingWith(box.getCollisionArea())
                 && control(box);
@@ -83,7 +89,7 @@ public abstract class AbstractEntity extends GameObject implements Entity {
     /**
      * @param box The boundingBox that must be checked
      * @return true if the type of the box is the one that damages the Entity,
-     * otherwise it will return false
+     *         otherwise it will return false
      */
     protected abstract boolean control(BoundingBox box);
 
@@ -106,5 +112,6 @@ public abstract class AbstractEntity extends GameObject implements Entity {
     @Override
     public final void setStun(final int stun) {
         this.stun = stun;
+        this.getBounds().changeCollisionType(CollisionType.STUNNED);
     }
 }

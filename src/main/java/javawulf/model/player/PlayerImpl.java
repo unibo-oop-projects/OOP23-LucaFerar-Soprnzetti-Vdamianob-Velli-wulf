@@ -1,9 +1,11 @@
 package javawulf.model.player;
 
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.ArrayList;
 
 import javawulf.model.BoundingBox;
+import javawulf.model.BoundingBoxImpl;
 import javawulf.model.Direction;
 import javawulf.model.AbstractEntity;
 import javawulf.model.Coordinate;
@@ -12,6 +14,8 @@ import javawulf.model.powerUp.PowerUpHandler;
 import javawulf.model.powerUp.PowerUpHandlerImpl;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletPiece;
+import javawulf.model.map.Map;
+import javawulf.model.map.TileType;
 
 /**
  * PlayerImpl is an implementation of Player.
@@ -19,13 +23,13 @@ import javawulf.model.item.AmuletPiece;
 public final class PlayerImpl extends AbstractEntity implements Player {
 
     private static final int DAMAGE = -1;
-    private PlayerHealth health;
-    private Score score;
-    private Sword sword;
+    private final PlayerHealth health;
+    private final Score score;
+    private final Sword sword;
     private static final int NUMBER_OF_PIECES = 4;
-    private List<AmuletPiece> piecesCollected;
+    private final List<AmuletPiece> piecesCollected;
     private PlayerColor color;
-    private PowerUpHandler powerUpHandler;
+    private final PowerUpHandler powerUpHandler;
     private static final int PLAYER_STUN = 4;
 
     /**
@@ -53,23 +57,21 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public void move(final Direction direction) throws IllegalStateException {
-        Coordinate current = this.getPosition();
-        int delta = this.getSpeed() * MOVEMENT_DELTA;
-        // var preview = this.getPosition();
-        // preview.setPosition(current.getX() + (int)direction.getX()*delta,
-        // current.getY() + (int)direction.getY()*delta);
-        //if (this.isCollidingWithWall(null)) { // if wall, this will be changed later
-        //    throw new IllegalStateException("There is a wall");
-        //} // else {
-          // this.setPosition(preview);
-          // }
-        this.setPosition(new CoordinateImpl(current.getX() + (int) (direction.getX() * delta),
+    public void move(final Direction direction, final Map map) {
+        final Coordinate current = this.getPosition();
+        final int delta = this.getSpeed() * MOVEMENT_DELTA;
+        final BoundingBox preview = new BoundingBoxImpl(current.getX() + (int) (direction.getX() * delta),
+            current.getY() + (int) (direction.getY() * delta), OBJECT_SIZE, OBJECT_SIZE, CollisionType.PLAYER);
+        final var tiles = map.getTileTypes(preview);
+        if (!tiles.contains(TileType.WALL)) {
+            this.setPosition(new CoordinateImpl(current.getX() + (int) (direction.getX() * delta),
                 current.getY() + (int) (direction.getY() * delta)));
-        this.getBounds().setCollisionArea(this.getPosition().getX(), this.getPosition().getY(), OBJECT_SIZE,
-                OBJECT_SIZE);
-        this.sword.move(this.getPosition(), direction);
-        this.setDirection(direction);
+            this.getBounds().setCollisionArea(preview.getCollisionArea());
+            this.setDirection(direction);
+            this.sword.move(this.getPosition(), direction);
+        } else {
+            throw new IllegalStateException("There is a wall");
+        }
     }
 
     @Override
@@ -78,9 +80,8 @@ public final class PlayerImpl extends AbstractEntity implements Player {
             this.health.setHealth(DAMAGE);
             if (isDefeated()) {
                 this.getBounds().changeCollisionType(CollisionType.INACTIVE);
-                System.out.println("Oh no! You Died. GAME OVER");
+                Logger.getLogger(PlayerImpl.class.getName()).fine("Oh no! You Died. GAME OVER");
             } else {
-                this.getBounds().changeCollisionType(CollisionType.STUNNED);
                 this.setStun(PLAYER_STUN);
             }
             return true;
@@ -90,7 +91,7 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public void collectAmuletPiece(final AmuletPiece piece) throws IllegalStateException {
+    public void collectAmuletPiece(final AmuletPiece piece) {
         if (this.piecesCollected.size() == NUMBER_OF_PIECES) {
             throw new IllegalStateException("Already gotten all fragments of the amulet");
         } else {
@@ -123,8 +124,8 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public PlayerColor getColor() {
-        return this.color;
+    public String getColor() {
+        return this.color.getColor();
     }
 
     @Override
@@ -133,8 +134,8 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public List<AmuletPiece> getPieces() {
-        return this.piecesCollected;
+    public int getNumberOfPieces() {
+        return this.piecesCollected.size();
     }
 
     @Override

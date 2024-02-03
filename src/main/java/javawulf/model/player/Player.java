@@ -1,13 +1,9 @@
 package javawulf.model.player;
 
-import java.awt.Color;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-
 import javawulf.model.Direction;
 import javawulf.model.Entity;
 import javawulf.model.item.AmuletPiece;
+import javawulf.model.map.Map;
 import javawulf.model.powerUp.PowerUpHandler;
 
 /**
@@ -20,20 +16,42 @@ public interface Player extends Entity {
      * It changes depending on the current Power-Up the Player has
      */
     enum PlayerColor {
-        RED(Optional.of(Color.RED)),
-        BLUE(Optional.of(Color.BLUE)),
-        YELLOW(Optional.of(Color.YELLOW)),
-        GREEN(Optional.of(Color.GREEN)),
-        NONE(Optional.empty());
+        /**
+         * The color the Player changes into when he collects a strength boosting
+         * Power-Up.
+         */
+        STRENGTH("red"),
+        /**
+         * The color the Player changes into when he collects a invincibility
+         * Power-Up.
+         */
+        INVULNERABILITY("blue"),
+        /**
+         * The color the Player changes into when he collects a points boosting
+         * Power-Up.
+         */
+        DOUBLE_POINTS("yellow"),
+        /**
+         * The color the Player changes into when he collects a speed boosting
+         * Power-Up.
+         */
+        SPEED("green"),
+        /**
+         * The color the Player has by default and has no Power-Up activated.
+         */
+        NONE("none");
 
-        private final Optional<Color> color;
+        private final String color;
 
-        PlayerColor(final Optional<Color> color) {
+        PlayerColor(final String color) {
             this.color = color;
         }
 
-        public Color getColor() throws NoSuchElementException {
-            return this.color.orElseThrow();
+        /**
+         * @return The string corrisponding to the color
+         */
+        public String getColor() {
+            return this.color;
         }
     }
 
@@ -46,16 +64,20 @@ public interface Player extends Entity {
      * Move in the specified direction.
      * 
      * @param direction The direction the player character must move towards
+     * @param map The map, whose tiles will be checked in order to
+     * understand whether the Player is going towards a wall
      * @throws IllegalStateException If the character can't continue in that direction
      * (due to a wall) 
      */
-    void move(Direction direction) throws IllegalStateException;
+    void move(Direction direction, Map map);
 
     /**
      * Adds an amulet piece to the Player's inventory. If it goes over the number
      * of biomes it won't be added to the inventory
      * 
      * @param piece The amulet piece being added to the inventory
+     * @throws IllegalStateException If all pieces have been already collected and
+     * another is getting added
      */
     void collectAmuletPiece(AmuletPiece piece);
 
@@ -84,13 +106,16 @@ public interface Player extends Entity {
     /**
      * @return The color of the Player
      */
-    PlayerColor getColor();
+    String getColor();
 
     /**
      * @param color The color the Player character will now have
      */
     void setColor(PlayerColor color);
 
-    List<AmuletPiece> getPieces();
+    /**
+     * @return The amount of amulet pieces Player has collected
+     */
+    int getNumberOfPieces();
 
 }

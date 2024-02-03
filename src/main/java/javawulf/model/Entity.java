@@ -5,7 +5,13 @@ package javawulf.model;
  */
 public interface Entity extends GameElement {
 
+    /**
+     * The default speed value.
+     */
     int DEFAULT_SPEED = 1;
+    /**
+     * The speed value of a Player while the speed boosting Power-Up is active.
+     */
     int DOUBLE_SPEED = 2;
 
     void setSpeed(int speed);

@@ -2,10 +2,14 @@ package javawulf.model.map;
 
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 
 import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
+import javawulf.model.GameElement;
+import javawulf.model.player.Player;
 
 /**
  * Map is the complete bidimensional game Enviroment. It takes four biomes and
@@ -18,14 +22,14 @@ import javawulf.model.Coordinate;
 public interface Map {
 
     /**
-     * Width-tile dimension of the central biome
+     * Width-tile dimension of the central biome.
      */
-    public static int WIDTH_CENTRAL_BIOME = 10;
+    int WIDTH_CENTRAL_BIOME = 10;
 
     /**
-     * Tile-dimension of the whole map
+     * Tile-dimension of the whole map.
      */
-    public static final int MAP_SIZE = Biome.SIZE * 2 + WIDTH_CENTRAL_BIOME;
+    int MAP_SIZE = Biome.SIZE * 2 + WIDTH_CENTRAL_BIOME;
 
     /**
      * 
@@ -54,5 +58,36 @@ public interface Map {
      */
     Set<TileType> getTileTypes(BoundingBox boundBoxEntity);
 
+    /**
+     * 
+     * @return a defensive copy of all tilepositions in the map (where hashmap doesn't contain a position (key value), it means
+     * there is a WALL by default).
+     */
     HashMap<TilePosition, TileType> getTilesMap();
+
+    /**
+     * 
+     * @return the player held by the map.
+     */
+    Player getPlayer();
+
+    /**
+     * 
+     * @return a biomes ordered list of the map (0 UPPER-LEFT, 1 UPPER-RIGHT, 2 DOWNER-RIGHT, 3 DOWNER-LEFT).
+     * Central biome isn't included.
+     */
+    ArrayList<Biome> getBiomes();
+
+    /**
+     * 
+     * @param room
+     * @return all elements of a specific room.
+     */
+    public List<GameElement> getRoomElements(Space room);
+
+    /**
+     * 
+     * @return a list of all elements inside map.
+     */
+    public List<GameElement> getAllElements();
 }

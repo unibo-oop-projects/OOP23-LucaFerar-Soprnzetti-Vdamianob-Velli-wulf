@@ -1,24 +1,31 @@
 package javawulf.view;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import javawulf.model.map.Map;
 import javawulf.model.map.TilePosition;
 import javawulf.model.map.TileType;
+import javawulf.model.player.Player;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class MapDrawerImpl implements MapDrawer {
-    private Map map;
-    BufferedImage imgRoom;
-    BufferedImage imgWall;
-    BufferedImage imgCorridor;
-    BufferedImage imgCentralRoom;
+/**
+ * Used in GamePanel for drawing Map (Game World).
+ */
+public final class MapDrawerImpl implements MapDrawer {
+    private final Map map;
+    private BufferedImage imgRoom;
+    private BufferedImage imgWall;
+    private BufferedImage imgCorridor;
+    private BufferedImage imgCentralRoom;
+    private GamePanel gamePanel;
 
-    public MapDrawerImpl(Map map) {
+    public MapDrawerImpl(final Map map, GamePanel gamePanel) {
         this.map = map;
+        this.gamePanel = gamePanel;
         try {
             this.imgRoom = ImageIO.read(getClass().getResourceAsStream(ImagePath.ROOM_TILE.getPath()));
             this.imgWall = ImageIO.read(getClass().getResourceAsStream(ImagePath.WALL_TILE.getPath()));
@@ -31,13 +38,11 @@ public class MapDrawerImpl implements MapDrawer {
     }
 
     @Override
-    public void draw(Graphics2D graphics) {
-
-        for (int x = 0; x < Map.MAP_SIZE; x++) {
-            for (int y = 0; y < Map.MAP_SIZE; y++) {
+    public void draw(final Graphics2D graphics) {
+        TilePosition playerPos = this.map.getTilePosition(this.map.getPlayer().getPosition()).get();
+        for (int x = playerPos.getX() - 7; x < playerPos.getX() + 8; x++) {
+            for (int y = playerPos.getY() - 7; y < playerPos.getY() + 8; y++) {
                 BufferedImage img;
-                // TileType currentTile = this.gameLoop.getMap().getTilesMap().get(new
-                // TilePosition(x, y));
                 if (this.map.getTilesMap().containsKey(new TilePosition(x, y))) {
                     switch (this.map.getTilesMap().get(new TilePosition(x, y))) {
                         case ROOM:
@@ -56,11 +61,21 @@ public class MapDrawerImpl implements MapDrawer {
                 } else {
                     img = imgWall;
                 }
-                graphics.drawImage(img, x * TileType.TILE_DIMENSION * GamePanel.scale,
-                        y * TileType.TILE_DIMENSION * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
-
+                graphics.drawImage(img, x * GamePanel.tileSize + (this.gamePanel.getWidth()/2 - Player.OBJECT_SIZE/2) - (int) map.getPlayer().getBounds().getCollisionArea().getX() * GamePanel.scale,
+                        y * GamePanel.tileSize + (this.gamePanel.getHeight()/2 - Player.OBJECT_SIZE/2) - (int) map.getPlayer().getBounds().getCollisionArea().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
             }
         }
+
+        this.drawCorners(graphics);
+    }
+
+    private void drawCorners(final Graphics2D graphics) {
+        graphics.setColor(Color.white);
+        int thicknessCorners = TileType.TILE_DIMENSION*GamePanel.scale*2;
+        graphics.fillRect(this.gamePanel.getWidth()/2 - (16*TileType.TILE_DIMENSION*GamePanel.scale)/2, 0, thicknessCorners, this.gamePanel.getHeight());
+        graphics.fillRect(0, this.gamePanel.getHeight()/2 - (16*TileType.TILE_DIMENSION*GamePanel.scale)/2, this.gamePanel.getWidth(), thicknessCorners);
+        graphics.fillRect(this.gamePanel.getWidth()/2 + (14*TileType.TILE_DIMENSION*GamePanel.scale)/2, 0, thicknessCorners, this.gamePanel.getHeight());
+        graphics.fillRect(0, this.gamePanel.getHeight()/2 + (14*TileType.TILE_DIMENSION*GamePanel.scale)/2, this.gamePanel.getWidth(), thicknessCorners);
     }
 
 }
