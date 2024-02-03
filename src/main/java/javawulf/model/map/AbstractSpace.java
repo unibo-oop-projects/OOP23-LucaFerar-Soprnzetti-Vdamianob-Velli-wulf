@@ -48,4 +48,9 @@ public abstract class AbstractSpace implements Space {
         return this.elements;
     }
 
+    @Override
+    public String toString() {
+        return "AbstractSpace [width=" + width + ", height=" + height + ", elements=" + elements + "]";
+    }
+
 }
