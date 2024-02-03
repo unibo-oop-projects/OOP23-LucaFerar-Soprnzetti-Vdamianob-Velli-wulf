@@ -1,7 +1,5 @@
 package javawulf.model.map.factory;
 
-import javawulf.model.CoordinateImpl;
-import javawulf.model.enemy.Pawn;
 import javawulf.model.map.Biome;
 import javawulf.model.map.BiomeImpl;
 import javawulf.model.map.Corridor;
