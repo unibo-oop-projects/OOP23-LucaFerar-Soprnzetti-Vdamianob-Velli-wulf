@@ -27,7 +27,7 @@ public final class HUDDrawer extends AbstractDrawer {
      * @param gamePanel The panel where the HUD must appear in.
      */
     public HUDDrawer(final PlayerStatus player, final GamePanel gamePanel) {
-        super(gamePanel);
+        super(gamePanel, player);
         this.gamePanel = gamePanel;
         this.player = player;
         try {
@@ -55,7 +55,7 @@ public final class HUDDrawer extends AbstractDrawer {
         for (i = 0; i < max + shield; i++) {
             if (max <= i) {
                 img = this.shield;
-            } else if (current > i + 1) {
+            } else if (current > i) {
                 img = this.health;
             } else { 
                 img = this.maxHealth;
