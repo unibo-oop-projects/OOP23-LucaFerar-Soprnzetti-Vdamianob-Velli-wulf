@@ -26,7 +26,7 @@ public interface Biome {
      *                 placed inside the biome (tile x, y)
      * @param room     to add to the Biome
      */
-    Biome addRoom(TilePosition biomePos, Room room);
+    Biome addRoom(TilePosition biomePos, Space room);
 
     /**
      * 
@@ -35,7 +35,7 @@ public interface Biome {
      *                 placed inside the biome (tile x, y)
      * @param corridor to add to the Biome
      */
-    Biome addCorridor(TilePosition biomePos, Corridor corridor);
+    Biome addCorridor(TilePosition biomePos, Space corridor);
 
     /**
      * 

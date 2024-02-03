@@ -16,13 +16,13 @@ public final class BiomeImpl implements Biome {
     private final List<Pair<TilePosition, Space>> corridors = new ArrayList<>();
 
     @Override
-    public Biome addRoom(final TilePosition biomePos, final Room room) {
+    public Biome addRoom(final TilePosition biomePos, final Space room) {
         this.addSpace(biomePos, room, true);
         return this;
     }
 
     @Override
-    public Biome addCorridor(final TilePosition biomePos, final Corridor corridor) {
+    public Biome addCorridor(final TilePosition biomePos, final Space corridor) {
         this.addSpace(biomePos, corridor, false);
         return this;
     }
