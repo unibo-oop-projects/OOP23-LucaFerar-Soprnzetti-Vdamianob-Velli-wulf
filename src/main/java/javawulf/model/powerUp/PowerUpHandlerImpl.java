@@ -19,16 +19,23 @@ public class PowerUpHandlerImpl implements PowerUpHandler{
 
     @Override
     public void update(Player player) {
-        powerUpActive.get().updateDuration();
         if (powerUpActive.isPresent()) {
-            powerUpActive.get().applyEffect(player);
+            powerUpActive.get().updateDuration();
+            this.checkPowerUpActive();
         }
+        powerUpActive.get().applyEffect(player);
         changePlayerColor(player);
     }
 
     @Override
     public Optional<PowerUp> getPowerUpActive() {
         return powerUpActive;
+    }
+
+    private void checkPowerUpActive() {
+        if (!powerUpActive.get().stillActive()) {
+            powerUpActive = Optional.empty();
+        }
     }
 
     private void changePlayerColor(Player player) {

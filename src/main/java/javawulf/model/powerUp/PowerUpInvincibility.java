@@ -5,7 +5,7 @@ import javawulf.model.player.Player;
 
 public class PowerUpInvincibility extends PowerUpImpl { 
     
-    public PowerUpInvincibility(Coordinate position, int duration, int points, String type) {
+    public PowerUpInvincibility(final Coordinate position, final int duration, final int points, final String type) {
         super(position, points, type, duration);
     }
 

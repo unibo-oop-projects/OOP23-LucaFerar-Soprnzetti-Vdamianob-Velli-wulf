@@ -6,7 +6,7 @@ import javawulf.model.player.Score;
 
 public class PowerUpDoublePoints extends PowerUpImpl {
     
-    public PowerUpDoublePoints(Coordinate position, int duration, int points, String type) {
+    public PowerUpDoublePoints(final Coordinate position, final int duration, final int points, final String type) {
         super(position, points, type, duration);
     }
 

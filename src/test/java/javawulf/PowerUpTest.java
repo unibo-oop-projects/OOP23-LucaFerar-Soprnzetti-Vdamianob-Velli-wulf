@@ -27,11 +27,13 @@ public class PowerUpTest {
 
     private Player player;
     private Coordinate coordinatesPowerUp;
+    private Coordinate coordinatesPlayer;
     private PowerUpFactory powerUpFactory = new PowerUpFactoryImpl();
 
     @BeforeEach
     void setUpPlayerAndCoordinates() {
         this.player = new PlayerImpl(X_COORDINATE_PLAYER, Y_COORDINATE_PLAYER, HEALTH, POINTS);
+        this.coordinatesPlayer = new CoordinateImpl(X_COORDINATE_PLAYER, Y_COORDINATE_PLAYER);
         this.coordinatesPowerUp = new CoordinateImpl(X_COORDINATE_POWERUP, Y_COORDINATE_POWERUP);
     }
 
@@ -46,14 +48,20 @@ public class PowerUpTest {
         // test if now power up is colliding with player
         assertTrue(player.getBounds().isCollidingWith(powerUpAttack.getBounds().getCollisionArea()));
         player.getPowerUpHandler().collectPowerUp(powerUpAttack);
-
         // test wich powerup is active in now
         assertEquals(player.getPowerUpHandler().getPowerUpActive().get(), powerUpAttack);
     }
 
     @Test
     void testStatsPowerUpAttack() {
-        
+        //create a powerUp colliding with player
+        PowerUpAttack powerUpAttack = powerUpFactory.createPowerUpAttack(coordinatesPlayer);
+        player.getPowerUpHandler().collectPowerUp(powerUpAttack);
+        //test powerUp activation
+        assertTrue(player.getPowerUpHandler().getPowerUpActive().get().stillActive());
+
+        player.getPowerUpHandler().update(player);
+
     }
 
 }

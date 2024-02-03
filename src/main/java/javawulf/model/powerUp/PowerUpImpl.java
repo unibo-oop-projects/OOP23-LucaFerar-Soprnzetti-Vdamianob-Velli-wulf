@@ -8,7 +8,7 @@ public abstract class PowerUpImpl extends AbstractCollectable implements PowerUp
     protected int duration;
     protected String type;
 
-    public PowerUpImpl(Coordinate position, Integer points, String type, int duration) {
+    public PowerUpImpl(final Coordinate position, final Integer points, final String type, final int duration) {
         super(position, points);
         this.type = type;
         this.duration = duration;

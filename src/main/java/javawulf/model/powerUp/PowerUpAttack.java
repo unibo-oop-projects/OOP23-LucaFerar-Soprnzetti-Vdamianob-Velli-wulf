@@ -7,7 +7,7 @@ import javawulf.model.player.SwordImpl;
 
 public class PowerUpAttack extends PowerUpImpl {
     
-    public PowerUpAttack(Coordinate position, int duration, int points, String type) {
+    public PowerUpAttack(final Coordinate position, final int duration, final int points, final String type) {
         super(position, points, type, duration);
     }
 

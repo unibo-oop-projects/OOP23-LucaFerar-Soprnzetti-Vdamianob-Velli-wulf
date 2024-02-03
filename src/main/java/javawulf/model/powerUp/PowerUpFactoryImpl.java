@@ -21,22 +21,22 @@ public class PowerUpFactoryImpl implements PowerUpFactory {
     private final static String TYPE_SPEED = "Speed";
 
     @Override
-    public PowerUpAttack createPowerUpAttack(Coordinate coordinates) {
+    public PowerUpAttack createPowerUpAttack(final Coordinate coordinates) {
         return new PowerUpAttack(coordinates, DURATION_ATTACK, POINTS_ATTACK, TYPE_ATTACK);
     }
 
     @Override
-    public PowerUpDoublePoints createPowerUpDoublePoints(Coordinate coordinates) {
+    public PowerUpDoublePoints createPowerUpDoublePoints(final Coordinate coordinates) {
         return new PowerUpDoublePoints(coordinates, DURATION_DOUBLEPOINTS, POINTS_DOUBLEPOINTS, TYPE_DOUBLEPOINTS);
     }
 
     @Override
-    public PowerUpInvincibility createPowerUpInvincibility(Coordinate coordinates) {
+    public PowerUpInvincibility createPowerUpInvincibility(final Coordinate coordinates) {
         return new PowerUpInvincibility(coordinates, DURATION_INVINCIBILITY, POINTS_INVINCIBILITY, TYPE_INVINCIBILITY);
     }
 
     @Override
-    public PowerUpSpeed createPowerUpSpeed(Coordinate coordinates) {
+    public PowerUpSpeed createPowerUpSpeed(final Coordinate coordinates) {
         return new PowerUpSpeed(coordinates, DURATION_SPEED, POINTS_SPEED, TYPE_SPEED);
     }
 
