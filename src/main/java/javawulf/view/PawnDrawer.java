@@ -36,7 +36,6 @@ public final class PawnDrawer extends AbstractDrawer {
     @Override
     public void draw(final Graphics2D graphics) {
         for (final Pawn pawn : this.pawns) {
-            BufferedImage imgPawn = this.pawn;
             String direction;
             switch (pawn.getDirection()) {
                 case UP:
@@ -54,7 +53,7 @@ public final class PawnDrawer extends AbstractDrawer {
                 default:
                     throw new IllegalArgumentException("Invalid direction");
             }
-            imgPawn = this.rotateImage(imgPawn, direction);
+            BufferedImage imgPawn = this.rotateImage(this.pawn, direction);
             this.drawImage(graphics, imgPawn, (int) pawn.getBounds().getCollisionArea().getX(),
                     (int) pawn.getBounds().getCollisionArea().getY());
         }
