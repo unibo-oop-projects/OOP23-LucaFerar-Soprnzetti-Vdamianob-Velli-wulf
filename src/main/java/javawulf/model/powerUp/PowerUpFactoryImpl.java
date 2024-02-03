@@ -4,21 +4,21 @@ import javawulf.model.Coordinate;
 
 public class PowerUpFactoryImpl implements PowerUpFactory {
 
-    private final static int DURATION_ATTACK = 20;
-    private final static int POINTS_ATTACK = 50;
-    private final static String TYPE_ATTACK = "Attack";
+    public final static int DURATION_ATTACK = 20;
+    public final static int POINTS_ATTACK = 50;
+    public final static String TYPE_ATTACK = "Attack";
 
-    private final static int DURATION_DOUBLEPOINTS = 30;
-    private final static int POINTS_DOUBLEPOINTS = 100;
-    private final static String TYPE_DOUBLEPOINTS = "DoublePoints";
+    public final static int DURATION_DOUBLEPOINTS = 30;
+    public final static int POINTS_DOUBLEPOINTS = 100;
+    public final static String TYPE_DOUBLEPOINTS = "DoublePoints";
 
-    private final static int DURATION_INVINCIBILITY = 10;
-    private final static int POINTS_INVINCIBILITY = 100;
-    private final static String TYPE_INVINCIBILITY = "Invincibility";   
+    public final static int DURATION_INVINCIBILITY = 10;
+    public final static int POINTS_INVINCIBILITY = 100;
+    public final static String TYPE_INVINCIBILITY = "Invincibility";   
 
-    private final static int DURATION_SPEED = 30;
-    private final static int POINTS_SPEED = 50;
-    private final static String TYPE_SPEED = "Speed";
+    public final static int DURATION_SPEED = 30;
+    public final static int POINTS_SPEED = 50;
+    public final static String TYPE_SPEED = "Speed";
 
     @Override
     public PowerUpAttack createPowerUpAttack(final Coordinate coordinates) {
