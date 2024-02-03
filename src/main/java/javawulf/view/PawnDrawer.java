@@ -19,11 +19,11 @@ public final class PawnDrawer extends AbstractDrawer {
     /**
      * The Pawn Drawer.
      * 
-     * @param gamePanel the Game Panel where the pawn must be drawn
      * @param player    the current status of the Player character
+     * @param gamePanel the Game Panel where the pawn must be drawn
      * @param pawns     a list of all the pawns to draw
      */
-    public PawnDrawer(final GamePanel gamePanel, final PlayerStatus player, final List<Pawn> pawns) {
+    public PawnDrawer(final PlayerStatus player, final GamePanel gamePanel, final List<Pawn> pawns) {
         super(gamePanel, player);
         this.pawns = pawns;
         try {
@@ -36,7 +36,6 @@ public final class PawnDrawer extends AbstractDrawer {
     @Override
     public void draw(final Graphics2D graphics) {
         for (final Pawn pawn : this.pawns) {
-            BufferedImage imgPawn = this.pawn;
             String direction;
             switch (pawn.getDirection()) {
                 case UP:
@@ -54,7 +53,7 @@ public final class PawnDrawer extends AbstractDrawer {
                 default:
                     throw new IllegalArgumentException("Invalid direction");
             }
-            imgPawn = this.rotateImage(imgPawn, direction);
+            final BufferedImage imgPawn = this.rotateImage(this.pawn, direction);
             this.drawImage(graphics, imgPawn, (int) pawn.getBounds().getCollisionArea().getX(),
                     (int) pawn.getBounds().getCollisionArea().getY());
         }

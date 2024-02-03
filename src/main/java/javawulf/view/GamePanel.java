@@ -27,6 +27,9 @@ public class GamePanel extends JPanel {
     private Drawer mapDrawer;
     private Drawer playerDrawer;
     private Drawer hudDrawer;
+    private Drawer pawnDrawer;
+    private Drawer itemDrawer;
+    private Drawer amuletPiecesDrawer;
     private PlayerStatus playerStatus;
 
     public GamePanel() {
@@ -41,6 +44,9 @@ public class GamePanel extends JPanel {
         this.mapDrawer = new MapDrawer(gameLoopController.getMap(), this);
         this.playerDrawer = new PlayerDrawer(this.playerStatus, this);
         this.hudDrawer = new HUDDrawer(this.playerStatus, this);
+        this.pawnDrawer = new PawnDrawer(this.playerStatus, this, gameLoopController.getPawns());
+        this.itemDrawer = new ItemDrawer(this, gameLoopController.getItems(), this.playerStatus);
+        this.amuletPiecesDrawer = new AmuletPiecesDrawer(this, this.playerStatus, gameLoopController.getAmuletPieces());
         gameLoopController.startGameLoopThread();
     }
 
@@ -51,6 +57,9 @@ public class GamePanel extends JPanel {
         this.mapDrawer.draw(graphics2d);
         this.playerDrawer.draw(graphics2d);
         this.hudDrawer.draw(graphics2d);
+        this.pawnDrawer.draw(graphics2d);
+        this.itemDrawer.draw(graphics2d);
+        this.amuletPiecesDrawer.draw(graphics2d);
         graphics2d.dispose();
     }
 }

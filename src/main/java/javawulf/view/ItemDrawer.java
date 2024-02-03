@@ -47,7 +47,7 @@ public final class ItemDrawer extends AbstractDrawer {
     @Override
     public void draw(final Graphics2D graphics) {
         for (final Collectable item : items) {
-            BufferedImage image = images.get(item.getClass());
+            final BufferedImage image = images.get(item.getClass());
             if (image != null) {
                 this.drawImage(graphics, image, (int) item.getBounds().getCollisionArea().getX(),
                         (int) item.getBounds().getCollisionArea().getY());
