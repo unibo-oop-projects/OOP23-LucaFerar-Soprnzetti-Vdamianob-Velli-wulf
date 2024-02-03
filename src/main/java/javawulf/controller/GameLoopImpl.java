@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javawulf.model.BoundingBox;
 import javawulf.model.Collectable;
 import javawulf.model.GameElement;
 import javawulf.model.enemy.Pawn;
@@ -60,17 +61,17 @@ public final class GameLoopImpl implements GameLoop, Runnable {
         this.gameMap = new MapFactoryImpl().getDefaultMap1(this.gamePlayer);
         var elements = this.gameMap.getAllElements();
         this.items.addAll(elements.stream()
-            .filter(this::isItem)
-            .map(e -> (Collectable) e)
-            .collect(Collectors.toList()));
+                .filter(this::isItem)
+                .map(e -> (Collectable) e)
+                .collect(Collectors.toList()));
         this.pawns.addAll(elements.stream()
-            .filter(e -> e instanceof Pawn)
-            .map(e -> (Pawn) e)
-            .collect(Collectors.toList()));
+                .filter(e -> e instanceof Pawn)
+                .map(e -> (Pawn) e)
+                .collect(Collectors.toList()));
         this.pieces.addAll(elements.stream()
-            .filter(e -> e instanceof AmuletPiece)
-            .map(e -> (AmuletPiece) e)
-            .collect(Collectors.toList()));
+                .filter(e -> e instanceof AmuletPiece)
+                .map(e -> (AmuletPiece) e)
+                .collect(Collectors.toList()));
     }
 
     private boolean isItem(GameElement e) {
@@ -79,7 +80,8 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void playerInit() {
-        this.gamePlayer = new PlayerImpl(Map.MAP_SIZE*GameObject.OBJECT_SIZE/2, Map.MAP_SIZE*GameObject.OBJECT_SIZE/2, 3, 0);
+        this.gamePlayer = new PlayerImpl(Map.MAP_SIZE * GameObject.OBJECT_SIZE / 2,
+                Map.MAP_SIZE * GameObject.OBJECT_SIZE / 2, 3, 0);
     }
 
     @Override
@@ -104,7 +106,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             this.delta--;
         }
 
-        if (this.timer >= NANOSECONDS*2) {
+        if (this.timer >= NANOSECONDS * 2) {
             this.timer = 0;
             // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
         }
@@ -129,6 +131,30 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             this.swordTime = 0;
         }
 
+        // Per ogni nemico nella lista, chiama i suoi metodi di movimento, il tick di
+        // aggiornamento ed i suoi controlli, quando muore viene rimosso dalla lista
+        this.pawns.forEach(p -> {
+            p.move(this.gamePlayer, this.gameMap);
+            p.takeHit(this.gamePlayer);
+            p.tick();
+        });
+        this.pawns
+                .removeIf(p -> !p.isAlive() && p.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
+
+        // Per ogni pezzo di amuleto nella lista, controlla se è stato raccolto e se il
+        // giocatore è allineato ad uno dei suoi assi, quando viene raccolto viene
+        // rimosso dalla lista
+        this.pieces.forEach(p -> {
+            p.collect(this.gamePlayer);
+            p.isPlayerAligned(this.gamePlayer);
+        });
+        this.pieces.removeIf(p -> p.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
+
+        // Per ogni oggetto collezionabile nella lista, controlla se è stato raccolto,
+        // una volta raccolto viene rimosso dalla lista
+        this.items.forEach(i -> i.collect(this.gamePlayer));
+        this.items.removeIf(i -> i.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
+        
         // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
     }
 
