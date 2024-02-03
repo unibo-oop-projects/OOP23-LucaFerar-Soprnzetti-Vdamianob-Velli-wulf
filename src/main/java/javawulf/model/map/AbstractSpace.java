@@ -34,13 +34,15 @@ public abstract class AbstractSpace implements Space {
     }
 
     @Override
-    public void addGameElement(GameElement element) {
+    public Space addGameElement(GameElement element) {
         this.elements.add(element);
+        return this;
     }
 
     @Override
-    public void addGameElements(Collection<GameElement> elements) {
+    public Space addGameElements(Collection<GameElement> elements) {
         this.elements.addAll(elements);
+        return this;
     }
 
     @Override

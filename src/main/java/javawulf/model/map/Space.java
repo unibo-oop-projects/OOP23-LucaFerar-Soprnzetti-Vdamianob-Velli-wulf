@@ -26,13 +26,13 @@ public interface Space {
      * 
      * @param element to add in the Space.
      */
-    void addGameElement(GameElement element);
+    Space addGameElement(GameElement element);
 
     /**
      * 
      * @param elements to add in the Space
      */
-    void addGameElements(Collection<GameElement> elements);
+    Space addGameElements(Collection<GameElement> elements);
 
     /**
      * 
