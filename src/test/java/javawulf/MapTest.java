@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import javawulf.model.BoundingBox;
 import javawulf.model.BoundingBoxImpl;
 import javawulf.model.CoordinateImpl;
+import javawulf.model.enemy.Pawn;
 import javawulf.model.map.*;
 
 /**
@@ -89,6 +90,24 @@ public class MapTest {
         this.gameMapExample = new MapImpl(null, firstBiome, secondBiome, thirdBiome, fourthBiome);
     }
 
+    void setUpWithEntities() {
+        firstBiome = new BiomeImpl();
+        Room roomA = new Room(10, 10);
+        roomA.addGameElement(new Pawn(new CoordinateImpl(0, 0)));
+        firstBiome.addRoom(new TilePosition(1, 1), roomA);
+
+        secondBiome = new BiomeImpl();
+        secondBiome.addRoom(new TilePosition(1, 1), new Room(7, 7));
+
+        thirdBiome = new BiomeImpl();
+        thirdBiome.addRoom(new TilePosition(1, 1), new Room(10, 10));
+
+        fourthBiome = new BiomeImpl();
+        fourthBiome.addRoom(new TilePosition(1, 1), new Room(10, 10));
+
+        this.gameMapExample = new MapImpl(null, firstBiome, secondBiome, thirdBiome, fourthBiome);
+    }
+
     @Test
     void testMap() {
         this.setUp();
@@ -149,6 +168,8 @@ public class MapTest {
 
     @Test
     void testEntitiesInMap() {
-        
+        this.setUpWithEntities();
+        assertEquals(1, gameMapExample.getAllElements().size());
+        assertEquals(Pawn.class, gameMapExample.getAllElements().get(0).getClass());
     }
 }

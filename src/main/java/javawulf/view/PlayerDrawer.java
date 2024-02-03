@@ -3,11 +3,9 @@ package javawulf.view;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.logging.Logger;
 
-import javawulf.model.BoundingBox.CollisionType;
-import javawulf.model.player.Player;
-import javawulf.model.player.Sword;
-import javawulf.model.player.Sword.SwordType;
+import javawulf.controller.PlayerStatus;
 
 /**
  * Class used to draw Player.
@@ -17,8 +15,7 @@ public final class PlayerDrawer extends AbstractDrawer {
     private BufferedImage player;
     private BufferedImage sword;
     private BufferedImage greatsword;
-    private Player gamePlayer;
-    private Sword playerSword;
+    private final PlayerStatus gamePlayer;
 
     /**
      * The Player coming from the Controller.
@@ -26,16 +23,15 @@ public final class PlayerDrawer extends AbstractDrawer {
      * @param player The Player character that must be drawn
      * @param gamePanel The panel that must be updated
      */
-    public PlayerDrawer(final Player player, final GamePanel gamePanel) {
-        super(gamePanel);
+    public PlayerDrawer(final PlayerStatus player, final GamePanel gamePanel) {
+        super(gamePanel, player);
         this.gamePlayer = player;
-        this.playerSword = this.gamePlayer.getSword();
         try {
             this.player = imageLoader(ImagePath.PLAYER_UP);
             this.sword = imageLoader(ImagePath.SWORD);
             this.greatsword = imageLoader(ImagePath.GREATSWORD);
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(PlayerDrawer.class.getName()).fine(e.getMessage());
         }
     }
 
@@ -46,17 +42,17 @@ public final class PlayerDrawer extends AbstractDrawer {
         String direction;
 
         switch (this.gamePlayer.getDirection()) {
-            case UP_RIGHT:
-            case RIGHT:
-            case DOWN_RIGHT:
+            case "UP_RIGHT":
+            case "RIGHT":
+            case "DOWN_RIGHT":
                 direction = "right";
                 break;
-            case UP_LEFT:
-            case LEFT:
-            case DOWN_LEFT:
+            case "UP_LEFT":
+            case "LEFT":
+            case "DOWN_LEFT":
                 direction = "left";
                 break;
-            case UP:
+            case "UP":
                 direction = "up";
                 break;
             default:
@@ -66,25 +62,20 @@ public final class PlayerDrawer extends AbstractDrawer {
 
         img = rotateImage(img, direction);
 
-        int playerX = getPlayerX();
-        int playerY = getPlayerY();
+        final int playerX = this.gamePlayer.getPlayerX();
+        final int playerY = this.gamePlayer.getPlayerY();
 
-        graphics.drawImage(img, playerX, playerY,
-            GamePanel.tileSize, GamePanel.tileSize, null);
+        this.drawImage(graphics, img, playerX, playerY);
 
-        if (this.playerSword.getBounds().getCollisionType().equals(CollisionType.SWORD)) {
-            int width = (int) this.playerSword.getBounds().getCollisionArea().getWidth();
-            int height = (int) this.playerSword.getBounds().getCollisionArea().getHeight();
-            if (this.playerSword.getSwordType().equals(SwordType.GREATSWORD)) {
+        if ("SWORD".equals(this.gamePlayer.getSwordCollision())) {
+            final int width = (int) this.gamePlayer.getSwordWidth();
+            final int height = (int) this.gamePlayer.getSwordHeight();
+            if ("GREATSWORD".equals(this.gamePlayer.getSwordType())) {
                 imgSword = this.greatsword;
             }
             imgSword = rotateImage(imgSword, direction);
 
-            int swordX = playerX - (int) (this.gamePlayer.getBounds().getCollisionArea().getX()
-                - this.playerSword.getBounds().getCollisionArea().getX()) * GamePanel.scale;
-            int swordY = playerY - (int) (this.gamePlayer.getBounds().getCollisionArea().getY()
-                - this.playerSword.getBounds().getCollisionArea().getY()) * GamePanel.scale;
-            graphics.drawImage(imgSword, swordX, swordY, width * GamePanel.scale, height * GamePanel.scale, null);
+            this.drawImage(graphics, imgSword, this.gamePlayer.getSwordX(), this.gamePlayer.getSwordY(), width, height);
         }
     }
 

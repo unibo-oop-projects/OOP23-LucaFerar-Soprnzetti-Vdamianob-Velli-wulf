@@ -13,6 +13,7 @@ import javawulf.model.item.CureMax;
 import javawulf.model.item.ExtraHeart;
 import javawulf.model.item.GreatSword;
 import javawulf.model.item.Shield;
+import javawulf.model.GameObject;
 import javawulf.model.map.Map;
 import javawulf.model.map.factory.MapFactoryImpl;
 import javawulf.model.player.Player;
@@ -31,7 +32,6 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private double delta;
     private double interval;
     private Thread gameLoopThread;
-    private int drawCount = 0;
     private final GamePanel gamePanel;
     private Map gameMap;
     private Player gamePlayer;
@@ -79,7 +79,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void playerInit() {
-        this.gamePlayer = new PlayerImpl(70, 70, 3, 0);
+        this.gamePlayer = new PlayerImpl(Map.MAP_SIZE*GameObject.OBJECT_SIZE/2, Map.MAP_SIZE*GameObject.OBJECT_SIZE/2, 3, 0);
     }
 
     @Override
@@ -102,15 +102,11 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             this.update();
             this.reDraw();
             this.delta--;
-            this.drawCount++;
         }
 
-        if (this.timer >= NANOSECONDS) {
-            System.out.println("FPS: " + drawCount);
-            System.out.println("GP height: " + this.gamePanel.getHeight()
-                    + " GP width: " + this.gamePanel.getWidth());
-            this.drawCount = 0;
+        if (this.timer >= NANOSECONDS*2) {
             this.timer = 0;
+            // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
         }
     }
 

@@ -12,13 +12,13 @@ import javawulf.controller.PlayerController;
  */
 public final class CommandListener implements KeyListener {
 
-    private boolean up = false;
-    private boolean down = false;
-    private boolean left = false;
-    private boolean right = false;
-    private boolean attack = false;
-    private PlayerController controller;
-    private boolean isMoving = false;
+    private boolean up;
+    private boolean down;
+    private boolean left;
+    private boolean right;
+    private boolean attack;
+    private final PlayerController controller;
+    private boolean isMoving;
 
     /**
      * Creates a new CommandListener.

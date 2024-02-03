@@ -10,7 +10,7 @@ import javawulf.model.Direction;
 public final class PlayerControllerImpl implements PlayerController {
 
     private Optional<Direction> movementDirection = Optional.empty();
-    private boolean attack = false;
+    private boolean attack;
 
     @Override
     public Optional<Direction> getDirection() {

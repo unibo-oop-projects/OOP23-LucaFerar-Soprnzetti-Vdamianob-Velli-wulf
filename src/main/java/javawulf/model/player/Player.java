@@ -69,13 +69,15 @@ public interface Player extends Entity {
      * @throws IllegalStateException If the character can't continue in that direction
      * (due to a wall) 
      */
-    void move(Direction direction, Map map) throws IllegalStateException;
+    void move(Direction direction, Map map);
 
     /**
      * Adds an amulet piece to the Player's inventory. If it goes over the number
      * of biomes it won't be added to the inventory
      * 
      * @param piece The amulet piece being added to the inventory
+     * @throws IllegalStateException If all pieces have been already collected and
+     * another is getting added
      */
     void collectAmuletPiece(AmuletPiece piece);
 

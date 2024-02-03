@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javawulf.controller.PlayerStatus;
 import javawulf.model.Collectable;
 import javawulf.model.item.Cure;
 import javawulf.model.item.CureMax;
@@ -26,9 +27,10 @@ public final class ItemDrawer extends AbstractDrawer {
      * 
      * @param gamePanel the Game Panel where the items must be drawn
      * @param items     a list of all the items to draw
+     * @param player
      */
-    public ItemDrawer(final GamePanel gamePanel, final List<Collectable> items) {
-        super(gamePanel);
+    public ItemDrawer(final GamePanel gamePanel, final List<Collectable> items, final PlayerStatus player) {
+        super(gamePanel, player);
         this.items = items;
         try {
             images.put(Cure.class, this.imageLoader(ImagePath.CURE));

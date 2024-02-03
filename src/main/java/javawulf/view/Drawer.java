@@ -7,8 +7,8 @@ import java.awt.Graphics2D;
  */
 public interface Drawer {
 
-    /**
-     * @param graphics where the HUD is drawn
+    /** Draw the components referred to the implemented *Drawer class.
+     * @param graphics where components are drawn
      */
     void draw(Graphics2D graphics);
 }
