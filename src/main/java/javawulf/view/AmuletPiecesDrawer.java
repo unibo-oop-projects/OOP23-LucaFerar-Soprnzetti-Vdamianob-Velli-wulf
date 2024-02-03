@@ -18,7 +18,7 @@ public final class AmuletPiecesDrawer implements Drawer {
     private final List<AmuletPiece> amuletPieces;
 
     /**
-     * The AmuletPieces coming from the Controller.
+     * The Amulet Pieces coming from the Controller.
      * 
      * @param amuletPieces A list of th Amulet Pieces that must be drawn
      */

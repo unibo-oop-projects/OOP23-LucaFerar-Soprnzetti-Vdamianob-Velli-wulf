@@ -21,6 +21,12 @@ public final class ItemDrawer extends AbstractDrawer {
     private final Map<Class<? extends Collectable>, BufferedImage> images = new HashMap<>();
     private final List<Collectable> items;
 
+    /**
+     * Builds the items passed from the Controller.
+     * 
+     * @param gamePanel the Game Panel where the items must be drawn
+     * @param items     a list of all the items to draw
+     */
     public ItemDrawer(final GamePanel gamePanel, final List<Collectable> items) {
         super(gamePanel);
         this.items = items;
