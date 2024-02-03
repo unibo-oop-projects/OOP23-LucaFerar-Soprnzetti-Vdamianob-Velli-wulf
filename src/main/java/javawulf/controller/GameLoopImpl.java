@@ -1,5 +1,6 @@
 package javawulf.controller;
 
+import javawulf.model.GameObject;
 import javawulf.model.map.Map;
 import javawulf.model.map.factory.MapFactoryImpl;
 import javawulf.model.player.Player;
@@ -42,7 +43,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void playerInit() {
-        this.gamePlayer = new PlayerImpl(70, 70, 3, 0);
+        this.gamePlayer = new PlayerImpl(Map.MAP_SIZE*GameObject.OBJECT_SIZE/2, Map.MAP_SIZE*GameObject.OBJECT_SIZE/2, 3, 0);
     }
 
     @Override
