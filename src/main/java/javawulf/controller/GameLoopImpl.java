@@ -1,5 +1,6 @@
 package javawulf.controller;
 
+import javawulf.model.GameObject;
 import javawulf.model.map.Map;
 import javawulf.model.map.factory.MapFactoryImpl;
 import javawulf.model.player.Player;
@@ -42,7 +43,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void playerInit() {
-        this.gamePlayer = new PlayerImpl(70, 70, 3, 0);
+        this.gamePlayer = new PlayerImpl(Map.MAP_SIZE*GameObject.OBJECT_SIZE/2, Map.MAP_SIZE*GameObject.OBJECT_SIZE/2, 3, 0);
     }
 
     @Override
@@ -55,7 +56,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
         }
     }
 
-    private void gameLoopBody() {    
+    private void gameLoopBody() {
         this.currentTime = System.nanoTime();
         delta += (this.currentTime - this.lastTime) / this.interval;
         this.timer += (this.currentTime - this.lastTime);
@@ -79,13 +80,13 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void update() {
-        if (this.playerController.getDirection().isPresent() && !this.attacking){
+        if (this.playerController.getDirection().isPresent() && !this.attacking) {
             try {
-                this.gamePlayer.move(this.playerController.getDirection().get(), this.gameMap);   
+                this.gamePlayer.move(this.playerController.getDirection().get(), this.gameMap);
             } catch (Exception e) {
                 System.out.println("There is a wall");
             }
-        } else if (this.playerController.isAttack() && !this.attacking){
+        } else if (this.playerController.isAttack() && !this.attacking) {
             this.gamePlayer.attack();
             this.attacking = true;
             this.swordTime = System.nanoTime();
@@ -96,7 +97,8 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             this.attacking = false;
             this.swordTime = 0;
         }
-        
+
+        // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
     }
 
     private void reDraw() {
@@ -112,11 +114,13 @@ public final class GameLoopImpl implements GameLoop, Runnable {
         this.gameLoopThread.start();
     }
 
+    @Override
     public Map getMap() {
         return this.gameMap;
     }
 
-    public Player getPlayer(){
+    @Override
+    public Player getPlayer() {
         return this.gamePlayer;
     }
 

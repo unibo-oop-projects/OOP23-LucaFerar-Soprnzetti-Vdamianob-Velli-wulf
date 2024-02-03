@@ -1,6 +1,9 @@
 package javawulf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,17 +23,20 @@ import javawulf.model.map.factory.MapFactoryImpl;
 import javawulf.model.player.Player;
 import javawulf.model.player.PlayerImpl;
 
+/**
+ * Test class for the Pawn class.
+ */
 public final class PawnTest {
 
     private static final int STARTING_X = 24;
     private static final int STARTING_Y = 24;
     private static final int STARTING_HEALTH = 3;
 
-    EnemyFactory factory = new EnemyFactoryImpl();
-    Player player = new PlayerImpl(STARTING_X * 3, STARTING_Y * 3, STARTING_HEALTH, 0);
-    Coordinate position = new CoordinateImpl(STARTING_X, STARTING_Y);
-    Map map = new MapFactoryImpl().getTestMap(player);
-    Pawn pawn;
+    private EnemyFactory factory = new EnemyFactoryImpl();
+    private Player player = new PlayerImpl(STARTING_X * 3, STARTING_Y * 3, STARTING_HEALTH, 0);
+    private Coordinate position = new CoordinateImpl(STARTING_X, STARTING_Y);
+    private Map map = new MapFactoryImpl().getTestMap(player);
+    private Pawn pawn;
 
     @BeforeEach
     void createPawn() {
@@ -79,7 +85,9 @@ public final class PawnTest {
 
         // Put the pawn near a wall
         pawn.setPosition(testPos);
-        pawn.setPosition(new CoordinateImpl(STARTING_X, STARTING_Y * 6));
+        int tilesBeforeWallY = 6;
+        int tileOfWallY = 7;
+        pawn.setPosition(new CoordinateImpl(STARTING_X, STARTING_Y * tilesBeforeWallY));
         pawn.getBounds().setCollisionArea(pawn.getPosition().getX(), pawn.getPosition().getY(),
                 AbstractEntity.OBJECT_SIZE,
                 AbstractEntity.OBJECT_SIZE);
@@ -88,7 +96,8 @@ public final class PawnTest {
         // Check if the pawn changes direction after colliding with a wall
         pawn.move(player, map);
         assertNotEquals(Direction.DOWN, pawn.getDirection());
-
+        Coordinate wallPosition = new CoordinateImpl(STARTING_X, STARTING_Y * tileOfWallY);
+        assertNotEquals(wallPosition, pawn.getPosition());
     }
 
     @Test

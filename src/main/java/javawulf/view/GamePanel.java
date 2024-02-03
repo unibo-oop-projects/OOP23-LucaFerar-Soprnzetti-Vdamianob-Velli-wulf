@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 
 import javawulf.controller.GameLoop;
 import javawulf.controller.GameLoopImpl;
+import javawulf.controller.PlayerStatus;
+import javawulf.controller.PlayerStatusImpl;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -25,8 +27,9 @@ public class GamePanel extends JPanel {
     private CommandListener listener;
     private GameLoop gameLoopController;
     private MapDrawer mapDrawer;
-    private PlayerDrawerImpl playerDrawer;
-    private HUDDrawerImpl hudDrawer;
+    private Drawer playerDrawer;
+    private Drawer hudDrawer;
+    private PlayerStatus playerStatus;
 
     public GamePanel() {
         this.gameLoopController = new GameLoopImpl(this);
@@ -36,9 +39,10 @@ public class GamePanel extends JPanel {
         this.listener = new CommandListener(this.gameLoopController.getPlayerController());
         this.addKeyListener(this.listener);
         this.setFocusable(true);
+        this.playerStatus = new PlayerStatusImpl(gameLoopController.getPlayer());
         this.mapDrawer = new MapDrawerImpl(gameLoopController.getMap(), this);
-        this.playerDrawer = new PlayerDrawerImpl(gameLoopController.getPlayer(), this);
-        this.hudDrawer = new HUDDrawerImpl(gameLoopController.getPlayer(), this);
+        this.playerDrawer = new PlayerDrawer(this.playerStatus, this);
+        this.hudDrawer = new HUDDrawer(this.playerStatus, this);
         gameLoopController.startGameLoopThread();
     }
 

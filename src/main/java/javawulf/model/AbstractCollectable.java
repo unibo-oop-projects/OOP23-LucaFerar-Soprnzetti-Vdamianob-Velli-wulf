@@ -44,7 +44,7 @@ public abstract class AbstractCollectable extends GameObject implements Collecta
             p.getScore().addPoints(this.points);
             this.getBounds().changeCollisionType(CollisionType.INACTIVE);
         }
-    };
+    }
 
     /**
      * Applies the effect of the collectable to the player.

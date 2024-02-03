@@ -3,7 +3,7 @@ package javawulf.view;
 import java.awt.Graphics2D;
 
 /**
- * Class used in GamePanel and element of the game.
+ * Class used in GamePanel in order to draw the elements of the game.
  */
 public interface Drawer {
 
