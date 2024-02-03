@@ -7,7 +7,7 @@ import javawulf.model.player.Player;
  */
 public final class PlayerStatusImpl implements PlayerStatus {
 
-    private Player player;
+    private final Player player;
 
     /**
      * @param player The Player whose status must be considered
