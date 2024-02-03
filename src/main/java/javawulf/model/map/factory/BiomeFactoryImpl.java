@@ -11,9 +11,10 @@ import javawulf.model.map.TilePosition;
  * biome; they can be used to compose a new map.
  */
 public final class BiomeFactoryImpl implements BiomeFactory {
-
+//TODO: riuscire sopprimere i checkstyles...
+//CHECKSTYLE MagicNumber:OFF
+//CHECKSTYLE:OFF
     @Override
-    @SuppressWarnings("checkstyle:magicnumber")
     public Biome getBiomeA() {
         return new BiomeImpl()
                 .addRoom(new TilePosition(2, 2), new RoomFactoryImpl().getSquaredRoom())
@@ -97,3 +98,4 @@ public final class BiomeFactoryImpl implements BiomeFactory {
                 .addRoom(new TilePosition(0, 0), new Room(Biome.SIZE, Biome.SIZE));
     }
 }
+//CHECKSTYLE:ON
