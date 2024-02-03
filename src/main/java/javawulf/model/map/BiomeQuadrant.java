@@ -30,10 +30,19 @@ package javawulf.model.map;
             this.offset = offset;
         }
 
+        /**
+         * 
+         * @return the offset tile-position of the corresponding biome quadrant.
+         */
         public TilePosition getOffset() {
             return this.offset;
         }
 
+        /**
+         * 
+         * @return the corresponding number of quadrant.
+         * Biomes in a map are arranged in four quadrant: pos. 0 is the first; pos. 3 is the fourth).
+         */
         public int getPos() {
             return this.pos;
         }
