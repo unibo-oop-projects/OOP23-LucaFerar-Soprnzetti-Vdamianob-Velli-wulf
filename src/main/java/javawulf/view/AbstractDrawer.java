@@ -9,26 +9,51 @@ import javax.imageio.ImageIO;
 
 import javawulf.model.player.Player;
 
+/**
+ * Class that implements useful methods for all Drawer classes.
+ */
 public abstract class AbstractDrawer implements Drawer {
 
     private final GamePanel gamePanel;
 
+    /**
+     * @param gamePanel The gamepanel the game must be drawn into.
+     */
     public AbstractDrawer(final GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
 
+    /**
+     * It loades an image from the resources.
+     * 
+     * @param image The image file to be loaded
+     * @return The file as a BufferedImage
+     */
     protected BufferedImage imageLoader(final ImagePath image) throws IOException {
         return ImageIO.read(getClass().getResourceAsStream(image.getPath()));
     }
 
-    protected int getPlayerX(){
+    /**
+     * @return The X-axis position of Player on the screen.
+     */
+    protected int getPlayerX() {
         return this.gamePanel.getWidth() / 2 - Player.OBJECT_SIZE / 2;
     }
 
-    protected int getPlayerY(){
+    /**
+     * @return The Y-axis position of Player on the screen.
+     */
+    protected int getPlayerY() {
         return this.gamePanel.getHeight() / 2 - Player.OBJECT_SIZE / 2;
     }
 
+    /**
+     * Rotates an image according to the String direction.
+     * 
+     * @param startingImage The image that must be rotated
+     * @param direction The direction the image must face.
+     * @return The image rotated 
+     */
     protected BufferedImage rotateImage(final BufferedImage startingImage, final String direction) {
         AffineTransform tx = new AffineTransform();
         AffineTransformOp op;

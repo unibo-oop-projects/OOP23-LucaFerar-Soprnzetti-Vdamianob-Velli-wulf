@@ -19,7 +19,13 @@ public final class HUDDrawer extends AbstractDrawer {
     private BufferedImage sword;
     private BufferedImage greatsword;
     private Player player;
-    
+
+    /**
+     * Creates a new HUDDrawer.
+     * 
+     * @param player The player character whose status will be made into the HUD
+     * @param gamePanel The panel where the HUD must appear in.
+     */
     public HUDDrawer(final Player player, final GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
@@ -57,7 +63,7 @@ public final class HUDDrawer extends AbstractDrawer {
             graphics.drawImage(img, x + img.getWidth() * GamePanel.scale * i,
                     y, GamePanel.tileSize, GamePanel.tileSize, null);
         }
-        if (sword == 1){
+        if (sword == 1) {
             img = this.sword;
         } else {
             img = this.greatsword;
@@ -65,5 +71,5 @@ public final class HUDDrawer extends AbstractDrawer {
         graphics.drawImage(img, x + img.getWidth() * GamePanel.scale * i, y, GamePanel.tileSize,
             GamePanel.tileSize, null);
     }
-    
+
 }

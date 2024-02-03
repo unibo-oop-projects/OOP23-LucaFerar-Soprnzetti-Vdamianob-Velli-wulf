@@ -22,15 +22,15 @@ public enum ImagePath {
     PLAYER_LEFT("/player/player_left.png"),
     /** <img src="../../../resources/player/player_right.png"> Player right. */
     PLAYER_RIGHT("/player/player_right.png"),
-    /** <img src="../../../resources/player/player/sword.png"> Sword. */
+    /** <img src="../../../resources/player/sword.png"> Sword. */
     SWORD("/player/sword.png"),
-
+    /** <img src="../../../resources/player/greatsword.png"> Greatsword. */
     GREATSWORD("/player/greatsword.png"),
-
+    /** <img src="../../../resources/player/health.png"> Health. */
     HEALTH("/player/health.png"),
-
+    /** <img src="../../../resources/player/recoverable_health.png"> Recoverable health. */
     MAX_HEALTH("/player/recoverable_health.png"),
-
+    /** <img src="../../../resources/player/shield.png"> Shield. */
     SHIELD("/player/shield.png"),
     /** <img src="../../../resources/enemies/pawn/pawn_up.png"> Pawn up. */
     PAWN_UP("/enemies/pawn/pawn_up.png"),
