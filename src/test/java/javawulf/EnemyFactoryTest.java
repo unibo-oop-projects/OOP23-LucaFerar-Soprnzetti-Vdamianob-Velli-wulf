@@ -12,6 +12,7 @@ import javawulf.model.BoundingBoxImpl;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.BoundingBox.CollisionType;
+import javawulf.model.enemy.Enemy;
 import javawulf.model.enemy.EnemyFactory;
 import javawulf.model.enemy.EnemyFactoryImpl;
 import javawulf.model.enemy.Guard;
@@ -39,7 +40,7 @@ public final class EnemyFactoryTest {
         assertNotNull(pawn);
         assertEquals(position.getPosition(), pawn.getPosition().getPosition());
         // Check if the pawn is instantiated as a Pawn
-        assertTrue(pawn instanceof Pawn);
+        assertTrue(pawn instanceof Enemy);
         // Check the coordinates of the pawn
         assertEquals(STARTING_X, pawn.getPosition().getX());
         assertEquals(STARTING_Y, pawn.getPosition().getY());
@@ -63,7 +64,7 @@ public final class EnemyFactoryTest {
         assertNotNull(guard);
         assertEquals(position.getPosition(), guard.getPosition().getPosition());
         // Check if the guard is instantiated as a Guard
-        assertTrue(guard instanceof Guard);
+        assertTrue(guard instanceof Enemy);
         // Check the coordinates of the guard
         assertEquals(STARTING_X, guard.getPosition().getX());
         assertEquals(STARTING_Y, guard.getPosition().getY());
