@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javawulf.controller.PlayerStatus;
 import javawulf.model.map.TileType;
 import java.awt.Color;
+import java.awt.Font;
 
 /**
  * Class used in GamePanel in order to draw the HUD.
@@ -53,6 +54,9 @@ public final class HUDDrawer extends AbstractDrawer {
         final int current = this.player.getHealth();
         final int shield = this.player.getShield();
         final String sword = this.player.getSwordType();
+        final String color = this.player.getColor();
+        final String status = this.player.getPlayerCollision();
+        final String score = String.valueOf(this.player.getScore());
         BufferedImage img;
         int i;
         for (i = 0; i < max + shield; i++) {
@@ -63,16 +67,37 @@ public final class HUDDrawer extends AbstractDrawer {
             } else { 
                 img = this.maxHealth;
             }
-            graphics.drawImage(img, x + img.getWidth() * GamePanel.scale * i,
-                    y, GamePanel.tileSize, GamePanel.tileSize, null);
+            graphics.drawImage(img, x + GamePanel.tileSize * i,
+                y, GamePanel.tileSize, GamePanel.tileSize, null);
         }
         if ("NORMAL".equals(sword)) {
             img = this.sword;
         } else {
             img = this.greatsword;
         }
-        graphics.drawImage(img, x + img.getWidth() * GamePanel.scale * i, y, GamePanel.tileSize,
+        graphics.drawImage(img, x + GamePanel.tileSize * i, y, GamePanel.tileSize,
             GamePanel.tileSize, null);
+        Color activePowerUp;
+        i++;
+        if ("none".equals(color)) {
+            activePowerUp = Color.GRAY;
+        } else {
+            activePowerUp = Color.getColor(color);
+        }
+        graphics.setColor(activePowerUp);
+        graphics.fillRect(x + GamePanel.tileSize * i, y, GamePanel.tileSize, GamePanel.tileSize);
+        i++;
+        if ("STUNNED".equals(status)) {
+            activePowerUp = Color.yellow;
+        } else {
+            activePowerUp = Color.lightGray;
+        }
+        graphics.setColor(activePowerUp);
+        graphics.fillRect(x + GamePanel.tileSize * i, y, GamePanel.tileSize, GamePanel.tileSize);
+
+        graphics.setColor(Color.red);
+        graphics.setFont(new Font(null, Font.BOLD, GamePanel.tileSize));
+        graphics.drawString("Score : " + score, x, this.gamePanel.getHeight()/2 + (14*TileType.TILE_DIMENSION*GamePanel.scale)/2);
     }
 
     private void drawCorners(final Graphics2D graphics) {
