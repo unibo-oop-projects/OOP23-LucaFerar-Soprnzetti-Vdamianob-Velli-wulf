@@ -53,7 +53,7 @@ public final class PawnDrawer extends AbstractDrawer {
                 default:
                     throw new IllegalArgumentException("Invalid direction");
             }
-            BufferedImage imgPawn = this.rotateImage(this.pawn, direction);
+            final BufferedImage imgPawn = this.rotateImage(this.pawn, direction);
             this.drawImage(graphics, imgPawn, (int) pawn.getBounds().getCollisionArea().getX(),
                     (int) pawn.getBounds().getCollisionArea().getY());
         }
