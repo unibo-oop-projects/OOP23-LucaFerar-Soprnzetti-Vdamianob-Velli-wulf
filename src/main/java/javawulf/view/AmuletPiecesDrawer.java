@@ -16,6 +16,13 @@ public final class AmuletPiecesDrawer extends AbstractDrawer {
 
     private final List<AmuletPiece> amuletPieces;
 
+    /**
+     * The Amulet Pieces Drawer.
+     * 
+     * @param gamePanel    the Game Panel where the amulet pieces must be drawn
+     * @param player       the current status of the Player character
+     * @param amuletPieces a list of all the amulet pieces to draw
+     */
     public AmuletPiecesDrawer(final GamePanel gamePanel, final PlayerStatus player,
             final List<AmuletPiece> amuletPieces) {
         super(gamePanel, player);

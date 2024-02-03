@@ -45,7 +45,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
 
     /**
      * 
-     * @param panel's view.
+     * @param panel panel's view.
      */
     public GameLoopImpl(final GamePanel panel) {
         this.items = new ArrayList<>();
@@ -74,14 +74,14 @@ public final class GameLoopImpl implements GameLoop, Runnable {
                 .collect(Collectors.toList()));
     }
 
-    private boolean isItem(GameElement e) {
+    private boolean isItem(final GameElement e) {
         return e instanceof Collectable && (e instanceof Cure || e instanceof CureMax
                 || e instanceof ExtraHeart || e instanceof GreatSword || e instanceof Shield);
     }
 
     private void playerInit() {
         this.gamePlayer = new PlayerImpl(Map.MAP_SIZE * GameObject.OBJECT_SIZE / 2,
-            Map.MAP_SIZE * GameObject.OBJECT_SIZE / 2, 3, 0);
+                Map.MAP_SIZE * GameObject.OBJECT_SIZE / 2, 3, 0);
     }
 
     @Override
@@ -154,7 +154,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
         // una volta raccolto viene rimosso dalla lista
         this.items.forEach(i -> i.collect(this.gamePlayer));
         this.items.removeIf(i -> i.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
-        
+
         // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
     }
 

@@ -16,7 +16,7 @@ import java.awt.Graphics2D;
 public class GamePanel extends JPanel {
     // Screen settings
     public static final int originalTileSize = 24; // Celle da 24x24px (standard per diversi retro-game)
-    public static int scale = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/400; // Fattore di scala (può essere proporzionale alla risoluzione dello schermo)
+    public static int scale = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 400; // Fattore di scala (può essere proporzionale alla risoluzione dello schermo)
     public static int tileSize = originalTileSize * scale; // Dimensione finale effettiva delle celle (scalata)
     // Numero massimo di celle (h e w) da visualizzare in gioco
     public static final int maxScreenCol = 15;
@@ -50,9 +50,9 @@ public class GamePanel extends JPanel {
         gameLoopController.startGameLoopThread();
     }
 
-    public void paintComponent(Graphics graphics) {
+    public void paintComponent(final Graphics graphics) {
         super.paintComponent(graphics);
-        Graphics2D graphics2d = (Graphics2D)graphics;
+        Graphics2D graphics2d = (Graphics2D) graphics;
 
         this.mapDrawer.draw(graphics2d);
         this.playerDrawer.draw(graphics2d);
