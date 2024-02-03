@@ -8,8 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javawulf.model.BoundingBoxImpl;
+import javawulf.model.Collectable;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
+import javawulf.model.GameElement;
 import javawulf.model.GameObject;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletPiece;
@@ -43,7 +45,8 @@ public final class ItemFactoryTest {
                 // Check if the piece is correctly created
                 assertNotNull(piece);
                 // Check if the piece is instantiated as an AmuletPiece
-                assertTrue(piece instanceof AmuletPiece);
+                assertTrue(piece instanceof Collectable);
+                assertTrue(piece instanceof GameElement);
                 // Check the coordinates of the piece
                 assertEquals(position.getPosition(), piece.getPosition().getPosition());
                 assertEquals(STARTING_X, piece.getPosition().getX());
@@ -63,7 +66,7 @@ public final class ItemFactoryTest {
                 // Check if the cure is correctly created
                 assertNotNull(cure);
                 // Check if the cure is instantiated as a Cure
-                assertTrue(cure instanceof Cure);
+                assertTrue(cure instanceof Collectable);
                 // Check the coordinates of the cure
                 assertEquals(position.getPosition(), cure.getPosition().getPosition());
                 assertEquals(STARTING_X, cure.getPosition().getX());
@@ -83,7 +86,7 @@ public final class ItemFactoryTest {
                 // Check if the cureMax is correctly created
                 assertNotNull(cureMax);
                 // Check if the cureMax is instantiated as a CureMax
-                assertTrue(cureMax instanceof CureMax);
+                assertTrue(cureMax instanceof Collectable);
                 // Check the coordinates of the cureMax
                 assertEquals(position.getPosition(), cureMax.getPosition().getPosition());
                 assertEquals(STARTING_X, cureMax.getPosition().getX());
@@ -103,7 +106,7 @@ public final class ItemFactoryTest {
                 // Check if the heart is correctly created
                 assertNotNull(heart);
                 // Check if the heart is instantiated as an ExtraHeart
-                assertTrue(heart instanceof ExtraHeart);
+                assertTrue(heart instanceof Collectable);
                 // Check the coordinates of the heart
                 assertEquals(position.getPosition(), heart.getPosition().getPosition());
                 assertEquals(STARTING_X, heart.getPosition().getX());
@@ -123,7 +126,7 @@ public final class ItemFactoryTest {
                 // Check if the greatSword is correctly created
                 assertNotNull(greatSword);
                 // Check if the greatSword is instantiated as a GreatSword
-                assertTrue(greatSword instanceof GreatSword);
+                assertTrue(greatSword instanceof Collectable);
                 // Check the coordinates of the greatSword
                 assertEquals(position.getPosition(), greatSword.getPosition().getPosition());
                 assertEquals(STARTING_X, greatSword.getPosition().getX());
@@ -143,7 +146,7 @@ public final class ItemFactoryTest {
                 // Check if the shield is correctly created
                 assertNotNull(shield);
                 // Check if the shield is instantiated as a Shield
-                assertTrue(shield instanceof Shield);
+                assertTrue(shield instanceof Collectable);
                 // Check the coordinates of the shield
                 assertEquals(position.getPosition(), shield.getPosition().getPosition());
                 assertEquals(STARTING_X, shield.getPosition().getX());

@@ -83,11 +83,17 @@ public interface Map {
      * @param room
      * @return all elements of a specific room.
      */
-    public List<GameElement> getRoomElements(Space room);
+    List<GameElement> getRoomElements(Space room);
+
+    /**
+     * 
+     * @return room where the Player is in (Empty if isn't in any room).
+     */
+    Optional<Space> getPlayerRoom();
 
     /**
      * 
      * @return a list of all elements inside map.
      */
-    public List<GameElement> getAllElements();
+    List<GameElement> getAllElements();
 }

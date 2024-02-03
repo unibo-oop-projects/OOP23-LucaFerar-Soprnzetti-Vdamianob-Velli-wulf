@@ -16,13 +16,13 @@ public final class BiomeImpl implements Biome {
     private final List<Pair<TilePosition, Space>> corridors = new ArrayList<>();
 
     @Override
-    public Biome addRoom(final TilePosition biomePos, final Room room) {
+    public Biome addRoom(final TilePosition biomePos, final Space room) {
         this.addSpace(biomePos, room, true);
         return this;
     }
 
     @Override
-    public Biome addCorridor(final TilePosition biomePos, final Corridor corridor) {
+    public Biome addCorridor(final TilePosition biomePos, final Space corridor) {
         this.addSpace(biomePos, corridor, false);
         return this;
     }
@@ -53,8 +53,8 @@ public final class BiomeImpl implements Biome {
 
     public Optional<Space> getRoom(TilePosition tilePos) {
         for (var room : rooms) {
-            if (tilePos.getX() >= room.getKey().getX() && tilePos.getY() >= room.getKey().getX()
-            && tilePos.getX() < room.getKey().getX()  + room.getValue().getWidth() && tilePos.getY() >= room.getKey().getX() + room.getValue().getHeight()) {
+            if (tilePos.getX() >= room.getKey().getX() && tilePos.getY() >= room.getKey().getY()
+            && tilePos.getX() < room.getKey().getX() + room.getValue().getWidth() && tilePos.getY() < room.getKey().getY() + room.getValue().getHeight()) {
                 return Optional.of(room.getValue());
             }
 

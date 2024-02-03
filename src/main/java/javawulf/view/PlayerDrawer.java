@@ -24,7 +24,7 @@ public final class PlayerDrawer extends AbstractDrawer {
      * @param gamePanel The panel that must be updated
      */
     public PlayerDrawer(final PlayerStatus player, final GamePanel gamePanel) {
-        super(gamePanel);
+        super(gamePanel, player);
         this.gamePlayer = player;
         try {
             this.player = imageLoader(ImagePath.PLAYER_UP);
@@ -62,11 +62,10 @@ public final class PlayerDrawer extends AbstractDrawer {
 
         img = rotateImage(img, direction);
 
-        final int playerX = this.getPlayerX();
-        final int playerY = this.getPlayerY();
+        final int playerX = this.gamePlayer.getPlayerX();
+        final int playerY = this.gamePlayer.getPlayerY();
 
-        graphics.drawImage(img, playerX, playerY,
-            GamePanel.tileSize, GamePanel.tileSize, null);
+        this.drawImage(graphics, img, playerX, playerY);
 
         if ("SWORD".equals(this.gamePlayer.getSwordCollision())) {
             final int width = (int) this.gamePlayer.getSwordWidth();
@@ -76,9 +75,7 @@ public final class PlayerDrawer extends AbstractDrawer {
             }
             imgSword = rotateImage(imgSword, direction);
 
-            final int swordX = playerX - (int) (this.gamePlayer.getPlayerX() - this.gamePlayer.getSwordX()) * GamePanel.scale;
-            final int swordY = playerY - (int) (this.gamePlayer.getPlayerY() - this.gamePlayer.getSwordY()) * GamePanel.scale;
-            graphics.drawImage(imgSword, swordX, swordY, width * GamePanel.scale, height * GamePanel.scale, null);
+            this.drawImage(graphics, imgSword, this.gamePlayer.getSwordX(), this.gamePlayer.getSwordY(), width, height);
         }
     }
 
