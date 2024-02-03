@@ -11,10 +11,13 @@ import org.junit.jupiter.api.Test;
 
 import javawulf.model.BoundingBox;
 import javawulf.model.BoundingBoxImpl;
+import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.GameElement;
 import javawulf.model.enemy.Pawn;
 import javawulf.model.map.*;
+import javawulf.model.map.factory.MapFactoryImpl;
+import javawulf.model.player.PlayerImpl;
 
 /**
  * Some tests for try rooms, corridors, biomes, and getTileTypes
@@ -155,17 +158,24 @@ public class MapTest {
     void testMapEntityInteraction() {
         this.setUp();
 
-        // EntityBox coincide perfettamente con la tile di posizione (0, 0) che è un muro
-        assertEquals(Set.of(TileType.WALL), gameMapExample.getTileTypes(new BoundingBoxImpl(12, 12, 24, 24, BoundingBox.CollisionType.PLAYER)));
-        
-        // EntityBox interseca 4 tile differenti, 3 di tipo WALL e 1 di tipo ROOM 
-        assertEquals(Set.of(TileType.WALL, TileType.ROOM), gameMapExample.getTileTypes(new BoundingBoxImpl(13, 13, 24, 24, BoundingBox.CollisionType.PLAYER)));
-        
+        // EntityBox coincide perfettamente con la tile di posizione (0, 0) che è un
+        // muro
+        assertEquals(Set.of(TileType.WALL),
+                gameMapExample.getTileTypes(new BoundingBoxImpl(12, 12, 24, 24, BoundingBox.CollisionType.PLAYER)));
+
+        // EntityBox interseca 4 tile differenti, 3 di tipo WALL e 1 di tipo ROOM
+        assertEquals(Set.of(TileType.WALL, TileType.ROOM),
+                gameMapExample.getTileTypes(new BoundingBoxImpl(13, 13, 24, 24, BoundingBox.CollisionType.PLAYER)));
+
         // EntityBox si trova dentro una stanza
-        assertEquals(Set.of(TileType.ROOM), gameMapExample.getTileTypes(new BoundingBoxImpl(200, 200, 24, 24, BoundingBox.CollisionType.PLAYER)));
-        
-        // EntityBox passato è fuori dalla mappa: in tal caso, dovrebbe restituire un Set vuoto
-        assertEquals(Set.of(), gameMapExample.getTileTypes(new BoundingBoxImpl(Map.MAP_SIZE * TileType.TILE_DIMENSION + 24, 0, 24, 24, BoundingBox.CollisionType.PLAYER)));
+        assertEquals(Set.of(TileType.ROOM),
+                gameMapExample.getTileTypes(new BoundingBoxImpl(200, 200, 24, 24, BoundingBox.CollisionType.PLAYER)));
+
+        // EntityBox passato è fuori dalla mappa: in tal caso, dovrebbe restituire un
+        // Set vuoto
+        assertEquals(Set.of(),
+                gameMapExample.getTileTypes(new BoundingBoxImpl(Map.MAP_SIZE * TileType.TILE_DIMENSION + 24, 0, 24, 24,
+                        BoundingBox.CollisionType.PLAYER)));
     }
 
     @Test
@@ -173,5 +183,19 @@ public class MapTest {
         this.setUpWithEntities();
         assertEquals(1, gameMapExample.getAllElements().size());
         assertEquals(Pawn.class, gameMapExample.getAllElements().get(0).getClass());
+
+        Coordinate playerStartingPos = new CoordinateImpl(36, 36);
+        int health = 2;
+        int startingPoints = 1;
+        // Nella mappa di default #1, sono presenti complessivamente 15 stanze
+        // distribuite nei 4 biomi.
+        Map gameMapExample2 = new MapFactoryImpl().getDefaultMap1(
+                new PlayerImpl(playerStartingPos.getX(), playerStartingPos.getY(), health, startingPoints));
+
+        // Viene aggiunto un elemento per ciascuna delle 15 stanze (quindi gli elementi dovrebbero essere 15)
+        int expectedGameElem = 15;
+        gameMapExample2.getBiomes().forEach(biome -> biome.getRooms()
+                .forEach(roomPair -> roomPair.getValue().addGameElement(new Pawn(new CoordinateImpl(0, 0)))));
+        assertEquals(expectedGameElem, gameMapExample.getAllElements().size());
     }
 }
