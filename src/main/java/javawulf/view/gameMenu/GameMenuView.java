@@ -2,8 +2,10 @@ package javawulf.view.gameMenu;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import javawulf.view.ViewImpl;
 
@@ -12,6 +14,7 @@ import javax.swing.BoxLayout;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,9 +36,16 @@ public class GameMenuView extends JPanel {
         frame.setMinimumSize(new Dimension( 600, 480));
         frame.setLayout(new BorderLayout());
 
+        showMenu(frame);
+
+        frame.setVisible(true);
+    }
+
+    private static void showMenu(JFrame frame){
+        frame.getContentPane().removeAll();
+
         JPanel menu = new JPanel(new GridLayout(4,1));
         menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
-
         JButton startButton = new JButton("PLAY");
         JButton leaderboardButton = new JButton("Leaderboard");
         JButton guideButton = new JButton("Guide");
@@ -64,7 +74,7 @@ public class GameMenuView extends JPanel {
         leaderboardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame, "needToCreateLeaderBoard");
+                showLeaderboard(frame);
             }
         });
         // Show Guide
@@ -100,10 +110,29 @@ public class GameMenuView extends JPanel {
         frame.add(Box.createVerticalStrut(BORDERS), BorderLayout.SOUTH);
         frame.add(Box.createHorizontalStrut(BORDERS), BorderLayout.WEST);
         frame.add(Box.createHorizontalStrut(BORDERS), BorderLayout.EAST);
+    }
 
-    
+    private static void showLeaderboard(JFrame frame) {
+        frame.getContentPane().removeAll();
 
-        frame.setVisible(true);
+        JPanel leaderboardPanel = new JPanel(new BorderLayout());
+
+        JLabel titleLabel = new JLabel("LeaderBoard", SwingConstants.CENTER);
+
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showMenu(frame);
+            }
+        });
+
+        leaderboardPanel.add(titleLabel, BorderLayout.NORTH);
+        leaderboardPanel.add(backButton, BorderLayout.SOUTH);
+        
+        frame.add(leaderboardPanel);
+        frame.revalidate();
+        frame.repaint();
     }
 
 }
