@@ -18,52 +18,52 @@ import javawulf.model.player.PlayerHealth.ShieldStatus;
  * PlayerHealthTest tests whether the implementation of PlayerHealth
  * works as it should.
  */
-public final class PlayerHealthTest {
+final class PlayerHealthTest {
 
-    private final int health = 3;
-    private final int startingX = 12;
-    private final int startingY = 12;
-    private final int startingPoints = 0;
+    private static final int HEALTH = 3;
+    private static final int STARTING_X = 12;
+    private static final int STARTING_Y = 12;
+    private static final int STARTING_POINTS = 0;
     private Player player;
     private PlayerHealth hp;
 
     @BeforeEach
     void createPlayer() {
-        this.player = new PlayerImpl(startingX, startingY, health, startingPoints);
+        this.player = new PlayerImpl(STARTING_X, STARTING_Y, HEALTH, STARTING_POINTS);
         this.hp = this.player.getPlayerHealth();
     }
 
     @Test
     void testStartingPlayerHealth() {
-        assertEquals(health, this.hp.getHealth());
-        assertEquals(health, this.hp.getMaxHealth());
+        assertEquals(HEALTH, this.hp.getHealth());
+        assertEquals(HEALTH, this.hp.getMaxHealth());
         assertEquals(ShieldStatus.NONE, this.hp.getShieldStatus());
     }
 
     @Test
     void testDamageComingFromPlayer() {
-        BoundingBox enemy = new BoundingBoxImpl(startingX, startingY,
+        final BoundingBox enemy = new BoundingBoxImpl(STARTING_X, STARTING_Y,
             AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY);
         this.player.isHit(enemy);
-        assertEquals(health - 1, this.hp.getHealth());
-        assertEquals(health, this.hp.getMaxHealth());
+        assertEquals(HEALTH - 1, this.hp.getHealth());
+        assertEquals(HEALTH, this.hp.getMaxHealth());
     }
 
     @Test
     void testHealthChange() {
         this.hp.setHealth(-1);
-        assertEquals(health - 1, this.hp.getHealth());
-        assertEquals(health, this.hp.getMaxHealth());
+        assertEquals(HEALTH - 1, this.hp.getHealth());
+        assertEquals(HEALTH, this.hp.getMaxHealth());
         this.hp.setHealth(2);
-        assertEquals(health, this.hp.getHealth());
-        assertEquals(health, this.hp.getMaxHealth());
+        assertEquals(HEALTH, this.hp.getHealth());
+        assertEquals(HEALTH, this.hp.getMaxHealth());
     }
 
     @Test
     void testMaxHealthIncrease() {
         this.hp.increaseMaxHealth(1);
-        assertEquals(health + 1, this.hp.getMaxHealth());
-        assertEquals(health, this.hp.getHealth());
+        assertEquals(HEALTH + 1, this.hp.getMaxHealth());
+        assertEquals(HEALTH, this.hp.getHealth());
     }
 
     @Test
@@ -72,15 +72,15 @@ public final class PlayerHealthTest {
         assertEquals(ShieldStatus.FULL, this.hp.getShieldStatus());
 
         this.hp.setHealth(-1);
-        assertEquals(health, this.hp.getHealth());
+        assertEquals(HEALTH, this.hp.getHealth());
         assertEquals(ShieldStatus.HALF, this.hp.getShieldStatus());
 
         this.hp.setHealth(-1);
-        assertEquals(health, this.hp.getHealth());
+        assertEquals(HEALTH, this.hp.getHealth());
         assertEquals(ShieldStatus.NONE, this.hp.getShieldStatus());
 
         this.hp.setHealth(-1);
-        assertEquals(health - 1, this.hp.getHealth());
+        assertEquals(HEALTH - 1, this.hp.getHealth());
         assertEquals(ShieldStatus.NONE, this.hp.getShieldStatus());
     }
 
@@ -89,7 +89,7 @@ public final class PlayerHealthTest {
         this.hp.setHealth(-1);
         this.hp.setShieldStatus(ShieldStatus.FULL);
         this.hp.setHealth(-1);
-        assertEquals(health - 1, this.hp.getHealth());
+        assertEquals(HEALTH - 1, this.hp.getHealth());
         assertEquals(ShieldStatus.HALF, this.hp.getShieldStatus());
     }
 
