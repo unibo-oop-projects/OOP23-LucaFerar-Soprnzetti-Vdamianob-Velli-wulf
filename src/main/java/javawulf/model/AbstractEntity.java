@@ -39,19 +39,11 @@ public abstract class AbstractEntity extends GameObject implements Entity {
         return this.speed;
     }
 
-    /**
-     * @return the direction of the entity.
-     */
     @Override
     public final Direction getDirection() {
         return this.direction;
     }
 
-    /**
-     * Sets the speed of the entity.
-     * 
-     * @param speed the new speed the entity will have
-     */
     @Override
     public final void setSpeed(final int speed) {
         this.speed = speed;

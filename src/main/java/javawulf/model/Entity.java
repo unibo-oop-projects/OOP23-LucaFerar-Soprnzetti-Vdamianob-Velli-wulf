@@ -14,8 +14,16 @@ public interface Entity extends GameElement {
      */
     int DOUBLE_SPEED = 2;
 
+    /**
+     * Sets the speed of the entity.
+     * 
+     * @param speed the new speed the entity will have
+     */
     void setSpeed(int speed);
 
+    /**
+     * @return the direction of the entity.
+     */
     Direction getDirection();
 
     /**
