@@ -91,7 +91,7 @@ public final class HUDDrawer extends AbstractDrawer {
         graphics.setColor(activePowerUp);
         graphics.fillRect(x + GamePanel.tileSize * i, y, GamePanel.tileSize, GamePanel.tileSize);
         i++;
-        if ("STUNNED".equals(status)) {
+        if ("STUNNED".equals(status) && "blue".equals(color)) {
             activePowerUp = Color.yellow;
         } else {
             activePowerUp = Color.lightGray;
