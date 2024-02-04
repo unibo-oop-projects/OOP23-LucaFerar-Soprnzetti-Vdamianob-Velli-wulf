@@ -52,13 +52,13 @@ public enum ImagePath {
     SHIELD_ITEM("/items/shield.png"),
     /** <img src="../../../resources/items/amulet_piece.png"> Amulet Piece. */
     AMULET_PIECE("/items/amulet_piece.png"),
-    /** <img src="../../../resources/powerUps/powerUpStrength.png"> Power Up Strength */
+    /** <img src="../../../resources/powerUps/powerUpStrength.png"> Power Up Strength. */
     POWERUP_STRENGTH("/powerUps/powerUpStrength.png"),
-    /** <img src="../../../resources/powerUps/powerUpInvincibility.png"> Power Up Invincibility*/
-    POWERUP_INVINCIBILITY("/powerUps/powerUpInvinvibility.png"),
-    /** <img src="../../../resources/powerUps/powerUpDoublePoints.png"> Power Up Double points*/
+    /** <img src="../../../resources/powerUps/powerUpInvincibility.png"> Power Up Invincibility. */
+    POWERUP_INVINCIBILITY("/powerUps/powerUpInvincibility.png"),
+    /** <img src="../../../resources/powerUps/powerUpDoublePoints.png"> Power Up Double points. */
     POWERUP_DOUBLEPOINTS("/powerUps/powerUpDoublePoints.png"),
-    /** <img src="../../../resources/powerUps/powerUpSpeed.png"> Power Up Speed*/
+    /** <img src="../../../resources/powerUps/powerUpSpeed.png"> Power Up Speed. */
     POWERUP_SPEED("/powerUps/powerUpSpeed.png");
 
 

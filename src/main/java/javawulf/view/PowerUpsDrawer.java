@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import javawulf.controller.PlayerStatus;
-import javawulf.model.Collectable;
 import javawulf.model.powerUp.PowerUp;
 import javawulf.model.powerUp.PowerUpAttack;
 import javawulf.model.powerUp.PowerUpDoublePoints;
@@ -19,7 +18,7 @@ import javawulf.model.powerUp.PowerUpSpeed;
  */
 public final class PowerUpsDrawer extends AbstractDrawer {
         
-        private final Map<Class<? extends Collectable>, BufferedImage> images = new HashMap<>();
+        private final Map<Class<? extends PowerUp>, BufferedImage> images = new HashMap<>();
         private final List<PowerUp> powerUps;
 
         /**
@@ -44,11 +43,11 @@ public final class PowerUpsDrawer extends AbstractDrawer {
 
         @Override
         public void draw(final Graphics2D graphics) {
-            for (final Collectable powerUp : powerUps) {
+            for (final PowerUp powerUp : powerUps) {
                 final BufferedImage image = images.get(powerUp.getClass());
                 if (image != null) {
-                    this.drawImage(graphics, image,(int) powerUp.getBounds().getCollisionArea().getX(),
-                    (int) powerUp.getBounds().getCollisionArea().getY());
+                    this.drawImage(graphics, image, (int) powerUp.getBounds().getCollisionArea().getX(),
+                        (int) powerUp.getBounds().getCollisionArea().getY());
                 }
             }
         }
