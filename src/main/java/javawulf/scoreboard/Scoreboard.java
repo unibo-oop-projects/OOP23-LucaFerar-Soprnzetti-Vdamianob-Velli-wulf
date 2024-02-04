@@ -2,27 +2,30 @@ package javawulf.scoreboard;
 
 import java.util.List;
 
+/**
+ * Scoreboard stores all the results of past games and the scores of the players.
+ */
 public interface Scoreboard {
 
     /**
      * Maximum Results in the scoreboard.
      */
-    public static final int SCOREBOARD_SIZE = 10;
+    static final int SCOREBOARD_SIZE = 10;
 
     /**
      * Updates the scoreboard.
      */
-    public void addNewScore(Result result);
+    void addNewScore(Result result);
     
     /**
      * saves the scoreboard.
      */
-    public void saveScoreBoard();
+    void saveScoreBoard();
 
     /**
      * 
      * @return all the scores presents
      */
-    public List<Result> getAllScores();
+    List<Result> getAllScores();
 
 }
