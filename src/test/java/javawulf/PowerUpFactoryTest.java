@@ -12,7 +12,7 @@ import javawulf.model.powerUp.PowerUp;
 import javawulf.model.powerUp.PowerUpFactory;
 import javawulf.model.powerUp.PowerUpFactoryImpl;
 
-public class PowerUpFactoryTest {
+final class PowerUpFactoryTest {
     
     private static final int X_COORDINATE_POWERUP = 10;
     private static final int Y_COORDINATE_POWERUP = 10;

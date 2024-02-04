@@ -26,7 +26,7 @@ import javawulf.model.powerUp.PowerUpInvincibility;
 import javawulf.model.powerUp.PowerUpSpeed;
 
 
-public class PowerUpTest {
+final class PowerUpTest {
     
     // SetUp
     private static final int X_COORDINATE_PLAYER = 10;

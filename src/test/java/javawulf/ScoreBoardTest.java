@@ -9,7 +9,7 @@ import javawulf.scoreboard.ResultImpl;
 import javawulf.scoreboard.ScoreBoardImpl;
 import javawulf.scoreboard.Scoreboard;
 
-public class ScoreBoardTest {
+final class ScoreBoardTest {
 
     private Scoreboard scoreboard;
 
@@ -33,5 +33,6 @@ public class ScoreBoardTest {
         scoreboard.addNewScore(new ResultImpl("shrek", 100, false));
 
         assertEquals("giacomo", scoreboard.getAllScores().get(0).getUserName());
+        assertEquals("giovanni", scoreboard.getAllScores().get(1).getUserName());
     }
 }
