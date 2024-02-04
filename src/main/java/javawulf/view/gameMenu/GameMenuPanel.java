@@ -88,7 +88,9 @@ public class GameMenuPanel extends JPanel {
         guideButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame, "needToCreateAguide");
+                JOptionPane.showMessageDialog(frame, "Press the UP key to move up\n"
+                    + "Press the DOWN key to move down\n" + "Press the LEFT key to move left\n"
+                    + "Press the RIGHT key to move right\n" + "Press the COMMA (,) key to attack\n");
             }
         });
         // Exit 
