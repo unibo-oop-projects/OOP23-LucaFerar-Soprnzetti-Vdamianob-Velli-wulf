@@ -16,7 +16,9 @@ import javawulf.model.player.Player;
 
 /**
  * Implementation of Map interface.
- * All important details are written in the interface: please, visit {@link Map} javadoc
+ * All important details are written in the interface: please, visit {@link Map}
+ * javadoc
+ * 
  * @see Map
  */
 public final class MapImpl implements Map {
@@ -28,12 +30,14 @@ public final class MapImpl implements Map {
     /**
      * This is the constructor. Calling constructor, map will be built.
      * 
-     * @param firstBiome
-     * @param secondBiome
-     * @param thirdBiome
-     * @param fourthBiome
+     * @param player
+     * @param firstBiome (first quadrant)
+     * @param secondBiome (second quadrant)
+     * @param thirdBiome (third quadrant)
+     * @param fourthBiome (fourth quadrant)
      */
-    public MapImpl(final Player player, final Biome firstBiome, final Biome secondBiome, final Biome thirdBiome, final Biome fourthBiome) {
+    public MapImpl(final Player player, final Biome firstBiome, final Biome secondBiome, final Biome thirdBiome,
+            final Biome fourthBiome) {
         this.biomes.addAll(List.of(firstBiome, secondBiome, thirdBiome, fourthBiome));
         this.tiles = MapTilesBuilder.buildTiles(this.biomes);
         this.player = player;
@@ -91,8 +95,8 @@ public final class MapImpl implements Map {
     }
 
     private boolean isValidPosition(final Coordinate pos) {
-        return (pos.getX() < 0 || pos.getY() < 0 || (pos.getX() / TileType.TILE_DIMENSION) >= MAP_SIZE
-                || (pos.getY() / TileType.TILE_DIMENSION) >= MAP_SIZE ? false : true);
+        return !(pos.getX() < 0 || pos.getY() < 0 || (pos.getX() / TileType.TILE_DIMENSION) >= MAP_SIZE
+                || (pos.getY() / TileType.TILE_DIMENSION) >= MAP_SIZE);
     }
 
     @Override
@@ -105,6 +109,7 @@ public final class MapImpl implements Map {
         return this.player;
     }
 
+    @Override
     public ArrayList<Biome> getBiomes() {
         return this.biomes;
     }
@@ -114,18 +119,20 @@ public final class MapImpl implements Map {
         for (var playerTile : this.getTiles(this.player.getBounds())) {
             Optional<BiomeQuadrant> quadrant = getBiomeQuadrant(playerTile);
             if (quadrant.isPresent()) {
-                return this.biomes.get(quadrant.get().getPos()).getRoom(new TilePosition(playerTile.getX() - quadrant.get().getOffset().getX(), playerTile.getY() - quadrant.get().getOffset().getY()));
+                return this.biomes.get(quadrant.get().getPos())
+                        .getRoom(new TilePosition(playerTile.getX() - quadrant.get().getOffset().getX(),
+                                playerTile.getY() - quadrant.get().getOffset().getY()));
             }
         }
         return Optional.empty();
     }
 
-    private Optional<BiomeQuadrant> getBiomeQuadrant(TilePosition tilePos) {
+    private Optional<BiomeQuadrant> getBiomeQuadrant(final TilePosition tilePos) {
         for (var quadrant : BiomeQuadrant.values()) {
-        if (tilePos.getX() >= quadrant.getOffset().getX() && tilePos.getY() >= quadrant.getOffset().getY()
-            &&
-            tilePos.getX() < quadrant.getOffset().getX() + Biome.SIZE && tilePos.getY() < quadrant.getOffset().getY() + Biome.SIZE
-            ) {
+            if (tilePos.getX() >= quadrant.getOffset().getX() && tilePos.getY() >= quadrant.getOffset().getY()
+                    &&
+                    tilePos.getX() < quadrant.getOffset().getX() + Biome.SIZE
+                    && tilePos.getY() < quadrant.getOffset().getY() + Biome.SIZE) {
                 return Optional.of(quadrant);
             }
         }
@@ -133,8 +140,8 @@ public final class MapImpl implements Map {
     }
 
     @Override
-    public List<GameElement> getRoomElements(Space room) {
-        for(var biome : biomes) {
+    public List<GameElement> getRoomElements(final Space room) {
+        for (var biome : biomes) {
             for (var biomeRoom : biome.getRooms()) {
                 if (room.equals(biomeRoom.getValue())) {
                     return biomeRoom.getValue().getElements();

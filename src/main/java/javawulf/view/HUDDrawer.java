@@ -46,13 +46,13 @@ public final class HUDDrawer extends AbstractDrawer {
 
     @Override
     public void draw(final Graphics2D graphics) {
-        final int upperCorner = this.gamePanel.getWidth() / 2 - (18 * TileType.TILE_DIMENSION * GamePanel.scale) / 2;
-        final int leftCorner = this.gamePanel.getHeight() / 2 - (16 * TileType.TILE_DIMENSION * GamePanel.scale) / 2;
-        final int lowerCorner = this.gamePanel.getWidth() / 2 + (14 * TileType.TILE_DIMENSION * GamePanel.scale) / 2;
-        final int rightCorner = this.gamePanel.getHeight() / 2 + (14 * TileType.TILE_DIMENSION * GamePanel.scale) / 2;
+        final int upperCorner = this.gamePanel.getWidth() / 2 - (18 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2;
+        final int leftCorner = this.gamePanel.getHeight() / 2 - (16 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2;
+        final int lowerCorner = this.gamePanel.getWidth() / 2 + (14 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2;
+        final int rightCorner = this.gamePanel.getHeight() / 2 + (14 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2;
         this.drawCorners(graphics, upperCorner, leftCorner, lowerCorner, rightCorner);
-        final int x = upperCorner + TileType.TILE_DIMENSION * GamePanel.scale * 2;
-        final int y = leftCorner + TileType.TILE_DIMENSION * GamePanel.scale * 2;
+        final int x = upperCorner + TileType.TILE_DIMENSION * GamePanel.SCALE * 2;
+        final int y = leftCorner + TileType.TILE_DIMENSION * GamePanel.SCALE * 2;
 
         final int max = this.player.getMaxHealth();
         final int current = this.player.getHealth();
@@ -71,26 +71,26 @@ public final class HUDDrawer extends AbstractDrawer {
             } else { 
                 img = this.maxHealth;
             }
-            graphics.drawImage(img, x + GamePanel.tileSize * i,
-                y, GamePanel.tileSize, GamePanel.tileSize, null);
+            graphics.drawImage(img, x + GamePanel.TILESIZE * i,
+                y, GamePanel.TILESIZE, GamePanel.TILESIZE, null);
         }
         if ("NORMAL".equals(sword)) {
             img = this.sword;
         } else {
             img = this.greatsword;
         }
-        graphics.drawImage(img, x + GamePanel.tileSize * i, y, GamePanel.tileSize,
-            GamePanel.tileSize, null);
+        graphics.drawImage(img, x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE,
+            GamePanel.TILESIZE, null);
         Color activePowerUp;
         i++;
         if ("none".equals(color)) {
             activePowerUp = Color.GRAY;
             graphics.setColor(activePowerUp);
-            graphics.fillRect(x + GamePanel.tileSize * i, y, GamePanel.tileSize, GamePanel.tileSize);
+            graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
         } else {
-            graphics.drawRect(x + GamePanel.tileSize * i, y, GamePanel.tileSize, GamePanel.tileSize);
-            graphics.drawImage(img, x + GamePanel.tileSize * i,
-                y, GamePanel.tileSize, GamePanel.tileSize, null);
+            graphics.drawRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
+            graphics.drawImage(img, x + GamePanel.TILESIZE * i,
+                y, GamePanel.TILESIZE, GamePanel.TILESIZE, null);
         }
         //graphics.setColor(activePowerUp);
         //graphics.fillRect(x + GamePanel.tileSize * i, y, GamePanel.tileSize, GamePanel.tileSize);
@@ -101,17 +101,17 @@ public final class HUDDrawer extends AbstractDrawer {
             activePowerUp = Color.lightGray;
         }
         graphics.setColor(activePowerUp);
-        graphics.fillRect(x + GamePanel.tileSize * i, y, GamePanel.tileSize, GamePanel.tileSize);
+        graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
 
         graphics.setColor(Color.red);
-        graphics.setFont(new Font(null, Font.BOLD, GamePanel.tileSize));
+        graphics.setFont(new Font(null, Font.BOLD, GamePanel.TILESIZE));
         graphics.drawString("Score : " + score, x, rightCorner);
     }
 
     private void drawCorners(final Graphics2D graphics, final int upX, final int upY, final int downX,
         final int downY) {
         graphics.setColor(Color.white);
-        final int thicknessCorners = TileType.TILE_DIMENSION * GamePanel.scale * 2;
+        final int thicknessCorners = TileType.TILE_DIMENSION * GamePanel.SCALE * 2;
         graphics.fillRect(upX, 0, thicknessCorners, this.gamePanel.getHeight());
         graphics.fillRect(0, upY, this.gamePanel.getWidth(), thicknessCorners);
         graphics.fillRect(downX, 0, thicknessCorners, this.gamePanel.getHeight());

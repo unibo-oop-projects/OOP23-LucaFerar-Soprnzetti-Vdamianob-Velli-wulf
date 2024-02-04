@@ -17,7 +17,7 @@ public class ViewImpl {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // window.setResizable(false);
-        window.setMinimumSize(new Dimension(GamePanel.tileSize*15, GamePanel.tileSize*15));
+        window.setMinimumSize(new Dimension(GamePanel.TILESIZE*15, GamePanel.TILESIZE*15));
         window.setTitle("Java Wulf");
         window.add(this.gamePanel);
         window.pack();

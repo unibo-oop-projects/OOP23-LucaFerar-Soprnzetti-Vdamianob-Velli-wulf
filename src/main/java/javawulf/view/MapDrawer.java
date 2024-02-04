@@ -64,8 +64,8 @@ public final class MapDrawer implements Drawer {
                 } else {
                     img = imgWall;
                 }
-                graphics.drawImage(img, x * GamePanel.tileSize + (this.gamePanel.getWidth()/2 - Player.OBJECT_SIZE/2) - (int) map.getPlayer().getBounds().getCollisionArea().getX() * GamePanel.scale,
-                        y * GamePanel.tileSize + (this.gamePanel.getHeight()/2 - Player.OBJECT_SIZE/2) - (int) map.getPlayer().getBounds().getCollisionArea().getY() * GamePanel.scale, GamePanel.tileSize, GamePanel.tileSize, null);
+                graphics.drawImage(img, x * GamePanel.TILESIZE + (this.gamePanel.getWidth()/2 - Player.OBJECT_SIZE/2) - (int) map.getPlayer().getBounds().getCollisionArea().getX() * GamePanel.SCALE,
+                        y * GamePanel.TILESIZE + (this.gamePanel.getHeight()/2 - Player.OBJECT_SIZE/2) - (int) map.getPlayer().getBounds().getCollisionArea().getY() * GamePanel.SCALE, GamePanel.TILESIZE, GamePanel.TILESIZE, null);
             }
         }
     }

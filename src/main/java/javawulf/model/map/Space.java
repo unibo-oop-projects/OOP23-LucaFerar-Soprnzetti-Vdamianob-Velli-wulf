@@ -22,15 +22,17 @@ public interface Space {
      */
     int getHeight();
 
-    /**
-     * 
-     * @param element to add in the Space.
-     */
+/**
+ * 
+ * @param element to add in the Space.
+ * @return itself space
+ */
     Space addGameElement(GameElement element);
 
     /**
      * 
      * @param elements to add in the Space
+     * @return itself space
      */
     Space addGameElements(Collection<GameElement> elements);
 
