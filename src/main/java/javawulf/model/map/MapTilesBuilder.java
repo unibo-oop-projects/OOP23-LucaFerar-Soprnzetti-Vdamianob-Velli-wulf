@@ -8,7 +8,7 @@ import javafx.util.Pair;
 /**
  * An Utility class that creates a HashMap<TilePosition, TileType> from four
  * biomes (and generating central biome, too).
- * The HashMap associates for each position a tile-type, thus composing the game
+ * The HashMap associates for each position a Tile-type, thus composing the game
  * map.
  * This class will be exclusively used by
  * MapImpl for the sole purpose of making, internally, the map.
@@ -36,6 +36,7 @@ public final class MapTilesBuilder {
                     Corridor.DEFAULT_TYPE);
         }
         buildCentralBiome(tiles);
+        buildFinisherTiles(tiles);
         return tiles;
     }
 
@@ -87,5 +88,22 @@ public final class MapTilesBuilder {
         buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1, Biome.SIZE + 8), new Room(2, 5), TileType.CENTRAL_ROOM);
         buildSpace(tiles, new TilePosition(Biome.SIZE - 3, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1), new Room(5, 2), TileType.CENTRAL_ROOM);
         buildSpace(tiles, new TilePosition(Biome.SIZE + 8, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1), new Room(5, 2), TileType.CENTRAL_ROOM);
+    }
+
+    /**
+     * For 'finisher tiles' it means these tiles which player can end game, getting on it.
+     * This method build their in the center of the map, inside Central room.
+     * If Size of map is odd, finisher tile is only one, else was 2x2 tile square.
+     */
+    @SuppressWarnings("unused")
+    private static void buildFinisherTiles(final HashMap<TilePosition, TileType> tiles) {
+        final int offset = 1;
+        Room biggerFinisher = new Room(2, 2);
+        Room unaryFinisher = new Room(1, 1);
+        if (Map.MAP_SIZE%2 == 0) {
+            buildSpace(tiles, new TilePosition(Map.MAP_SIZE/2 - offset, Map.MAP_SIZE/2 - offset), biggerFinisher, TileType.PORTAL);
+        } else {
+            buildSpace(tiles, new TilePosition(Map.MAP_SIZE/2, Map.MAP_SIZE/2), unaryFinisher, TileType.PORTAL);
+        }
     }
 }
