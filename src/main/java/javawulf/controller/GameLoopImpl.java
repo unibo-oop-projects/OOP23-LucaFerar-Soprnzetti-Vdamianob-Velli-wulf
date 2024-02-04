@@ -45,6 +45,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private final List<AmuletPiece> pieces;
     private final List<PowerUp> powerUps;
     private boolean playerDead;
+    private boolean gameWon;
 
     /**
      * 
@@ -126,7 +127,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void update() {
-        if (!playerDead){
+        if (!playerDead && !gameWon){
             if (this.playerController.getDirection().isPresent() && !this.attacking) {
                 try {
                     this.gamePlayer.move(this.playerController.getDirection().get(), this.gameMap);
@@ -172,8 +173,11 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             
             // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
     
-            if(this.gamePlayer.getBounds().getCollisionType().equals(BoundingBox.CollisionType.INACTIVE)){
+            if (this.gamePlayer.getBounds().getCollisionType().equals(BoundingBox.CollisionType.INACTIVE)) {
                 playerDead = true;
+            }
+            if (this.gamePlayer.hasPlayerWon(gameMap)) {
+                gameWon = true;
             }
             this.powerUps.forEach(p -> p.collect(gamePlayer));
             this.powerUps.removeIf(p -> p.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);

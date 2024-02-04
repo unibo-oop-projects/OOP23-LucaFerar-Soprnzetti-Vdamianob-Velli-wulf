@@ -1,5 +1,6 @@
 package javawulf.controller;
 
+import javawulf.model.map.Map;
 import javawulf.model.player.Player;
 
 /**
@@ -8,12 +9,14 @@ import javawulf.model.player.Player;
 public final class PlayerStatusImpl implements PlayerStatus {
 
     private final Player player;
+    private final Map map;
 
     /**
      * @param player The Player whose status must be considered
      */
-    public PlayerStatusImpl(final Player player) {
+    public PlayerStatusImpl(final Player player, final Map map) {
         this.player = player;
+        this.map = map;
     }
 
     @Override
@@ -94,6 +97,11 @@ public final class PlayerStatusImpl implements PlayerStatus {
     @Override
     public String getSwordCollision() {
         return this.player.getSword().getBounds().getCollisionType().name();
+    }
+
+    @Override
+    public boolean hasPlayerWon() {
+        return this.player.hasPlayerWon(this.map);
     }
 
 }

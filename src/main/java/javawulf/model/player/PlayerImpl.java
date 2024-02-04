@@ -149,4 +149,10 @@ public final class PlayerImpl extends AbstractEntity implements Player {
         return CollisionType.PLAYER;
     }
 
+    @Override
+    public boolean hasPlayerWon(Map map) {
+        final var tiles = map.getTileTypes(this.getBounds());
+        return tiles.contains(TileType.PORTAL) && this.getNumberOfPieces() == NUMBER_OF_PIECES;
+    }
+
 }

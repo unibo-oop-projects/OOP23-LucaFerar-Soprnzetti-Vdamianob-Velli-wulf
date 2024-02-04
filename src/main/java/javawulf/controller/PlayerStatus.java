@@ -84,4 +84,9 @@ public interface PlayerStatus {
      * @return The type of collision the Sword has
      */
     String getSwordCollision();
+
+    /**
+     * @return True if the Player has won
+     */
+    boolean hasPlayerWon();
 }

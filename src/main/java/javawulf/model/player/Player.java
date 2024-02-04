@@ -118,4 +118,10 @@ public interface Player extends Entity {
      */
     int getNumberOfPieces();
 
+    /**
+     * @return True if the player has collected all 4 pieces and
+     * is standing on the portal
+     */
+    boolean hasPlayerWon(Map map);
+
 }

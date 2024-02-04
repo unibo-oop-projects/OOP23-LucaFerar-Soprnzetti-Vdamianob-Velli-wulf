@@ -37,7 +37,7 @@ public class GamePanel extends JPanel {
         this.listener = new CommandListener(this.gameLoopController.getPlayerController());
         this.addKeyListener(this.listener);
         this.setFocusable(true);
-        this.playerStatus = new PlayerStatusImpl(gameLoopController.getPlayer());
+        this.playerStatus = new PlayerStatusImpl(gameLoopController.getPlayer(), gameLoopController.getMap());
         this.drawers.add(new MapDrawer(gameLoopController.getMap(), this));
         this.drawers.add(new PlayerDrawer(this.playerStatus, this));
         this.drawers.add(new PawnDrawer(this.playerStatus, this, gameLoopController.getPawns()));
