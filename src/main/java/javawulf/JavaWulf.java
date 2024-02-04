@@ -1,6 +1,5 @@
 package javawulf;
 
-import javawulf.view.ViewImpl;
 import javawulf.view.gameMenu.GameMenuView;
 
 public class JavaWulf {
