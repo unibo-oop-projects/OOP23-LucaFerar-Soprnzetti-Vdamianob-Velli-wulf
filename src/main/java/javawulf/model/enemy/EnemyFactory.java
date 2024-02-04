@@ -15,12 +15,4 @@ public interface EnemyFactory {
      */
     Pawn createPawn(Coordinate position);
 
-    /**
-     * Creates a guard.
-     * 
-     * @param position the position of the guard when created
-     * @return the guard
-     */
-    Guard createGuard(Coordinate position);
-
 }

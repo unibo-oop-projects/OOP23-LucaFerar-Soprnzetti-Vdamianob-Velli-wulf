@@ -12,9 +12,4 @@ public final class EnemyFactoryImpl implements EnemyFactory {
         return new Pawn(position);
     }
 
-    @Override
-    public Guard createGuard(final Coordinate position) {
-        return new Guard(position);
-    }
-
 }

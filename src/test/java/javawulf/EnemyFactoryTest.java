@@ -15,7 +15,6 @@ import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.enemy.Enemy;
 import javawulf.model.enemy.EnemyFactory;
 import javawulf.model.enemy.EnemyFactoryImpl;
-import javawulf.model.enemy.Guard;
 import javawulf.model.enemy.Pawn;
 
 /**
@@ -56,27 +55,6 @@ public final class EnemyFactoryTest {
         // Check the pawn's tick is set to 0
         assertEquals(0, pawn.getTickCount());
 
-    }
-
-    @Test
-    void testCreateGuard() {
-        Guard guard = factory.createGuard(position);
-        assertNotNull(guard);
-        assertEquals(position.getPosition(), guard.getPosition().getPosition());
-        // Check if the guard is instantiated as a Guard
-        assertTrue(guard instanceof Enemy);
-        // Check the coordinates of the guard
-        assertEquals(STARTING_X, guard.getPosition().getX());
-        assertEquals(STARTING_Y, guard.getPosition().getY());
-        // Check if the guard is alive
-        assertTrue(guard.isAlive());
-        // Check the BoundingBox of the guard
-        assertEquals(guard.getBounds().getCollisionType(), new BoundingBoxImpl(STARTING_X, STARTING_Y,
-                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY).getCollisionType());
-        assertEquals(guard.getBounds().getCollisionArea(), new BoundingBoxImpl(STARTING_X, STARTING_Y,
-                AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY).getCollisionArea());
-        // Check guard's speed
-        assertEquals(AbstractEntity.DEFAULT_SPEED, guard.getSpeed());
     }
 
 }
