@@ -37,7 +37,7 @@ public final class ItemDrawer extends AbstractDrawer {
             images.put(CureMax.class, this.imageLoader(ImagePath.CURE_MAX));
             images.put(ExtraHeart.class, this.imageLoader(ImagePath.EXTRA_HEART));
             images.put(GreatSword.class, this.imageLoader(ImagePath.GREATSWORD));
-            images.put(Shield.class, this.imageLoader(ImagePath.CURE));
+            images.put(Shield.class, this.imageLoader(ImagePath.SHIELD_ITEM));
         } catch (Exception e) {
             e.printStackTrace();
         }
