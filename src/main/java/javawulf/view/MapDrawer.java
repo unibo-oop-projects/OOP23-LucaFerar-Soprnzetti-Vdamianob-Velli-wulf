@@ -22,7 +22,15 @@ public final class MapDrawer implements Drawer {
     private BufferedImage imgPortal;
     private GamePanel gamePanel;
 
-    public MapDrawer(final Map map, GamePanel gamePanel) {
+    /**
+     * MapDrawer is a component of GamePanel and it used for draw map Enviroment:
+     * all tiles close to the player, with a move-effect redrawing everytime player
+     * is moving. Constructor inizializes all tile images from memory.
+     * 
+     * @param map
+     * @param gamePanel
+     */
+    public MapDrawer(final Map map, final GamePanel gamePanel) {
         this.map = map;
         this.gamePanel = gamePanel;
         try {
@@ -39,9 +47,10 @@ public final class MapDrawer implements Drawer {
 
     @Override
     public void draw(final Graphics2D graphics) {
+        final int offset = 1;
         TilePosition playerPos = this.map.getTilePosition(this.map.getPlayer().getPosition()).get();
         for (int x = playerPos.getX() - 8; x < playerPos.getX() + 8; x++) {
-            for (int y = playerPos.getY() - 7; y < playerPos.getY() + 8; y++) {
+            for (int y = playerPos.getY() - 8 - offset; y < playerPos.getY() + 8; y++) {
                 BufferedImage img;
                 if (this.map.getTilesMap().containsKey(new TilePosition(x, y))) {
                     switch (this.map.getTilesMap().get(new TilePosition(x, y))) {
@@ -64,8 +73,12 @@ public final class MapDrawer implements Drawer {
                 } else {
                     img = imgWall;
                 }
-                graphics.drawImage(img, x * GamePanel.TILESIZE + (this.gamePanel.getWidth()/2 - Player.OBJECT_SIZE/2) - (int) map.getPlayer().getBounds().getCollisionArea().getX() * GamePanel.SCALE,
-                        y * GamePanel.TILESIZE + (this.gamePanel.getHeight()/2 - Player.OBJECT_SIZE/2) - (int) map.getPlayer().getBounds().getCollisionArea().getY() * GamePanel.SCALE, GamePanel.TILESIZE, GamePanel.TILESIZE, null);
+                graphics.drawImage(img,
+                        x * GamePanel.TILESIZE + (this.gamePanel.getWidth() / 2 - Player.OBJECT_SIZE / 2)
+                                - (int) map.getPlayer().getBounds().getCollisionArea().getX() * GamePanel.SCALE,
+                        y * GamePanel.TILESIZE + (this.gamePanel.getHeight() / 2 - Player.OBJECT_SIZE / 2)
+                                - (int) map.getPlayer().getBounds().getCollisionArea().getY() * GamePanel.SCALE,
+                        GamePanel.TILESIZE, GamePanel.TILESIZE, null);
             }
         }
     }

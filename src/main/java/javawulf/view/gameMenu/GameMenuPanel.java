@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import javawulf.view.GamePanel;
-import javawulf.view.ViewImpl;
 
 import javax.swing.Box;
 

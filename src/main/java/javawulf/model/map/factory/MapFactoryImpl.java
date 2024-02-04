@@ -5,7 +5,10 @@ import javawulf.model.map.Map;
 import javawulf.model.map.MapImpl;
 import javawulf.model.player.Player;
 
-public class MapFactoryImpl implements MapFactory {
+/**
+ * Implementation of MapFactory.
+ */
+public final class MapFactoryImpl implements MapFactory {
 
     private Biome firstBiome, secondBiome, thirdBiome, fourthBiome;
 

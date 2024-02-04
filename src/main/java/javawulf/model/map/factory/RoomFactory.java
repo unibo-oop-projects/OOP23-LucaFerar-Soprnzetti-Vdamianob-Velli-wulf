@@ -2,6 +2,9 @@ package javawulf.model.map.factory;
 
 import javawulf.model.map.Room;
 
+/**
+ * Used to obtain default rooms.
+ */
 public interface RoomFactory {
     /**
      * 

@@ -21,14 +21,13 @@ import javawulf.model.map.TileType;
 import javawulf.model.powerUp.PowerUpFactory;
 import javawulf.model.powerUp.PowerUpFactoryImpl;
 
-
 /**
  * Utility class used to populate a map with items, power-up and enemies.
  */
 public final class Populator {
-    private static final int halfTile = TileType.TILE_DIMENSION / 2;
+    private static final int HALFTILE = TileType.TILE_DIMENSION / 2;
     private static ItemFactory itemFactory = new ItemFactoryImpl();
-    private static EnemyFactory enemyFactory = new EnemyFactoryImpl(); 
+    private static EnemyFactory enemyFactory = new EnemyFactoryImpl();
     private static PowerUpFactory powerUpFactory = new PowerUpFactoryImpl();
 
     enum Collectables {
@@ -42,7 +41,16 @@ public final class Populator {
         }
     }
 
-    public static Map populate(Map map) {
+    private Populator() {
+        throw new UnsupportedOperationException("This class cannot be instantiated (Utility class)");
+    }
+
+    /**
+     * 
+     * @param map to populate with game elements.
+     * @return map itself
+     */
+    public static Map populate(final Map map) {
         for (var biomeQuadrant : BiomeQuadrant.values()) {
             Biome biome = map.getBiomes().get(biomeQuadrant.getPos());
             Pair<TilePosition, Space> randRoom = getRandomicSpace(biome.getRooms());
@@ -60,7 +68,8 @@ public final class Populator {
 
             for (var corridor : biome.getCorridors()) {
                 corridor.getValue().addGameElement(
-                        enemyFactory.createPawn(getCentralPosition(corridor.getKey(), corridor.getValue(), biomeQuadrant)));
+                        enemyFactory
+                                .createPawn(getCentralPosition(corridor.getKey(), corridor.getValue(), biomeQuadrant)));
             }
         }
         return map;
@@ -70,15 +79,18 @@ public final class Populator {
      * Utility method used for obtain central coordinate of a space (useful for
      * rooms).
      * 
-     * @param space
+     * @param spacePos of the space
+     * @param space    where found its central coordinate position.
+     * @param quadrant specify in which quadrant the space is in.
      * @return central position.
      */
-    private static Coordinate getCentralPosition(TilePosition spacePos, Space space, BiomeQuadrant quadrant) {
+    private static Coordinate getCentralPosition(final TilePosition spacePos, final Space space,
+            final BiomeQuadrant quadrant) {
         final int halfWidth = space.getWidth() / 2;
         final int halfHeight = space.getHeight() / 2;
         return new CoordinateImpl(
-                (spacePos.getX() + quadrant.getOffset().getX() + halfWidth) * TileType.TILE_DIMENSION + halfTile,
-                (spacePos.getY() + quadrant.getOffset().getY() + halfHeight) * TileType.TILE_DIMENSION + halfTile);
+                (spacePos.getX() + quadrant.getOffset().getX() + halfWidth) * TileType.TILE_DIMENSION + HALFTILE,
+                (spacePos.getY() + quadrant.getOffset().getY() + halfHeight) * TileType.TILE_DIMENSION + HALFTILE);
     }
 
     /**
@@ -86,12 +98,16 @@ public final class Populator {
      * center (useful for put
      * guards).
      * 
-     * @param space
-     * @return lateral position (lateral left is 'leftRight' is True or lateral
+     * @param spacePos  of the space
+     * @param space     where found its lateral coordinate position.
+     * @param quadrant  specify in which quadrant the space is in.
+     * @param leftRight is a flag. See @return
+     * @return lateral position (lateral left if 'leftRight' is True or lateral
      *         right if 'leftRight' is False).
      */
-    private static Coordinate getlateralPosition(TilePosition spacePos, Space space, BiomeQuadrant quadrant,
-            boolean leftRight) {
+    private static Coordinate getlateralPosition(final TilePosition spacePos, final Space space,
+            final BiomeQuadrant quadrant,
+            final boolean leftRight) {
         final int offSetPos;
         if (leftRight) {
             offSetPos = TileType.TILE_DIMENSION;
@@ -101,12 +117,12 @@ public final class Populator {
         final int halfWidth = space.getWidth() / 2;
         final int halfHeight = space.getHeight() / 2;
         return new CoordinateImpl(
-                (spacePos.getX() + quadrant.getOffset().getX() + halfWidth) * TileType.TILE_DIMENSION + halfTile
+                (spacePos.getX() + quadrant.getOffset().getX() + halfWidth) * TileType.TILE_DIMENSION + HALFTILE
                         + offSetPos,
-                (spacePos.getY() + quadrant.getOffset().getY() + halfHeight) * TileType.TILE_DIMENSION + halfTile);
+                (spacePos.getY() + quadrant.getOffset().getY() + halfHeight) * TileType.TILE_DIMENSION + HALFTILE);
     }
 
-    private static Collectable getRandomCollectable(Coordinate coordColl) {
+    private static Collectable getRandomCollectable(final Coordinate coordColl) {
         switch (Collectables.getRandomic()) {
             case CURE:
                 return itemFactory.createCure(coordColl);
@@ -133,10 +149,10 @@ public final class Populator {
 
     /**
      * 
-     * @param arraylist of spaces
+     * @param spaces arrayList of spaces
      * @return a randomic space from arraylist
      */
-    private static Pair<TilePosition, Space> getRandomicSpace(ArrayList<Pair<TilePosition, Space>> spaces) {
+    private static Pair<TilePosition, Space> getRandomicSpace(final ArrayList<Pair<TilePosition, Space>> spaces) {
         return spaces.get(new Random().nextInt(spaces.size()));
     }
 

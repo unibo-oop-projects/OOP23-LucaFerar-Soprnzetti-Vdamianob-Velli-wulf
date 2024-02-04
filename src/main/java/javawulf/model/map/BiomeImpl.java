@@ -27,18 +27,19 @@ public final class BiomeImpl implements Biome {
         return this;
     }
 
-    private Biome addSpace(final TilePosition biomePos, final Space space, boolean isRoom) {
+    private Biome addSpace(final TilePosition biomePos, final Space space, final boolean isRoom) {
         if (biomePos.getX() + space.getWidth() > Biome.SIZE || biomePos.getY() + space.getHeight() > Biome.SIZE
-            || biomePos.getX() < 0 || biomePos.getY() < 0) {
+                || biomePos.getX() < 0 || biomePos.getY() < 0) {
             throw new IllegalArgumentException("Space position & his width " + biomePos + " is out of tile SIZE ("
-            + Biome.SIZE + ") biome range");
+                    + Biome.SIZE + ") biome range");
         }
-        Pair<TilePosition, Space> SpaceWithPos = new Pair<>(biomePos, space);
+        Pair<TilePosition, Space> spaceWithPos = new Pair<>(biomePos, space);
         if (isRoom) {
-            this.rooms.add(SpaceWithPos);
+            this.rooms.add(spaceWithPos);
         } else {
-            this.corridors.add(SpaceWithPos);
-        }    return this;
+            this.corridors.add(spaceWithPos);
+        }
+        return this;
     }
 
     @Override
@@ -51,10 +52,12 @@ public final class BiomeImpl implements Biome {
         return new ArrayList<>(this.corridors);
     }
 
-    public Optional<Space> getRoom(TilePosition tilePos) {
+    @Override
+    public Optional<Space> getRoom(final TilePosition tilePos) {
         for (var room : rooms) {
             if (tilePos.getX() >= room.getKey().getX() && tilePos.getY() >= room.getKey().getY()
-            && tilePos.getX() < room.getKey().getX() + room.getValue().getWidth() && tilePos.getY() < room.getKey().getY() + room.getValue().getHeight()) {
+                    && tilePos.getX() < room.getKey().getX() + room.getValue().getWidth()
+                    && tilePos.getY() < room.getKey().getY() + room.getValue().getHeight()) {
                 return Optional.of(room.getValue());
             }
 

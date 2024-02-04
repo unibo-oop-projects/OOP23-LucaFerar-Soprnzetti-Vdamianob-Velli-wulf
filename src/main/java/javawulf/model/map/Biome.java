@@ -17,7 +17,7 @@ public interface Biome {
      * (Size repesents
      * both Height and Width).
      */
-    public static int SIZE = 20;
+    int SIZE = 20;
 
     /**
      * 
@@ -25,6 +25,7 @@ public interface Biome {
      *                 where will be
      *                 placed inside the biome (tile x, y)
      * @param room     to add to the Biome
+     * @return Biome itself
      */
     Biome addRoom(TilePosition biomePos, Space room);
 
@@ -34,6 +35,7 @@ public interface Biome {
      *                 where will be
      *                 placed inside the biome (tile x, y)
      * @param corridor to add to the Biome
+     * @return Biome itself
      */
     Biome addCorridor(TilePosition biomePos, Space corridor);
 
