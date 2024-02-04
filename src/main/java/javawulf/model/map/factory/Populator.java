@@ -7,24 +7,29 @@ import javafx.util.Pair;
 import javawulf.model.Collectable;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
+import javawulf.model.enemy.EnemyFactory;
+import javawulf.model.enemy.EnemyFactoryImpl;
+import javawulf.model.item.AmuletPiece;
+import javawulf.model.item.ItemFactory;
+import javawulf.model.item.ItemFactoryImpl;
 import javawulf.model.map.Biome;
 import javawulf.model.map.BiomeQuadrant;
 import javawulf.model.map.Map;
 import javawulf.model.map.Space;
 import javawulf.model.map.TilePosition;
 import javawulf.model.map.TileType;
-import javawulf.model.enemy.*;
-import javawulf.model.item.*;
-import javawulf.model.powerUp.*;
+import javawulf.model.powerUp.PowerUpFactory;
+import javawulf.model.powerUp.PowerUpFactoryImpl;
+
 
 /**
  * Utility class used to populate a map with items, power-up and enemies.
  */
 public final class Populator {
     private static final int halfTile = TileType.TILE_DIMENSION / 2;
-    private static final int objectDuration = 10;
-    private static final int points = 10;
-    private static String type = "Collectable";
+    private static ItemFactory itemFactory = new ItemFactoryImpl();
+    private static EnemyFactory enemyFactory = new EnemyFactoryImpl(); 
+    private static PowerUpFactory powerUpFactory = new PowerUpFactoryImpl();
 
     enum Collectables {
         CURE, CUREMAX, EXTRAHEART, GREATSWORD, SHIELD, POWERUPATTACK, POWERUPDOUBLEPOINTS, POWERUPSPEED,
@@ -55,7 +60,7 @@ public final class Populator {
 
             for (var corridor : biome.getCorridors()) {
                 corridor.getValue().addGameElement(
-                        new Pawn(getCentralPosition(corridor.getKey(), corridor.getValue(), biomeQuadrant)));
+                        enemyFactory.createPawn(getCentralPosition(corridor.getKey(), corridor.getValue(), biomeQuadrant)));
             }
         }
         return map;
@@ -102,39 +107,28 @@ public final class Populator {
     }
 
     private static Collectable getRandomCollectable(Coordinate coordColl) {
-        Collectable coll;
         switch (Collectables.getRandomic()) {
             case CURE:
-                coll = new Cure(coordColl);
-                break;
+                return itemFactory.createCure(coordColl);
             case CUREMAX:
-                coll = new CureMax(coordColl);
-                break;
+                return itemFactory.createCureMax(coordColl);
             case EXTRAHEART:
-                coll = new ExtraHeart(coordColl);
-                break;
+                return itemFactory.createExtraHeart(coordColl);
             case GREATSWORD:
-                coll = new GreatSword(coordColl);
-                break;
+                return itemFactory.createGreatSword(coordColl);
             case SHIELD:
-                coll = new Shield(coordColl);
-                break;
+                return itemFactory.createShield(coordColl);
             case POWERUPATTACK:
-                coll = new PowerUpAttack(coordColl, objectDuration, points, type);
-                break;
+                return powerUpFactory.createPowerUpAttack(coordColl);
             case POWERUPDOUBLEPOINTS:
-                coll = new PowerUpDoublePoints(coordColl, objectDuration, points, type);
-                break;
+                return powerUpFactory.createPowerUpDoublePoints(coordColl);
             case POWERUPSPEED:
-                coll = new PowerUpSpeed(coordColl, objectDuration, points, type);
-                break;
+                return powerUpFactory.createPowerUpSpeed(coordColl);
             case POWERUPINVINCIBILITY:
-                coll = new PowerUpInvincibility(coordColl, objectDuration, points, type);
-                break;
+                return powerUpFactory.createPowerUpInvincibility(coordColl);
             default:
-                coll = new Cure(coordColl);
+                return itemFactory.createCure(coordColl);
         }
-        return coll;
     }
 
     /**
