@@ -31,38 +31,38 @@ import javawulf.model.map.factory.MapFactoryImpl;
  * The class PlayerTest it used to check if the implementation
  * of Player works according to the game rules.
  */
-public final class PlayerTest {
+final class PlayerTest {
 
-    private final int health = 3;
-    private final int startingX = 12;
-    private final int startingY = 12;
-    private final int startingPoints = 0;
+    private static final int HEALTH = 3;
+    private static final int STARTING_X = 12;
+    private static final int STARTING_Y = 12;
+    private static final int STARTING_POINTS = 0;
     private Player player;
     private Coordinate test;
 
     @BeforeEach
     void createPlayer() {
-        this.player = new PlayerImpl(startingX, startingY, health, startingPoints);
-        this.test = new CoordinateImpl(startingX, startingY);
+        this.player = new PlayerImpl(STARTING_X, STARTING_Y, HEALTH, STARTING_POINTS);
+        this.test = new CoordinateImpl(STARTING_X, STARTING_Y);
     }
 
     @Test
     void testStartingPlayerStatistics() {
         assertEquals(test.getPosition(), player.getPosition().getPosition());
-        assertEquals(new BoundingBoxImpl(startingX, startingY, AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE,
+        assertEquals(new BoundingBoxImpl(STARTING_X, STARTING_Y, AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE,
                 CollisionType.PLAYER).getCollisionArea(), player.getBounds().getCollisionArea());
         assertEquals(0, player.getNumberOfPieces());
     }
 
     @Test
     void testPlayerMovement() {
-        Direction movementDirection = Direction.DOWN_LEFT;
-        Map map = new MapFactoryImpl().getTestMap(player);
-        int delta = AbstractEntity.MOVEMENT_DELTA;
-        Coordinate expectedCoordinate = new CoordinateImpl(player.getPosition().getX()
+        final Direction movementDirection = Direction.DOWN_LEFT;
+        final Map map = new MapFactoryImpl().getTestMap(player);
+        final int delta = AbstractEntity.MOVEMENT_DELTA;
+        final Coordinate expectedCoordinate = new CoordinateImpl(player.getPosition().getX()
             + (int) (movementDirection.getX() * delta), player.getPosition().getY()
             + (int) (movementDirection.getY() * delta));
-        BoundingBox expectedBoundingBox = new BoundingBoxImpl(expectedCoordinate.getX(),
+        final BoundingBox expectedBoundingBox = new BoundingBoxImpl(expectedCoordinate.getX(),
             expectedCoordinate.getY(), AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.PLAYER);
         player.move(movementDirection, map);
         assertNotEquals(test.getPosition(), player.getPosition().getPosition());
@@ -72,8 +72,8 @@ public final class PlayerTest {
 
     @Test
     void testAttack() {
-        CollisionType original = player.getSword().getBounds().getCollisionType();
-        CollisionType expected = CollisionType.SWORD;
+        final CollisionType original = player.getSword().getBounds().getCollisionType();
+        final CollisionType expected = CollisionType.SWORD;
         assertEquals(original, player.getSword().getBounds().getCollisionType());
         player.attack();
         assertNotEquals(original, player.getSword().getBounds().getCollisionType());
@@ -82,20 +82,20 @@ public final class PlayerTest {
 
     @Test
     void testGettingHit() {
-        BoundingBox item = new BoundingBoxImpl(startingX, startingY, AbstractEntity.OBJECT_SIZE,
+        final BoundingBox item = new BoundingBoxImpl(STARTING_X, STARTING_Y, AbstractEntity.OBJECT_SIZE,
             AbstractEntity.OBJECT_SIZE, CollisionType.COLLECTABLE);
         assertFalse(player.isHit(item));
         assertNotEquals(CollisionType.STUNNED, player.getBounds().getCollisionType());
 
-        BoundingBox enemy = new BoundingBoxImpl(startingX + AbstractEntity.OBJECT_SIZE, startingY + AbstractEntity.OBJECT_SIZE,
+        BoundingBox enemy = new BoundingBoxImpl(STARTING_X + AbstractEntity.OBJECT_SIZE, STARTING_Y + AbstractEntity.OBJECT_SIZE,
             AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY);
         assertFalse(player.isHit(enemy));
-        enemy = new BoundingBoxImpl(startingX, startingY, AbstractEntity.OBJECT_SIZE,
+        enemy = new BoundingBoxImpl(STARTING_X, STARTING_Y, AbstractEntity.OBJECT_SIZE,
             AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY);
         assertTrue(player.isHit(enemy));
         assertEquals(CollisionType.STUNNED, player.getBounds().getCollisionType());
-        assertNotEquals(new PlayerHealthImpl(health).getHealth(), player.getPlayerHealth().getHealth());
-        assertEquals(new PlayerHealthImpl(health - 1).getHealth(), player.getPlayerHealth().getHealth());
+        assertNotEquals(new PlayerHealthImpl(HEALTH).getHealth(), player.getPlayerHealth().getHealth());
+        assertEquals(new PlayerHealthImpl(HEALTH - 1).getHealth(), player.getPlayerHealth().getHealth());
 
         assertFalse(player.isHit(enemy));
         for (int i = 4; i > 0; i--) {
@@ -112,8 +112,8 @@ public final class PlayerTest {
     @Test
     void testObtainFragment() {
         final int wrongResult = 5;
-        List<AmuletPiece> fragments = new ArrayList<>();
-        AmuletPiece fragment = new ItemFactoryImpl().createAmuletPiece(test);
+        final List<AmuletPiece> fragments = new ArrayList<>();
+        final AmuletPiece fragment = new ItemFactoryImpl().createAmuletPiece(test);
         for (int i = 0; i < 4; i++) {
             fragments.add(fragment);
             player.collectAmuletPiece(fragments.get(i));

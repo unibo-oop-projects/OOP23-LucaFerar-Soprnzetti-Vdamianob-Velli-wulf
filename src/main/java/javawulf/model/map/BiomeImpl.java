@@ -42,12 +42,12 @@ public final class BiomeImpl implements Biome {
     }
 
     @Override
-    public List<Pair<TilePosition, Space>> getRooms() {
+    public ArrayList<Pair<TilePosition, Space>> getRooms() {
         return new ArrayList<>(this.rooms);
     }
 
     @Override
-    public List<Pair<TilePosition, Space>> getCorridors() {
+    public ArrayList<Pair<TilePosition, Space>> getCorridors() {
         return new ArrayList<>(this.corridors);
     }
 

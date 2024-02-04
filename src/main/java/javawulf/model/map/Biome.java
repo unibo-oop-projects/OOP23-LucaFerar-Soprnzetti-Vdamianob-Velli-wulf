@@ -1,7 +1,7 @@
 package javawulf.model.map;
 
 import javafx.util.Pair;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -42,14 +42,14 @@ public interface Biome {
      * @return a defensive copy of a list of room positions and their relative rooms
      *         Pair [ (tile x, y) - ROOM ].
      */
-    List<Pair<TilePosition, Space>> getRooms();
+    ArrayList<Pair<TilePosition, Space>> getRooms();
 
     /**
      * 
      * @return a defensive copy of a list of corridor positions and their relative
      *         Pair corridors [ (tile x, y) - CORRIDOR ].
      */
-    List<Pair<TilePosition, Space>> getCorridors();
+    ArrayList<Pair<TilePosition, Space>> getCorridors();
 
 /**
  * 

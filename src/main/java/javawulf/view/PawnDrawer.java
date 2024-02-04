@@ -19,11 +19,11 @@ public final class PawnDrawer extends AbstractDrawer {
     /**
      * The Pawn Drawer.
      * 
-     * @param gamePanel the Game Panel where the pawn must be drawn
      * @param player    the current status of the Player character
+     * @param gamePanel the Game Panel where the pawn must be drawn
      * @param pawns     a list of all the pawns to draw
      */
-    public PawnDrawer(final GamePanel gamePanel, final PlayerStatus player, final List<Pawn> pawns) {
+    public PawnDrawer(final PlayerStatus player, final GamePanel gamePanel, final List<Pawn> pawns) {
         super(gamePanel, player);
         this.pawns = pawns;
         try {

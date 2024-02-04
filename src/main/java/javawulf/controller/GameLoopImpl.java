@@ -106,9 +106,10 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             this.delta--;
         }
 
-        if (this.timer >= NANOSECONDS * 2) {
+        if (this.timer >= NANOSECONDS * 1) {
             this.timer = 0;
             // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
+            System.out.println(this.getMap().getPlayerRoom());
         }
     }
 
@@ -184,6 +185,21 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     @Override
     public PlayerController getPlayerController() {
         return this.playerController;
+    }
+
+    @Override
+    public List<Collectable> getItems() {
+        return this.items;
+    }
+
+    @Override
+    public List<Pawn> getPawns() {
+        return this.pawns;
+    }
+
+    @Override
+    public List<AmuletPiece> getAmuletPieces() {
+        return this.pieces;
     }
 
 }

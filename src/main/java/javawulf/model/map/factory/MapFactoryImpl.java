@@ -19,7 +19,7 @@ public class MapFactoryImpl implements MapFactory {
 
         this.fourthBiome = new BiomeFactoryImpl().getBiomeD();
 
-        return new MapImpl(player, this.firstBiome, this.secondBiome, this.thirdBiome, this.fourthBiome);
+        return Populator.populate(new MapImpl(player, this.firstBiome, this.secondBiome, this.thirdBiome, this.fourthBiome));
     }
 
     @Override
