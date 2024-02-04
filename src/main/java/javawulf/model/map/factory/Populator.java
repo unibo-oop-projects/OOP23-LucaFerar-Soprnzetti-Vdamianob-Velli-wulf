@@ -41,14 +41,21 @@ public final class Populator {
         for (var biomeQuadrant : BiomeQuadrant.values()) {
             Biome biome = map.getBiomes().get(biomeQuadrant.getPos());
             Pair<TilePosition, Space> randRoom = getRandomicSpace(biome.getRooms());
-            AmuletPiece biomeAmulet = new AmuletPiece(getCentralPosition(randRoom.getKey(), randRoom.getValue(), biomeQuadrant));
+            AmuletPiece biomeAmulet = new AmuletPiece(
+                    getCentralPosition(randRoom.getKey(), randRoom.getValue(), biomeQuadrant));
             randRoom.getValue().addGameElement(biomeAmulet);
+
             for (var room : biome.getRooms()) {
                 if (!room.getValue().getElements().contains(biomeAmulet)) {
                     room.getValue().addGameElement(
-                        getRandomCollectable(getCentralPosition(room.getKey(), room.getValue(), biomeQuadrant)));
+                            getRandomCollectable(getCentralPosition(room.getKey(), room.getValue(), biomeQuadrant)));
                 }
 
+            }
+
+            for (var corridor : biome.getCorridors()) {
+                corridor.getValue().addGameElement(
+                        new Pawn(getCentralPosition(corridor.getKey(), corridor.getValue(), biomeQuadrant)));
             }
         }
         return map;
@@ -66,6 +73,31 @@ public final class Populator {
         final int halfHeight = space.getHeight() / 2;
         return new CoordinateImpl(
                 (spacePos.getX() + quadrant.getOffset().getX() + halfWidth) * TileType.TILE_DIMENSION + halfTile,
+                (spacePos.getY() + quadrant.getOffset().getY() + halfHeight) * TileType.TILE_DIMENSION + halfTile);
+    }
+
+    /**
+     * Utility method used for obtain a lateral coordinate of a space, next to the
+     * center (useful for put
+     * guards).
+     * 
+     * @param space
+     * @return lateral position (lateral left is 'leftRight' is True or lateral
+     *         right if 'leftRight' is False).
+     */
+    private static Coordinate getlateralPosition(TilePosition spacePos, Space space, BiomeQuadrant quadrant,
+            boolean leftRight) {
+        final int offSetPos;
+        if (leftRight) {
+            offSetPos = TileType.TILE_DIMENSION;
+        } else {
+            offSetPos = -TileType.TILE_DIMENSION;
+        }
+        final int halfWidth = space.getWidth() / 2;
+        final int halfHeight = space.getHeight() / 2;
+        return new CoordinateImpl(
+                (spacePos.getX() + quadrant.getOffset().getX() + halfWidth) * TileType.TILE_DIMENSION + halfTile
+                        + offSetPos,
                 (spacePos.getY() + quadrant.getOffset().getY() + halfHeight) * TileType.TILE_DIMENSION + halfTile);
     }
 
