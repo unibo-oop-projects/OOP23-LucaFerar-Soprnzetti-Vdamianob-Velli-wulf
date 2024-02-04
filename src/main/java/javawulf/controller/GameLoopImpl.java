@@ -2,6 +2,7 @@ package javawulf.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javawulf.model.BoundingBox;
@@ -19,6 +20,7 @@ import javawulf.model.map.Map;
 import javawulf.model.map.factory.MapFactoryImpl;
 import javawulf.model.player.Player;
 import javawulf.model.player.PlayerImpl;
+import javawulf.model.powerUp.PowerUp;
 import javawulf.view.GamePanel;
 
 /**
@@ -42,6 +44,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private final List<Collectable> items;
     private final List<Pawn> pawns;
     private final List<AmuletPiece> pieces;
+    private final List<PowerUp> powerUps;
 
     /**
      * 
@@ -51,6 +54,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
         this.items = new ArrayList<>();
         this.pawns = new ArrayList<>();
         this.pieces = new ArrayList<>();
+        this.powerUps = new ArrayList<>();
         playerInit();
         mapInit();
         this.playerController = new PlayerControllerImpl();
@@ -71,6 +75,10 @@ public final class GameLoopImpl implements GameLoop, Runnable {
         this.pieces.addAll(elements.stream()
                 .filter(e -> e instanceof AmuletPiece)
                 .map(e -> (AmuletPiece) e)
+                .collect(Collectors.toList()));
+        this.powerUps.addAll(elements.stream()
+                .filter(e -> e instanceof PowerUp)
+                .map(e -> (PowerUp) e)
                 .collect(Collectors.toList()));
     }
 
@@ -166,6 +174,8 @@ public final class GameLoopImpl implements GameLoop, Runnable {
         if(this.gamePlayer.getBounds().getCollisionType().equals(BoundingBox.CollisionType.INACTIVE)){
             this.gameLoopThread.interrupt();
         }
+        this.powerUps.forEach(p -> p.collect(gamePlayer));
+        this.powerUps.removeIf(p -> p.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
     }
 
     private void reDraw() {
@@ -209,6 +219,11 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     @Override
     public List<AmuletPiece> getAmuletPieces() {
         return this.pieces;
+    }
+
+    @Override
+    public List<PowerUp> getPowerUps() {
+        return this.powerUps;
     }
 
 }

@@ -7,6 +7,7 @@ import javawulf.model.enemy.Pawn;
 import javawulf.model.item.AmuletPiece;
 import javawulf.model.map.Map;
 import javawulf.model.player.Player;
+import javawulf.model.powerUp.PowerUp;
 
 /**
  * GameLoop is an important Controller element: determines the game Time.
@@ -58,4 +59,9 @@ public interface GameLoop {
      * @return The AmuletPieces in the game
      */
     List<AmuletPiece> getAmuletPieces();
+
+    /**
+     * @return The PowerUps in the game
+     */
+    List<PowerUp> getPowerUps();
 }
