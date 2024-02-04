@@ -13,6 +13,7 @@ public final class PlayerStatusImpl implements PlayerStatus {
 
     /**
      * @param player The Player whose status must be considered
+     * @param map The map the player is on
      */
     public PlayerStatusImpl(final Player player, final Map map) {
         this.player = player;

@@ -3,9 +3,11 @@ package javawulf.view;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javawulf.controller.PlayerStatus;
+import javawulf.model.item.AmuletPiece;
 import javawulf.model.map.TileType;
 import java.awt.Color;
 import java.awt.Font;
@@ -22,6 +24,7 @@ public final class HUDDrawer extends AbstractDrawer {
     private BufferedImage sword;
     private BufferedImage greatsword;
     private final PlayerStatus player;
+    private final List<AmuletPiece> pieces;
 
     /**
      * Creates a new HUDDrawer.
@@ -29,10 +32,11 @@ public final class HUDDrawer extends AbstractDrawer {
      * @param player The player character whose status will be made into the HUD
      * @param gamePanel The panel where the HUD must appear in.
      */
-    public HUDDrawer(final PlayerStatus player, final GamePanel gamePanel) {
+    public HUDDrawer(final PlayerStatus player, final List<AmuletPiece> pieces ,final GamePanel gamePanel) {
         super(gamePanel, player);
         this.gamePanel = gamePanel;
         this.player = player;
+        this.pieces = pieces;
         try {
             this.shield = imageLoader(ImagePath.SHIELD);
             this.health = imageLoader(ImagePath.HEALTH);
@@ -54,58 +58,10 @@ public final class HUDDrawer extends AbstractDrawer {
         final int x = upperCorner + TileType.TILE_DIMENSION * GamePanel.SCALE * 2;
         final int y = leftCorner + TileType.TILE_DIMENSION * GamePanel.SCALE * 2;
 
-        final int max = this.player.getMaxHealth();
-        final int current = this.player.getHealth();
-        final int shield = this.player.getShield();
-        final String sword = this.player.getSwordType();
-        final String color = this.player.getColor();
-        final String status = this.player.getPlayerCollision();
-        final String score = String.valueOf(this.player.getScore());
-        BufferedImage img;
-        int i;
-        for (i = 0; i < max + shield; i++) {
-            if (max <= i) {
-                img = this.shield;
-            } else if (current > i) {
-                img = this.health;
-            } else { 
-                img = this.maxHealth;
-            }
-            graphics.drawImage(img, x + GamePanel.TILESIZE * i,
-                y, GamePanel.TILESIZE, GamePanel.TILESIZE, null);
-        }
-        if ("NORMAL".equals(sword)) {
-            img = this.sword;
-        } else {
-            img = this.greatsword;
-        }
-        graphics.drawImage(img, x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE,
-            GamePanel.TILESIZE, null);
-        Color activePowerUp;
-        i++;
-        if ("none".equals(color)) {
-            activePowerUp = Color.GRAY;
-            graphics.setColor(activePowerUp);
-            graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
-        } else {
-            graphics.drawRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
-            graphics.drawImage(img, x + GamePanel.TILESIZE * i,
-                y, GamePanel.TILESIZE, GamePanel.TILESIZE, null);
-        }
-        //graphics.setColor(activePowerUp);
-        //graphics.fillRect(x + GamePanel.tileSize * i, y, GamePanel.tileSize, GamePanel.tileSize);
-        i++;
-        if ("STUNNED".equals(status) && !"blue".equals(color)) {
-            activePowerUp = Color.yellow;
-        } else {
-            activePowerUp = Color.lightGray;
-        }
-        graphics.setColor(activePowerUp);
-        graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
+        this.drawHud(graphics, x, y);
 
-        graphics.setColor(Color.red);
-        graphics.setFont(new Font(null, Font.BOLD, GamePanel.TILESIZE));
-        graphics.drawString("Score : " + score, x, rightCorner);
+        final int score = this.player.getScore();
+        this.drawScore(graphics, score, x, rightCorner);
     }
 
     private void drawCorners(final Graphics2D graphics, final int upX, final int upY, final int downX,
@@ -116,6 +72,83 @@ public final class HUDDrawer extends AbstractDrawer {
         graphics.fillRect(0, upY, this.gamePanel.getWidth(), thicknessCorners);
         graphics.fillRect(downX, 0, thicknessCorners, this.gamePanel.getHeight());
         graphics.fillRect(0, downY, this.gamePanel.getWidth(), thicknessCorners);
+    }
+
+    private void drawHud(final Graphics2D graphics, final int x, final int y) {
+        final int maxHealth = this.player.getMaxHealth();
+        final int current = this.player.getHealth();
+        final int shield = this.player.getShield();
+        final String sword = this.player.getSwordType();
+        final String color = this.player.getColor();
+        final String status = this.player.getPlayerCollision();
+        BufferedImage img;
+        int i;
+        for (i = 0; i < maxHealth + shield; i++) {
+            if (maxHealth <= i) {
+                img = this.shield;
+            } else if (current > i) {
+                img = this.health;
+            } else { 
+                img = this.maxHealth;
+            }
+            graphics.drawImage(img, x + GamePanel.TILESIZE * i,
+                y, GamePanel.TILESIZE, GamePanel.TILESIZE, null);
+        }
+        img = "NORMAL".equals(sword) ? this.sword : this.greatsword;
+        graphics.drawImage(img, x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE,
+            GamePanel.TILESIZE, null);
+        i++;
+        final Color activePowerUp = this.colorPowerUpActive(color);
+        graphics.setColor(activePowerUp);
+        graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
+        i++;
+        final Color stunStatus = "STUNNED".equals(status) && !"blue".equals(color) ? Color.ORANGE : Color.lightGray;
+        graphics.setColor(stunStatus);
+        graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
+        i++;
+        graphics.setColor(this.isPlayerAligned() ? Color.MAGENTA : Color.BLACK);
+        graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
+    }
+
+    private boolean isPlayerAligned() {
+        boolean value = false;
+        for (AmuletPiece piece : this.pieces) {
+            if (piece.getPosition().getX() > (player.getPlayerX() - GamePanel.ORIGINAL_TILE_SIZE)
+                && piece.getPosition().getX() < (player.getPlayerX() + GamePanel.ORIGINAL_TILE_SIZE)
+                || piece.getPosition().getY() > (player.getPlayerY() - GamePanel.ORIGINAL_TILE_SIZE)
+                && piece.getPosition().getY() < (player.getPlayerY() + GamePanel.ORIGINAL_TILE_SIZE)) {
+                return true;
+            }
+        }
+        return value;
+    }
+
+    private void drawScore(final Graphics2D graphics, final int score, final int x, final int y) {
+        graphics.setColor(Color.red);
+        graphics.setFont(new Font(null, Font.BOLD, GamePanel.TILESIZE));
+        graphics.drawString("Score : " + score, x, y);
+    }
+
+    private Color colorPowerUpActive(final String color) {
+        final Color activePowerUp;
+        switch (color) {
+            case "red":
+                activePowerUp = Color.RED;
+                break;
+            case "blue":
+                activePowerUp = Color.BLUE;
+                break;
+            case "yellow":
+                activePowerUp   = Color.YELLOW;
+                break;
+            case "green":
+                activePowerUp = Color.GREEN;
+                break;
+            default:
+                activePowerUp = Color.GRAY;
+                break;
+        }
+        return activePowerUp;
     }
 
 }

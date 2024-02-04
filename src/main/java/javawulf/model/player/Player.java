@@ -43,9 +43,9 @@ public interface Player extends Entity {
 
         private final String color;
 
-        PlayerColor(final String color) {
+ PlayerColor(final String color) {
             this.color = color;
-        }
+        }       
 
         /**
          * @return The string corrisponding to the color
@@ -119,6 +119,7 @@ public interface Player extends Entity {
     int getNumberOfPieces();
 
     /**
+     * @param map The map the Player is on
      * @return True if the player has collected all 4 pieces and
      * is standing on the portal
      */

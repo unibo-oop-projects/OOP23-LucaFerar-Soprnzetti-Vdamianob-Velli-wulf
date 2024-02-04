@@ -23,7 +23,7 @@ public interface GameLoop {
      * How many ticks per second the game state and the View representation will be
      * refredhed.
      */
-    int FPS = 60;
+    int FPS = 30;
 
     /**
      * GameLoop thread will be start only after this method is invoked.

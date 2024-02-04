@@ -1,5 +1,7 @@
 package javawulf.model.player;
 
+import java.util.logging.Logger;
+
 /**
  * PlayerHealthImpl is a class implementing the PlayerHealth
  * interface.
@@ -50,14 +52,15 @@ public final class PlayerHealthImpl implements PlayerHealth {
     private void damage(final int health) {
         if (this.getShieldStatus().equals(ShieldStatus.NONE)) {
             this.health = this.health + health;
-            System.out.println("Health remaining : " + this.getHealth());
+            Logger.getLogger(SwordImpl.class.getName()).fine("Health remaining : " + this.getHealth());
         } else {
             if (this.getShieldStatus().equals(ShieldStatus.FULL)) {
                 this.setShieldStatus(ShieldStatus.HALF);
-                System.out.println("Shield hits remaining :" + this.getShieldStatus().getStrength());
+                Logger.getLogger(SwordImpl.class.getName()).fine("Shield hits remaining :"
+                    + this.getShieldStatus().getStrength());
             } else {
                 this.setShieldStatus(ShieldStatus.NONE);
-                System.out.println("Shield broke!");
+                Logger.getLogger(SwordImpl.class.getName()).fine("Shield broke!");
             }
         }
     }

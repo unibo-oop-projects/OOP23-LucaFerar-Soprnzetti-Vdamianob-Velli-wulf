@@ -24,7 +24,7 @@ public final class PlayerControllerImpl implements PlayerController {
 
     @Override
     public void updatePlayerStatus(final boolean up, final boolean down, final boolean left, final boolean right) {
-        if (!((up && down) || (left && right))) {
+        if (!(up && down || left && right)) {
             if (up) {
                 if (right) {
                     this.movementDirection = Optional.of(Direction.UP_RIGHT);

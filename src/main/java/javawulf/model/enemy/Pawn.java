@@ -70,7 +70,7 @@ public final class Pawn extends EnemyImpl {
                 current.getY() + (int) (this.getDirection().getY() * delta), OBJECT_SIZE, OBJECT_SIZE,
                 CollisionType.PLAYER);
         final var tiles = m.getTileTypes(preview);
-        if (!tiles.contains(TileType.WALL)) {
+        if (!tiles.contains(TileType.WALL) && !tiles.contains(TileType.CENTRAL_ROOM)) {
             this.setPosition(new CoordinateImpl(current.getX() + (int) (this.getDirection().getX() * delta),
                     current.getY() + (int) (this.getDirection().getY() * delta)));
             this.getBounds().setCollisionArea(preview.getCollisionArea());
