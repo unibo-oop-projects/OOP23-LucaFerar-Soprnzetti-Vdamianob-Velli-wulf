@@ -1,7 +1,10 @@
 package javawulf.model.map.factory;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.stream.Collectors;
 
+import javafx.util.Pair;
 import javawulf.model.Collectable;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
@@ -38,9 +41,15 @@ public final class Populator {
     public static Map populate(Map map) {
         for (var biomeQuadrant : BiomeQuadrant.values()) {
             Biome biome = map.getBiomes().get(biomeQuadrant.getPos());
+            Pair<TilePosition, Space> randRoom = getRandomicSpace(biome.getRooms());
+            AmuletPiece biomeAmulet = new AmuletPiece(getCentralPosition(randRoom.getKey(), randRoom.getValue(), biomeQuadrant));
+            randRoom.getValue().addGameElement(biomeAmulet);
             for (var room : biome.getRooms()) {
-                room.getValue().addGameElement(
+                if (!room.getValue().getElements().contains(biomeAmulet)) {
+                    room.getValue().addGameElement(
                         getRandomCollectable(getCentralPosition(room.getKey(), room.getValue(), biomeQuadrant)));
+                }
+
             }
         }
         return map;
@@ -95,6 +104,15 @@ public final class Populator {
                 coll = new Cure(coordColl);
         }
         return coll;
+    }
+
+    /**
+     * 
+     * @param arraylist of spaces
+     * @return a randomic space from arraylist
+     */
+    private static Pair<TilePosition, Space> getRandomicSpace(ArrayList<Pair<TilePosition, Space>> spaces) {
+        return spaces.get(new Random().nextInt(spaces.size()));
     }
 
 }
