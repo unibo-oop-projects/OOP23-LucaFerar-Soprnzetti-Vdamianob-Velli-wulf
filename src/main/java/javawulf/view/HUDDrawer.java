@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javawulf.controller.PlayerStatus;
 import javawulf.model.item.AmuletPiece;
 import javawulf.model.map.TileType;
@@ -33,6 +34,14 @@ public final class HUDDrawer extends AbstractDrawer {
      * @param pieces The amulet piece that still have to be collected
      * @param gamePanel The panel where the HUD must appear in.
      */
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI2"
+        },
+        justification = "Game panel is stored to allow calculations for the drawings that are relative "
+            + "to its size. The pieces are passed in order to check whether the Player's"
+            + " position relative to the pieces"
+    )
     public HUDDrawer(final PlayerStatus player, final List<AmuletPiece> pieces, final GamePanel gamePanel) {
         super(gamePanel, player);
         this.gamePanel = gamePanel;
