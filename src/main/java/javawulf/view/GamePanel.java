@@ -13,16 +13,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-// import java.awt.Color;
 
+/**
+ * JPanel where videogame match is drawn.
+ */
 public class GamePanel extends JPanel {
     // Screen settings
-    public static final int originalTileSize = 24; // Celle da 24x24px (standard per diversi retro-game)
-    public static int scale = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/400; // Fattore di scala (può essere proporzionale alla risoluzione dello schermo)
-    public static int tileSize = originalTileSize * scale; // Dimensione finale effettiva delle celle (scalata)
+    /** Original Tile Size (even entities and game objects have the dimension of a tile). */
+    public static final int ORIGINAL_TILE_SIZE = 24;
+    /** Elements scaling field. It is proportional to display resolution. */
+    public static int SCALE = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/400;
+    /** Scaled dimension of a tile. */
+    public static int TILESIZE = ORIGINAL_TILE_SIZE * SCALE;
     // Numero massimo di celle (h e w) da visualizzare in gioco
-    public static final int maxScreenCol = 15;
-    public static final int maxScreenRow = 15;
+    public static final int MAX_SCREEN_COL = 15;
+    public static final int MAX_SCREEN_ROW = 15;
 
     private CommandListener listener;
     private GameLoop gameLoopController;

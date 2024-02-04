@@ -6,16 +6,16 @@ package javawulf.model.map;
 public final class Room extends AbstractSpace {
 
     /**
-     * Default rooms' tile-type
+     * Default rooms' tile-type.
      */
-    public static TileType DEFAULT_TYPE = TileType.ROOM;
+    public static final TileType DEFAULT_TYPE = TileType.ROOM;
 
     /**
      * 
      * @param width of the room
      * @param height of the room
      */
-    public Room(int width, int height) {
+    public Room(final int width, final int height) {
         super(width, height);
     }
 

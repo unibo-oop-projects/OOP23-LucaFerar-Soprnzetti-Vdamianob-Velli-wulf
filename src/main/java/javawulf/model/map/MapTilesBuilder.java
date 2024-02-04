@@ -42,29 +42,35 @@ public final class MapTilesBuilder {
 
     /**
      * Used to build spaces in a specific biome.
-     * @param tiles HashMap where build (w*h) spaces
-     * @param biomeQuadrant used for take the specific position quadrant offset
-     * @param spaces a list of Pair (SpacePosition, Space) to build in the HashMap
+     * 
+     * @param tiles            HashMap where build (w*h) spaces
+     * @param biomeQuadrant    used for take the specific position quadrant offset
+     * @param spaces           a list of Pair (SpacePosition, Space) to build in the
+     *                         HashMap
      * @param defaultSpaceTile to use for build spaces
      */
-    private static void buildSpacesBiome(final HashMap<TilePosition, TileType> tiles, 
+    private static void buildSpacesBiome(final HashMap<TilePosition, TileType> tiles,
             final BiomeQuadrant biomeQuadrant, final List<Pair<TilePosition, Space>> spaces,
             final TileType defaultSpaceTile) {
         for (var space : spaces) {
-            buildSpace(tiles, new TilePosition(space.getKey().getX() + biomeQuadrant.getOffset().getX(), space.getKey().getY() + biomeQuadrant.getOffset().getY()), space.getValue(), defaultSpaceTile);
+            buildSpace(tiles,
+                    new TilePosition(space.getKey().getX() + biomeQuadrant.getOffset().getX(),
+                            space.getKey().getY() + biomeQuadrant.getOffset().getY()),
+                    space.getValue(), defaultSpaceTile);
         }
     }
 
     /**
      * Used to build a specific space inside the whole map.
+     * 
      * @param tiles
-     * @param posToStart where build Space inside map
+     * @param posToStart       where build Space inside map
      * @param space
      * @param defaultSpaceTile to use for build space
      */
-    private static void buildSpace(final HashMap<TilePosition, TileType> tiles, 
-    TilePosition posToStart, Space space,
-    final TileType defaultSpaceTile) {
+    private static void buildSpace(final HashMap<TilePosition, TileType> tiles,
+            final TilePosition posToStart, final Space space,
+            final TileType defaultSpaceTile) {
         for (int y = posToStart.getY(); y < posToStart.getY() + space.getHeight(); y++) {
             for (int x = posToStart.getX(); x < posToStart.getX() + space.getWidth(); x++) {
                 tiles.put(new TilePosition(x, y), defaultSpaceTile);
@@ -73,37 +79,58 @@ public final class MapTilesBuilder {
     }
 
     private static void buildCentralBiome(final HashMap<TilePosition, TileType> tiles) {
+        // CHECKSTYLE: MagicNumber OFF
+        // In the central biome, the position of the spaces was choosen arbitrarily: the
+        // use of final variables to identify the
+        // TilePositions of each space would have been less comprehensive.
+        // For this reason it was decided to suppress the warning checkstyles.
         buildSpace(tiles, new TilePosition(Biome.SIZE, 3), new Corridor(Map.WIDTH_CENTRAL_BIOME, 2), TileType.CORRIDOR);
-        buildSpace(tiles, new TilePosition(Biome.SIZE, 15), new Corridor(Map.WIDTH_CENTRAL_BIOME, 2), TileType.CORRIDOR);
-        buildSpace(tiles, new TilePosition(Biome.SIZE, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 3), new Corridor(Map.WIDTH_CENTRAL_BIOME, 2), TileType.CORRIDOR);
-        buildSpace(tiles, new TilePosition(Biome.SIZE, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 15), new Corridor(Map.WIDTH_CENTRAL_BIOME, 2), TileType.CORRIDOR);
+        buildSpace(tiles, new TilePosition(Biome.SIZE, 15), new Corridor(Map.WIDTH_CENTRAL_BIOME, 2),
+                TileType.CORRIDOR);
+        buildSpace(tiles, new TilePosition(Biome.SIZE, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 3),
+                new Corridor(Map.WIDTH_CENTRAL_BIOME, 2), TileType.CORRIDOR);
+        buildSpace(tiles, new TilePosition(Biome.SIZE, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 15),
+                new Corridor(Map.WIDTH_CENTRAL_BIOME, 2), TileType.CORRIDOR);
 
         buildSpace(tiles, new TilePosition(3, Biome.SIZE), new Corridor(2, Map.WIDTH_CENTRAL_BIOME), TileType.CORRIDOR);
-        buildSpace(tiles, new TilePosition(15, Biome.SIZE), new Corridor(2, Map.WIDTH_CENTRAL_BIOME), TileType.CORRIDOR);
-        buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 3, Biome.SIZE), new Corridor(2, Map.WIDTH_CENTRAL_BIOME), TileType.CORRIDOR);
-        buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 15, Biome.SIZE), new Corridor(2, Map.WIDTH_CENTRAL_BIOME), TileType.CORRIDOR);
+        buildSpace(tiles, new TilePosition(15, Biome.SIZE), new Corridor(2, Map.WIDTH_CENTRAL_BIOME),
+                TileType.CORRIDOR);
+        buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 3, Biome.SIZE),
+                new Corridor(2, Map.WIDTH_CENTRAL_BIOME), TileType.CORRIDOR);
+        buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME + 15, Biome.SIZE),
+                new Corridor(2, Map.WIDTH_CENTRAL_BIOME), TileType.CORRIDOR);
 
-        buildSpace(tiles, new TilePosition(Biome.SIZE + 2, Biome.SIZE + 2), new Room(Map.WIDTH_CENTRAL_BIOME-2*2, Map.WIDTH_CENTRAL_BIOME-2*2), TileType.CENTRAL_ROOM);
-        buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1, Biome.SIZE - 3), new Room(2, 5), TileType.CENTRAL_ROOM);
-        buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1, Biome.SIZE + 8), new Room(2, 5), TileType.CENTRAL_ROOM);
-        buildSpace(tiles, new TilePosition(Biome.SIZE - 3, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1), new Room(5, 2), TileType.CENTRAL_ROOM);
-        buildSpace(tiles, new TilePosition(Biome.SIZE + 8, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1), new Room(5, 2), TileType.CENTRAL_ROOM);
+        buildSpace(tiles, new TilePosition(Biome.SIZE + 2, Biome.SIZE + 2),
+                new Room(Map.WIDTH_CENTRAL_BIOME - 2 * 2, Map.WIDTH_CENTRAL_BIOME - 2 * 2), TileType.CENTRAL_ROOM);
+        buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1, Biome.SIZE - 3),
+                new Room(2, 5), TileType.CENTRAL_ROOM);
+        buildSpace(tiles, new TilePosition(Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1, Biome.SIZE + 8),
+                new Room(2, 5), TileType.CENTRAL_ROOM);
+        buildSpace(tiles, new TilePosition(Biome.SIZE - 3, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1),
+                new Room(5, 2), TileType.CENTRAL_ROOM);
+        buildSpace(tiles, new TilePosition(Biome.SIZE + 8, Biome.SIZE + Map.WIDTH_CENTRAL_BIOME / 2 - 1),
+                new Room(5, 2), TileType.CENTRAL_ROOM);
+        // CHECKSTYLE: MagicNumber ON
     }
 
     /**
-     * For 'finisher tiles' it means these tiles which player can end game, getting on it.
+     * For 'finisher tiles' it means these tiles which player can end game, getting
+     * on it.
      * This method build their in the center of the map, inside Central room.
      * If Size of map is odd, finisher tile is only one, else was 2x2 tile square.
+     * 
+     * @param tiles HashMap-tiles where build finisher tiles.
      */
     @SuppressWarnings("unused")
     private static void buildFinisherTiles(final HashMap<TilePosition, TileType> tiles) {
         final int offset = 1;
         Room biggerFinisher = new Room(2, 2);
         Room unaryFinisher = new Room(1, 1);
-        if (Map.MAP_SIZE%2 == 0) {
-            buildSpace(tiles, new TilePosition(Map.MAP_SIZE/2 - offset, Map.MAP_SIZE/2 - offset), biggerFinisher, TileType.PORTAL);
+        if (Map.MAP_SIZE % 2 == 0) {
+            buildSpace(tiles, new TilePosition(Map.MAP_SIZE / 2 - offset, Map.MAP_SIZE / 2 - offset), biggerFinisher,
+                    TileType.PORTAL);
         } else {
-            buildSpace(tiles, new TilePosition(Map.MAP_SIZE/2, Map.MAP_SIZE/2), unaryFinisher, TileType.PORTAL);
+            buildSpace(tiles, new TilePosition(Map.MAP_SIZE / 2, Map.MAP_SIZE / 2), unaryFinisher, TileType.PORTAL);
         }
     }
 }

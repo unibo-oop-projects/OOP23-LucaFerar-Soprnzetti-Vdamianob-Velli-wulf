@@ -73,7 +73,7 @@ public interface Map {
 
     /**
      * 
-     * @return a biomes ordered list of the map (0 UPPER-LEFT, 1 UPPER-RIGHT, 2 DOWNER-RIGHT, 3 DOWNER-LEFT).
+     * @return an ordered Arraylist of biomes of the map (0 UPPER-LEFT, 1 UPPER-RIGHT, 2 DOWNER-RIGHT, 3 DOWNER-LEFT).
      * Central biome isn't included.
      */
     ArrayList<Biome> getBiomes();

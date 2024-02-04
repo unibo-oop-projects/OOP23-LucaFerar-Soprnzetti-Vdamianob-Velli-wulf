@@ -94,9 +94,9 @@ public abstract class AbstractDrawer implements Drawer {
      */
     protected void drawImage(final Graphics2D graphics, final BufferedImage img, final int elementX, final int elementY,
         final int width, final int height) {
-        final int x = this.getPlayerX() - (this.player.getPlayerX() - elementX) * GamePanel.scale;
-        final int y = this.getPlayerY() - (this.player.getPlayerY() - elementY) * GamePanel.scale;
-        graphics.drawImage(img, x, y, width * GamePanel.scale, height * GamePanel.scale, null);
+        final int x = this.getPlayerX() - (this.player.getPlayerX() - elementX) * GamePanel.SCALE;
+        final int y = this.getPlayerY() - (this.player.getPlayerY() - elementY) * GamePanel.SCALE;
+        graphics.drawImage(img, x, y, width * GamePanel.SCALE, height * GamePanel.SCALE, null);
     }
 
     /**
@@ -109,6 +109,6 @@ public abstract class AbstractDrawer implements Drawer {
      */
     protected void drawImage(final Graphics2D graphics, final BufferedImage img, final int elementX, final int elementY) {
         this.drawImage(graphics, img, elementX, elementY,
-            GamePanel.tileSize / GamePanel.scale, GamePanel.tileSize / GamePanel.scale);
+            GamePanel.TILESIZE / GamePanel.SCALE, GamePanel.TILESIZE / GamePanel.SCALE);
     }
 }
