@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import javawulf.view.GamePanel;
 import javawulf.view.ViewImpl;
 
 import javax.swing.Box;
@@ -71,7 +72,10 @@ public class GameMenuPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
                 try {
-                    new ViewImpl();
+                    frame.getContentPane().removeAll();
+                    frame.add(new GamePanel());
+                    frame.setSize(GamePanel.TILESIZE*15, GamePanel.TILESIZE*15);
+                    frame.setVisible(true);
                 } catch (final Exception exceptionViewImpl) {
                     exceptionViewImpl.printStackTrace();
                 }
