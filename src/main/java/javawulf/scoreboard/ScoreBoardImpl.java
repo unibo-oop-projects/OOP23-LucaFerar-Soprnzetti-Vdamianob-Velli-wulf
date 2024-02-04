@@ -35,7 +35,7 @@ public class ScoreBoardImpl implements Scoreboard{
 
     private void orderScoreBoard() {
         scoreboard = scoreboard.stream()
-            .sorted(Comparator.comparingInt(Result::getScore))
+            .sorted(Comparator.comparingInt(Result::getScore).reversed())
             .collect(Collectors.toList());
     }
     
