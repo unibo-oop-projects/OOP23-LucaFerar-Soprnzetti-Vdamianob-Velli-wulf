@@ -14,16 +14,19 @@ import javax.swing.BoxLayout;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameMenuView extends JPanel {
 
+    public static int scale = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/400;
+    public static int tileSize = 4 * scale;
+
     private static final int BUTTON_WIDTH = 800;
     private static final int BUTTON_HEIGHT = 120;
-    private static final int BORDERS = 100;
+    private static final int BORDERS = scale * 40;
 
     public GameMenuView() throws InterruptedException {
         CreateMenuGUI();
@@ -42,7 +45,6 @@ public class GameMenuView extends JPanel {
     }
 
     private static void showMenu(JFrame frame){
-        frame.getContentPane().removeAll();
 
         JPanel menu = new JPanel(new GridLayout(4,1));
         menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
@@ -123,7 +125,9 @@ public class GameMenuView extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().removeAll();
                 showMenu(frame);
+                frame.setVisible(true);
             }
         });
 
