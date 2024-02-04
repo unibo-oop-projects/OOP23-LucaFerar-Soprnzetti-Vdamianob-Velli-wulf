@@ -17,18 +17,19 @@ import java.awt.Graphics2D;
 /**
  * JPanel where videogame match is drawn.
  */
-public class GamePanel extends JPanel {
+public final class GamePanel extends JPanel {
     // Screen settings
     /** Original Tile Size (even entities and game objects have the dimension of a tile). */
     public static final int ORIGINAL_TILE_SIZE = 24;
+    /** Constant used to calculate SCALE.  */
+    private static final int SCALE_FACTOR = 400;
     /** Elements scaling field. It is proportional to display resolution. */
-    private static final int scaleFactor = 400;
-    public static final int SCALE = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() / scaleFactor;
+    public static final int SCALE = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() / SCALE_FACTOR;
     /** Scaled dimension of a tile. */
     public static final int TILESIZE = ORIGINAL_TILE_SIZE * SCALE;
-    /** Max columns of tile (width) */
+    /** Max columns of tile (width). */
     public static final int MAX_SCREEN_COL = 15;
-    /** Max rows of tile (height) */
+    /** Max rows of tile (height). */
     public static final int MAX_SCREEN_ROW = 15;
 
     private CommandListener listener;
@@ -36,6 +37,11 @@ public class GamePanel extends JPanel {
     private final List<Drawer> drawers = new ArrayList<>();
     private PlayerStatus playerStatus;
 
+    /**
+     * Used to inizialize GamePanel. 
+     * It starts an importart part of in-gaming controller: Game Loop.
+     * It sets several default view details, like drawers of components.
+     */
     public GamePanel() {
         this.gameLoopController = new GameLoopImpl(this);
         this.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
@@ -55,9 +61,10 @@ public class GamePanel extends JPanel {
         gameLoopController.startGameLoopThread();
     }
 
-    public void paintComponent(Graphics graphics) {
+    @Override
+    public void paintComponent(final Graphics graphics) {
         super.paintComponent(graphics);
-        Graphics2D graphics2d = (Graphics2D)graphics;
+        Graphics2D graphics2d = (Graphics2D) graphics;
 
         for (Drawer drawer : drawers) {
             drawer.draw(graphics2d);

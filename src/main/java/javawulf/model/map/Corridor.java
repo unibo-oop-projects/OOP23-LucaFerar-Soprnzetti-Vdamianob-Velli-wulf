@@ -1,7 +1,7 @@
 package javawulf.model.map;
 
 /**
- * Corridor implementation of area
+ * Corridor implementation of area.
  */
 public final class Corridor extends AbstractSpace {
 

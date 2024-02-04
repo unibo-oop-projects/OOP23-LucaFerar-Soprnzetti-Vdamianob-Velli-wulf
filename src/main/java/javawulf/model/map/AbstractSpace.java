@@ -18,40 +18,45 @@ public abstract class AbstractSpace implements Space {
     private final int height;
     private List<GameElement> elements = new ArrayList<>();
 
-    public AbstractSpace(int width, int height) {
+    /**
+     * Constructor that initializes a new space with width and height specified.
+     * @param width (in 'tile number')
+     * @param height (in 'tile number')
+     */
+    public AbstractSpace(final int width, final int height) {
         this.width = width;
         this.height = height;
     }
 
     @Override
-    public int getWidth() {
+    public final int getWidth() {
         return this.width;
     }
 
     @Override
-    public int getHeight() {
+    public final int getHeight() {
         return this.height;
     }
 
     @Override
-    public Space addGameElement(GameElement element) {
+    public final Space addGameElement(final GameElement element) {
         this.elements.add(element);
         return this;
     }
 
     @Override
-    public Space addGameElements(Collection<GameElement> elements) {
+    public final Space addGameElements(final Collection<GameElement> elements) {
         this.elements.addAll(elements);
         return this;
     }
 
     @Override
-    public List<GameElement> getElements() {
+    public final List<GameElement> getElements() {
         return this.elements;
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return "AbstractSpace [width=" + width + ", height=" + height + ", elements=" + elements + "]";
     }
 

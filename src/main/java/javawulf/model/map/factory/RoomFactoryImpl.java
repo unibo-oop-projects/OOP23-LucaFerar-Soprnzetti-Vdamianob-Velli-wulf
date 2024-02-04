@@ -2,11 +2,17 @@ package javawulf.model.map.factory;
 
 import javawulf.model.map.Room;
 
-public class RoomFactoryImpl implements RoomFactory {
+/**
+ * Implementation of RoomFactory, which is used to create default rooms. Useful
+ * in BiomeFactories or standalone in tests.
+ */
+public final class RoomFactoryImpl implements RoomFactory {
+
+    private final int mediumDefDim = 5;
 
     @Override
     public Room getSquaredRoom() {
-        return new Room(5, 5);
+        return new Room(this.mediumDefDim, this.mediumDefDim);
     }
 
 }
