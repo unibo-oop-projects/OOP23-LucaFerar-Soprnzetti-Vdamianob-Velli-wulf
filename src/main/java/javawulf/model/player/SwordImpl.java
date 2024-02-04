@@ -5,6 +5,9 @@ import javawulf.model.Direction;
 import javawulf.model.GameObject;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
+
+import java.util.logging.Logger;
+
 import javawulf.model.BoundingBox.CollisionType;
 
 /**
@@ -84,10 +87,10 @@ public final class SwordImpl extends GameObject implements Sword {
         this.getBounds().changeCollisionType(CollisionType.SWORD);
         if (this.swordType.equals(SwordType.GREATSWORD)) {
             this.consume();
-            System.out.println("Durability remaining :" + this.durability);
+            Logger.getLogger(SwordImpl.class.getName()).fine("Durability remaining :" + this.durability);
             if (this.durability == 0) {
                 this.changeSwordType();
-                System.out.println("Greatsword broke!! Changed to normal");
+                Logger.getLogger(SwordImpl.class.getName()).fine("Greatsword broke!! Changed to normal");
             }
         }
     }
