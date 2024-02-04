@@ -40,4 +40,6 @@ public class PowerUpFactoryImpl implements PowerUpFactory {
         return new PowerUpSpeed(coordinates, DURATION_SPEED, POINTS_SPEED, TYPE_SPEED);
     }
 
+    
+
 }

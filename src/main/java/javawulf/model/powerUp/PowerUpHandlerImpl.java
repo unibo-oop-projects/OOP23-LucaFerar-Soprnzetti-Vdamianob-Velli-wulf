@@ -13,8 +13,12 @@ public class PowerUpHandlerImpl implements PowerUpHandler{
     }
 
     @Override
-    public void collectPowerUp(final PowerUp powerUpPicked) {
+    public void collectPowerUp(final PowerUp powerUpPicked, Player player) {
+        if(powerUpActive.isPresent()){
+            powerUpActive.get().finishEffect(player);
+        }
         this.powerUpActive = Optional.of(powerUpPicked);
+        update(player);
     }
 
     @Override

@@ -2,6 +2,7 @@ package javawulf.model.powerUp;
 
 import javawulf.model.AbstractCollectable;
 import javawulf.model.Coordinate;
+import javawulf.model.player.Player;
 
 public abstract class PowerUpImpl extends AbstractCollectable implements PowerUp {
 
@@ -38,5 +39,11 @@ public abstract class PowerUpImpl extends AbstractCollectable implements PowerUp
     public String toString() {
         return "PowerUp: [duration=" + this.getDuration() + ", type=" + this.getType() + ", pointsGiven=" + this.getPoints() + "]";
     }
-    
+
+    @Override
+    public void finishEffect(Player p) {
+        this.duration = 0;
+        this.applyEffect(p);
+    }
+
 }
