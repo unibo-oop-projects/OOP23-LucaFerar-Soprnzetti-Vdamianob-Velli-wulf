@@ -40,7 +40,7 @@ public final class Populator {
             Biome biome = map.getBiomes().get(biomeQuadrant.getPos());
             for (var room : biome.getRooms()) {
                 room.getValue().addGameElement(
-                        getRandomCollectable(getCentralTilePosition(room.getKey(), room.getValue(), biomeQuadrant)));
+                        getRandomCollectable(getCentralPosition(room.getKey(), room.getValue(), biomeQuadrant)));
             }
         }
         return map;
@@ -53,12 +53,12 @@ public final class Populator {
      * @param space
      * @return central position.
      */
-    private static Coordinate getCentralTilePosition(TilePosition spacePos, Space space, BiomeQuadrant quadrant) {
+    private static Coordinate getCentralPosition(TilePosition spacePos, Space space, BiomeQuadrant quadrant) {
         final int halfWidth = space.getWidth() / 2;
         final int halfHeight = space.getHeight() / 2;
         return new CoordinateImpl(
-                (spacePos.getX() + quadrant.getOffset().getX() + halfWidth) * TileType.TILE_DIMENSION /* - halfTile */,
-                (spacePos.getY() + quadrant.getOffset().getY() + halfHeight) * TileType.TILE_DIMENSION /* - halfTile */);
+                (spacePos.getX() + quadrant.getOffset().getX() + halfWidth) * TileType.TILE_DIMENSION + halfTile,
+                (spacePos.getY() + quadrant.getOffset().getY() + halfHeight) * TileType.TILE_DIMENSION + halfTile);
     }
 
     private static Collectable getRandomCollectable(Coordinate coordColl) {
