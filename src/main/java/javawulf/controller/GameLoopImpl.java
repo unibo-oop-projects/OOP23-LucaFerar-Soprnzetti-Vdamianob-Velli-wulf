@@ -135,11 +135,13 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             this.swordTime = 0;
         }
 
+
         // Per ogni nemico nella lista, chiama i suoi metodi di movimento, il tick di
         // aggiornamento ed i suoi controlli, quando muore viene rimosso dalla lista
         this.pawns.forEach(p -> {
             p.move(this.gamePlayer, this.gameMap);
             p.takeHit(this.gamePlayer);
+            this.gamePlayer.isHit(p.getBounds());
         });
         this.pawns
                 .removeIf(p -> !p.isAlive() && p.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
