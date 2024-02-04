@@ -12,11 +12,17 @@ public class PowerUpDoublePoints extends PowerUpImpl {
 
     @Override
     public void applyEffect(Player p) {
+        super.applyEffect(p);
         if(this.stillActive()) {
             p.getScore().setMultiplier(Score.Multiplier.DOUBLE);
         } else {
-            p.getScore().setMultiplier(Score.Multiplier.DEFAULT);
+            resetEffect(p);
         }
+    }
+
+    @Override
+    public void resetEffect(Player p) {
+        p.getScore().setMultiplier(Score.Multiplier.DEFAULT);
     }
     
 }

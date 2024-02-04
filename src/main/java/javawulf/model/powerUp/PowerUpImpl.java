@@ -41,9 +41,16 @@ public abstract class PowerUpImpl extends AbstractCollectable implements PowerUp
     }
 
     @Override
+    public void applyEffect(final Player p) {
+        p.getPowerUpHandler().collectPowerUp(this, p);
+    }
+
+    @Override
     public void finishEffect(Player p) {
         this.duration = 0;
-        this.applyEffect(p);
+        this.resetEffect(p);
     }
+
+    public abstract void resetEffect(Player p);
 
 }

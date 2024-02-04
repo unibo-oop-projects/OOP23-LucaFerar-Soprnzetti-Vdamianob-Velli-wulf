@@ -14,15 +14,22 @@ public class PowerUpInvincibility extends PowerUpImpl {
 
     @Override
     public void applyEffect(Player p) {
+        super.applyEffect(p);
         if(this.stillActive()) {
             //make the player invincible
             p.getBounds().changeCollisionType(CollisionType.STUNNED);
             p.setStun(this.getDuration());
         } else {
             //return the player to his normal form
-            p.getBounds().changeCollisionType(CollisionType.PLAYER);
-            p.setStun(STUN_FINISHED);
+            resetEffect(p);
         }
     }
+
+    @Override
+    public void resetEffect(Player p) {
+        p.getBounds().changeCollisionType(CollisionType.PLAYER);
+        p.setStun(STUN_FINISHED);
+    }
+    
     
 }
