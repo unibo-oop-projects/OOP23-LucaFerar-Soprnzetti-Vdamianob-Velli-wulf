@@ -58,11 +58,11 @@ public class GamePanel extends JPanel {
 
         this.mapDrawer.draw(graphics2d);
         this.playerDrawer.draw(graphics2d);
-        this.hudDrawer.draw(graphics2d);
         this.pawnDrawer.draw(graphics2d);
         this.itemDrawer.draw(graphics2d);
         this.powerUpDrawer.draw(graphics2d);
         this.amuletPiecesDrawer.draw(graphics2d);
+        this.hudDrawer.draw(graphics2d);
         graphics2d.dispose();
     }
 }
