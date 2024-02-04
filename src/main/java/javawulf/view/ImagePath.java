@@ -51,7 +51,16 @@ public enum ImagePath {
     /** <img src="../../../resources/items/shield.png"> Shield. */
     SHIELD_ITEM("/items/shield.png"),
     /** <img src="../../../resources/items/amulet_piece.png"> Amulet Piece. */
-    AMULET_PIECE("/items/amulet_piece.png");
+    AMULET_PIECE("/items/amulet_piece.png"),
+    //** <img src="../../../resources/powerUps/powerUpStrength> Power Up Strength */
+    POWERUP_STRENGTH("/powerUps/powerUpStrength.png"),
+    //** <img src="../../../resources/powerUps/powerUpInvincibility> Power Up Invincibility*/
+    POWERUP_INVINCIBILITY("/powerUps/powerUpInvinvibility.png"),
+    //** <img src="../../../resources/powerUps/powerUpDoublePoints> Power Up Double points*/
+    POWERUP_DOUBLEPOINTS("/powerUps/powerUpDoublePoints.png"),
+    //** <img src="../../../resources/powerUps/powerUpSpeed> Power Up Speed*/
+    POWERUP_SPEED("/powerUps/powerUpSpeed.png");
+
 
     private final String path;
 
