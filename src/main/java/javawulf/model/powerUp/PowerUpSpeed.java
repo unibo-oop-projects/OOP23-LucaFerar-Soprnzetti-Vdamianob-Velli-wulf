@@ -13,11 +13,17 @@ public class PowerUpSpeed extends PowerUpImpl {
 
     @Override
     public void applyEffect(Player p) {
+        super.applyEffect(p);
         if(this.stillActive()) {
             p.setSpeed(Entity.DOUBLE_SPEED);
         } else {
-            p.setSpeed(Entity.DEFAULT_SPEED);
+            resetEffect(p);
         }
+    }
+
+    @Override
+    public void resetEffect(Player p) {
+        p.setSpeed(Entity.DEFAULT_SPEED);
     }
 
 }

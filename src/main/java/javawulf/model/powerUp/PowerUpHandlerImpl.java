@@ -18,15 +18,14 @@ public class PowerUpHandlerImpl implements PowerUpHandler{
             powerUpActive.get().finishEffect(player);
         }
         this.powerUpActive = Optional.of(powerUpPicked);
-        update(player);
     }
 
     @Override
     public void update(Player player) {
         if (powerUpActive.isPresent()) {
             powerUpActive.get().updateDuration();
-            powerUpActive.get().applyEffect(player);
             if (checkUpFinished()) {
+                powerUpActive.get().finishEffect(player);
                 powerUpActive = Optional.empty();
             }
         }
