@@ -2,7 +2,6 @@ package javawulf.model.map.factory;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import javafx.util.Pair;
 import javawulf.model.Collectable;
