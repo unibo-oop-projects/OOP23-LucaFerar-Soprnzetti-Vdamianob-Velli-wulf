@@ -150,7 +150,7 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
-    public boolean hasPlayerWon(Map map) {
+    public boolean hasPlayerWon(final Map map) {
         final var tiles = map.getTileTypes(this.getBounds());
         return tiles.contains(TileType.PORTAL) && this.getNumberOfPieces() == NUMBER_OF_PIECES;
     }
