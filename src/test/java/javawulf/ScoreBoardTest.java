@@ -34,5 +34,7 @@ final class ScoreBoardTest {
 
         assertEquals("giacomo", scoreboard.getAllScores().get(0).getUserName());
         assertEquals("giovanni", scoreboard.getAllScores().get(1).getUserName());
+
+        scoreboard.saveScoreBoard();
     }
 }

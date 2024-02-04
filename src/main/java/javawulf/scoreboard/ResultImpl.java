@@ -1,6 +1,8 @@
 package javawulf.scoreboard;
 
-public class ResultImpl implements Result {
+import java.io.Serializable;
+
+public class ResultImpl implements Result, Serializable{
 
     private final String username;
     private final int score;

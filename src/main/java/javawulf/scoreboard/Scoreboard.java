@@ -1,5 +1,6 @@
 package javawulf.scoreboard;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -10,7 +11,12 @@ public interface Scoreboard {
     /**
      * Maximum Results in the scoreboard.
      */
-    static final int SCOREBOARD_SIZE = 10;
+    int SCOREBOARD_SIZE = 10;
+
+    /**
+     * 
+     */
+    String FILE_PATH = new File(".."+ File.separator + "resources" + File.separator +"Scoreboard.txt").getAbsolutePath();
 
     /**
      * Updates the scoreboard.

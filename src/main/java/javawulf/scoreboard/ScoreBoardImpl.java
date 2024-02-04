@@ -1,5 +1,13 @@
 package javawulf.scoreboard;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -7,10 +15,12 @@ import java.util.stream.Collectors;
 
 public final class ScoreBoardImpl implements Scoreboard{
 
-    private List<Result> scoreboard;
+    private final File file;
+    private List<Result> scoreboard;  
 
     public ScoreBoardImpl() {
-        this.scoreboard = new ArrayList<>();
+        this.file = new File(FILE_PATH);
+        loadScoreBoard();
     }
 
     @Override
@@ -24,13 +34,34 @@ public final class ScoreBoardImpl implements Scoreboard{
 
     @Override
     public void saveScoreBoard() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveScoreBoard'");
+        try (final OutputStream file = new FileOutputStream(FILE_PATH);
+            final OutputStream bstream = new BufferedOutputStream(file);
+            final ObjectOutputStream ostream = new ObjectOutputStream(bstream);) {
+            for (Result result : scoreboard) {
+                ostream.writeObject(result);
+                System.out.println(FILE_PATH);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public List<Result> getAllScores() {
         return this.scoreboard;
+    }
+
+    private void loadScoreBoard() {
+        if (this.file.exists()){
+            try (ObjectInputStream fileInputStream = new ObjectInputStream(new FileInputStream(file))) {
+                this.scoreboard = (List<Result>) fileInputStream.readObject(); // NOPMD suppressed as it is a false positive
+                //all objects in this file are Results
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            this.scoreboard = new ArrayList<Result>();
+        }
     }
 
     private void orderScoreBoard() {
