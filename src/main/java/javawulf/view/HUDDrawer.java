@@ -85,13 +85,17 @@ public final class HUDDrawer extends AbstractDrawer {
         i++;
         if ("none".equals(color)) {
             activePowerUp = Color.GRAY;
+            graphics.setColor(activePowerUp);
+            graphics.fillRect(x + GamePanel.tileSize * i, y, GamePanel.tileSize, GamePanel.tileSize);
         } else {
-            activePowerUp = Color.getColor(color);
+            graphics.drawRect(x + GamePanel.tileSize * i, y, GamePanel.tileSize, GamePanel.tileSize);
+            graphics.drawImage(img, x + GamePanel.tileSize * i,
+                y, GamePanel.tileSize, GamePanel.tileSize, null);
         }
-        graphics.setColor(activePowerUp);
-        graphics.fillRect(x + GamePanel.tileSize * i, y, GamePanel.tileSize, GamePanel.tileSize);
+        //graphics.setColor(activePowerUp);
+        //graphics.fillRect(x + GamePanel.tileSize * i, y, GamePanel.tileSize, GamePanel.tileSize);
         i++;
-        if ("STUNNED".equals(status) && "blue".equals(color)) {
+        if ("STUNNED".equals(status) && !"blue".equals(color)) {
             activePowerUp = Color.yellow;
         } else {
             activePowerUp = Color.lightGray;
