@@ -14,7 +14,10 @@ import javawulf.model.player.PlayerImpl;
 import javawulf.controller.PlayerController;
 import javawulf.controller.PlayerControllerImpl;
 
-public class PlayerControllerTest {
+/**
+ * Test class for PlayerController.
+ */
+final class PlayerControllerTest {
 
     private static final int HEALTH = 3;
     private static final int STARTING_X = 12;
@@ -53,11 +56,7 @@ public class PlayerControllerTest {
     private void updatePlayer() {
         final Map map = new MapFactoryImpl().getTestMap(player);
         if (this.controller.getDirection().isPresent() && !this.attacking) {
-            try {
-                this.player.move(this.controller.getDirection().get(), map);
-            } catch (Exception e) {
-                System.out.println("There is a wall");
-            }
+            this.player.move(this.controller.getDirection().get(), map);
         } else if (this.controller.isAttack() && !this.attacking) {
             this.player.attack();
             this.attacking = true;

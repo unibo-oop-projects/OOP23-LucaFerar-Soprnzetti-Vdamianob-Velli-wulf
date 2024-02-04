@@ -30,9 +30,10 @@ public final class HUDDrawer extends AbstractDrawer {
      * Creates a new HUDDrawer.
      * 
      * @param player The player character whose status will be made into the HUD
+     * @param pieces The amulet piece that still have to be collected
      * @param gamePanel The panel where the HUD must appear in.
      */
-    public HUDDrawer(final PlayerStatus player, final List<AmuletPiece> pieces ,final GamePanel gamePanel) {
+    public HUDDrawer(final PlayerStatus player, final List<AmuletPiece> pieces, final GamePanel gamePanel) {
         super(gamePanel, player);
         this.gamePanel = gamePanel;
         this.player = player;
@@ -111,8 +112,7 @@ public final class HUDDrawer extends AbstractDrawer {
     }
 
     private boolean isPlayerAligned() {
-        boolean value = false;
-        for (AmuletPiece piece : this.pieces) {
+        for (final AmuletPiece piece : this.pieces) {
             if (piece.getPosition().getX() > (player.getPlayerX() - GamePanel.ORIGINAL_TILE_SIZE)
                 && piece.getPosition().getX() < (player.getPlayerX() + GamePanel.ORIGINAL_TILE_SIZE)
                 || piece.getPosition().getY() > (player.getPlayerY() - GamePanel.ORIGINAL_TILE_SIZE)
@@ -120,7 +120,7 @@ public final class HUDDrawer extends AbstractDrawer {
                 return true;
             }
         }
-        return value;
+        return false;
     }
 
     private void drawScore(final Graphics2D graphics, final int score, final int x, final int y) {
