@@ -3,9 +3,11 @@ package javawulf.view;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javawulf.controller.PlayerStatus;
+import javawulf.model.item.AmuletPiece;
 import javawulf.model.map.TileType;
 import java.awt.Color;
 import java.awt.Font;
@@ -22,6 +24,7 @@ public final class HUDDrawer extends AbstractDrawer {
     private BufferedImage sword;
     private BufferedImage greatsword;
     private final PlayerStatus player;
+    private final List<AmuletPiece> pieces;
 
     /**
      * Creates a new HUDDrawer.
@@ -29,10 +32,11 @@ public final class HUDDrawer extends AbstractDrawer {
      * @param player The player character whose status will be made into the HUD
      * @param gamePanel The panel where the HUD must appear in.
      */
-    public HUDDrawer(final PlayerStatus player, final GamePanel gamePanel) {
+    public HUDDrawer(final PlayerStatus player, final List<AmuletPiece> pieces ,final GamePanel gamePanel) {
         super(gamePanel, player);
         this.gamePanel = gamePanel;
         this.player = player;
+        this.pieces = pieces;
         try {
             this.shield = imageLoader(ImagePath.SHIELD);
             this.health = imageLoader(ImagePath.HEALTH);
@@ -101,6 +105,22 @@ public final class HUDDrawer extends AbstractDrawer {
         final Color stunStatus = "STUNNED".equals(status) && !"blue".equals(color) ? Color.ORANGE : Color.lightGray;
         graphics.setColor(stunStatus);
         graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
+        i++;
+        graphics.setColor(this.isPlayerAligned() ? Color.MAGENTA : Color.BLACK);
+        graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
+    }
+
+    private boolean isPlayerAligned() {
+        boolean value = false;
+        for (AmuletPiece piece : this.pieces) {
+            if (piece.getPosition().getX() > (player.getPlayerX() - GamePanel.ORIGINAL_TILE_SIZE)
+                && piece.getPosition().getX() < (player.getPlayerX() + GamePanel.ORIGINAL_TILE_SIZE)
+                || piece.getPosition().getY() > (player.getPlayerY() - GamePanel.ORIGINAL_TILE_SIZE)
+                && piece.getPosition().getY() < (player.getPlayerY() + GamePanel.ORIGINAL_TILE_SIZE)) {
+                return true;
+            }
+        }
+        return value;
     }
 
     private void drawScore(final Graphics2D graphics, final int score, final int x, final int y) {

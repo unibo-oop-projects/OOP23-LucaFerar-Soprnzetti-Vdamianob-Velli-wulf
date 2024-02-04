@@ -49,7 +49,7 @@ public class GamePanel extends JPanel {
         this.drawers.add(new ItemDrawer(this, gameLoopController.getItems(), this.playerStatus));
         this.drawers.add(new AmuletPiecesDrawer(this, this.playerStatus, gameLoopController.getAmuletPieces()));
         this.drawers.add(new PowerUpsDrawer(this, gameLoopController.getPowerUps(), this.playerStatus));
-        this.drawers.add(new HUDDrawer(this.playerStatus, this));
+        this.drawers.add(new HUDDrawer(this.playerStatus, this.gameLoopController.getAmuletPieces(), this));
         gameLoopController.startGameLoopThread();
     }
 
