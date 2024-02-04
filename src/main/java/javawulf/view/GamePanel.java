@@ -31,6 +31,7 @@ public class GamePanel extends JPanel {
     private Drawer itemDrawer;
     private Drawer amuletPiecesDrawer;
     private PlayerStatus playerStatus;
+    private Drawer powerUpDrawer;
 
     public GamePanel() {
         this.gameLoopController = new GameLoopImpl(this);
@@ -47,6 +48,7 @@ public class GamePanel extends JPanel {
         this.pawnDrawer = new PawnDrawer(this.playerStatus, this, gameLoopController.getPawns());
         this.itemDrawer = new ItemDrawer(this, gameLoopController.getItems(), this.playerStatus);
         this.amuletPiecesDrawer = new AmuletPiecesDrawer(this, this.playerStatus, gameLoopController.getAmuletPieces());
+        this.powerUpDrawer = new PowerUpsDrawer(this, gameLoopController.getPowerUps(), this.playerStatus);
         gameLoopController.startGameLoopThread();
     }
 
@@ -59,6 +61,7 @@ public class GamePanel extends JPanel {
         this.hudDrawer.draw(graphics2d);
         this.pawnDrawer.draw(graphics2d);
         this.itemDrawer.draw(graphics2d);
+        this.powerUpDrawer.draw(graphics2d);
         this.amuletPiecesDrawer.draw(graphics2d);
         graphics2d.dispose();
     }

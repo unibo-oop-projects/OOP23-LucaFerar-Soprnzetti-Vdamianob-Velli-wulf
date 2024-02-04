@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javawulf.controller.PlayerStatus;
 import javawulf.model.Collectable;
+import javawulf.model.powerUp.PowerUp;
 import javawulf.model.powerUp.PowerUpAttack;
 import javawulf.model.powerUp.PowerUpDoublePoints;
 import javawulf.model.powerUp.PowerUpInvincibility;
@@ -16,10 +17,10 @@ import javawulf.model.powerUp.PowerUpSpeed;
 /**
  *  Implementation for drawing all Power Ups
  */
-public class PowerUpsDrawer extends AbstractDrawer{
+public final class PowerUpsDrawer extends AbstractDrawer {
         
         private final Map<Class<? extends Collectable>, BufferedImage> images = new HashMap<>();
-        private final List<Collectable> powerUps;
+        private final List<PowerUp> powerUps;
 
         /**
          * Builds the power ups passed from the Controller.
@@ -28,7 +29,7 @@ public class PowerUpsDrawer extends AbstractDrawer{
          * @param items     a list of all the items to draw
          * @param player    the current status of the Player character
          */
-        public PowerUpsDrawer(final GamePanel gamePanel, final List<Collectable> powerUps, final PlayerStatus playerStatus) {
+        public PowerUpsDrawer(final GamePanel gamePanel, final List<PowerUp> powerUps, final PlayerStatus playerStatus) {
             super(gamePanel, playerStatus);
             this.powerUps = powerUps;
             try {
