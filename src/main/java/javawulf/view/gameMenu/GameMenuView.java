@@ -112,7 +112,7 @@ public class GameMenuView extends JPanel {
         frame.add(Box.createHorizontalStrut(BORDERS), BorderLayout.EAST);
     }
 
-    private static void showLeaderboard(JFrame frame) {
+    private static void showLeaderboard(final JFrame frame) {
         frame.getContentPane().removeAll();
 
         JPanel leaderboardPanel = new JPanel(new BorderLayout());
