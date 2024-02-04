@@ -40,7 +40,11 @@ public class GameMenuPanel extends JPanel {
     
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(scaleY, scaleX));
+        frame.setPreferredSize(new Dimension(frame.getWidth(), frame.getHeight()));
         frame.setLayout(new BorderLayout());
+        frame.setLocationRelativeTo(null);
+
+        frame.setBackground(java.awt.Color.BLACK);
 
         showMenu(frame);
 
@@ -49,8 +53,7 @@ public class GameMenuPanel extends JPanel {
 
     private static void showMenu(JFrame frame){
 
-        JPanel menu = new JPanel(new GridLayout(4,1));
-        menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
+        JPanel menu = new JPanel(new GridLayout(2,2));
         JButton startButton = new JButton("PLAY");
         JButton leaderboardButton = new JButton("Leaderboard");
         JButton guideButton = new JButton("Guide");
