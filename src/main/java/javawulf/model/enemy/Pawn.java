@@ -3,8 +3,11 @@ package javawulf.model.enemy;
 import java.util.Random;
 
 import javawulf.model.Direction;
+import javawulf.model.BoundingBox;
 import javawulf.model.BoundingBox.CollisionType;
+import javawulf.model.BoundingBoxImpl;
 import javawulf.model.map.Map;
+import javawulf.model.map.TileType;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
 import javawulf.model.player.Player;
@@ -60,22 +63,21 @@ public final class Pawn extends EnemyImpl {
     @Override
     public void move(final Player p, final Map m) {
 
+        final Coordinate current = this.getPosition();
         final int delta = this.getSpeed() * MOVEMENT_DELTA;
 
-        int newX = this.getPosition().getX() + (int) (this.getDirection().getX() * delta);
-        int newY = this.getPosition().getY() + (int) (this.getDirection().getY() * delta);
-
-        this.getBounds().setCollisionArea(newX, newY, OBJECT_SIZE, OBJECT_SIZE);
-
-        if (this.isCollidingWithWall(m)) {
+        final BoundingBox preview = new BoundingBoxImpl(current.getX() + (int) (this.getDirection().getX() * delta),
+                current.getY() + (int) (this.getDirection().getY() * delta), OBJECT_SIZE, OBJECT_SIZE,
+                CollisionType.PLAYER);
+        final var tiles = m.getTileTypes(preview);
+        if (!tiles.contains(TileType.WALL)) {
+            this.setPosition(new CoordinateImpl(current.getX() + (int) (this.getDirection().getX() * delta),
+                    current.getY() + (int) (this.getDirection().getY() * delta)));
+            this.getBounds().setCollisionArea(preview.getCollisionArea());
+            this.setDirection(this.getDirection());
+        } else {
             this.turnPawn(this.getDirection());
-            newX = this.getPosition().getX() + (int) (this.getDirection().getX() * delta);
-            newY = this.getPosition().getY() + (int) (this.getDirection().getY() * delta);
         }
-
-        this.setPosition(new CoordinateImpl(newX, newY));
-        this.getBounds().setCollisionArea(this.getPosition().getX(),
-                this.getPosition().getY(), OBJECT_SIZE, OBJECT_SIZE);
 
     }
 
