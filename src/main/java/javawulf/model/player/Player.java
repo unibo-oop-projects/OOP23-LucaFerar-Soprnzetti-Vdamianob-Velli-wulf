@@ -43,9 +43,9 @@ public interface Player extends Entity {
 
         private final String color;
 
-        PlayerColor(final String color) {
+ PlayerColor(final String color) {
             this.color = color;
-        }
+        }       
 
         /**
          * @return The string corrisponding to the color

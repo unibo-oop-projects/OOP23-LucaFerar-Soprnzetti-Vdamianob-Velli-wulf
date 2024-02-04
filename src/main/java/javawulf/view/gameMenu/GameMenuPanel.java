@@ -19,16 +19,19 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameMenuView extends JPanel {
+public class GameMenuPanel extends JPanel {
 
-    public static int scale = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/400;
-    public static int tileSize = 4 * scale;
+    public static int scaleX;
+    public static int scaleY;
+    private static int borders;
 
-    private static final int BUTTON_WIDTH = 800;
-    private static final int BUTTON_HEIGHT = 120;
-    private static final int BORDERS = scale * 40;
+    private static final int MAX_BUTTON_WIDTH = 800;
+    private static final int MAX_BUTTON_HEIGHT = 120;
 
-    public GameMenuView() throws InterruptedException {
+    public GameMenuPanel() throws InterruptedException {
+        scaleX = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/2;
+        scaleY = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2;
+        borders = scaleX/5;
         CreateMenuGUI();
     }
 
@@ -36,8 +39,12 @@ public class GameMenuView extends JPanel {
         JFrame frame = new JFrame("JavaWulf");
     
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension( 600, 480));
+        frame.setMinimumSize(new Dimension(scaleY, scaleX));
+        frame.setPreferredSize(new Dimension(frame.getWidth(), frame.getHeight()));
         frame.setLayout(new BorderLayout());
+        frame.setLocationRelativeTo(null);
+
+        frame.setBackground(java.awt.Color.BLACK);
 
         showMenu(frame);
 
@@ -46,15 +53,14 @@ public class GameMenuView extends JPanel {
 
     private static void showMenu(JFrame frame){
 
-        JPanel menu = new JPanel(new GridLayout(4,1));
-        menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
+        JPanel menu = new JPanel(new GridLayout(2,2));
         JButton startButton = new JButton("PLAY");
         JButton leaderboardButton = new JButton("Leaderboard");
         JButton guideButton = new JButton("Guide");
         JButton exitButton = new JButton("Exit");
 
         // To limit Max button sixing
-        Dimension maxButtonSize = new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT);
+        Dimension maxButtonSize = new Dimension(MAX_BUTTON_WIDTH, MAX_BUTTON_HEIGHT);
         startButton.setMaximumSize(maxButtonSize);
         leaderboardButton.setMaximumSize(maxButtonSize);
         guideButton.setMaximumSize(maxButtonSize);
@@ -108,10 +114,10 @@ public class GameMenuView extends JPanel {
 
         frame.add(menu, BorderLayout.CENTER);
 
-        frame.add(Box.createVerticalStrut(BORDERS), BorderLayout.NORTH);
-        frame.add(Box.createVerticalStrut(BORDERS), BorderLayout.SOUTH);
-        frame.add(Box.createHorizontalStrut(BORDERS), BorderLayout.WEST);
-        frame.add(Box.createHorizontalStrut(BORDERS), BorderLayout.EAST);
+        frame.add(Box.createVerticalStrut(borders), BorderLayout.NORTH);
+        frame.add(Box.createVerticalStrut(borders), BorderLayout.SOUTH);
+        frame.add(Box.createHorizontalStrut(borders), BorderLayout.WEST);
+        frame.add(Box.createHorizontalStrut(borders), BorderLayout.EAST);
     }
 
     private static void showLeaderboard(final JFrame frame) {
