@@ -22,11 +22,13 @@ public class GamePanel extends JPanel {
     /** Original Tile Size (even entities and game objects have the dimension of a tile). */
     public static final int ORIGINAL_TILE_SIZE = 24;
     /** Elements scaling field. It is proportional to display resolution. */
-    public static int SCALE = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/400;
+    private static final int scaleFactor = 400;
+    public static final int SCALE = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() / scaleFactor;
     /** Scaled dimension of a tile. */
-    public static int TILESIZE = ORIGINAL_TILE_SIZE * SCALE;
-    // Numero massimo di celle (h e w) da visualizzare in gioco
+    public static final int TILESIZE = ORIGINAL_TILE_SIZE * SCALE;
+    /** Max columns of tile (width) */
     public static final int MAX_SCREEN_COL = 15;
+    /** Max rows of tile (height) */
     public static final int MAX_SCREEN_ROW = 15;
 
     private CommandListener listener;
