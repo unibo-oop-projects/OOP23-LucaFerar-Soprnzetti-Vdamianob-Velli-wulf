@@ -9,6 +9,8 @@ import javawulf.controller.PlayerStatusImpl;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 // import java.awt.Color;
@@ -24,14 +26,8 @@ public class GamePanel extends JPanel {
 
     private CommandListener listener;
     private GameLoop gameLoopController;
-    private Drawer mapDrawer;
-    private Drawer playerDrawer;
-    private Drawer hudDrawer;
-    private Drawer pawnDrawer;
-    private Drawer itemDrawer;
-    private Drawer amuletPiecesDrawer;
+    private final List<Drawer> drawers = new ArrayList<>();
     private PlayerStatus playerStatus;
-    private Drawer powerUpDrawer;
 
     public GamePanel() {
         this.gameLoopController = new GameLoopImpl(this);
@@ -42,13 +38,13 @@ public class GamePanel extends JPanel {
         this.addKeyListener(this.listener);
         this.setFocusable(true);
         this.playerStatus = new PlayerStatusImpl(gameLoopController.getPlayer());
-        this.mapDrawer = new MapDrawer(gameLoopController.getMap(), this);
-        this.playerDrawer = new PlayerDrawer(this.playerStatus, this);
-        this.hudDrawer = new HUDDrawer(this.playerStatus, this);
-        this.pawnDrawer = new PawnDrawer(this.playerStatus, this, gameLoopController.getPawns());
-        this.itemDrawer = new ItemDrawer(this, gameLoopController.getItems(), this.playerStatus);
-        this.amuletPiecesDrawer = new AmuletPiecesDrawer(this, this.playerStatus, gameLoopController.getAmuletPieces());
-        this.powerUpDrawer = new PowerUpsDrawer(this, gameLoopController.getPowerUps(), this.playerStatus);
+        this.drawers.add(new MapDrawer(gameLoopController.getMap(), this));
+        this.drawers.add(new PlayerDrawer(this.playerStatus, this));
+        this.drawers.add(new PawnDrawer(this.playerStatus, this, gameLoopController.getPawns()));
+        this.drawers.add(new ItemDrawer(this, gameLoopController.getItems(), this.playerStatus));
+        this.drawers.add(new AmuletPiecesDrawer(this, this.playerStatus, gameLoopController.getAmuletPieces()));
+        this.drawers.add(new PowerUpsDrawer(this, gameLoopController.getPowerUps(), this.playerStatus));
+        this.drawers.add(new HUDDrawer(this.playerStatus, this));
         gameLoopController.startGameLoopThread();
     }
 
@@ -56,13 +52,9 @@ public class GamePanel extends JPanel {
         super.paintComponent(graphics);
         Graphics2D graphics2d = (Graphics2D)graphics;
 
-        this.mapDrawer.draw(graphics2d);
-        this.playerDrawer.draw(graphics2d);
-        this.pawnDrawer.draw(graphics2d);
-        this.itemDrawer.draw(graphics2d);
-        this.powerUpDrawer.draw(graphics2d);
-        this.amuletPiecesDrawer.draw(graphics2d);
-        this.hudDrawer.draw(graphics2d);
+        for (Drawer drawer : drawers) {
+            drawer.draw(graphics2d);
+        }
         graphics2d.dispose();
     }
 }
