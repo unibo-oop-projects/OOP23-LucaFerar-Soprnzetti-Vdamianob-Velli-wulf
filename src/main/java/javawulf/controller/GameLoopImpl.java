@@ -36,9 +36,9 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private final GamePanel gamePanel;
     private Map gameMap;
     private Player gamePlayer;
-    private boolean attacking = false;
+    private boolean attacking;
     private long swordTime;
-    private PlayerController playerController;
+    private final PlayerController playerController;
     private final List<Collectable> items;
     private final List<Pawn> pawns;
     private final List<AmuletPiece> pieces;
@@ -111,7 +111,8 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             this.pawns.forEach(p -> {
                 p.tick();
             });
-            this.gamePlayer.getPowerUpHandler().update(gamePlayer);
+            this.gamePlayer.reduceStun();
+            this.gamePlayer.getPowerUpHandler().update(this.gamePlayer);
             //System.out.println(this.getMap().getPlayerRoom());
         }
     }
@@ -161,6 +162,10 @@ public final class GameLoopImpl implements GameLoop, Runnable {
         this.items.removeIf(i -> i.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
         
         // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
+
+        if(this.gamePlayer.getBounds().getCollisionType().equals(BoundingBox.CollisionType.INACTIVE)){
+            this.gameLoopThread.interrupt();
+        }
     }
 
     private void reDraw() {
