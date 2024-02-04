@@ -44,6 +44,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private final List<Pawn> pawns;
     private final List<AmuletPiece> pieces;
     private final List<PowerUp> powerUps;
+    private boolean playerDead;
 
     /**
      * 
@@ -125,56 +126,61 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void update() {
-        if (this.playerController.getDirection().isPresent() && !this.attacking) {
-            try {
-                this.gamePlayer.move(this.playerController.getDirection().get(), this.gameMap);
-            } catch (Exception e) {
-                System.out.println("There is a wall");
+        if (!playerDead){
+            if (this.playerController.getDirection().isPresent() && !this.attacking) {
+                try {
+                    this.gamePlayer.move(this.playerController.getDirection().get(), this.gameMap);
+                } catch (Exception e) {
+                    System.out.println("There is a wall");
+                }
+            } else if (this.playerController.isAttack() && !this.attacking) {
+                this.gamePlayer.attack();
+                this.attacking = true;
+                this.swordTime = System.nanoTime();
             }
-        } else if (this.playerController.isAttack() && !this.attacking) {
-            this.gamePlayer.attack();
-            this.attacking = true;
-            this.swordTime = System.nanoTime();
+    
+            if (System.nanoTime() - this.swordTime >= NANOSECONDS / 2 && attacking) {
+                this.gamePlayer.getSword().deactivate();
+                this.attacking = false;
+                this.swordTime = 0;
+            }
+    
+    
+            // Per ogni nemico nella lista, chiama i suoi metodi di movimento, il tick di
+            // aggiornamento ed i suoi controlli, quando muore viene rimosso dalla lista
+            this.pawns.forEach(p -> {
+                p.move(this.gamePlayer, this.gameMap);
+                p.takeHit(this.gamePlayer);
+                this.gamePlayer.isHit(p.getBounds());
+            });
+            this.pawns
+                    .removeIf(p -> !p.isAlive() && p.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
+    
+            // Per ogni pezzo di amuleto nella lista, controlla se è stato raccolto e se il
+            // giocatore è allineato ad uno dei suoi assi, quando viene raccolto viene
+            // rimosso dalla lista
+            this.pieces.forEach(p -> {
+                p.collect(this.gamePlayer);
+                p.isPlayerAligned(this.gamePlayer);
+            });
+            this.pieces.removeIf(p -> p.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
+    
+            // Per ogni oggetto collezionabile nella lista, controlla se è stato raccolto,
+            // una volta raccolto viene rimosso dalla lista
+            this.items.forEach(i -> i.collect(this.gamePlayer));
+            this.items.removeIf(i -> i.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
+            
+            // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
+    
+            if(this.gamePlayer.getBounds().getCollisionType().equals(BoundingBox.CollisionType.INACTIVE)){
+                playerDead = true;
+            }
+            this.powerUps.forEach(p -> p.collect(gamePlayer));
+            this.powerUps.removeIf(p -> p.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
+        } else {
+            this.gamePanel.setVisible(false);
         }
-
-        if (System.nanoTime() - this.swordTime >= NANOSECONDS / 2 && attacking) {
-            this.gamePlayer.getSword().deactivate();
-            this.attacking = false;
-            this.swordTime = 0;
-        }
-
-
-        // Per ogni nemico nella lista, chiama i suoi metodi di movimento, il tick di
-        // aggiornamento ed i suoi controlli, quando muore viene rimosso dalla lista
-        this.pawns.forEach(p -> {
-            p.move(this.gamePlayer, this.gameMap);
-            p.takeHit(this.gamePlayer);
-            this.gamePlayer.isHit(p.getBounds());
-        });
-        this.pawns
-                .removeIf(p -> !p.isAlive() && p.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
-
-        // Per ogni pezzo di amuleto nella lista, controlla se è stato raccolto e se il
-        // giocatore è allineato ad uno dei suoi assi, quando viene raccolto viene
-        // rimosso dalla lista
-        this.pieces.forEach(p -> {
-            p.collect(this.gamePlayer);
-            p.isPlayerAligned(this.gamePlayer);
-        });
-        this.pieces.removeIf(p -> p.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
-
-        // Per ogni oggetto collezionabile nella lista, controlla se è stato raccolto,
-        // una volta raccolto viene rimosso dalla lista
-        this.items.forEach(i -> i.collect(this.gamePlayer));
-        this.items.removeIf(i -> i.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
         
-        // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
-
-        if(this.gamePlayer.getBounds().getCollisionType().equals(BoundingBox.CollisionType.INACTIVE)){
-            this.gameLoopThread.interrupt();
-        }
-        this.powerUps.forEach(p -> p.collect(gamePlayer));
-        this.powerUps.removeIf(p -> p.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
     }
 
     private void reDraw() {
