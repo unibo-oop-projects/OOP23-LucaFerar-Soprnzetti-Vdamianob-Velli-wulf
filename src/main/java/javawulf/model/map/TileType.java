@@ -10,6 +10,8 @@ public enum TileType {
     ROOM(true),
     /** Used to compose the central room, where the game will be completed by player. */
     CENTRAL_ROOM(true),
+    /** Crossable tile for ending the game (if conditions are respected) */
+    PORTAL(true),
     /** Corridor is a tile for link rooms with a walkable kind of cell. */
     CORRIDOR(true);
     

@@ -19,6 +19,7 @@ public final class MapDrawer implements Drawer {
     private BufferedImage imgWall;
     private BufferedImage imgCorridor;
     private BufferedImage imgCentralRoom;
+    private BufferedImage imgPortal;
     private GamePanel gamePanel;
 
     public MapDrawer(final Map map, GamePanel gamePanel) {
@@ -29,6 +30,7 @@ public final class MapDrawer implements Drawer {
             this.imgWall = ImageIO.read(getClass().getResourceAsStream(ImagePath.WALL_TILE.getPath()));
             this.imgCorridor = ImageIO.read(getClass().getResourceAsStream(ImagePath.CORRIDOR_TILE.getPath()));
             this.imgCentralRoom = ImageIO.read(getClass().getResourceAsStream(ImagePath.CENTRAL_ROOM_TILE.getPath()));
+            this.imgPortal = ImageIO.read(getClass().getResourceAsStream(ImagePath.PORTAL_TILE.getPath()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,6 +53,9 @@ public final class MapDrawer implements Drawer {
                             break;
                         case CORRIDOR:
                             img = imgCorridor;
+                            break;
+                        case PORTAL:
+                            img = imgPortal;
                             break;
                         default:
                             img = imgRoom;

@@ -14,6 +14,8 @@ public enum ImagePath {
     CENTRAL_ROOM_TILE("/tiles/central_room.png"),
     /** <img src="../../../resources/tiles/corridor.png"> Corridor tile. */
     CORRIDOR_TILE("/tiles/corridor.png"),
+    /** <img src="../../../resources/tiles/portal.png"> Portal tile. */
+    PORTA_TILE("/tiles/portal.png"),
     /** <img src="../../../resources/player/player_up.png"> Player up. */
     PLAYER_UP("/player/player_up.png"),
     /** <img src="../../../resources/player/player_down.png"> Player down. */
