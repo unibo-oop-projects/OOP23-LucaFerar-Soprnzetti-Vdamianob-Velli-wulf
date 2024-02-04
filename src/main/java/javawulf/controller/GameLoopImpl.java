@@ -108,8 +108,11 @@ public final class GameLoopImpl implements GameLoop, Runnable {
 
         if (this.timer >= NANOSECONDS * 1) {
             this.timer = 0;
-            // Qui l'update degli elementi di gioco (giocatore, nemici, ...)
-            System.out.println(this.getMap().getPlayerRoom());
+            this.pawns.forEach(p -> {
+                p.tick();
+            });
+            this.gamePlayer.getPowerUpHandler().update(gamePlayer);
+            //System.out.println(this.getMap().getPlayerRoom());
         }
     }
 
@@ -137,7 +140,6 @@ public final class GameLoopImpl implements GameLoop, Runnable {
         this.pawns.forEach(p -> {
             p.move(this.gamePlayer, this.gameMap);
             p.takeHit(this.gamePlayer);
-            p.tick();
         });
         this.pawns
                 .removeIf(p -> !p.isAlive() && p.getBounds().getCollisionType() == BoundingBox.CollisionType.INACTIVE);
