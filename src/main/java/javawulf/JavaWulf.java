@@ -2,7 +2,7 @@ package javawulf;
 
 import javax.swing.SwingUtilities;
 
-import javawulf.view.gameMenu.GameMenuPanel;
+import javawulf.view.gamemenu.GameMenuPanel;
 
 public class JavaWulf {
     public static void main(String[] args) throws InterruptedException {

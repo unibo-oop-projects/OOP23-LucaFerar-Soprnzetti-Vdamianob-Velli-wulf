@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+// CHECKSTYLE: OFF
+//The annotation is needed to avoid false positives
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+// CHECKSTYLE: ON
 import javawulf.model.BoundingBox;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.BoundingBoxImpl;
@@ -41,6 +45,12 @@ final class PlayerHealthTest {
     }
 
     @Test
+    @SuppressFBWarnings(
+        value = {
+            "L", "D", "UwF"
+        },
+        justification = "Player is initialized in the @BeforeEach"
+    )
     void testDamageComingFromPlayer() {
         final BoundingBox enemy = new BoundingBoxImpl(STARTING_X, STARTING_Y,
             AbstractEntity.OBJECT_SIZE, AbstractEntity.OBJECT_SIZE, CollisionType.ENEMY);

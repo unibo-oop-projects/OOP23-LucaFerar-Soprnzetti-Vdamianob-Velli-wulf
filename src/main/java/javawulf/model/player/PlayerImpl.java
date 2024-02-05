@@ -2,6 +2,9 @@ package javawulf.model.player;
 
 import java.util.List;
 import java.util.logging.Logger;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.ArrayList;
 
 import javawulf.model.BoundingBox;
@@ -10,12 +13,12 @@ import javawulf.model.Direction;
 import javawulf.model.AbstractEntity;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
-import javawulf.model.powerUp.PowerUpHandler;
-import javawulf.model.powerUp.PowerUpHandlerImpl;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletPiece;
 import javawulf.model.map.Map;
 import javawulf.model.map.TileType;
+import javawulf.model.powerup.PowerUpHandler;
+import javawulf.model.powerup.PowerUpHandlerImpl;
 
 /**
  * PlayerImpl is an implementation of Player.
@@ -100,6 +103,12 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI"
+        },
+        justification = "PlayerHealth returns all its info to the controller"
+    )
     public PlayerHealth getPlayerHealth() {
         return this.health;
     }
@@ -114,11 +123,23 @@ public final class PlayerImpl extends AbstractEntity implements Player {
     }
 
     @Override
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI"
+        },
+        justification = "The score returns all its info to the controller"
+    )
     public Score getScore() {
         return this.score;
     }
 
     @Override
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI"
+        },
+        justification = "The sword returns all its info to the controller and has to be modified by it"
+    )
     public Sword getSword() {
         return this.sword;
     }

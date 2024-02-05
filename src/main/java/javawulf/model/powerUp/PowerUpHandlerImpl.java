@@ -1,27 +1,33 @@
-package javawulf.model.powerUp;
+package javawulf.model.powerup;
 
 import java.util.Optional;
 
 import javawulf.model.player.Player;
 
-public class PowerUpHandlerImpl implements PowerUpHandler{
+/**
+ * PowerUpHandler is used for making interact player and powerUps.
+ */
+public final class PowerUpHandlerImpl implements PowerUpHandler {
 
     private Optional<PowerUp> powerUpActive;
 
+    /**
+     * Creates the powerUpHandler.
+     */
     public PowerUpHandlerImpl() {
         this.powerUpActive = Optional.empty();
     }
 
     @Override
-    public void collectPowerUp(final PowerUp powerUpPicked, Player player) {
-        if(powerUpActive.isPresent()){
+    public void collectPowerUp(final PowerUp powerUpPicked, final Player player) {
+        if (powerUpActive.isPresent()) {
             powerUpActive.get().finishEffect(player);
         }
         this.powerUpActive = Optional.of(powerUpPicked);
     }
 
     @Override
-    public void update(Player player) {
+    public void update(final Player player) {
         if (powerUpActive.isPresent()) {
             powerUpActive.get().updateDuration();
             if (checkUpFinished()) {
@@ -41,7 +47,7 @@ public class PowerUpHandlerImpl implements PowerUpHandler{
         return !powerUpActive.get().stillActive();
     }
 
-    private void changePlayerColor(Player player) {
+    private void changePlayerColor(final Player player) {
         if (this.getPowerUpActive().isPresent()) {
             if (PowerUpType.ATTACK.getType().equals(powerUpActive.get().getType())) {
                 player.setColor(Player.PlayerColor.STRENGTH);
@@ -59,5 +65,5 @@ public class PowerUpHandlerImpl implements PowerUpHandler{
             player.setColor(Player.PlayerColor.NONE);
         }
     }
-    
+
 }

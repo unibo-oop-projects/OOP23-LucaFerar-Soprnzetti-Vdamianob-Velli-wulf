@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+// CHECKSTYLE: OFF
+//The annotation is needed to avoid false positives
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+// CHECKSTYLE: ON
 import javawulf.model.player.Player;
 import javawulf.model.player.PlayerImpl;
 import javawulf.model.player.Score;
@@ -32,28 +36,46 @@ final class ScoreTest {
     }
 
     @Test
+    @SuppressFBWarnings(
+        value = {
+            "L", "D", "UwF"
+        },
+        justification = "Score is initialized in the @BeforeEach"
+    )
     void testStartingScore() {
         assertEquals(STARTING_POINTS, this.score.getPoints());
         assertEquals(Multiplier.DEFAULT.getValue(), this.score.getMultiplier());
     }
 
     @Test
+    @SuppressFBWarnings(
+        value = {
+            "L", "D", "UwF"
+        },
+        justification = "Score is initialized in the @BeforeEach"
+    )
     void testIncrease() {
-        score.addPoints(INCREASE);
+        this.score.addPoints(INCREASE);
         assertNotEquals(STARTING_POINTS, this.score.getPoints());
         assertEquals(INCREASE, this.score.getPoints());
     }
 
     @Test
+    @SuppressFBWarnings(
+        value = {
+            "L", "D", "UwF"
+        },
+        justification = "Score is initialized in the @BeforeEach"
+    )
     void testIncreaseWithMultiplier() {
-        score.setMultiplier(Multiplier.DOUBLE);
-        score.addPoints(INCREASE);
+        this.score.setMultiplier(Multiplier.DOUBLE);
+        this.score.addPoints(INCREASE);
         assertNotEquals(Multiplier.DEFAULT.getValue(), this.score.getMultiplier());
         assertNotEquals(INCREASE, this.score.getPoints());
         assertEquals(INCREASE * 2, this.score.getPoints());
 
-        score.setMultiplier(Multiplier.DEFAULT);
-        score.addPoints(INCREASE);
+        this.score.setMultiplier(Multiplier.DEFAULT);
+        this.score.addPoints(INCREASE);
         assertEquals(Multiplier.DEFAULT.getValue(), this.score.getMultiplier());
         assertNotEquals(INCREASE * 2, this.score.getPoints());
         assertEquals(INCREASE * 3, this.score.getPoints());

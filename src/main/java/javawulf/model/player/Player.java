@@ -4,7 +4,7 @@ import javawulf.model.Direction;
 import javawulf.model.Entity;
 import javawulf.model.item.AmuletPiece;
 import javawulf.model.map.Map;
-import javawulf.model.powerUp.PowerUpHandler;
+import javawulf.model.powerup.PowerUpHandler;
 
 /**
  * Player represents the playable character and its statitstics.
@@ -43,9 +43,9 @@ public interface Player extends Entity {
 
         private final String color;
 
- PlayerColor(final String color) {
+        PlayerColor(final String color) {
             this.color = color;
-        }       
+        }
 
         /**
          * @return The string corrisponding to the color

@@ -1,5 +1,6 @@
 package javawulf.controller;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javawulf.model.map.Map;
 import javawulf.model.player.Player;
 
@@ -15,6 +16,13 @@ public final class PlayerStatusImpl implements PlayerStatus {
      * @param player The Player whose status must be considered
      * @param map The map the player is on
      */
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI2"
+        },
+        justification = "Player is passed through this class in order to get read only values"
+            + "coming from the model"
+    )
     public PlayerStatusImpl(final Player player, final Map map) {
         this.player = player;
         this.map = map;

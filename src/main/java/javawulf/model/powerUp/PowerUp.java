@@ -1,20 +1,42 @@
-package javawulf.model.powerUp;
+package javawulf.model.powerup;
 
 import javawulf.model.Collectable;
 import javawulf.model.player.Player;
 
-public interface PowerUp extends Collectable{
-    
-    public boolean stillActive();
+/**
+ * PowerUp represents the powerUp stats.
+ */
+public interface PowerUp extends Collectable {
 
-    public void updateDuration();
+    /**
+     * @return If PowerUp is still active
+     */
+    boolean stillActive();
 
-    public int getPoints();
+    /**
+     * Updates the duration of the PowerUp.
+     */
+    void updateDuration();
 
-    public int getDuration();
+    /**
+     * @return The points given to the player
+     */
+    int getPoints();
 
-    public String getType();
-    
-    public void finishEffect(Player p);
+    /**
+     * @return The duration left
+     */
+    int getDuration();
+
+    /**
+     * @return The type of the PowerUp
+     */
+    String getType();
+
+    /**
+     * Consumes the PowerUp and updates the player.
+     * @param p The player to Update
+     */
+    void finishEffect(Player p);
 
 }

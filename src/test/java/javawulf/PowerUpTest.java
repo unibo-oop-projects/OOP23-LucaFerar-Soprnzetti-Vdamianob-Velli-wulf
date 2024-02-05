@@ -18,15 +18,15 @@ import javawulf.model.player.PlayerImpl;
 import javawulf.model.player.Score;
 import javawulf.model.player.Sword;
 import javawulf.model.player.SwordImpl;
-import javawulf.model.powerUp.PowerUpAttack;
-import javawulf.model.powerUp.PowerUpDoublePoints;
-import javawulf.model.powerUp.PowerUpFactory;
-import javawulf.model.powerUp.PowerUpFactoryImpl;
-import javawulf.model.powerUp.PowerUpInvincibility;
-import javawulf.model.powerUp.PowerUpSpeed;
+import javawulf.model.powerup.PowerUpAttack;
+import javawulf.model.powerup.PowerUpDoublePoints;
+import javawulf.model.powerup.PowerUpFactory;
+import javawulf.model.powerup.PowerUpFactoryImpl;
+import javawulf.model.powerup.PowerUpInvincibility;
+import javawulf.model.powerup.PowerUpSpeed;
 
 
-public class PowerUpTest {
+final class PowerUpTest {
     
     // SetUp
     private static final int X_COORDINATE_PLAYER = 10;

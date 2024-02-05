@@ -2,6 +2,7 @@ package javawulf.view;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.List;
 
 import javawulf.controller.PlayerStatus;
@@ -28,7 +29,7 @@ public final class PawnDrawer extends AbstractDrawer {
         this.pawns = pawns;
         try {
             this.pawn = this.imageLoader(ImagePath.PAWN_UP);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

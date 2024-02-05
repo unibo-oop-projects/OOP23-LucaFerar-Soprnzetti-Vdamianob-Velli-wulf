@@ -2,22 +2,23 @@ package javawulf.view;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javawulf.controller.PlayerStatus;
-import javawulf.model.powerUp.PowerUp;
-import javawulf.model.powerUp.PowerUpAttack;
-import javawulf.model.powerUp.PowerUpDoublePoints;
-import javawulf.model.powerUp.PowerUpInvincibility;
-import javawulf.model.powerUp.PowerUpSpeed;
+import javawulf.model.powerup.PowerUp;
+import javawulf.model.powerup.PowerUpAttack;
+import javawulf.model.powerup.PowerUpDoublePoints;
+import javawulf.model.powerup.PowerUpInvincibility;
+import javawulf.model.powerup.PowerUpSpeed;
 
 /**
- *  Implementation for drawing all Power Ups
+ *  Implementation for drawing all Power Ups.
  */
 public final class PowerUpsDrawer extends AbstractDrawer {
-        
+
         private final Map<Class<? extends PowerUp>, BufferedImage> images = new HashMap<>();
         private final List<PowerUp> powerUps;
 
@@ -25,8 +26,8 @@ public final class PowerUpsDrawer extends AbstractDrawer {
          * Builds the power ups passed from the Controller.
          * 
          * @param gamePanel the Game Panel where the items must be drawn
-         * @param items     a list of all the items to draw
-         * @param player    the current status of the Player character
+         * @param powerUps a list of all the items to draw
+         * @param playerStatus the current status of the Player character
          */
         public PowerUpsDrawer(final GamePanel gamePanel, final List<PowerUp> powerUps, final PlayerStatus playerStatus) {
             super(gamePanel, playerStatus);
@@ -36,7 +37,7 @@ public final class PowerUpsDrawer extends AbstractDrawer {
                 images.put(PowerUpInvincibility.class, this.imageLoader(ImagePath.POWERUP_INVINCIBILITY));
                 images.put(PowerUpDoublePoints.class, this.imageLoader(ImagePath.POWERUP_DOUBLEPOINTS));
                 images.put(PowerUpSpeed.class, this.imageLoader(ImagePath.POWERUP_SPEED));
-            } catch (Exception exception) {
+            } catch (IOException exception) {
                 exception.printStackTrace();
             }
         }
@@ -51,6 +52,5 @@ public final class PowerUpsDrawer extends AbstractDrawer {
                 }
             }
         }
-
 
 }

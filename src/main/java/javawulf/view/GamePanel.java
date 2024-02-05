@@ -1,5 +1,6 @@
 package javawulf.view;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import javawulf.controller.GameLoop;
@@ -71,5 +72,14 @@ public final class GamePanel extends JPanel {
             drawer.draw(graphics2d);
         }
         graphics2d.dispose();
+    }
+
+    public void resetFrame(final boolean gameWon, final int score) {
+        String value = gameWon ? "CONGRATULATIONS! You escaped sucessfully" : "Oh no, Game Over. Better luck next time!";
+        JOptionPane.showMessageDialog(this, value + "\n Your point total is " + score);
+        this.setVisible(false);
+        // Save scoreBoard
+        // Clear the frame
+        // Open gameMenuPanel
     }
 }
