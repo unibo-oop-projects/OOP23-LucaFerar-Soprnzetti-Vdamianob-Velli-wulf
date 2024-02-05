@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javawulf.model.AbstractEntity;
@@ -26,7 +25,7 @@ import javawulf.model.player.PlayerImpl;
 /**
  * Test class for the Pawn class.
  */
-public final class PawnTest {
+final class PawnTest {
 
     private static final int STARTING_X = 24;
     private static final int STARTING_Y = 24;
@@ -34,29 +33,24 @@ public final class PawnTest {
     private static final int PAWN_NEAR_WALL_Y_MULTIPLIER = 6;
     private static final int WALL_POSITION_Y_MULTIPLIER = 7;
 
-    private EnemyFactory factory = new EnemyFactoryImpl();
+    private final EnemyFactory factory = new EnemyFactoryImpl();
     private Player player = new PlayerImpl(STARTING_X * 3, STARTING_Y * 3, STARTING_HEALTH, 0);
-    private Coordinate position = new CoordinateImpl(STARTING_X, STARTING_Y);
-    private Map map = new MapFactoryImpl().getTestMap(player);
-    private Pawn pawn;
-
-    @BeforeEach
-    void createPawn() {
-        this.pawn = factory.createPawn(position);
-    }
+    private final Coordinate position = new CoordinateImpl(STARTING_X, STARTING_Y);
+    private final Map map = new MapFactoryImpl().getTestMap(player);
+    private final Pawn pawn = factory.createPawn(position);
 
     @Test
     void testMove() throws InterruptedException {
         // Test coordinates and BoundingBox
-        Coordinate testPos = pawn.getPosition();
-        var testBounds = pawn.getBounds().getCollisionArea();
-        int delta = pawn.getSpeed() * AbstractEntity.MOVEMENT_DELTA;
+        final Coordinate testPos = pawn.getPosition();
+        final var testBounds = pawn.getBounds().getCollisionArea();
+        final int delta = pawn.getSpeed() * AbstractEntity.MOVEMENT_DELTA;
         // Test coordinates and boundingbox for expected position of the pawn after
         // moving
-        Coordinate expectedCoordinate = new CoordinateImpl(
+        final Coordinate expectedCoordinate = new CoordinateImpl(
                 pawn.getPosition().getX() + (int) (pawn.getDirection().getX() * delta),
                 pawn.getPosition().getY() + (int) (pawn.getDirection().getY() * delta));
-        BoundingBox expectedBounds = new BoundingBoxImpl(
+        final BoundingBox expectedBounds = new BoundingBoxImpl(
                 expectedCoordinate.getX(),
                 expectedCoordinate.getY(),
                 AbstractEntity.OBJECT_SIZE,
@@ -96,7 +90,7 @@ public final class PawnTest {
         // Check if the pawn changes direction after colliding with a wall
         pawn.move(player, map);
         assertNotEquals(Direction.DOWN, pawn.getDirection());
-        Coordinate wallPosition = new CoordinateImpl(STARTING_X, STARTING_Y * WALL_POSITION_Y_MULTIPLIER);
+        final Coordinate wallPosition = new CoordinateImpl(STARTING_X, STARTING_Y * WALL_POSITION_Y_MULTIPLIER);
         assertNotEquals(wallPosition, pawn.getPosition());
     }
 
@@ -139,8 +133,8 @@ public final class PawnTest {
             assertEquals(1, pawn.getTickCount());
         }
         // Memorizing the initial time to wait and initial direction
-        initialTime = pawn.getTimeToWait();
-        Direction initialDirection = pawn.getDirection();
+        //initialTime = pawn.getTimeToWait();
+        final Direction initialDirection = pawn.getDirection();
         int counter = 0;
         // Call the tick method until the pawn changes direction or the counter reaches
         // 100

@@ -25,14 +25,14 @@ import javawulf.model.player.Sword.SwordType;
 /**
  * Test class for Items' effect.
  */
-public final class ItemTest {
+final class ItemTest {
 
     private static final int STARTING_X = 12;
     private static final int STARTING_Y = 12;
     private static final int STARTING_HEALTH = 3;
     private static final int DAMAGED_PLAYER = -2;
 
-    private ItemFactory factory = new ItemFactoryImpl();
+    private final ItemFactory factory = new ItemFactoryImpl();
     private Coordinate test;
     private Player player;
 
@@ -45,7 +45,7 @@ public final class ItemTest {
     @Test
     void testCollection() {
         // Creating an item (any item will do for this test)
-        Shield shield = factory.createShield(test);
+        final Shield shield = factory.createShield(test);
         // Checking that the player meets the requirements to collect the item
         assertTrue(player.getBounds().isCollidingWith(shield.getBounds().getCollisionArea()));
         // Collecting the item
@@ -56,7 +56,7 @@ public final class ItemTest {
 
     @Test
     void testAmuletPiece() {
-        AmuletPiece piece = factory.createAmuletPiece(test);
+        final AmuletPiece piece = factory.createAmuletPiece(test);
         // Player collect the item
         piece.collect(player);
         // Checking that the effect has been applied
@@ -65,7 +65,7 @@ public final class ItemTest {
 
     @Test
     void testCure() {
-        Cure cure = factory.createCure(test);
+        final Cure cure = factory.createCure(test);
         player.getPlayerHealth().setHealth(DAMAGED_PLAYER);
         // Player collect the item
         cure.collect(player);
@@ -75,7 +75,7 @@ public final class ItemTest {
 
     @Test
     void testCureMax() {
-        CureMax cure = factory.createCureMax(test);
+        final CureMax cure = factory.createCureMax(test);
         player.getPlayerHealth().setHealth(DAMAGED_PLAYER);
         // Player collect the item
         cure.collect(player);
@@ -85,7 +85,7 @@ public final class ItemTest {
 
     @Test
     void testExtraHeart() {
-        ExtraHeart heart = factory.createExtraHeart(test);
+        final ExtraHeart heart = factory.createExtraHeart(test);
         // Player collect the item
         heart.collect(player);
         // Checking that the effect has been applied correctly
@@ -95,7 +95,7 @@ public final class ItemTest {
 
     @Test
     void testGreatSword() {
-        GreatSword greatSword = factory.createGreatSword(test);
+        final GreatSword greatSword = factory.createGreatSword(test);
         // Player collect the item
         greatSword.collect(player);
         // Checking that the effect has been applied correctly
@@ -105,7 +105,7 @@ public final class ItemTest {
 
     @Test
     void testShield() {
-        Shield shield = factory.createShield(test);
+        final Shield shield = factory.createShield(test);
         // Player collect the item
         shield.collect(player);
         // Checking that the effect has been applied correctly

@@ -21,13 +21,13 @@ import javawulf.model.enemy.Pawn;
 /**
  * Test class for EnemyFactory.
  */
-public final class EnemyFactoryTest {
+final class EnemyFactoryTest {
 
     private static final int STARTING_X = 12;
     private static final int STARTING_Y = 12;
 
     private EnemyFactory factory;
-    private Coordinate position = new CoordinateImpl(STARTING_X, STARTING_Y);
+    private final Coordinate position = new CoordinateImpl(STARTING_X, STARTING_Y);
 
     @BeforeEach
     void setUpFactory() {
@@ -36,7 +36,7 @@ public final class EnemyFactoryTest {
 
     @Test
     void testCreatePawn() {
-        Pawn pawn = factory.createPawn(position);
+        final Pawn pawn = factory.createPawn(position);
         assertNotNull(pawn);
         assertEquals(position.getPosition(), pawn.getPosition().getPosition());
         // Check if the pawn is instantiated as a Pawn
@@ -60,7 +60,7 @@ public final class EnemyFactoryTest {
 
     @Test
     void testCreateGuard() {
-        Guard guard = factory.createGuard(position);
+        final Guard guard = factory.createGuard(position);
         assertNotNull(guard);
         assertEquals(position.getPosition(), guard.getPosition().getPosition());
         // Check if the guard is instantiated as a Guard
