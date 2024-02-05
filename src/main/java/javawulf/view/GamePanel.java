@@ -3,13 +3,11 @@ package javawulf.view;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import javawulf.controller.GameLoop;
 import javawulf.controller.GameLoopImpl;
 import javawulf.controller.PlayerStatus;
 import javawulf.controller.PlayerStatusImpl;
-import javawulf.scoreboard.Result;
 import javawulf.scoreboard.ResultImpl;
 import javawulf.scoreboard.ScoreBoardImpl;
 import javawulf.scoreboard.Scoreboard;
@@ -41,35 +39,32 @@ public final class GamePanel extends JPanel {
     /** Max rows of tile (height). */
     public static final int MAX_SCREEN_ROW = 15;
 
-    private final CommandListener listener;
-    private final GameLoop gameLoopController;
     private final List<Drawer> drawers = new ArrayList<>();
-    private final PlayerStatus playerStatus;
     private final JFrame frame;
 
     /**
      * Used to inizialize GamePanel. 
      * It starts an importart part of in-gaming controller: Game Loop.
      * It sets several default view details, like drawers of components.
-     * @param frame 
+     * 
+     * @param frame The JFrame that creates it
      */
     public GamePanel(final JFrame frame) {
         this.frame = frame;
-        this.gameLoopController = new GameLoopImpl(this);
+        final GameLoop gameLoopController = new GameLoopImpl(this);
         this.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
         this.setBackground(java.awt.Color.WHITE);
         this.setDoubleBuffered(true);
-        this.listener = new CommandListener(this.gameLoopController.getPlayerController());
-        this.addKeyListener(this.listener);
+        this.addKeyListener(new CommandListener(gameLoopController.getPlayerController()));
         this.setFocusable(true);
-        this.playerStatus = new PlayerStatusImpl(gameLoopController.getPlayer(), gameLoopController.getMap());
+        final PlayerStatus playerStatus = new PlayerStatusImpl(gameLoopController.getPlayer(), gameLoopController.getMap());
         this.drawers.add(new MapDrawer(gameLoopController.getMap(), this));
-        this.drawers.add(new PlayerDrawer(this.playerStatus, this));
-        this.drawers.add(new PawnDrawer(this.playerStatus, this, gameLoopController.getPawns()));
-        this.drawers.add(new ItemDrawer(this, gameLoopController.getItems(), this.playerStatus));
-        this.drawers.add(new AmuletPiecesDrawer(this, this.playerStatus, gameLoopController.getAmuletPieces()));
-        this.drawers.add(new PowerUpsDrawer(this, gameLoopController.getPowerUps(), this.playerStatus));
-        this.drawers.add(new HUDDrawer(this.playerStatus, this.gameLoopController.getAmuletPieces(), this));
+        this.drawers.add(new PlayerDrawer(playerStatus, this));
+        this.drawers.add(new PawnDrawer(playerStatus, this, gameLoopController.getPawns()));
+        this.drawers.add(new ItemDrawer(this, gameLoopController.getItems(), playerStatus));
+        this.drawers.add(new AmuletPiecesDrawer(this, playerStatus, gameLoopController.getAmuletPieces()));
+        this.drawers.add(new PowerUpsDrawer(this, gameLoopController.getPowerUps(), playerStatus));
+        this.drawers.add(new HUDDrawer(playerStatus, gameLoopController.getAmuletPieces(), this));
         gameLoopController.startGameLoopThread();
     }
 
@@ -78,18 +73,26 @@ public final class GamePanel extends JPanel {
         super.paintComponent(graphics);
         final Graphics2D graphics2d = (Graphics2D) graphics;
 
-        for (Drawer drawer : drawers) {
+        for (final Drawer drawer : drawers) {
             drawer.draw(graphics2d);
         }
         graphics2d.dispose();
     }
 
+    /**
+     * Resets the frame that created GamePanel in order to show the main menu.
+     * 
+     * @param gameWon Boolean that inidcates whether the player has won or not
+     * @param score The amount of points obtained by the player by the end of the game
+     */
     public void resetFrame(final boolean gameWon, final int score) {
-        String value = gameWon ? "CONGRATULATIONS! You escaped sucessfully" : "Oh no, Game Over. Better luck next time!";
-        String username = JOptionPane.showInputDialog(value + "\n Your point total is " + score + "\n Insert your username:");
+        final String value = gameWon ? "CONGRATULATIONS! You escaped sucessfully"
+            : "Oh no, Game Over. Better luck next time!";
+        final String username = JOptionPane.showInputDialog(value + "\n Your point total is " + score
+            + "\n Insert your username:");
         this.setVisible(false);
         // Save scoreBoard
-        Scoreboard scoreboard = new ScoreBoardImpl();
+        final Scoreboard scoreboard = new ScoreBoardImpl();
         scoreboard.loadScoreBoardFromFile();
         scoreboard.addNewScore(new ResultImpl(username, score, gameWon));
         scoreboard.saveScoreBoard();
