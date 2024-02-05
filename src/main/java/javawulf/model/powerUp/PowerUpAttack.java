@@ -5,8 +5,18 @@ import javawulf.model.player.Player;
 import javawulf.model.player.Sword;
 import javawulf.model.player.SwordImpl;
 
-public class PowerUpAttack extends PowerUpImpl {
-    
+/**
+ * PowerUpAttack is a Type of PowerUp.
+ */
+public final class PowerUpAttack extends PowerUpImpl {
+
+    /**
+     * Creates a PowerUpAttack.
+     * @param position The starting position
+     * @param duration The duration of the PowerUp
+     * @param points Points given once collected 
+     * @param type The type name of the PowerUp
+     */
     public PowerUpAttack(final Coordinate position, final int duration, final int points, final String type) {
         super(position, points, type, duration);
     }
@@ -15,7 +25,7 @@ public class PowerUpAttack extends PowerUpImpl {
     public void applyEffect(final Player p) {
         super.applyEffect(p);
         //the damage of the player gets increased only if he isnt using the great sword
-        if(p.getSword().getSwordType() == Sword.SwordType.NORMAL && this.stillActive()) {
+        if (p.getSword().getSwordType() == Sword.SwordType.NORMAL && this.stillActive()) {
             //here i need to increment the damage of the player 
             p.getSword().setSwordStrength(SwordImpl.STRONG);
         } else {
@@ -29,6 +39,4 @@ public class PowerUpAttack extends PowerUpImpl {
         p.getSword().setSwordStrength(SwordImpl.NORMAL);
     }
 
-    
-    
 }
