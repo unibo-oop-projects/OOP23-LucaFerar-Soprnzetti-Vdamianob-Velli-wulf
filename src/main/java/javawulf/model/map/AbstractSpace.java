@@ -16,7 +16,7 @@ import javawulf.model.GameElement;
 public abstract class AbstractSpace implements Space {
     private final int width;
     private final int height;
-    private List<GameElement> elements = new ArrayList<>();
+    private final List<GameElement> elements = new ArrayList<>();
 
     /**
      * Constructor that initializes a new space with width and height specified.

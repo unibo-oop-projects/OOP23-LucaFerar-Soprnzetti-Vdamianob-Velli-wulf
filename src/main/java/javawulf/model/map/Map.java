@@ -1,9 +1,7 @@
 package javawulf.model.map;
 
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Set;
 
 import javawulf.model.BoundingBox;
@@ -63,7 +61,7 @@ public interface Map {
      * @return a defensive copy of all tilepositions in the map (where hashmap doesn't contain a position (key value), it means
      * there is a WALL by default).
      */
-    HashMap<TilePosition, TileType> getTilesMap();
+    java.util.Map<TilePosition, TileType> getTilesMap();
 
     /**
      * 
@@ -76,7 +74,7 @@ public interface Map {
      * @return an ordered Arraylist of biomes of the map (0 UPPER-LEFT, 1 UPPER-RIGHT, 2 DOWNER-RIGHT, 3 DOWNER-LEFT).
      * Central biome isn't included.
      */
-    ArrayList<Biome> getBiomes();
+    List<Biome> getBiomes();
 
     /**
      * 
@@ -87,7 +85,7 @@ public interface Map {
 
     /**
      * 
-     * @return room where the Player is in (Empty if isn't in any room).
+     * @return room where the Player is in (Optional.Empty if isn't in any room).
      */
     Optional<Space> getPlayerRoom();
 

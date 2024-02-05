@@ -3,8 +3,11 @@ package javawulf.model.map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.util.Pair;
+import javawulf.model.GameElement;
 
 /**
  * Implementation of Biome.
@@ -33,7 +36,7 @@ public final class BiomeImpl implements Biome {
             throw new IllegalArgumentException("Space position & his width " + biomePos + " is out of tile SIZE ("
                     + Biome.SIZE + ") biome range");
         }
-        Pair<TilePosition, Space> spaceWithPos = new Pair<>(biomePos, space);
+        final Pair<TilePosition, Space> spaceWithPos = new Pair<>(biomePos, space);
         if (isRoom) {
             this.rooms.add(spaceWithPos);
         } else {
@@ -54,7 +57,7 @@ public final class BiomeImpl implements Biome {
 
     @Override
     public Optional<Space> getRoom(final TilePosition tilePos) {
-        for (var room : rooms) {
+        for (final var room : rooms) {
             if (tilePos.getX() >= room.getKey().getX() && tilePos.getY() >= room.getKey().getY()
                     && tilePos.getX() < room.getKey().getX() + room.getValue().getWidth()
                     && tilePos.getY() < room.getKey().getY() + room.getValue().getHeight()) {
@@ -63,5 +66,24 @@ public final class BiomeImpl implements Biome {
 
         }
         return Optional.empty();
+    }
+
+    @Override
+    public List<GameElement> getElements() {
+        return this.getSpaces().stream()
+        .flatMap(space -> space.getElements().stream())
+        .collect(Collectors.toList());
+    }
+
+    /**
+     * 
+     * @return list of all spaces (rooms and coor.s) of the biome.
+     */
+    private List<Space> getSpaces() {
+        return Stream.concat(
+            rooms.stream().map(Pair::getValue),
+            corridors.stream().map(Pair::getValue)
+        )
+        .collect(Collectors.toList());
     }
 }

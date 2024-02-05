@@ -8,11 +8,11 @@ import javawulf.model.map.Room;
  */
 public final class RoomFactoryImpl implements RoomFactory {
 
-    private final int mediumDefDim = 5;
+    private static final int MEDIUM_DEFAULT_DIM = 5;
 
     @Override
     public Room getSquaredRoom() {
-        return new Room(this.mediumDefDim, this.mediumDefDim);
+        return new Room(MEDIUM_DEFAULT_DIM, MEDIUM_DEFAULT_DIM);
     }
 
 }

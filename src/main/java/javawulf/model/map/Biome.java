@@ -1,7 +1,9 @@
 package javawulf.model.map;
 
 import javafx.util.Pair;
-import java.util.ArrayList;
+import javawulf.model.GameElement;
+
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -44,14 +46,14 @@ public interface Biome {
      * @return a defensive copy of a list of room positions and their relative rooms
      *         Pair [ (tile x, y) - ROOM ].
      */
-    ArrayList<Pair<TilePosition, Space>> getRooms();
+    List<Pair<TilePosition, Space>> getRooms();
 
     /**
      * 
      * @return a defensive copy of a list of corridor positions and their relative
      *         Pair corridors [ (tile x, y) - CORRIDOR ].
      */
-    ArrayList<Pair<TilePosition, Space>> getCorridors();
+    List<Pair<TilePosition, Space>> getCorridors();
 
 /**
  * 
@@ -59,5 +61,11 @@ public interface Biome {
  * @return Optional of the room corrisponding (Empty if there isn't any room)
  */
     Optional<Space> getRoom(TilePosition tilePos);
+
+    /**
+     * 
+     * @return all GameElements inside biome.
+     */
+    List<GameElement> getElements();
 
 }
