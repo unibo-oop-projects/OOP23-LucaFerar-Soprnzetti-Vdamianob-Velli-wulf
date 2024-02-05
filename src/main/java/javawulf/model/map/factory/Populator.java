@@ -1,6 +1,6 @@
 package javawulf.model.map.factory;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javafx.util.Pair;
@@ -154,7 +154,7 @@ public final class Populator {
      * @param spaces arrayList of spaces
      * @return a randomic space from arraylist
      */
-    private static Pair<TilePosition, Space> getRandomicSpace(final ArrayList<Pair<TilePosition, Space>> spaces) {
+    private static Pair<TilePosition, Space> getRandomicSpace(final List<Pair<TilePosition, Space>> spaces) {
         return spaces.get(new Random().nextInt(spaces.size()));
     }
 
