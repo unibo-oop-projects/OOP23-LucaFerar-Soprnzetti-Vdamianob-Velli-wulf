@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
-import javawulf.model.powerUp.PowerUp;
-import javawulf.model.powerUp.PowerUpFactory;
-import javawulf.model.powerUp.PowerUpFactoryImpl;
+import javawulf.model.powerup.PowerUp;
+import javawulf.model.powerup.PowerUpFactory;
+import javawulf.model.powerup.PowerUpFactoryImpl;
 
 final class PowerUpFactoryTest {
     

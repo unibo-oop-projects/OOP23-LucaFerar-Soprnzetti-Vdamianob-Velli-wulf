@@ -18,8 +18,8 @@ import javawulf.model.map.Map;
 import javawulf.model.map.Space;
 import javawulf.model.map.TilePosition;
 import javawulf.model.map.TileType;
-import javawulf.model.powerUp.PowerUpFactory;
-import javawulf.model.powerUp.PowerUpFactoryImpl;
+import javawulf.model.powerup.PowerUpFactory;
+import javawulf.model.powerup.PowerUpFactoryImpl;
 
 /**
  * Utility class used to populate a map with items, power-up and enemies.

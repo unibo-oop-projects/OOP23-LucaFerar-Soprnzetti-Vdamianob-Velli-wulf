@@ -1,4 +1,4 @@
-package javawulf.view.gameMenu;
+package javawulf.view.gamemenu;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;

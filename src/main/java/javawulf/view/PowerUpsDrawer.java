@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import javawulf.controller.PlayerStatus;
-import javawulf.model.powerUp.PowerUp;
-import javawulf.model.powerUp.PowerUpAttack;
-import javawulf.model.powerUp.PowerUpDoublePoints;
-import javawulf.model.powerUp.PowerUpInvincibility;
-import javawulf.model.powerUp.PowerUpSpeed;
+import javawulf.model.powerup.PowerUp;
+import javawulf.model.powerup.PowerUpAttack;
+import javawulf.model.powerup.PowerUpDoublePoints;
+import javawulf.model.powerup.PowerUpInvincibility;
+import javawulf.model.powerup.PowerUpSpeed;
 
 /**
  *  Implementation for drawing all Power Ups.

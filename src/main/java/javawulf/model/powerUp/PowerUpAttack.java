@@ -1,4 +1,4 @@
-package javawulf.model.powerUp;
+package javawulf.model.powerup;
 
 import javawulf.model.Coordinate;
 import javawulf.model.player.Player;

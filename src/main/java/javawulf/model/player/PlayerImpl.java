@@ -13,12 +13,12 @@ import javawulf.model.Direction;
 import javawulf.model.AbstractEntity;
 import javawulf.model.Coordinate;
 import javawulf.model.CoordinateImpl;
-import javawulf.model.powerUp.PowerUpHandler;
-import javawulf.model.powerUp.PowerUpHandlerImpl;
 import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletPiece;
 import javawulf.model.map.Map;
 import javawulf.model.map.TileType;
+import javawulf.model.powerup.PowerUpHandler;
+import javawulf.model.powerup.PowerUpHandlerImpl;
 
 /**
  * PlayerImpl is an implementation of Player.
