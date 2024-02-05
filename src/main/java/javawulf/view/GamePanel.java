@@ -1,5 +1,6 @@
 package javawulf.view;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -7,6 +8,7 @@ import javawulf.controller.GameLoop;
 import javawulf.controller.GameLoopImpl;
 import javawulf.controller.PlayerStatus;
 import javawulf.controller.PlayerStatusImpl;
+import javawulf.view.gamemenu.GameMenuPanel;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -38,13 +40,16 @@ public final class GamePanel extends JPanel {
     private final GameLoop gameLoopController;
     private final List<Drawer> drawers = new ArrayList<>();
     private final PlayerStatus playerStatus;
+    private final JFrame frame;
 
     /**
      * Used to inizialize GamePanel. 
      * It starts an importart part of in-gaming controller: Game Loop.
      * It sets several default view details, like drawers of components.
+     * @param frame 
      */
-    public GamePanel() {
+    public GamePanel(final JFrame frame) {
+        this.frame = frame;
         this.gameLoopController = new GameLoopImpl(this);
         this.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
         this.setBackground(java.awt.Color.WHITE);
@@ -80,6 +85,8 @@ public final class GamePanel extends JPanel {
         this.setVisible(false);
         // Save scoreBoard
         // Clear the frame
+        frame.getContentPane().removeAll();
         // Open gameMenuPanel
+        GameMenuPanel.createMenuGUI(frame);
     }
 }

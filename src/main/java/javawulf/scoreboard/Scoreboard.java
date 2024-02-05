@@ -25,9 +25,14 @@ public interface Scoreboard {
     void addNewScore(Result result);
 
     /**
-     * saves the scoreboard.
+     * Saves the scoreboard.
      */
     void saveScoreBoard();
+
+    /**
+     * Loads the scoreboard from file.
+     */
+    void loadScoreBoardFromFile();
 
     /**
      * 

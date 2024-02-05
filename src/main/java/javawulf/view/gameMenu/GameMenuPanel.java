@@ -30,6 +30,7 @@ public class GameMenuPanel extends JPanel {
     private static final int MAX_BUTTON_WIDTH = 800;
     private static final int MAX_BUTTON_HEIGHT = 120;
     private static final int MENU_OFFSET = 5;
+    private final JFrame frame;
 
     /**
      * Sets the size of the window and creates the menu.
@@ -39,18 +40,17 @@ public class GameMenuPanel extends JPanel {
         scaleX = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2;
         scaleY = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2;
         borders = scaleX / MENU_OFFSET;
-        createMenuGUI();
+        frame = new JFrame("JavaWulf");
+        createMenuGUI(frame);
     }
 
     /**
      * Creates the menu.
      */
-    private static void createMenuGUI() {
-        JFrame frame = new JFrame("JavaWulf");
-
+    public static void createMenuGUI(JFrame frame) {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(scaleY, scaleX));
-        frame.setPreferredSize(new Dimension(frame.getWidth(), frame.getHeight()));
+        frame.setSize(new Dimension(scaleY, scaleX));
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
 
@@ -81,8 +81,9 @@ public class GameMenuPanel extends JPanel {
                 frame.dispose();
                 try {
                     frame.getContentPane().removeAll();
-                    frame.add(new GamePanel());
+                    frame.add(new GamePanel(frame));
                     frame.setSize(GamePanel.TILESIZE * GamePanel.MAX_SCREEN_COL, GamePanel.TILESIZE * GamePanel.MAX_SCREEN_ROW);
+                    frame.setLocationRelativeTo(null);
                     frame.setVisible(true);
                 } catch (final Exception exceptionViewImpl) {
                     exceptionViewImpl.printStackTrace();

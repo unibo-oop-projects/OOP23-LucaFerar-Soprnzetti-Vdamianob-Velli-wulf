@@ -17,8 +17,8 @@ public final class ViewImpl {
      * @throws InterruptedException
      */
     public ViewImpl() throws InterruptedException {
-        this.gamePanel = new GamePanel();
         final JFrame window = new JFrame();
+        this.gamePanel = new GamePanel(window);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // window.setResizable(false);
         window.setMinimumSize(new Dimension(GamePanel.TILESIZE * GamePanel.MAX_SCREEN_COL,

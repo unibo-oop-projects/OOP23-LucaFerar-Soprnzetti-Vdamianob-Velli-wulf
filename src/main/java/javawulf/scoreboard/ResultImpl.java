@@ -38,4 +38,9 @@ public final class ResultImpl implements Result, Serializable {
         return this.won;
     }
 
+    @Override
+    public String toString() {
+        return "[username=" + this.getUserName() + ", score=" + this.getScore() + ", won=" + this.getWon() + "]";
+    }
+
 }
