@@ -13,30 +13,36 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class ScoreBoardImpl implements Scoreboard{
+/**
+ * ScoreBoardImpl is used to save all Results and store them.
+ */
+public final class ScoreBoardImpl implements Scoreboard {
 
     private final File file;
-    private List<Result> scoreboard;  
+    private List<Result> scoreboard;
 
+    /**
+     * Creates a Scoreboard.
+     */
     public ScoreBoardImpl() {
         this.file = new File(FILE_PATH);
         loadScoreBoard();
     }
 
     @Override
-    public void addNewScore(Result result) {
+    public void addNewScore(final Result result) {
         this.scoreboard.add(result);
         orderScoreBoard();
-        if(scoreboard.size() > SCOREBOARD_SIZE){
+        if (scoreboard.size() > SCOREBOARD_SIZE) {
             this.scoreboard.remove(SCOREBOARD_SIZE);
         }
     }
 
     @Override
     public void saveScoreBoard() {
-        try (final OutputStream file = new FileOutputStream(FILE_PATH);
-            final OutputStream bstream = new BufferedOutputStream(file);
-            final ObjectOutputStream ostream = new ObjectOutputStream(bstream);) {
+        try (OutputStream file = new FileOutputStream(FILE_PATH);
+            OutputStream bstream = new BufferedOutputStream(file);
+            ObjectOutputStream ostream = new ObjectOutputStream(bstream);) {
             for (Result result : scoreboard) {
                 ostream.writeObject(result);
                 System.out.println(FILE_PATH);
@@ -52,7 +58,7 @@ public final class ScoreBoardImpl implements Scoreboard{
     }
 
     private void loadScoreBoard() {
-        if (this.file.exists()){
+        if (this.file.exists()) {
             try (ObjectInputStream fileInputStream = new ObjectInputStream(new FileInputStream(file))) {
                 this.scoreboard = (List<Result>) fileInputStream.readObject(); // NOPMD suppressed as it is a false positive
                 //all objects in this file are Results
@@ -69,5 +75,5 @@ public final class ScoreBoardImpl implements Scoreboard{
             .sorted(Comparator.comparingInt(Result::getScore).reversed())
             .collect(Collectors.toList());
     }
-    
+
 }
