@@ -158,9 +158,7 @@ public final class MapImpl implements Map {
     @Override
     public List<GameElement> getAllElements() {
         List<GameElement> allEntities = new ArrayList<>();
-        for (var biome : biomes) {
-            allEntities.addAll(biome.getElements());
-        }
+        this.biomes.forEach(biome -> allEntities.addAll(biome.getElements()));
         return allEntities;
     }
 
