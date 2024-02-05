@@ -50,7 +50,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
 
     /**
      * 
-     * @param panel's view.
+     * @param panel 's view.
      */
     public GameLoopImpl(final GamePanel panel) {
         this.items = new ArrayList<>();
@@ -125,7 +125,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             });
             this.gamePlayer.reduceStun();
             this.gamePlayer.getPowerUpHandler().update(this.gamePlayer);
-            if(PRINT_LOG) {
+            if (PRINT_LOG) {
                 LogInfo.print(this.gameMap);
             }
         }

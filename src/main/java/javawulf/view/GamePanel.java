@@ -79,6 +79,11 @@ public final class GamePanel extends JPanel {
         graphics2d.dispose();
     }
 
+    /**
+     * 
+     * @param gameWon flag who knows if player is winner
+     * @param score
+     */
     public void resetFrame(final boolean gameWon, final int score) {
         String value = gameWon ? "CONGRATULATIONS! You escaped sucessfully" : "Oh no, Game Over. Better luck next time!";
         JOptionPane.showMessageDialog(this, value + "\n Your point total is " + score);
