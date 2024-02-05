@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+// CHECKSTYLE: OFF
+//The annotation is needed to avoid false positives
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+// CHECKSTYLE: ON
 import javawulf.scoreboard.ResultImpl;
 import javawulf.scoreboard.ScoreBoardImpl;
 import javawulf.scoreboard.Scoreboard;
@@ -28,6 +32,12 @@ final class ScoreBoardTest {
     }
 
     @Test
+    @SuppressFBWarnings(
+        value = {
+            "L", "D", "UwF"
+        },
+        justification = "Score is initialized in the @BeforeEach"
+    )
     void testAddNewScore() {
         scoreboard.addNewScore(new ResultImpl("marco", 1130, false));
         assertEquals(1, scoreboard.getAllScores().size());
@@ -35,6 +45,12 @@ final class ScoreBoardTest {
     }
 
     @Test
+    @SuppressFBWarnings(
+        value = {
+            "L", "D", "UwF"
+        },
+        justification = "Score is initialized in the @BeforeEach"
+    )
     void testSortScoreboard() {
         scoreboard.addNewScore(new ResultImpl("giovanni", 1200, false));
         scoreboard.addNewScore(new ResultImpl("giacomo", 1300, true));
@@ -46,6 +62,12 @@ final class ScoreBoardTest {
     }
 
     @Test
+    @SuppressFBWarnings(
+        value = {
+            "L", "D", "UwF"
+        },
+        justification = "Score is initialized in the @BeforeEach"
+    )
     void testTooManyResults() {
         //add of max players
         scoreboard.addNewScore(new ResultImpl("giovanni", 1200, false));
