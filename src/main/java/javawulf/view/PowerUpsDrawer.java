@@ -3,6 +3,7 @@ package javawulf.view;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,7 @@ public final class PowerUpsDrawer extends AbstractDrawer {
          */
         public PowerUpsDrawer(final GamePanel gamePanel, final List<PowerUp> powerUps, final PlayerStatus playerStatus) {
             super(gamePanel, playerStatus);
-            this.powerUps = powerUps;
+            this.powerUps = new ArrayList<>(powerUps);
             try {
                 images.put(PowerUpAttack.class, this.imageLoader(ImagePath.POWERUP_STRENGTH));
                 images.put(PowerUpInvincibility.class, this.imageLoader(ImagePath.POWERUP_INVINCIBILITY));

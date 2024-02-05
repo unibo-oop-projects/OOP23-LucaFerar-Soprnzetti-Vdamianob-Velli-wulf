@@ -11,6 +11,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Collections;
 import java.util.stream.Collectors;
+import java.nio.charset.StandardCharsets;
+
 
 
 /**
@@ -40,7 +42,7 @@ public final class ScoreBoardImpl implements Scoreboard {
 
     @Override
     public void saveScoreBoard() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH));) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, StandardCharsets.UTF_8, false))) {
             for (Result result : scoreboard) {
                 writer.write(result.toString());
                 writer.newLine();
@@ -58,7 +60,7 @@ public final class ScoreBoardImpl implements Scoreboard {
     @Override
     public void loadScoreBoardFromFile() {
         if (this.file.exists()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH, StandardCharsets.UTF_8))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     this.addNewScore(convertInResult(line));
