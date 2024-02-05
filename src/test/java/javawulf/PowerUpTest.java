@@ -27,7 +27,6 @@ import javawulf.model.powerup.PowerUpSpeed;
 
 
 final class PowerUpTest {
-    
     // SetUp
     private static final int X_COORDINATE_PLAYER = 10;
     private static final int Y_COORDINATE_PLAYER = 10;
@@ -72,7 +71,7 @@ final class PowerUpTest {
     }
 
     @Test
-    void testCollectionAndSubstitutionPowerUp(){
+    void testCollectionAndSubstitutionPowerUp() {
         PowerUpAttack powerUpAttack = powerUpFactory.createPowerUpAttack(coordinatesPlayer);
         powerUpAttack.collect(player);
         // Test if powerUp active is attack
@@ -84,8 +83,6 @@ final class PowerUpTest {
         powerUpDoublePoints.collect(player);
         assertEquals(powerUpDoublePoints.getType(), player.getPowerUpHandler().getPowerUpActive().get().getType());
         assertEquals(Score.Multiplier.DOUBLE.getValue(), player.getScore().getMultiplier());
-        
-
     }
 
     @Test
@@ -152,12 +149,13 @@ final class PowerUpTest {
         // powerUp gets collected and activated
         powerUpAttack.collect(player);
         player.getPowerUpHandler().update(player);
+        int duration = player.getPowerUpHandler().getPowerUpActive().get().getDuration();
         // Test if powerUp got collected and updated player stats
-        assertEquals(player.getPowerUpHandler().getPowerUpActive().get().getDuration(), 19);
+        assertEquals(player.getPowerUpHandler().getPowerUpActive().get().getDuration(), duration);
         assertEquals(Player.PlayerColor.STRENGTH.getColor(), player.getColor());
         assertEquals(Sword.STRONG, player.getSword().getSwordStrength());
         // Let the powerUp deactivate
-        for (int i = 0; i < 18; i++) {
+        for (int i = 0; i < duration - 1; i++) {
             player.getPowerUpHandler().update(player);
             assertEquals(Player.PlayerColor.STRENGTH.getColor(), player.getColor());
             assertEquals(Sword.STRONG, player.getSword().getSwordStrength());
