@@ -2,6 +2,7 @@ package javawulf.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javawulf.model.BoundingBox;
@@ -83,7 +84,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
                 .collect(Collectors.toList()));
     }
 
-    private boolean isItem(GameElement e) {
+    private boolean isItem(final GameElement e) {
         return e instanceof Collectable && (e instanceof Cure || e instanceof CureMax
                 || e instanceof ExtraHeart || e instanceof GreatSword || e instanceof Shield);
     }
@@ -131,8 +132,8 @@ public final class GameLoopImpl implements GameLoop, Runnable {
         if (this.playerController.getDirection().isPresent() && !this.attacking) {
             try {
                 this.gamePlayer.move(this.playerController.getDirection().get(), this.gameMap);
-            } catch (Exception e) {
-                System.out.println("There is a wall");
+            } catch (final IllegalStateException e) {
+                Logger.getLogger(GameLoopImpl.class.getName()).fine("There is a wall");
             }
         } else if (this.playerController.isAttack() && !this.attacking) {
             this.gamePlayer.attack();
