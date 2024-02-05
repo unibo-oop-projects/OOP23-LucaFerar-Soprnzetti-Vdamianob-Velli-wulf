@@ -1,17 +1,16 @@
 package javawulf.scoreboard;
 
-import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 /**
  * ScoreBoardImpl is used to save all Results and store them.
@@ -26,7 +25,7 @@ public final class ScoreBoardImpl implements Scoreboard {
      */
     public ScoreBoardImpl() {
         this.file = new File(FILE_PATH);
-        loadScoreBoard();
+        scoreboard = new ArrayList<Result>();
     }
 
     @Override
@@ -40,12 +39,10 @@ public final class ScoreBoardImpl implements Scoreboard {
 
     @Override
     public void saveScoreBoard() {
-        try (OutputStream file = new FileOutputStream(FILE_PATH);
-            OutputStream bstream = new BufferedOutputStream(file);
-            ObjectOutputStream ostream = new ObjectOutputStream(bstream);) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH));) {
             for (Result result : scoreboard) {
-                ostream.writeObject(result);
-                System.out.println(FILE_PATH);
+                writer.write(result.toString());
+                writer.newLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,17 +54,28 @@ public final class ScoreBoardImpl implements Scoreboard {
         return this.scoreboard;
     }
 
-    private void loadScoreBoard() {
+    @Override
+    public void loadScoreBoardFromFile() {
         if (this.file.exists()) {
-            try (ObjectInputStream fileInputStream = new ObjectInputStream(new FileInputStream(file))) {
-                this.scoreboard = (List<Result>) fileInputStream.readObject(); // NOPMD suppressed as it is a false positive
-                //all objects in this file are Results
+            try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    this.addNewScore(convertInResult(line));
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else {
-            this.scoreboard = new ArrayList<Result>();
         }
+    }
+
+    private Result convertInResult(final String line) {
+        //splits [username=shrek] [score=100] [won=false]
+        String[] scoreString = line.split(",");
+        //index increased by 1 because i need to read whats after "="
+        String username = scoreString[0].substring(scoreString[0].indexOf("=") + 1);
+        String score = scoreString[1].substring(scoreString[1].indexOf("=") + 1);
+        String won = scoreString[2].substring(scoreString[2].indexOf("=") + 1);
+        return new ResultImpl(username, Integer.parseInt(score), Boolean.parseBoolean(won));
     }
 
     private void orderScoreBoard() {

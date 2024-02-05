@@ -14,19 +14,19 @@ final class ScoreBoardTest {
     private Scoreboard scoreboard;
 
     @BeforeEach
-    void populateScoreBoard(){
+    void populateScoreBoard() {
         scoreboard = new ScoreBoardImpl();
     }
 
     @Test
-    void testAddNewScore(){
+    void testAddNewScore() {
         scoreboard.addNewScore(new ResultImpl("marco", 1130, false));
         assertEquals(1, scoreboard.getAllScores().size());
         assertEquals(1130, scoreboard.getAllScores().get(0).getScore());
     }
 
     @Test 
-    void testSortScoreboard(){
+    void testSortScoreboard() {
         scoreboard.addNewScore(new ResultImpl("giovanni", 1200, false));
         scoreboard.addNewScore(new ResultImpl("giacomo", 1300, true));
         scoreboard.addNewScore(new ResultImpl("aldo", 1100, false));
