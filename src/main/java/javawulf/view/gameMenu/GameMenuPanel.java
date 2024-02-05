@@ -83,6 +83,7 @@ public class GameMenuPanel extends JPanel {
                     frame.getContentPane().removeAll();
                     frame.add(new GamePanel());
                     frame.setSize(GamePanel.TILESIZE * GamePanel.MAX_SCREEN_COL, GamePanel.TILESIZE * GamePanel.MAX_SCREEN_ROW);
+                    frame.setLocationRelativeTo(null);
                     frame.setVisible(true);
                 } catch (final Exception exceptionViewImpl) {
                     exceptionViewImpl.printStackTrace();
