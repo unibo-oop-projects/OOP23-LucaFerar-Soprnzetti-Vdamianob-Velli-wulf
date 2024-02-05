@@ -159,12 +159,7 @@ public final class MapImpl implements Map {
     public List<GameElement> getAllElements() {
         List<GameElement> allEntities = new ArrayList<>();
         for (var biome : biomes) {
-            for (var room : biome.getRooms()) {
-                allEntities.addAll(room.getValue().getElements());
-            }
-            for (var corridor : biome.getCorridors()) {
-                allEntities.addAll(corridor.getValue().getElements());
-            }
+            allEntities.addAll(biome.getElements());
         }
         return allEntities;
     }
