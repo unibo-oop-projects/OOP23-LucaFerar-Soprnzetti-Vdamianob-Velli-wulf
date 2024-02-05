@@ -46,6 +46,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private final List<PowerUp> powerUps;
     private boolean playerDead;
     private boolean gameWon;
+    private final boolean log = true;
 
     /**
      * 
@@ -122,7 +123,11 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             });
             this.gamePlayer.reduceStun();
             this.gamePlayer.getPowerUpHandler().update(this.gamePlayer);
-            //System.out.println(this.getMap().getPlayerRoom());
+            if(this.log) {
+                LogInfo.print(this.gameMap);
+            }
+            if(this.getMap().getPlayerRoom().isPresent())
+                System.out.println(this.getMap().getRoomElements(this.getMap().getPlayerRoom().get()));
         }
     }
 
