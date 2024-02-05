@@ -105,6 +105,8 @@ public final class Populator {
      * @return lateral position (lateral left if 'leftRight' is True or lateral
      *         right if 'leftRight' is False).
      */
+    
+    @SuppressWarnings("unused")
     private static Coordinate getlateralPosition(final TilePosition spacePos, final Space space,
             final BiomeQuadrant quadrant,
             final boolean leftRight) {
