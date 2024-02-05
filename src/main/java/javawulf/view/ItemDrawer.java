@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javawulf.controller.PlayerStatus;
 import javawulf.model.Collectable;
@@ -40,7 +41,7 @@ public final class ItemDrawer extends AbstractDrawer {
             images.put(GreatSword.class, this.imageLoader(ImagePath.GREATSWORD));
             images.put(Shield.class, this.imageLoader(ImagePath.SHIELD_ITEM));
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(ItemDrawer.class.getName()).fine(e.getMessage());
         }
 
     }

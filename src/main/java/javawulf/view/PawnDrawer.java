@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javawulf.controller.PlayerStatus;
 import javawulf.model.enemy.Pawn;
@@ -30,7 +31,7 @@ public final class PawnDrawer extends AbstractDrawer {
         try {
             this.pawn = this.imageLoader(ImagePath.PAWN_UP);
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(PawnDrawer.class.getName()).fine(e.getMessage());
         }
     }
 

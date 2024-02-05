@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javawulf.controller.PlayerStatus;
 import javawulf.model.item.AmuletPiece;
@@ -17,6 +18,13 @@ public final class AmuletPiecesDrawer extends AbstractDrawer {
 
     private final List<AmuletPiece> amuletPieces;
 
+    /**
+     * Builds the amulet pieces passed from the Controller.
+     * 
+     * @param gamePanel     the Game Panel where the pieces must be drawn
+     * @param player        the current status of the Player character
+     * @param amuletPieces  a list of all the pieces to draw
+     */
     public AmuletPiecesDrawer(final GamePanel gamePanel, final PlayerStatus player,
             final List<AmuletPiece> amuletPieces) {
         super(gamePanel, player);
@@ -24,7 +32,7 @@ public final class AmuletPiecesDrawer extends AbstractDrawer {
         try {
             this.amuletPiece = this.imageLoader(ImagePath.AMULET_PIECE);
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(AmuletPiecesDrawer.class.getName()).fine(e.getMessage());
         }
     }
 
