@@ -7,6 +7,10 @@ import javawulf.model.map.Map;
  */
 public final class LogInfo {
 
+    private LogInfo() {
+        throw new UnsupportedOperationException("This class cannot be instantiated (Utility class)");
+    }
+
     /**
      * 
      * @param map of current game match
