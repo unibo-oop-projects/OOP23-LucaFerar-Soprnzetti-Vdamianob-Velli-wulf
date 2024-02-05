@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javawulf.controller.GameLoop;
 import javawulf.controller.GameLoopImpl;
 import javawulf.controller.PlayerStatus;
@@ -49,6 +50,12 @@ public final class GamePanel extends JPanel {
      * 
      * @param frame The JFrame that creates it
      */
+    @SuppressFBWarnings(
+        value = {
+            "L", "B"
+        },
+        justification = "Why this non-serializable warning? We don't serialize anything! "
+    )
     public GamePanel(final JFrame frame) {
         this.frame = frame;
         final GameLoop gameLoopController = new GameLoopImpl(this);

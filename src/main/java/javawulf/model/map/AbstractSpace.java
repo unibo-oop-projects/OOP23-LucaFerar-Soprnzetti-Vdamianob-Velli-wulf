@@ -2,6 +2,8 @@ package javawulf.model.map;
 
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.ArrayList;
 
 import java.util.Collection;
@@ -50,6 +52,12 @@ public abstract class AbstractSpace implements Space {
         return this;
     }
 
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI"
+        },
+        justification = "Elements can be modified."
+    )
     @Override
     public final List<GameElement> getElements() {
         return this.elements;

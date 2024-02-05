@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Used in GamePanel for drawing Map (Game World).
  */
@@ -32,6 +34,12 @@ public final class MapDrawer implements Drawer {
      * @param map
      * @param gamePanel
      */
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI2"
+        },
+        justification = "It isn't a problem expose internal representation to GamePanel"
+    )
     public MapDrawer(final Map map, final GamePanel gamePanel) {
         this.map = map;
         this.gamePanel = gamePanel;

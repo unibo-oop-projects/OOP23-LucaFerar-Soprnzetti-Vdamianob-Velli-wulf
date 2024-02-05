@@ -3,6 +3,7 @@ package javawulf.model.map;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.util.Pair;
 
 /**
@@ -122,6 +123,12 @@ public final class MapTilesBuilder {
      * @param tiles HashMap-tiles where build finisher tiles.
      */
     @SuppressWarnings("unused")
+    @SuppressFBWarnings(
+        value = {
+            "H", "D", "DLS"
+        },
+        justification = "'biggerFinisher' and 'unaryFinisher' can be change if Biome.SIZE is changed."
+        )
     private static void buildFinisherTiles(final java.util.Map<TilePosition, TileType> tiles) {
         final int offset = 1;
         final Room biggerFinisher = new Room(2, 2);
