@@ -23,7 +23,7 @@ import javawulf.model.player.Player;
  */
 public final class MapImpl implements Map {
 
-    private final ArrayList<Biome> biomes = new ArrayList<>();
+    private final List<Biome> biomes = new ArrayList<>();
     private final java.util.Map<TilePosition, TileType> tiles;
     private final Player player;
 
@@ -54,7 +54,7 @@ public final class MapImpl implements Map {
     }
 
     @Override
-    public ArrayList<Biome> getBiomes() {
+    public List<Biome> getBiomes() {
         return this.biomes;
     }
 

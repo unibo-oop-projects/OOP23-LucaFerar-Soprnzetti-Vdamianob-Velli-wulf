@@ -122,7 +122,7 @@ public final class MapTilesBuilder {
      * @param tiles HashMap-tiles where build finisher tiles.
      */
     @SuppressWarnings("unused")
-    private static void buildFinisherTiles(final HashMap<TilePosition, TileType> tiles) {
+    private static void buildFinisherTiles(final java.util.Map<TilePosition, TileType> tiles) {
         final int offset = 1;
         final Room biggerFinisher = new Room(2, 2);
         final Room unaryFinisher = new Room(1, 1);

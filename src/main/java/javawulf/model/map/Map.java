@@ -2,7 +2,6 @@ package javawulf.model.map;
 
 import java.util.Optional;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Set;
 
 import javawulf.model.BoundingBox;

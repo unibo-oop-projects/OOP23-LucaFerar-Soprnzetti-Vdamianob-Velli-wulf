@@ -35,8 +35,8 @@ public final class Populator {
         POWERUPINVINCIBILITY;
 
         public static Collectables getRandomic() {
-            Collectables[] colls = Collectables.values();
-            Random r = new Random();
+            final Collectables[] colls = Collectables.values();
+            final Random r = new Random();
             return colls[r.nextInt(colls.length)];
         }
     }
@@ -51,14 +51,14 @@ public final class Populator {
      * @return map itself
      */
     public static Map populate(final Map map) {
-        for (var biomeQuadrant : BiomeQuadrant.values()) {
-            Biome biome = map.getBiomes().get(biomeQuadrant.getPos());
-            Pair<TilePosition, Space> randRoom = getRandomicSpace(biome.getRooms());
-            AmuletPiece biomeAmulet = new AmuletPiece(
+        for (final var biomeQuadrant : BiomeQuadrant.values()) {
+            final Biome biome = map.getBiomes().get(biomeQuadrant.getPos());
+            final Pair<TilePosition, Space> randRoom = getRandomicSpace(biome.getRooms());
+            final AmuletPiece biomeAmulet = new AmuletPiece(
                     getCentralPosition(randRoom.getKey(), randRoom.getValue(), biomeQuadrant));
             randRoom.getValue().addGameElement(biomeAmulet);
 
-            for (var room : biome.getRooms()) {
+            for (final var room : biome.getRooms()) {
                 if (!room.getValue().getElements().contains(biomeAmulet)) {
                     room.getValue().addGameElement(
                             getRandomCollectable(getCentralPosition(room.getKey(), room.getValue(), biomeQuadrant)));
@@ -66,7 +66,7 @@ public final class Populator {
 
             }
 
-            for (var corridor : biome.getCorridors()) {
+            for (final var corridor : biome.getCorridors()) {
                 corridor.getValue().addGameElement(
                         enemyFactory
                                 .createPawn(getCentralPosition(corridor.getKey(), corridor.getValue(), biomeQuadrant)));

@@ -18,6 +18,7 @@ import java.awt.Graphics2D;
  * JPanel where videogame match is drawn.
  */
 public final class GamePanel extends JPanel {
+    private static final long serialVersionUID = 1L;
     // Screen settings
     /** Original Tile Size (even entities and game objects have the dimension of a tile). */
     public static final int ORIGINAL_TILE_SIZE = 24;
@@ -32,10 +33,10 @@ public final class GamePanel extends JPanel {
     /** Max rows of tile (height). */
     public static final int MAX_SCREEN_ROW = 15;
 
-    private CommandListener listener;
-    private GameLoop gameLoopController;
+    private final CommandListener listener;
+    private final GameLoop gameLoopController;
     private final List<Drawer> drawers = new ArrayList<>();
-    private PlayerStatus playerStatus;
+    private final PlayerStatus playerStatus;
 
     /**
      * Used to inizialize GamePanel. 
@@ -64,7 +65,7 @@ public final class GamePanel extends JPanel {
     @Override
     public void paintComponent(final Graphics graphics) {
         super.paintComponent(graphics);
-        Graphics2D graphics2d = (Graphics2D) graphics;
+        final Graphics2D graphics2d = (Graphics2D) graphics;
 
         for (Drawer drawer : drawers) {
             drawer.draw(graphics2d);
