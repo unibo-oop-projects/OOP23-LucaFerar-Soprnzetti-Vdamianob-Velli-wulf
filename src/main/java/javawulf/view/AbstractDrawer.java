@@ -14,7 +14,7 @@ import javawulf.model.player.Player;
 /**
  * Class that implements useful methods for all Drawer classes.
  */
-public abstract class AbstractDrawer implements Drawer {
+abstract class AbstractDrawer implements Drawer {
 
     private final GamePanel gamePanel;
     private final PlayerStatus player;
@@ -23,7 +23,7 @@ public abstract class AbstractDrawer implements Drawer {
      * @param gamePanel The gamepanel the game must be drawn into
      * @param player The current status of the Player character
      */
-    public AbstractDrawer(final GamePanel gamePanel, final PlayerStatus player) {
+    AbstractDrawer(final GamePanel gamePanel, final PlayerStatus player) {
         this.gamePanel = gamePanel;
         this.player = player;
     }
@@ -74,7 +74,7 @@ public abstract class AbstractDrawer implements Drawer {
         } else {
             theta = -Math.PI / 2;
         }
-        tx.rotate(theta, finalImage.getWidth() / 2, finalImage.getHeight() / 2);
+        tx.rotate(theta, (double) finalImage.getWidth() / 2, (double) finalImage.getHeight() / 2);
         op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 
         return op.filter(finalImage, null);
