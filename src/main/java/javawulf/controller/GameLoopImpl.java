@@ -57,14 +57,15 @@ public final class GameLoopImpl implements GameLoop, Runnable {
         this.pawns = new ArrayList<>();
         this.pieces = new ArrayList<>();
         this.powerUps = new ArrayList<>();
-        playerInit();
         mapInit();
+        playerInit();
         this.playerController = new PlayerControllerImpl();
         this.gamePanel = panel;
     }
 
     private void mapInit() {
-        this.gameMap = new MapFactoryImpl().getDefaultMap1(this.gamePlayer);
+        this.gameMap = new MapFactoryImpl().getDefaultMap1(new PlayerImpl(Map.MAP_SIZE * GameObject.OBJECT_SIZE / 2,
+        Map.MAP_SIZE * GameObject.OBJECT_SIZE / 2, 3, 0));
         final var elements = this.gameMap.getAllElements();
         this.items.addAll(elements.stream()
                 .filter(this::isItem)
@@ -90,8 +91,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void playerInit() {
-        this.gamePlayer = new PlayerImpl(Map.MAP_SIZE * GameObject.OBJECT_SIZE / 2,
-                Map.MAP_SIZE * GameObject.OBJECT_SIZE / 2, 3, 0);
+        this.gamePlayer = this.gameMap.getPlayer();
     }
 
     @Override
