@@ -56,7 +56,6 @@ public final class TilePosition {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-    
         final TilePosition other = (TilePosition) obj;
         return x == other.x && y == other.y;
     }

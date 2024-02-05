@@ -19,11 +19,12 @@ public final class LogInfo {
      * @param map of current game match
      */
     public static void print(final Map map) {
-        if(map.getPlayerRoom().isPresent()) {
+        if (map.getPlayerRoom().isPresent()) {
             // In case of PMD warnings, use logger instead println.
             final Logger log = Logger.getLogger(MapDrawer.class.getName());
             log.fine("GameObjects stanza corrente: " + map.getRoomElements(map.getPlayerRoom().get()));
-            // System.out.println("GameObjects stanza corrente: " + map.getRoomElements(map.getPlayerRoom().get()));
+            // System.out.println("GameObjects stanza corrente: " +
+            // map.getRoomElements(map.getPlayerRoom().get()));
         }
     }
 }
