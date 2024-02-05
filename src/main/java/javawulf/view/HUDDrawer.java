@@ -76,12 +76,16 @@ public final class HUDDrawer extends AbstractDrawer {
 
     private void drawCorners(final Graphics2D graphics, final int upX, final int upY, final int downX,
         final int downY) {
-        graphics.setColor(Color.white);
-        final int thicknessCorners = TileType.TILE_DIMENSION * GamePanel.SCALE * 2;
-        graphics.fillRect(upX, 0, thicknessCorners, this.gamePanel.getHeight());
-        graphics.fillRect(0, upY, this.gamePanel.getWidth(), thicknessCorners);
-        graphics.fillRect(downX, 0, thicknessCorners, this.gamePanel.getHeight());
-        graphics.fillRect(0, downY, this.gamePanel.getWidth(), thicknessCorners);
+        graphics.setColor(Color.darkGray);
+        // final int thicknessCorners = TileType.TILE_DIMENSION * GamePanel.SCALE * 2;
+        // graphics.fillRect(upX, 0, thicknessCorners, this.gamePanel.getHeight());
+        // graphics.fillRect(0, upY, this.gamePanel.getWidth(), thicknessCorners);
+        // graphics.fillRect(downX, 0, thicknessCorners, this.gamePanel.getHeight());
+        // graphics.fillRect(0, downY, this.gamePanel.getWidth(), thicknessCorners);
+        graphics.fillRect(0, 0, this.gamePanel.getWidth() / 2 - (15 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2, this.gamePanel.getHeight());
+        graphics.fillRect(0, 0, this.gamePanel.getWidth(), this.gamePanel.getHeight() / 2 - (15 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2);
+        graphics.fillRect(0, this.gamePanel.getHeight() / 2 + (14 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2, this.gamePanel.getWidth(), this.gamePanel.getHeight());
+        graphics.fillRect(this.gamePanel.getWidth() / 2 + (14 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2, 0, this.gamePanel.getWidth(), this.gamePanel.getHeight());
     }
 
     private void drawHud(final Graphics2D graphics, final int x, final int y) {
