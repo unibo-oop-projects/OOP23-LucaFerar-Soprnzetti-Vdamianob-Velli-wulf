@@ -12,12 +12,13 @@ import javawulf.model.powerup.PowerUp;
 import javawulf.model.powerup.PowerUpFactory;
 import javawulf.model.powerup.PowerUpFactoryImpl;
 
+/**
+ * Test for creation of all powerUps types.
+ */
 final class PowerUpFactoryTest {
-    
+
     private static final int X_COORDINATE_POWERUP = 10;
     private static final int Y_COORDINATE_POWERUP = 10;
-
-
     private PowerUpFactory factory;
     private Coordinate coordinatesPowerUp;
 
