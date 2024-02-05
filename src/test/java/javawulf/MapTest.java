@@ -188,10 +188,10 @@ public final class MapTest {
         Map gameMapExample2 = new MapFactoryImpl().getDefaultMap1(
                 new PlayerImpl(playerStartingPos.getX(), playerStartingPos.getY(), health, startingPoints));
 
-        int expectedGameElem = 52;
         // Default Map #1 ha, di default, 52 gameobjects (1 per stanza e 1 per corridoio).
+        int expectedGameElem = 52;
         assertEquals(expectedGameElem, gameMapExample2.getAllElements().size());
-        
+
         // Viene quindi aggiunto un ulteriore elemento per ciascuna delle 15 stanze (gli elementi
         // attesi dovrebbero essere ora 52 + 15 = 67)
         expectedGameElem+=15;
