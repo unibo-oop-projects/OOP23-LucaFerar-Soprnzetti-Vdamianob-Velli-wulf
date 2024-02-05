@@ -30,7 +30,6 @@ public final class GameLoopImpl implements GameLoop, Runnable {
 
     private static final int NANOSECONDS = 1_000_000_000;
     private long lastTime;
-    private long currentTime;
     private long timer;
     private double delta;
     private double interval;
@@ -47,6 +46,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     private final List<PowerUp> powerUps;
     private boolean playerDead;
     private boolean gameWon;
+    private static final boolean PRINT_LOG = true;
 
     /**
      * 
@@ -65,7 +65,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
 
     private void mapInit() {
         this.gameMap = new MapFactoryImpl().getDefaultMap1(this.gamePlayer);
-        var elements = this.gameMap.getAllElements();
+        final var elements = this.gameMap.getAllElements();
         this.items.addAll(elements.stream()
                 .filter(this::isItem)
                 .map(e -> (Collectable) e)
@@ -106,10 +106,11 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void gameLoopBody() {
-        this.currentTime = System.nanoTime();
-        delta += (this.currentTime - this.lastTime) / this.interval;
-        this.timer += (this.currentTime - this.lastTime);
-        this.lastTime = this.currentTime;
+        final long currentTime;
+        currentTime = System.nanoTime();
+        delta += (currentTime - this.lastTime) / this.interval;
+        this.timer += currentTime - this.lastTime;
+        this.lastTime = currentTime;
 
         if (delta >= 1) {
             this.update();
@@ -124,7 +125,9 @@ public final class GameLoopImpl implements GameLoop, Runnable {
             });
             this.gamePlayer.reduceStun();
             this.gamePlayer.getPowerUpHandler().update(this.gamePlayer);
-            // System.out.println(this.getMap().getPlayerRoom());
+            if(PRINT_LOG) {
+                LogInfo.print(this.gameMap);
+            }
         }
     }
 

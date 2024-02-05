@@ -5,7 +5,7 @@ import java.awt.Dimension;
 
 public final class ViewImpl {
 
-    protected GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
     public GamePanel getGamePanel() {
         return gamePanel;
@@ -18,7 +18,7 @@ public final class ViewImpl {
      */
     public ViewImpl() throws InterruptedException {
         this.gamePanel = new GamePanel();
-        JFrame window = new JFrame();
+        final JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // window.setResizable(false);
         window.setMinimumSize(new Dimension(GamePanel.TILESIZE * GamePanel.MAX_SCREEN_COL,

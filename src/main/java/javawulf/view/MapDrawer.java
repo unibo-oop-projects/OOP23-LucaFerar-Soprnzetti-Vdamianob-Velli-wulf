@@ -8,6 +8,8 @@ import javawulf.model.player.Player;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -20,7 +22,7 @@ public final class MapDrawer implements Drawer {
     private BufferedImage imgCorridor;
     private BufferedImage imgCentralRoom;
     private BufferedImage imgPortal;
-    private GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
     /**
      * MapDrawer is a component of GamePanel and it used for draw map Enviroment:
@@ -40,7 +42,8 @@ public final class MapDrawer implements Drawer {
             this.imgCentralRoom = ImageIO.read(getClass().getResourceAsStream(ImagePath.CENTRAL_ROOM_TILE.getPath()));
             this.imgPortal = ImageIO.read(getClass().getResourceAsStream(ImagePath.PORTAL_TILE.getPath()));
         } catch (IOException e) {
-            e.printStackTrace();
+            final Logger log = Logger.getLogger(MapDrawer.class.getName());
+            log.fine("Exception during path image load.");
         }
 
     }
@@ -48,7 +51,7 @@ public final class MapDrawer implements Drawer {
     @Override
     public void draw(final Graphics2D graphics) {
         final int offset = 1;
-        TilePosition playerPos = this.map.getTilePosition(this.map.getPlayer().getPosition()).get();
+        final TilePosition playerPos = this.map.getTilePosition(this.map.getPlayer().getPosition()).get();
         for (int x = playerPos.getX() - 8; x < playerPos.getX() + 8; x++) {
             for (int y = playerPos.getY() - 8 - offset; y < playerPos.getY() + 8; y++) {
                 BufferedImage img;

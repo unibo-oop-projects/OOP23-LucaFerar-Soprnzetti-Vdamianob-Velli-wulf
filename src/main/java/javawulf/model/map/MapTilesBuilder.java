@@ -24,13 +24,13 @@ public final class MapTilesBuilder {
      * @param biomes is a list that have four biomes of tiles map to be build.
      * @return a built map tiles.
      */
-    public static HashMap<TilePosition, TileType> buildTiles(final List<Biome> biomes) {
+    public static java.util.Map<TilePosition, TileType> buildTiles(final List<Biome> biomes) {
         return build(biomes);
     }
 
-    private static HashMap<TilePosition, TileType> build(final List<Biome> biomes) {
+    private static java.util.Map<TilePosition, TileType> build(final List<Biome> biomes) {
         final HashMap<TilePosition, TileType> tiles = new HashMap<>();
-        for (var biomeOffSet : BiomeQuadrant.values()) {
+        for (final var biomeOffSet : BiomeQuadrant.values()) {
             buildSpacesBiome(tiles, biomeOffSet, biomes.get(biomeOffSet.getPos()).getRooms(), Room.DEFAULT_TYPE);
             buildSpacesBiome(tiles, biomeOffSet, biomes.get(biomeOffSet.getPos()).getCorridors(),
                     Corridor.DEFAULT_TYPE);
@@ -49,10 +49,10 @@ public final class MapTilesBuilder {
      *                         HashMap
      * @param defaultSpaceTile to use for build spaces
      */
-    private static void buildSpacesBiome(final HashMap<TilePosition, TileType> tiles,
+    private static void buildSpacesBiome(final java.util.Map<TilePosition, TileType> tiles,
             final BiomeQuadrant biomeQuadrant, final List<Pair<TilePosition, Space>> spaces,
             final TileType defaultSpaceTile) {
-        for (var space : spaces) {
+        for (final var space : spaces) {
             buildSpace(tiles,
                     new TilePosition(space.getKey().getX() + biomeQuadrant.getOffset().getX(),
                             space.getKey().getY() + biomeQuadrant.getOffset().getY()),
@@ -68,7 +68,7 @@ public final class MapTilesBuilder {
      * @param space
      * @param defaultSpaceTile to use for build space
      */
-    private static void buildSpace(final HashMap<TilePosition, TileType> tiles,
+    private static void buildSpace(final java.util.Map<TilePosition, TileType> tiles,
             final TilePosition posToStart, final Space space,
             final TileType defaultSpaceTile) {
         for (int y = posToStart.getY(); y < posToStart.getY() + space.getHeight(); y++) {
@@ -78,11 +78,11 @@ public final class MapTilesBuilder {
         }
     }
 
-    private static void buildCentralBiome(final HashMap<TilePosition, TileType> tiles) {
+    private static void buildCentralBiome(final java.util.Map<TilePosition, TileType> tiles) {
         // CHECKSTYLE: MagicNumber OFF
         // In the central biome, the position of the spaces was choosen arbitrarily: the
         // use of final variables to identify the
-        // TilePositions of each space would have been less comprehensive.
+        // tilePositions of each space would have been less comprehensive.
         // For this reason it was decided to suppress the warning checkstyles.
         buildSpace(tiles, new TilePosition(Biome.SIZE, 3), new Corridor(Map.WIDTH_CENTRAL_BIOME, 2), TileType.CORRIDOR);
         buildSpace(tiles, new TilePosition(Biome.SIZE, 15), new Corridor(Map.WIDTH_CENTRAL_BIOME, 2),
@@ -122,10 +122,10 @@ public final class MapTilesBuilder {
      * @param tiles HashMap-tiles where build finisher tiles.
      */
     @SuppressWarnings("unused")
-    private static void buildFinisherTiles(final HashMap<TilePosition, TileType> tiles) {
+    private static void buildFinisherTiles(final java.util.Map<TilePosition, TileType> tiles) {
         final int offset = 1;
-        Room biggerFinisher = new Room(2, 2);
-        Room unaryFinisher = new Room(1, 1);
+        final Room biggerFinisher = new Room(2, 2);
+        final Room unaryFinisher = new Room(1, 1);
         if (Map.MAP_SIZE % 2 == 0) {
             buildSpace(tiles, new TilePosition(Map.MAP_SIZE / 2 - offset, Map.MAP_SIZE / 2 - offset), biggerFinisher,
                     TileType.PORTAL);

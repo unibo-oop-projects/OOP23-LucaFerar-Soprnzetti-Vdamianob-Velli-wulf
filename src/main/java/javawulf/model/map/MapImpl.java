@@ -23,7 +23,7 @@ import javawulf.model.player.Player;
  */
 public final class MapImpl implements Map {
 
-    private ArrayList<Biome> biomes = new ArrayList<>();
+    private final List<Biome> biomes = new ArrayList<>();
     private final java.util.Map<TilePosition, TileType> tiles;
     private final Player player;
 
@@ -44,6 +44,21 @@ public final class MapImpl implements Map {
     }
 
     @Override
+    public HashMap<TilePosition, TileType> getTilesMap() {
+        return new HashMap<>(this.tiles);
+    }
+
+    @Override
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    @Override
+    public List<Biome> getBiomes() {
+        return this.biomes;
+    }
+
+    @Override
     public Optional<TilePosition> getTilePosition(final Coordinate position) {
         if (!this.isValidPosition(position)) {
             return Optional.empty();
@@ -54,19 +69,19 @@ public final class MapImpl implements Map {
 
     @Override
     public Optional<TileType> getTileType(final Coordinate position) {
-        var tilePos = this.getTilePosition(position);
+        final var tilePos = this.getTilePosition(position);
         if (tilePos.isEmpty()) {
             return Optional.empty();
         }
 
-        return (this.tiles.containsKey(tilePos.get()) ? Optional.of(tiles.get(tilePos.get()))
-                : Optional.of(TileType.WALL));
+        return this.tiles.containsKey(tilePos.get()) ? Optional.of(tiles.get(tilePos.get()))
+                : Optional.of(TileType.WALL);
     }
 
     @Override
     public Set<TileType> getTileTypes(final BoundingBox boundBoxEntity) {
-        Rectangle entityRect = boundBoxEntity.getCollisionArea();
-        HashSet<TileType> intersectedTileTypes = new HashSet<>();
+        final Rectangle entityRect = boundBoxEntity.getCollisionArea();
+        final HashSet<TileType> intersectedTileTypes = new HashSet<>();
         if (!isValidPosition(new CoordinateImpl(entityRect.x, entityRect.y))) {
             return intersectedTileTypes;
         }
@@ -80,8 +95,8 @@ public final class MapImpl implements Map {
     }
 
     private Set<TilePosition> getTiles(final BoundingBox boundBoxEntity) {
-        Rectangle entityRect = boundBoxEntity.getCollisionArea();
-        HashSet<TilePosition> intersectedTiles = new HashSet<>();
+        final Rectangle entityRect = boundBoxEntity.getCollisionArea();
+        final HashSet<TilePosition> intersectedTiles = new HashSet<>();
         if (!isValidPosition(new CoordinateImpl(entityRect.x, entityRect.y))) {
             return intersectedTiles;
         }
@@ -100,24 +115,9 @@ public final class MapImpl implements Map {
     }
 
     @Override
-    public HashMap<TilePosition, TileType> getTilesMap() {
-        return new HashMap<>(this.tiles);
-    }
-
-    @Override
-    public Player getPlayer() {
-        return this.player;
-    }
-
-    @Override
-    public ArrayList<Biome> getBiomes() {
-        return this.biomes;
-    }
-
-    @Override
     public Optional<Space> getPlayerRoom() {
-        for (var playerTile : this.getTiles(this.player.getBounds())) {
-            Optional<BiomeQuadrant> quadrant = getBiomeQuadrant(playerTile);
+        for (final var playerTile : this.getTiles(this.player.getBounds())) {
+            final Optional<BiomeQuadrant> quadrant = getBiomeQuadrant(playerTile);
             if (quadrant.isPresent()) {
                 return this.biomes.get(quadrant.get().getPos())
                         .getRoom(new TilePosition(playerTile.getX() - quadrant.get().getOffset().getX(),
@@ -127,8 +127,12 @@ public final class MapImpl implements Map {
         return Optional.empty();
     }
 
+    /**
+     * @param tilePos absolute tile position (referred to Map)
+     * @return the specific BiomeQuadrant where tilePos is (Empty optional if pos. passed is out of Map)
+     */
     private Optional<BiomeQuadrant> getBiomeQuadrant(final TilePosition tilePos) {
-        for (var quadrant : BiomeQuadrant.values()) {
+        for (final var quadrant : BiomeQuadrant.values()) {
             if (tilePos.getX() >= quadrant.getOffset().getX() && tilePos.getY() >= quadrant.getOffset().getY()
                     &&
                     tilePos.getX() < quadrant.getOffset().getX() + Biome.SIZE
@@ -141,27 +145,18 @@ public final class MapImpl implements Map {
 
     @Override
     public List<GameElement> getRoomElements(final Space room) {
-        for (var biome : biomes) {
-            for (var biomeRoom : biome.getRooms()) {
-                if (room.equals(biomeRoom.getValue())) {
-                    return biomeRoom.getValue().getElements();
-                }
-            }
-        }
-        return List.of();
+        return biomes.stream()
+        .flatMap(biome -> biome.getRooms().stream())
+        .filter(biomeRoom -> room.equals(biomeRoom.getValue()))
+        .findFirst()
+        .map(biomeRoom -> biomeRoom.getValue().getElements())
+        .orElse(List.of());
     }
 
     @Override
     public List<GameElement> getAllElements() {
-        List<GameElement> allEntities = new ArrayList<>();
-        for (var biome : biomes) {
-            for (var room : biome.getRooms()) {
-                allEntities.addAll(room.getValue().getElements());
-            }
-            for (var corridor : biome.getCorridors()) {
-                allEntities.addAll(corridor.getValue().getElements());
-            }
-        }
+        final List<GameElement> allEntities = new ArrayList<>();
+        this.biomes.forEach(biome -> allEntities.addAll(biome.getElements()));
         return allEntities;
     }
 
