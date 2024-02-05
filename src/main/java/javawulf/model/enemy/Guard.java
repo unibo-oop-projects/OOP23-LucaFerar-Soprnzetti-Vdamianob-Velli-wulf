@@ -61,8 +61,8 @@ public final class Guard extends EnemyImpl {
             this.reduceStun();
         } else {
 
-            int diffX = p.getPosition().getX() - this.getPosition().getX();
-            int diffY = p.getPosition().getY() - this.getPosition().getY();
+            final int diffX = p.getPosition().getX() - this.getPosition().getX();
+            final int diffY = p.getPosition().getY() - this.getPosition().getY();
 
             if (!this.isCollidingWithWall(m)) {
                 if (Math.abs(diffX) > Math.abs(diffY)) {
