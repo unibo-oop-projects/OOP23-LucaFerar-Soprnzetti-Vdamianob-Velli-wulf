@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 
@@ -51,7 +52,7 @@ public final class ScoreBoardImpl implements Scoreboard {
 
     @Override
     public List<Result> getAllScores() {
-        return this.scoreboard;
+        return Collections.unmodifiableList(this.scoreboard);
     }
 
     @Override
@@ -62,7 +63,7 @@ public final class ScoreBoardImpl implements Scoreboard {
                 while ((line = reader.readLine()) != null) {
                     this.addNewScore(convertInResult(line));
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

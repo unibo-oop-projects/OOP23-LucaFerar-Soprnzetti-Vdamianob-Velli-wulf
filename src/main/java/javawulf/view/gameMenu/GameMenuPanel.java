@@ -33,6 +33,7 @@ public class GameMenuPanel extends JPanel {
     private static final int MAX_BUTTON_WIDTH = 800;
     private static final int MAX_BUTTON_HEIGHT = 120;
     private static final int MENU_OFFSET = 5;
+    private static final int SCOREBOARD_OFFSET = 7;
     private static final int COLS_RESULTS = 3;
     private final JFrame frame;
 
@@ -40,12 +41,11 @@ public class GameMenuPanel extends JPanel {
      * Sets the size of the window and creates the menu.
      * @throws InterruptedException 
      */
-    
     public GameMenuPanel() throws InterruptedException {
         scaleX = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2;
         scaleY = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2;
         menuBorders = scaleX / MENU_OFFSET;
-        scoreboardBorders = scaleX / 7;
+        scoreboardBorders = scaleX / SCOREBOARD_OFFSET;
         frame = new JFrame("JavaWulf");
         createMenuGUI(frame);
     }
