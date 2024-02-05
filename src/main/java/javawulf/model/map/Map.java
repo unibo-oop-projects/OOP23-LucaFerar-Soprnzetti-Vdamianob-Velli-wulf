@@ -87,7 +87,7 @@ public interface Map {
 
     /**
      * 
-     * @return room where the Player is in (Empty if isn't in any room).
+     * @return room where the Player is in (Optional.Empty if isn't in any room).
      */
     Optional<Space> getPlayerRoom();
 

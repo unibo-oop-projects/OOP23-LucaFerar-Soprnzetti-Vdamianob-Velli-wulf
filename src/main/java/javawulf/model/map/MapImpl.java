@@ -44,6 +44,21 @@ public final class MapImpl implements Map {
     }
 
     @Override
+    public HashMap<TilePosition, TileType> getTilesMap() {
+        return new HashMap<>(this.tiles);
+    }
+
+    @Override
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    @Override
+    public ArrayList<Biome> getBiomes() {
+        return this.biomes;
+    }
+
+    @Override
     public Optional<TilePosition> getTilePosition(final Coordinate position) {
         if (!this.isValidPosition(position)) {
             return Optional.empty();
@@ -100,21 +115,6 @@ public final class MapImpl implements Map {
     }
 
     @Override
-    public HashMap<TilePosition, TileType> getTilesMap() {
-        return new HashMap<>(this.tiles);
-    }
-
-    @Override
-    public Player getPlayer() {
-        return this.player;
-    }
-
-    @Override
-    public ArrayList<Biome> getBiomes() {
-        return this.biomes;
-    }
-
-    @Override
     public Optional<Space> getPlayerRoom() {
         for (var playerTile : this.getTiles(this.player.getBounds())) {
             Optional<BiomeQuadrant> quadrant = getBiomeQuadrant(playerTile);
@@ -127,6 +127,10 @@ public final class MapImpl implements Map {
         return Optional.empty();
     }
 
+    /**
+     * @param tilePos absolute tile position (referred to Map)
+     * @return the specific BiomeQuadrant where tilePos is (Empty optional if pos. passed is out of Map)
+     */
     private Optional<BiomeQuadrant> getBiomeQuadrant(final TilePosition tilePos) {
         for (var quadrant : BiomeQuadrant.values()) {
             if (tilePos.getX() >= quadrant.getOffset().getX() && tilePos.getY() >= quadrant.getOffset().getY()
