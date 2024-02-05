@@ -2,6 +2,7 @@ package javawulf.view;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,7 @@ public final class ItemDrawer extends AbstractDrawer {
             images.put(ExtraHeart.class, this.imageLoader(ImagePath.EXTRA_HEART));
             images.put(GreatSword.class, this.imageLoader(ImagePath.GREATSWORD));
             images.put(Shield.class, this.imageLoader(ImagePath.SHIELD_ITEM));
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

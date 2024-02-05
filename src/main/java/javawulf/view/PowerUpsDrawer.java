@@ -2,6 +2,7 @@ package javawulf.view;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ public final class PowerUpsDrawer extends AbstractDrawer {
                 images.put(PowerUpInvincibility.class, this.imageLoader(ImagePath.POWERUP_INVINCIBILITY));
                 images.put(PowerUpDoublePoints.class, this.imageLoader(ImagePath.POWERUP_DOUBLEPOINTS));
                 images.put(PowerUpSpeed.class, this.imageLoader(ImagePath.POWERUP_SPEED));
-            } catch (Exception exception) {
+            } catch (IOException exception) {
                 exception.printStackTrace();
             }
         }
