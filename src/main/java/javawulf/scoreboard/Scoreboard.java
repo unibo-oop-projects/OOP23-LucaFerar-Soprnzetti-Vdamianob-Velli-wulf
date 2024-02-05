@@ -16,7 +16,7 @@ public interface Scoreboard {
     /**
      * File path for saving and reading the Scoreboard.
      */
-    String FILE_PATH = new File(".." + File.separator + "resources" + File.separator + "Scoreboard.txt").getAbsolutePath();
+    String FILE_PATH = new File(System.getProperty("user.dir") + File.separator + "Scoreboard.txt").getPath();
 
     /**
      * Updates the scoreboard.

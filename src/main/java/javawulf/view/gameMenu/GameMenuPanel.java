@@ -78,6 +78,7 @@ public class GameMenuPanel extends JPanel {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
+                frame.dispose();
                 try {
                     frame.getContentPane().removeAll();
                     frame.add(new GamePanel());
