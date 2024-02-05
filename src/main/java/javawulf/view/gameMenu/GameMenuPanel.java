@@ -7,6 +7,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import javawulf.model.player.ScoreImpl;
+import javawulf.scoreboard.ScoreBoardImpl;
+import javawulf.scoreboard.Scoreboard;
+import javawulf.scoreboard.Result;
 import javawulf.view.GamePanel;
 
 import javax.swing.Box;
@@ -14,6 +18,7 @@ import javax.swing.Box;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.List;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -135,12 +140,13 @@ public class GameMenuPanel extends JPanel {
     }
 
     private static void showLeaderboard(final JFrame frame) {
+        
         frame.getContentPane().removeAll();
-
+        Scoreboard scoreboard = new ScoreBoardImpl();
+        scoreboard.loadScoreBoardFromFile();
+        JPanel scoreBoardJPanel;
         JPanel leaderboardPanel = new JPanel(new BorderLayout());
-
         JLabel titleLabel = new JLabel("LeaderBoard", SwingConstants.CENTER);
-
         JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -151,7 +157,24 @@ public class GameMenuPanel extends JPanel {
             }
         });
 
+        if(!scoreboard.getAllScores().isEmpty()) {
+            scoreBoardJPanel = new JPanel(new GridLayout(scoreboard.getAllScores().size(), 3));
+            scoreboard.getAllScores().forEach(score -> {
+            JLabel nameLabel = new JLabel(score.getUserName());
+            JLabel scoreLabel = new JLabel(Integer.toString(score.getScore()));
+            JLabel wonLabel = new JLabel(score.getWon() ? "yes" : "no");
+    
+            scoreBoardJPanel.add(nameLabel);
+            scoreBoardJPanel.add(scoreLabel);
+            scoreBoardJPanel.add(wonLabel);
+            });
+        } else {
+            scoreBoardJPanel = new JPanel();
+            scoreBoardJPanel.add(new JLabel("no results yet!"));
+        }
+
         leaderboardPanel.add(titleLabel, BorderLayout.NORTH);
+        leaderboardPanel.add(scoreBoardJPanel, BorderLayout.CENTER);
         leaderboardPanel.add(backButton, BorderLayout.SOUTH);
         frame.add(leaderboardPanel);
         frame.revalidate();

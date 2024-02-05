@@ -3,11 +3,16 @@ package javawulf.view;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import javawulf.controller.GameLoop;
 import javawulf.controller.GameLoopImpl;
 import javawulf.controller.PlayerStatus;
 import javawulf.controller.PlayerStatusImpl;
+import javawulf.scoreboard.Result;
+import javawulf.scoreboard.ResultImpl;
+import javawulf.scoreboard.ScoreBoardImpl;
+import javawulf.scoreboard.Scoreboard;
 import javawulf.view.gamemenu.GameMenuPanel;
 
 import java.awt.Dimension;
@@ -81,9 +86,13 @@ public final class GamePanel extends JPanel {
 
     public void resetFrame(final boolean gameWon, final int score) {
         String value = gameWon ? "CONGRATULATIONS! You escaped sucessfully" : "Oh no, Game Over. Better luck next time!";
-        JOptionPane.showMessageDialog(this, value + "\n Your point total is " + score);
+        String username = JOptionPane.showInputDialog(value + "\n Your point total is " + score + "\n Insert your username:");
         this.setVisible(false);
         // Save scoreBoard
+        Scoreboard scoreboard = new ScoreBoardImpl();
+        scoreboard.loadScoreBoardFromFile();
+        scoreboard.addNewScore(new ResultImpl(username, score, gameWon));
+        scoreboard.saveScoreBoard();
         // Clear the frame
         frame.getContentPane().removeAll();
         // Open gameMenuPanel
