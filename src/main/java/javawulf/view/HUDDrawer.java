@@ -92,32 +92,32 @@ public final class HUDDrawer extends AbstractDrawer {
         final String color = this.player.getColor();
         final String status = this.player.getPlayerCollision();
         BufferedImage img;
-        int i;
-        for (i = 0; i < maxHealth + shield; i++) {
-            if (maxHealth <= i) {
+        int offset;
+        for (offset = 0; offset < maxHealth + shield; offset++) {
+            if (maxHealth <= offset) {
                 img = this.shield;
-            } else if (current > i) {
+            } else if (current > offset) {
                 img = this.health;
             } else { 
                 img = this.maxHealth;
             }
-            graphics.drawImage(img, x + GamePanel.TILESIZE * i,
+            graphics.drawImage(img, x + GamePanel.TILESIZE * offset,
                 y, GamePanel.TILESIZE, GamePanel.TILESIZE, null);
         }
         img = "NORMAL".equals(sword) ? this.sword : this.greatsword;
-        graphics.drawImage(img, x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE,
+        graphics.drawImage(img, x + GamePanel.TILESIZE * offset, y, GamePanel.TILESIZE,
             GamePanel.TILESIZE, null);
-        i++;
+        offset++;
         final Color activePowerUp = this.colorPowerUpActive(color);
         graphics.setColor(activePowerUp);
-        graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
-        i++;
+        graphics.fillRect(x + GamePanel.TILESIZE * offset, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
+        offset++;
         final Color stunStatus = "STUNNED".equals(status) && !"blue".equals(color) ? Color.ORANGE : Color.lightGray;
         graphics.setColor(stunStatus);
-        graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
-        i++;
+        graphics.fillRect(x + GamePanel.TILESIZE * offset, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
+        offset++;
         graphics.setColor(this.isPlayerAligned() ? Color.MAGENTA : Color.BLACK);
-        graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
+        graphics.fillRect(x + GamePanel.TILESIZE * offset, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
     }
 
     private boolean isPlayerAligned() {
