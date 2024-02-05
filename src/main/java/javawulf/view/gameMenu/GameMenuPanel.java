@@ -18,41 +18,50 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * GameMenuPanel is used to display the GUI.
+ */
 public class GameMenuPanel extends JPanel {
 
-    public static int scaleX;
-    public static int scaleY;
+    private static int scaleX;
+    private static int scaleY;
     private static int borders;
 
     private static final int MAX_BUTTON_WIDTH = 800;
     private static final int MAX_BUTTON_HEIGHT = 120;
+    private static final int MENU_OFFSET = 5;
 
+    /**
+     * Sets the size of the window and creates the menu.
+     * @throws InterruptedException 
+     */
     public GameMenuPanel() throws InterruptedException {
-        scaleX = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/2;
-        scaleY = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2;
-        borders = scaleX/5;
-        CreateMenuGUI();
+        scaleX = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2;
+        scaleY = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2;
+        borders = scaleX / MENU_OFFSET;
+        createMenuGUI();
     }
 
-    private static void CreateMenuGUI() {
+    /**
+     * Creates the menu.
+     */
+    private static void createMenuGUI() {
         JFrame frame = new JFrame("JavaWulf");
-    
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(scaleY, scaleX));
         frame.setPreferredSize(new Dimension(frame.getWidth(), frame.getHeight()));
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
 
-        frame.setBackground(java.awt.Color.BLACK);
-
         showMenu(frame);
 
         frame.setVisible(true);
     }
 
-    private static void showMenu(JFrame frame){
+    private static void showMenu(final JFrame frame) {
 
-        JPanel menu = new JPanel(new GridLayout(2,2));
+        JPanel menu = new JPanel(new GridLayout(2, 2));
         JButton startButton = new JButton("PLAY");
         JButton leaderboardButton = new JButton("Leaderboard");
         JButton guideButton = new JButton("Guide");
@@ -68,12 +77,11 @@ public class GameMenuPanel extends JPanel {
         // Start Game
         startButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+            public void actionPerformed(final ActionEvent e) {
                 try {
                     frame.getContentPane().removeAll();
                     frame.add(new GamePanel());
-                    frame.setSize(GamePanel.TILESIZE*15, GamePanel.TILESIZE*15);
+                    frame.setSize(GamePanel.TILESIZE * GamePanel.MAX_SCREEN_COL, GamePanel.TILESIZE * GamePanel.MAX_SCREEN_ROW);
                     frame.setVisible(true);
                 } catch (final Exception exceptionViewImpl) {
                     exceptionViewImpl.printStackTrace();
@@ -83,14 +91,14 @@ public class GameMenuPanel extends JPanel {
         // Show LeaderBoard
         leaderboardButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 showLeaderboard(frame);
             }
         });
         // Show Guide
         guideButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 JOptionPane.showMessageDialog(frame, "Press the UP key to move up\n"
                     + "Press the DOWN key to move down\n" + "Press the LEFT key to move left\n"
                     + "Press the RIGHT key to move right\n" + "Press the COMMA (,) key to attack\n");
@@ -99,7 +107,7 @@ public class GameMenuPanel extends JPanel {
         // Exit 
         exitButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 int choice = JOptionPane.showConfirmDialog(frame,
                         "Sure you want to quit?",
                         "Confirm exit",
@@ -134,7 +142,7 @@ public class GameMenuPanel extends JPanel {
         JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 frame.getContentPane().removeAll();
                 showMenu(frame);
                 frame.setVisible(true);
@@ -143,7 +151,6 @@ public class GameMenuPanel extends JPanel {
 
         leaderboardPanel.add(titleLabel, BorderLayout.NORTH);
         leaderboardPanel.add(backButton, BorderLayout.SOUTH);
-        
         frame.add(leaderboardPanel);
         frame.revalidate();
         frame.repaint();

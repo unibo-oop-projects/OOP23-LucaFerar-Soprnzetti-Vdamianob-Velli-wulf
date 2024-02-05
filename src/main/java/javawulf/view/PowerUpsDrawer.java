@@ -14,10 +14,10 @@ import javawulf.model.powerUp.PowerUpInvincibility;
 import javawulf.model.powerUp.PowerUpSpeed;
 
 /**
- *  Implementation for drawing all Power Ups
+ *  Implementation for drawing all Power Ups.
  */
 public final class PowerUpsDrawer extends AbstractDrawer {
-        
+
         private final Map<Class<? extends PowerUp>, BufferedImage> images = new HashMap<>();
         private final List<PowerUp> powerUps;
 
@@ -25,8 +25,8 @@ public final class PowerUpsDrawer extends AbstractDrawer {
          * Builds the power ups passed from the Controller.
          * 
          * @param gamePanel the Game Panel where the items must be drawn
-         * @param items     a list of all the items to draw
-         * @param player    the current status of the Player character
+         * @param powerUps a list of all the items to draw
+         * @param playerStatus the current status of the Player character
          */
         public PowerUpsDrawer(final GamePanel gamePanel, final List<PowerUp> powerUps, final PlayerStatus playerStatus) {
             super(gamePanel, playerStatus);
@@ -51,6 +51,5 @@ public final class PowerUpsDrawer extends AbstractDrawer {
                 }
             }
         }
-
 
 }

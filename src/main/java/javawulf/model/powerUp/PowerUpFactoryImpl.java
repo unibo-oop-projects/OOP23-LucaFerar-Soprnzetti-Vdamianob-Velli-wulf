@@ -2,23 +2,59 @@ package javawulf.model.powerUp;
 
 import javawulf.model.Coordinate;
 
-public class PowerUpFactoryImpl implements PowerUpFactory {
+/**
+ * PowerUpFactoryImpl is the implementation of PowerUpFactory.
+ */
+public final class PowerUpFactoryImpl implements PowerUpFactory {
 
-    public final static int DURATION_ATTACK = 20;
-    public final static int POINTS_ATTACK = 50;
-    public final static String TYPE_ATTACK = "Attack";
-
-    public final static int DURATION_DOUBLEPOINTS = 30;
-    public final static int POINTS_DOUBLEPOINTS = 100;
-    public final static String TYPE_DOUBLEPOINTS = "DoublePoints";
-
-    public final static int DURATION_INVINCIBILITY = 10;
-    public final static int POINTS_INVINCIBILITY = 100;
-    public final static String TYPE_INVINCIBILITY = "Invincibility";   
-
-    public final static int DURATION_SPEED = 30;
-    public final static int POINTS_SPEED = 50;
-    public final static String TYPE_SPEED = "Speed";
+    /**
+     *  Param for Attack powerUp (duration).
+     */
+    public static final int DURATION_ATTACK = 20;
+    /**
+     *  Param for Attack powerUp (points).
+     */
+    public static final int POINTS_ATTACK = 50;
+    /**
+     *  Param for Attack powerUp (type).
+     */
+    public static final String TYPE_ATTACK = "Attack";
+    /**
+     *  Param for Double points powerUp (duration).
+     */
+    public static final int DURATION_DOUBLEPOINTS = 30;
+    /**
+     *  Param for Double points powerUp (points).
+     */
+    public static final int POINTS_DOUBLEPOINTS = 100;
+    /**
+     *  Param for Double points powerUp (type).
+     */
+    public static final String TYPE_DOUBLEPOINTS = "DoublePoints";
+    /**
+     *  Param for Invincibility powerUp (duration).
+     */
+    public static final int DURATION_INVINCIBILITY = 10;
+    /**
+     *  Param for Invincibility powerUp (points).
+     */
+    public static final int POINTS_INVINCIBILITY = 100;
+    /**
+     *  Param for Invincibility powerUp (type).
+     */
+    public static final String TYPE_INVINCIBILITY = "Invincibility";
+    /**
+     *  Param for Speed powerUp (duration).
+     */
+    public static final int DURATION_SPEED = 30;
+    /**
+     *  Param for Speed powerUp (points).
+     */
+    public static final int POINTS_SPEED = 50;
+    /**
+     *  Param for Speed powerUp (type).
+     */
+    public static final String TYPE_SPEED = "Speed";
 
     @Override
     public PowerUpAttack createPowerUpAttack(final Coordinate coordinates) {
@@ -39,7 +75,5 @@ public class PowerUpFactoryImpl implements PowerUpFactory {
     public PowerUpSpeed createPowerUpSpeed(final Coordinate coordinates) {
         return new PowerUpSpeed(coordinates, DURATION_SPEED, POINTS_SPEED, TYPE_SPEED);
     }
-
-    
 
 }
