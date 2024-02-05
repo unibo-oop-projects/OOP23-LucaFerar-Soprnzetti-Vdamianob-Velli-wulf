@@ -7,10 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import javawulf.model.player.ScoreImpl;
 import javawulf.scoreboard.ScoreBoardImpl;
 import javawulf.scoreboard.Scoreboard;
-import javawulf.scoreboard.Result;
 import javawulf.view.GamePanel;
 
 import javax.swing.Box;
@@ -18,7 +16,6 @@ import javax.swing.Box;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.List;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,9 +47,10 @@ public class GameMenuPanel extends JPanel {
     }
 
     /**
-     * Creates the menu.
+     * Create the buttons of the game menu.
+     * @param frame Is the frame where the menu is shown
      */
-    public static void createMenuGUI(JFrame frame) {
+    public static void createMenuGUI(final JFrame frame) {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(scaleY, scaleX));
         frame.setSize(new Dimension(scaleY, scaleX));
@@ -119,7 +117,6 @@ public class GameMenuPanel extends JPanel {
                         "Sure you want to quit?",
                         "Confirm exit",
                         JOptionPane.YES_NO_OPTION);
-
                 if (choice == JOptionPane.YES_OPTION) {
                     System.exit(0);
                 }
@@ -130,9 +127,7 @@ public class GameMenuPanel extends JPanel {
         menu.add(leaderboardButton);
         menu.add(guideButton);
         menu.add(exitButton);
-
         frame.add(menu, BorderLayout.CENTER);
-
         frame.add(Box.createVerticalStrut(borders), BorderLayout.NORTH);
         frame.add(Box.createVerticalStrut(borders), BorderLayout.SOUTH);
         frame.add(Box.createHorizontalStrut(borders), BorderLayout.WEST);
@@ -140,7 +135,6 @@ public class GameMenuPanel extends JPanel {
     }
 
     private static void showLeaderboard(final JFrame frame) {
-        
         frame.getContentPane().removeAll();
         Scoreboard scoreboard = new ScoreBoardImpl();
         scoreboard.loadScoreBoardFromFile();
@@ -157,13 +151,12 @@ public class GameMenuPanel extends JPanel {
             }
         });
 
-        if(!scoreboard.getAllScores().isEmpty()) {
+        if (!scoreboard.getAllScores().isEmpty()) {
             scoreBoardJPanel = new JPanel(new GridLayout(scoreboard.getAllScores().size(), 3));
             scoreboard.getAllScores().forEach(score -> {
             JLabel nameLabel = new JLabel(score.getUserName());
             JLabel scoreLabel = new JLabel(Integer.toString(score.getScore()));
             JLabel wonLabel = new JLabel(score.getWon() ? "yes" : "no");
-    
             scoreBoardJPanel.add(nameLabel);
             scoreBoardJPanel.add(scoreLabel);
             scoreBoardJPanel.add(wonLabel);
