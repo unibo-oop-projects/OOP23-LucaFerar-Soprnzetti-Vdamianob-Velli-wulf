@@ -12,3 +12,5 @@ bin/
 
 # Ignore VScode setting directory
 .vscode
+
+Scoreboard.txt
