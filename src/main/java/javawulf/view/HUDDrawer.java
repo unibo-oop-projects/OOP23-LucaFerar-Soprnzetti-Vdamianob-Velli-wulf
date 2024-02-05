@@ -76,12 +76,16 @@ public final class HUDDrawer extends AbstractDrawer {
 
     private void drawCorners(final Graphics2D graphics, final int upX, final int upY, final int downX,
         final int downY) {
-        graphics.setColor(Color.white);
-        final int thicknessCorners = TileType.TILE_DIMENSION * GamePanel.SCALE * 2;
-        graphics.fillRect(upX, 0, thicknessCorners, this.gamePanel.getHeight());
-        graphics.fillRect(0, upY, this.gamePanel.getWidth(), thicknessCorners);
-        graphics.fillRect(downX, 0, thicknessCorners, this.gamePanel.getHeight());
-        graphics.fillRect(0, downY, this.gamePanel.getWidth(), thicknessCorners);
+        graphics.setColor(Color.darkGray);
+        // final int thicknessCorners = TileType.TILE_DIMENSION * GamePanel.SCALE * 2;
+        // graphics.fillRect(upX, 0, thicknessCorners, this.gamePanel.getHeight());
+        // graphics.fillRect(0, upY, this.gamePanel.getWidth(), thicknessCorners);
+        // graphics.fillRect(downX, 0, thicknessCorners, this.gamePanel.getHeight());
+        // graphics.fillRect(0, downY, this.gamePanel.getWidth(), thicknessCorners);
+        graphics.fillRect(0, 0, this.gamePanel.getWidth() / 2 - (15 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2, this.gamePanel.getHeight());
+        graphics.fillRect(0, 0, this.gamePanel.getWidth(), this.gamePanel.getHeight() / 2 - (15 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2);
+        graphics.fillRect(0, this.gamePanel.getHeight() / 2 + (14 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2, this.gamePanel.getWidth(), this.gamePanel.getHeight());
+        graphics.fillRect(this.gamePanel.getWidth() / 2 + (14 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2, 0, this.gamePanel.getWidth(), this.gamePanel.getHeight());
     }
 
     private void drawHud(final Graphics2D graphics, final int x, final int y) {
@@ -92,32 +96,32 @@ public final class HUDDrawer extends AbstractDrawer {
         final String color = this.player.getColor();
         final String status = this.player.getPlayerCollision();
         BufferedImage img;
-        int i;
-        for (i = 0; i < maxHealth + shield; i++) {
-            if (maxHealth <= i) {
+        int offset;
+        for (offset = 0; offset < maxHealth + shield; offset++) {
+            if (maxHealth <= offset) {
                 img = this.shield;
-            } else if (current > i) {
+            } else if (current > offset) {
                 img = this.health;
             } else { 
                 img = this.maxHealth;
             }
-            graphics.drawImage(img, x + GamePanel.TILESIZE * i,
+            graphics.drawImage(img, x + GamePanel.TILESIZE * offset,
                 y, GamePanel.TILESIZE, GamePanel.TILESIZE, null);
         }
         img = "NORMAL".equals(sword) ? this.sword : this.greatsword;
-        graphics.drawImage(img, x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE,
+        graphics.drawImage(img, x + GamePanel.TILESIZE * offset, y, GamePanel.TILESIZE,
             GamePanel.TILESIZE, null);
-        i++;
+        offset++;
         final Color activePowerUp = this.colorPowerUpActive(color);
         graphics.setColor(activePowerUp);
-        graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
-        i++;
+        graphics.fillRect(x + GamePanel.TILESIZE * offset, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
+        offset++;
         final Color stunStatus = "STUNNED".equals(status) && !"blue".equals(color) ? Color.ORANGE : Color.lightGray;
         graphics.setColor(stunStatus);
-        graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
-        i++;
+        graphics.fillRect(x + GamePanel.TILESIZE * offset, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
+        offset++;
         graphics.setColor(this.isPlayerAligned() ? Color.MAGENTA : Color.BLACK);
-        graphics.fillRect(x + GamePanel.TILESIZE * i, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
+        graphics.fillRect(x + GamePanel.TILESIZE * offset, y, GamePanel.TILESIZE, GamePanel.TILESIZE);
     }
 
     private boolean isPlayerAligned() {

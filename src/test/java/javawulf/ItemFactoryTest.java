@@ -26,12 +26,12 @@ import javawulf.model.item.Shield;
 /**
  * Test class for ItemFactory.
  */
-public final class ItemFactoryTest {
+final class ItemFactoryTest {
 
         private static final int STARTING_X = 12;
         private static final int STARTING_Y = 12;
 
-        private Coordinate position = new CoordinateImpl(STARTING_X, STARTING_Y);
+        private final Coordinate position = new CoordinateImpl(STARTING_X, STARTING_Y);
         private ItemFactory factory;
 
         @BeforeEach
@@ -41,7 +41,7 @@ public final class ItemFactoryTest {
 
         @Test
         void testCreateAmuletPiece() {
-                AmuletPiece piece = factory.createAmuletPiece(position);
+                final AmuletPiece piece = factory.createAmuletPiece(position);
                 // Check if the piece is correctly created
                 assertNotNull(piece);
                 // Check if the piece is instantiated as an AmuletPiece
@@ -62,7 +62,7 @@ public final class ItemFactoryTest {
 
         @Test
         void testCreateCure() {
-                Cure cure = factory.createCure(position);
+                final Cure cure = factory.createCure(position);
                 // Check if the cure is correctly created
                 assertNotNull(cure);
                 // Check if the cure is instantiated as a Cure
@@ -82,7 +82,7 @@ public final class ItemFactoryTest {
 
         @Test
         void testCreateCureMax() {
-                CureMax cureMax = factory.createCureMax(position);
+                final CureMax cureMax = factory.createCureMax(position);
                 // Check if the cureMax is correctly created
                 assertNotNull(cureMax);
                 // Check if the cureMax is instantiated as a CureMax
@@ -102,7 +102,7 @@ public final class ItemFactoryTest {
 
         @Test
         void testCreateExtraHeart() {
-                ExtraHeart heart = factory.createExtraHeart(position);
+                final ExtraHeart heart = factory.createExtraHeart(position);
                 // Check if the heart is correctly created
                 assertNotNull(heart);
                 // Check if the heart is instantiated as an ExtraHeart
@@ -122,7 +122,7 @@ public final class ItemFactoryTest {
 
         @Test
         void testCreateGreatSword() {
-                GreatSword greatSword = factory.createGreatSword(position);
+                final GreatSword greatSword = factory.createGreatSword(position);
                 // Check if the greatSword is correctly created
                 assertNotNull(greatSword);
                 // Check if the greatSword is instantiated as a GreatSword
@@ -142,7 +142,7 @@ public final class ItemFactoryTest {
 
         @Test
         void testCreateShield() {
-                Shield shield = factory.createShield(position);
+                final Shield shield = factory.createShield(position);
                 // Check if the shield is correctly created
                 assertNotNull(shield);
                 // Check if the shield is instantiated as a Shield
