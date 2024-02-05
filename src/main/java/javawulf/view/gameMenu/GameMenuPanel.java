@@ -27,21 +27,25 @@ public class GameMenuPanel extends JPanel {
 
     private static int scaleX;
     private static int scaleY;
-    private static int borders;
+    private static int menuBorders;
+    private static int scoreboardBorders;
 
     private static final int MAX_BUTTON_WIDTH = 800;
     private static final int MAX_BUTTON_HEIGHT = 120;
     private static final int MENU_OFFSET = 5;
+    private static final int COLS_RESULTS = 3;
     private final JFrame frame;
 
     /**
      * Sets the size of the window and creates the menu.
      * @throws InterruptedException 
      */
+    
     public GameMenuPanel() throws InterruptedException {
         scaleX = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2;
         scaleY = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2;
-        borders = scaleX / MENU_OFFSET;
+        menuBorders = scaleX / MENU_OFFSET;
+        scoreboardBorders = scaleX / 7;
         frame = new JFrame("JavaWulf");
         createMenuGUI(frame);
     }
@@ -128,19 +132,26 @@ public class GameMenuPanel extends JPanel {
         menu.add(guideButton);
         menu.add(exitButton);
         frame.add(menu, BorderLayout.CENTER);
-        frame.add(Box.createVerticalStrut(borders), BorderLayout.NORTH);
-        frame.add(Box.createVerticalStrut(borders), BorderLayout.SOUTH);
-        frame.add(Box.createHorizontalStrut(borders), BorderLayout.WEST);
-        frame.add(Box.createHorizontalStrut(borders), BorderLayout.EAST);
+        frame.add(Box.createVerticalStrut(menuBorders), BorderLayout.NORTH);
+        frame.add(Box.createVerticalStrut(menuBorders), BorderLayout.SOUTH);
+        frame.add(Box.createHorizontalStrut(menuBorders), BorderLayout.WEST);
+        frame.add(Box.createHorizontalStrut(menuBorders), BorderLayout.EAST);
     }
 
     private static void showLeaderboard(final JFrame frame) {
         frame.getContentPane().removeAll();
+        frame.setLayout(new BorderLayout());
         Scoreboard scoreboard = new ScoreBoardImpl();
         scoreboard.loadScoreBoardFromFile();
         JPanel scoreBoardJPanel;
         JPanel leaderboardPanel = new JPanel(new BorderLayout());
+        JPanel titlePanel = new JPanel(new GridLayout(2, 1));
+        JPanel legendPanel = new JPanel(new GridLayout(1, COLS_RESULTS));
         JLabel titleLabel = new JLabel("LeaderBoard", SwingConstants.CENTER);
+        JLabel legendNicknameLabel = new JLabel("Nickname", SwingConstants.CENTER);
+        JLabel legendScoreLabel = new JLabel("Score", SwingConstants.CENTER);
+        JLabel legendWonLabel = new JLabel("Did you win?", SwingConstants.CENTER);
+
         JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -152,11 +163,11 @@ public class GameMenuPanel extends JPanel {
         });
 
         if (!scoreboard.getAllScores().isEmpty()) {
-            scoreBoardJPanel = new JPanel(new GridLayout(scoreboard.getAllScores().size(), 3));
+            scoreBoardJPanel = new JPanel(new GridLayout(scoreboard.getAllScores().size(), COLS_RESULTS));
             scoreboard.getAllScores().forEach(score -> {
             JLabel nameLabel = new JLabel(score.getUserName());
-            JLabel scoreLabel = new JLabel(Integer.toString(score.getScore()));
-            JLabel wonLabel = new JLabel(score.getWon() ? "yes" : "no");
+            JLabel scoreLabel = new JLabel(Integer.toString(score.getScore()), SwingConstants.CENTER);
+            JLabel wonLabel = new JLabel(score.getWon() ? "yes" : "no", SwingConstants.CENTER);
             scoreBoardJPanel.add(nameLabel);
             scoreBoardJPanel.add(scoreLabel);
             scoreBoardJPanel.add(wonLabel);
@@ -166,10 +177,20 @@ public class GameMenuPanel extends JPanel {
             scoreBoardJPanel.add(new JLabel("no results yet!"));
         }
 
-        leaderboardPanel.add(titleLabel, BorderLayout.NORTH);
+        legendPanel.add(legendNicknameLabel);
+        legendPanel.add(legendScoreLabel);
+        legendPanel.add(legendWonLabel);
+        titlePanel.add(titleLabel);
+        titlePanel.add(legendPanel);
+        leaderboardPanel.add(titlePanel, BorderLayout.NORTH);
         leaderboardPanel.add(scoreBoardJPanel, BorderLayout.CENTER);
         leaderboardPanel.add(backButton, BorderLayout.SOUTH);
-        frame.add(leaderboardPanel);
+        frame.add(leaderboardPanel, BorderLayout.CENTER);
+        frame.add(Box.createVerticalStrut(scoreboardBorders), BorderLayout.NORTH);
+        frame.add(Box.createVerticalStrut(scoreboardBorders), BorderLayout.SOUTH);
+        frame.add(Box.createHorizontalStrut(scoreboardBorders), BorderLayout.WEST);
+        frame.add(Box.createHorizontalStrut(scoreboardBorders), BorderLayout.EAST);
+
         frame.revalidate();
         frame.repaint();
     }
