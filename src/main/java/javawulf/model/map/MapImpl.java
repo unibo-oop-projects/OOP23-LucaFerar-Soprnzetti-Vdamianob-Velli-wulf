@@ -145,14 +145,12 @@ public final class MapImpl implements Map {
 
     @Override
     public List<GameElement> getRoomElements(final Space room) {
-        for (var biome : biomes) {
-            for (var biomeRoom : biome.getRooms()) {
-                if (room.equals(biomeRoom.getValue())) {
-                    return biomeRoom.getValue().getElements();
-                }
-            }
-        }
-        return List.of();
+        return biomes.stream()
+        .flatMap(biome -> biome.getRooms().stream())
+        .filter(biomeRoom -> room.equals(biomeRoom.getValue()))
+        .findFirst()
+        .map(biomeRoom -> biomeRoom.getValue().getElements())
+        .orElse(List.of());
     }
 
     @Override
