@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.awt.Rectangle;
 import javawulf.model.BoundingBox;
 import javawulf.model.Coordinate;
@@ -36,6 +38,12 @@ public final class MapImpl implements Map {
      * @param thirdBiome (third quadrant)
      * @param fourthBiome (fourth quadrant)
      */
+        @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI2"
+        },
+        justification = "It isn't a problem expose internal representation to Player"
+    )
     public MapImpl(final Player player, final Biome firstBiome, final Biome secondBiome, final Biome thirdBiome,
             final Biome fourthBiome) {
         this.biomes.addAll(List.of(firstBiome, secondBiome, thirdBiome, fourthBiome));
@@ -48,11 +56,23 @@ public final class MapImpl implements Map {
         return new HashMap<>(this.tiles);
     }
 
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI"
+        },
+        justification = "Player can be edit by outside."
+    )
     @Override
     public Player getPlayer() {
         return this.player;
     }
 
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI"
+        },
+        justification = "Biomes can be edit by outside."
+    )
     @Override
     public List<Biome> getBiomes() {
         return this.biomes;
