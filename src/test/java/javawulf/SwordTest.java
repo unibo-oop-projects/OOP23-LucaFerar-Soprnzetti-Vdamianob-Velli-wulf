@@ -62,6 +62,11 @@ final class SwordTest {
         assertNotEquals(CollisionType.SWORD, this.sword.getBounds().getCollisionType());
     }
 
+    // CPD-OFF
+    /*  The sword movement is tested in 3 different ways. These test require that
+    *   the sword is checked by the end of the movement, so there is some
+    *   repetition
+    */
     @Test
     void testSwordMovement() {
         final Direction movementDirection = Direction.UP;
@@ -113,6 +118,7 @@ final class SwordTest {
         assertEquals(expectBox.getCollisionArea(), this.sword.getBounds().getCollisionArea());
         assertEquals(expectCoordinate.getPosition(), this.sword.getPosition().getPosition());
     }
+    // CPD-ON
 
     @Test
     void testActivation() {
