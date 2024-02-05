@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javawulf.controller.PlayerStatus;
 import javawulf.model.item.AmuletPiece;
-import javawulf.model.map.TileType;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -60,32 +59,25 @@ public final class HUDDrawer extends AbstractDrawer {
 
     @Override
     public void draw(final Graphics2D graphics) {
-        final int upperCorner = this.gamePanel.getWidth() / 2 - (18 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2;
-        final int leftCorner = this.gamePanel.getHeight() / 2 - (16 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2;
-        final int lowerCorner = this.gamePanel.getWidth() / 2 + (14 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2;
-        final int rightCorner = this.gamePanel.getHeight() / 2 + (14 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2;
-        this.drawCorners(graphics, upperCorner, leftCorner, lowerCorner, rightCorner);
-        final int x = upperCorner + TileType.TILE_DIMENSION * GamePanel.SCALE * 2;
-        final int y = leftCorner + TileType.TILE_DIMENSION * GamePanel.SCALE * 2;
+        final int upperCorner = this.gamePanel.getWidth() / 2 - (14 * GamePanel.ORIGINAL_TILE_SIZE * GamePanel.SCALE) / 2;
+        final int leftCorner = this.gamePanel.getHeight() / 2 - (12 * GamePanel.ORIGINAL_TILE_SIZE * GamePanel.SCALE) / 2;
+        final int lowerCorner = this.gamePanel.getWidth() / 2 + (14 * GamePanel.ORIGINAL_TILE_SIZE * GamePanel.SCALE) / 2;
+        final int rightCorner = this.gamePanel.getHeight() / 2 + (12 * GamePanel.ORIGINAL_TILE_SIZE * GamePanel.SCALE) / 2;
 
-        this.drawHud(graphics, x, y);
+        this.drawCorners(graphics, upperCorner, leftCorner, lowerCorner, rightCorner);
+        this.drawHud(graphics, upperCorner, leftCorner);
 
         final int score = this.player.getScore();
-        this.drawScore(graphics, score, x, rightCorner);
+        this.drawScore(graphics, score, upperCorner, rightCorner);
     }
 
     private void drawCorners(final Graphics2D graphics, final int upX, final int upY, final int downX,
         final int downY) {
         graphics.setColor(Color.darkGray);
-        // final int thicknessCorners = TileType.TILE_DIMENSION * GamePanel.SCALE * 2;
-        // graphics.fillRect(upX, 0, thicknessCorners, this.gamePanel.getHeight());
-        // graphics.fillRect(0, upY, this.gamePanel.getWidth(), thicknessCorners);
-        // graphics.fillRect(downX, 0, thicknessCorners, this.gamePanel.getHeight());
-        // graphics.fillRect(0, downY, this.gamePanel.getWidth(), thicknessCorners);
-        graphics.fillRect(0, 0, this.gamePanel.getWidth() / 2 - (15 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2, this.gamePanel.getHeight());
-        graphics.fillRect(0, 0, this.gamePanel.getWidth(), this.gamePanel.getHeight() / 2 - (15 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2);
-        graphics.fillRect(0, this.gamePanel.getHeight() / 2 + (14 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2, this.gamePanel.getWidth(), this.gamePanel.getHeight());
-        graphics.fillRect(this.gamePanel.getWidth() / 2 + (14 * TileType.TILE_DIMENSION * GamePanel.SCALE) / 2, 0, this.gamePanel.getWidth(), this.gamePanel.getHeight());
+        graphics.fillRect(0, 0, upX, this.gamePanel.getHeight());
+        graphics.fillRect(0, 0, this.gamePanel.getWidth(), upY);
+        graphics.fillRect(downX, 0, this.gamePanel.getWidth(), this.gamePanel.getHeight());
+        graphics.fillRect(0, downY, this.gamePanel.getWidth(), this.gamePanel.getHeight());
     }
 
     private void drawHud(final Graphics2D graphics, final int x, final int y) {
