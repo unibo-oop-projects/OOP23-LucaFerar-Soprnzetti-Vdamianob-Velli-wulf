@@ -82,7 +82,7 @@ public final class MapTilesBuilder {
         // CHECKSTYLE: MagicNumber OFF
         // In the central biome, the position of the spaces was choosen arbitrarily: the
         // use of final variables to identify the
-        // TilePositions of each space would have been less comprehensive.
+        // tilePositions of each space would have been less comprehensive.
         // For this reason it was decided to suppress the warning checkstyles.
         buildSpace(tiles, new TilePosition(Biome.SIZE, 3), new Corridor(Map.WIDTH_CENTRAL_BIOME, 2), TileType.CORRIDOR);
         buildSpace(tiles, new TilePosition(Biome.SIZE, 15), new Corridor(Map.WIDTH_CENTRAL_BIOME, 2),
