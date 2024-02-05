@@ -3,8 +3,11 @@ package javawulf.model.map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.util.Pair;
+import javawulf.model.GameElement;
 
 /**
  * Implementation of Biome.
@@ -63,5 +66,24 @@ public final class BiomeImpl implements Biome {
 
         }
         return Optional.empty();
+    }
+
+    @Override
+    public ArrayList<GameElement> getElements() {
+        return this.getSpaces().stream()
+        .flatMap(space -> space.getElements().stream())
+        .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * 
+     * @return list of all spaces (rooms and coor.s) of the biome.
+     */
+    private List<Space> getSpaces() {
+        return Stream.concat(
+            rooms.stream().map(Pair::getValue),
+            corridors.stream().map(Pair::getValue)
+        )
+        .collect(Collectors.toList());
     }
 }

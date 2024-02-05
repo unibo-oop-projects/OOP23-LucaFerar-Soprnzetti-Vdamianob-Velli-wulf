@@ -1,6 +1,8 @@
 package javawulf.model.map;
 
 import javafx.util.Pair;
+import javawulf.model.GameElement;
+
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -59,5 +61,11 @@ public interface Biome {
  * @return Optional of the room corrisponding (Empty if there isn't any room)
  */
     Optional<Space> getRoom(TilePosition tilePos);
+
+    /**
+     * 
+     * @return all GameElements inside biome.
+     */
+    ArrayList<GameElement> getElements();
 
 }
