@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javawulf.model.AbstractEntity;
@@ -26,13 +25,8 @@ final class EnemyFactoryTest {
     private static final int STARTING_X = 12;
     private static final int STARTING_Y = 12;
 
-    private EnemyFactory factory;
+    private final EnemyFactory factory = new EnemyFactoryImpl();
     private final Coordinate position = new CoordinateImpl(STARTING_X, STARTING_Y);
-
-    @BeforeEach
-    void setUpFactory() {
-        factory = new EnemyFactoryImpl();
-    }
 
     @Test
     void testCreatePawn() {

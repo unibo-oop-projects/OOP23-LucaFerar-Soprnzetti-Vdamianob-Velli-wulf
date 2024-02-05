@@ -123,7 +123,7 @@ final class PawnTest {
     @Test
     void testTick() {
         // Memorizing the initial time to wait
-        int initialTime = pawn.getTimeToWait();
+        final int initialTime = pawn.getTimeToWait();
         // Tick the pawn
         pawn.tick();
         // Test if the tick count is 1 or 0 depending on the time to wait
