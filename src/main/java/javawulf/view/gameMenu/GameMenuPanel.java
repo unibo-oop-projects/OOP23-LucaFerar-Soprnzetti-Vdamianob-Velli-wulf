@@ -7,10 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-// CHECKSTYLE: OFF
-//The annotation is needed to avoid false positives
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-// CHECKSTYLE: ON
+
 import javawulf.scoreboard.ScoreBoardImpl;
 import javawulf.scoreboard.Scoreboard;
 import javawulf.view.GamePanel;
@@ -28,7 +26,8 @@ import java.awt.event.ActionListener;
  * GameMenuPanel is used to display the GUI.
  */
 public class GameMenuPanel extends JPanel {
-
+    
+    public static final long serialVersionUID = 4328743;
     private static final int SCALE_X = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2;
     private static final int SCALE_Y = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2;
     @SuppressFBWarnings(
@@ -51,15 +50,15 @@ public class GameMenuPanel extends JPanel {
     private static final int MENU_OFFSET = 5;
     private static final int SCOREBOARD_OFFSET = 7;
     private static final int COLS_RESULTS = 3;
-    private final JFrame frame;
+    private final JFrame frame; // NOPMD suppressed as this is c
 
     /**
      * Sets the size of the window and creates the menu.
      * @throws InterruptedException 
      */
     public GameMenuPanel() throws InterruptedException {
-        menuBorders = SCALE_X / MENU_OFFSET;
-        scoreboardBorders = SCALE_X / SCOREBOARD_OFFSET;
+        menuBorders = SCALE_X / MENU_OFFSET; // NOPMD suppressed as it is a false positive
+        scoreboardBorders = SCALE_X / SCOREBOARD_OFFSET; // NOPMD suppressed as it is a false positive
         frame = new JFrame("JavaWulf");
         createMenuGUI(frame);
     }
@@ -100,15 +99,11 @@ public class GameMenuPanel extends JPanel {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 frame.dispose();
-                try {
-                    frame.getContentPane().removeAll();
-                    frame.add(new GamePanel(frame));
-                    frame.setSize(GamePanel.TILESIZE * GamePanel.MAX_SCREEN_COL, GamePanel.TILESIZE * GamePanel.MAX_SCREEN_ROW);
-                    frame.setLocationRelativeTo(null);
-                    frame.setVisible(true);
-                } catch (final Exception exceptionViewImpl) {
-                    exceptionViewImpl.printStackTrace();
-                }
+                frame.getContentPane().removeAll();
+                frame.add(new GamePanel(frame));
+                frame.setSize(GamePanel.TILESIZE * GamePanel.MAX_SCREEN_COL, GamePanel.TILESIZE * GamePanel.MAX_SCREEN_ROW);
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
             }
         });
         // Show LeaderBoard
