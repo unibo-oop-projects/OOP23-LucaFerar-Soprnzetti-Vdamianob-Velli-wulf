@@ -9,6 +9,7 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javawulf.model.BoundingBox;
 import javawulf.model.BoundingBoxImpl;
 import javawulf.model.Coordinate;
@@ -126,6 +127,9 @@ final class MapTest {
         }
 
         @Test
+        @SuppressFBWarnings(value = {
+                        "L", "D", "UwF"
+        }, justification = "Preferred to re-initialize biomes for each test that uses them.")
         void testMap() {
                 this.setUp();
 
@@ -173,6 +177,9 @@ final class MapTest {
         }
 
         @Test
+        @SuppressFBWarnings(value = {
+                        "L", "D", "UwF"
+        }, justification = "Preferred to re-initialize biomes for each test that uses them.")
         void testMapEntityInteraction() {
                 this.setUp();
 
@@ -201,6 +208,9 @@ final class MapTest {
         }
 
         @Test
+        @SuppressFBWarnings(value = {
+                        "L", "D", "UwF"
+        }, justification = "Preferred to re-initialize biomes for each test that uses them.")
         void testEntitiesInMap() {
 
                 // The map initialised on setUp() has no elements (0)
