@@ -40,8 +40,7 @@ public final class HUDDrawer extends AbstractDrawer {
             "M", "V", "EI2"
         },
         justification = "Game panel is stored to allow calculations for the drawings that are relative "
-            + "to its size. The pieces are passed in order to check whether the Player's"
-            + " position relative to the pieces"
+            + "to its size"
     )
     public HUDDrawer(final PlayerStatus player, final List<AmuletPiece> pieces, final GamePanel gamePanel) {
         super(gamePanel, player);
