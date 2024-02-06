@@ -31,7 +31,7 @@ final class PowerUpFactoryTest {
     @Test
     void testCreatePowerUpAttack() {
         // Create the powerUp and check if its not null
-        PowerUp powerUpAttack = factory.createPowerUpAttack(coordinatesPowerUp);
+        final PowerUp powerUpAttack = factory.createPowerUpAttack(coordinatesPowerUp);
         assertNotNull(powerUpAttack);
         // Checks on the valuers of powerUp
         assertEquals(coordinatesPowerUp.getPosition(), powerUpAttack.getPosition().getPosition());
@@ -43,7 +43,7 @@ final class PowerUpFactoryTest {
     @Test
     void testCreatePowerUpDoublePoints() {
         // Create the powerUp and check if its not null
-        PowerUp powerUpDoublePoints = factory.createPowerUpDoublePoints(coordinatesPowerUp);
+        final PowerUp powerUpDoublePoints = factory.createPowerUpDoublePoints(coordinatesPowerUp);
         assertNotNull(powerUpDoublePoints);
         // Checks on the valuers of powerUp
         assertEquals(coordinatesPowerUp.getPosition(), powerUpDoublePoints.getPosition().getPosition());
@@ -55,7 +55,7 @@ final class PowerUpFactoryTest {
     @Test
     void testCreatePowerUpInvincibility() {
         // Create the powerUp and check if its not null
-        PowerUp powerUpIncincibility = factory.createPowerUpInvincibility(coordinatesPowerUp);
+        final PowerUp powerUpIncincibility = factory.createPowerUpInvincibility(coordinatesPowerUp);
         assertNotNull(powerUpIncincibility);
         // Checks on the valuers of powerUp
         assertEquals(coordinatesPowerUp.getPosition(), powerUpIncincibility.getPosition().getPosition());
