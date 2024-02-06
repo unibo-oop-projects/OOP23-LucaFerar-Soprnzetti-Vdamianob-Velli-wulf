@@ -150,7 +150,7 @@ public class GameMenuPanel extends JPanel {
                         "Confirm exit",
                         JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
-                    System.exit(0);
+                    exitApplication();
                 }
             }
         });
@@ -221,6 +221,10 @@ public class GameMenuPanel extends JPanel {
 
         frame.revalidate();
         frame.repaint();
+    }
+
+    private static void exitApplication() {
+        System.exit(0);
     }
 
 }
