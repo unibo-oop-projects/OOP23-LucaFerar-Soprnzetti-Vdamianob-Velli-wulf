@@ -10,7 +10,7 @@ import javawulf.model.player.Player;
 public abstract class PowerUpImpl extends AbstractCollectable implements PowerUp {
 
     private int duration;
-    final private String type;
+    private final String type;
 
     /**
      * Creates a new PowerUp.
