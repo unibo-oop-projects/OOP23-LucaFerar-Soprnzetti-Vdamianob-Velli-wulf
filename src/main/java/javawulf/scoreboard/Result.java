@@ -21,6 +21,6 @@ public interface Result {
      * 
      * @return If the player got all the amulets and did not die
      */
-    boolean getWon();
+    boolean hasWon();
 
 }

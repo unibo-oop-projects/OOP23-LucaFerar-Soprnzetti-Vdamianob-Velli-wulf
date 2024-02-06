@@ -32,13 +32,13 @@ public final class ResultImpl implements Result {
     }
 
     @Override
-    public boolean getWon() {
+    public boolean hasWon() {
         return this.won;
     }
 
     @Override
     public String toString() {
-        return "[username=" + this.getUserName() + ", score=" + this.getScore() + ", won=" + this.getWon() + "]";
+        return "[username=" + this.getUserName() + ", score=" + this.getScore() + ", won=" + this.hasWon() + "]";
     }
 
 }

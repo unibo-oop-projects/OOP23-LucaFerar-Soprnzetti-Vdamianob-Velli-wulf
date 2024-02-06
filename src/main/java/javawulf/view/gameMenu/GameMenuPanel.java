@@ -96,14 +96,14 @@ public class GameMenuPanel extends JPanel {
 
     private static void showMenu(final JFrame frame) {
 
-        JPanel menu = new JPanel(new GridLayout(2, 2));
-        JButton startButton = new JButton("PLAY");
-        JButton leaderboardButton = new JButton("Leaderboard");
-        JButton guideButton = new JButton("Guide");
-        JButton exitButton = new JButton("Exit");
+        final JPanel menu = new JPanel(new GridLayout(2, 2));
+        final JButton startButton = new JButton("PLAY");
+        final JButton leaderboardButton = new JButton("Leaderboard");
+        final JButton guideButton = new JButton("Guide");
+        final JButton exitButton = new JButton("Exit");
 
         // To limit Max button sixing
-        Dimension maxButtonSize = new Dimension(MAX_BUTTON_WIDTH, MAX_BUTTON_HEIGHT);
+        final Dimension maxButtonSize = new Dimension(MAX_BUTTON_WIDTH, MAX_BUTTON_HEIGHT);
         startButton.setMaximumSize(maxButtonSize);
         leaderboardButton.setMaximumSize(maxButtonSize);
         guideButton.setMaximumSize(maxButtonSize);
@@ -145,7 +145,7 @@ public class GameMenuPanel extends JPanel {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                int choice = JOptionPane.showConfirmDialog(frame,
+                final int choice = JOptionPane.showConfirmDialog(frame,
                         "Sure you want to quit?",
                         "Confirm exit",
                         JOptionPane.YES_NO_OPTION);
@@ -169,18 +169,18 @@ public class GameMenuPanel extends JPanel {
     private static void showLeaderboard(final JFrame frame) {
         frame.getContentPane().removeAll();
         frame.setLayout(new BorderLayout());
-        Scoreboard scoreboard = new ScoreBoardImpl();
+        final Scoreboard scoreboard = new ScoreBoardImpl();
         scoreboard.loadScoreBoardFromFile();
         JPanel scoreBoardJPanel;
-        JPanel leaderboardPanel = new JPanel(new BorderLayout());
-        JPanel titlePanel = new JPanel(new GridLayout(2, 1));
-        JPanel legendPanel = new JPanel(new GridLayout(1, COLS_RESULTS));
-        JLabel titleLabel = new JLabel("LeaderBoard", SwingConstants.CENTER);
-        JLabel legendNicknameLabel = new JLabel("Nickname", SwingConstants.CENTER);
-        JLabel legendScoreLabel = new JLabel("Score", SwingConstants.CENTER);
-        JLabel legendWonLabel = new JLabel("Did you win?", SwingConstants.CENTER);
+        final JPanel leaderboardPanel = new JPanel(new BorderLayout());
+        final JPanel titlePanel = new JPanel(new GridLayout(2, 1));
+        final JPanel legendPanel = new JPanel(new GridLayout(1, COLS_RESULTS));
+        final JLabel titleLabel = new JLabel("LeaderBoard", SwingConstants.CENTER);
+        final JLabel legendNicknameLabel = new JLabel("Nickname", SwingConstants.CENTER);
+        final JLabel legendScoreLabel = new JLabel("Score", SwingConstants.CENTER);
+        final JLabel legendWonLabel = new JLabel("Did you win?", SwingConstants.CENTER);
 
-        JButton backButton = new JButton("Back");
+        final JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -193,9 +193,9 @@ public class GameMenuPanel extends JPanel {
         if (!scoreboard.getAllScores().isEmpty()) {
             scoreBoardJPanel = new JPanel(new GridLayout(scoreboard.getAllScores().size(), COLS_RESULTS));
             scoreboard.getAllScores().forEach(score -> {
-            JLabel nameLabel = new JLabel(score.getUserName());
-            JLabel scoreLabel = new JLabel(Integer.toString(score.getScore()), SwingConstants.CENTER);
-            JLabel wonLabel = new JLabel(score.getWon() ? "yes" : "no", SwingConstants.CENTER);
+            final JLabel nameLabel = new JLabel(score.getUserName());
+            final JLabel scoreLabel = new JLabel(Integer.toString(score.getScore()), SwingConstants.CENTER);
+            final JLabel wonLabel = new JLabel(score.hasWon() ? "yes" : "no", SwingConstants.CENTER);
             scoreBoardJPanel.add(nameLabel);
             scoreBoardJPanel.add(scoreLabel);
             scoreBoardJPanel.add(wonLabel);
