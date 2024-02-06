@@ -47,7 +47,8 @@ public final class Populator {
 
     /**
      * 
-     * @param map to populate with game elements.
+     * @param map to populate with game elements (1 collectable in the center of
+     *            each room, 1 entity per corridor).
      * @return map itself
      */
     public static Map populate(final Map map) {
