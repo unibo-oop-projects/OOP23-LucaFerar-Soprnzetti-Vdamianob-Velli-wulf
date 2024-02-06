@@ -40,7 +40,7 @@ public final class PawnDrawer extends AbstractDrawer {
     @Override
     public void draw(final Graphics2D graphics) {
         for (final Pawn pawn : this.pawns) {
-            if(!pawn.getBounds().getCollisionType().equals(CollisionType.INACTIVE)){
+            if (!pawn.getBounds().getCollisionType().equals(CollisionType.INACTIVE)) {
                 String direction;
                 switch (pawn.getDirection()) {
                     case UP:
