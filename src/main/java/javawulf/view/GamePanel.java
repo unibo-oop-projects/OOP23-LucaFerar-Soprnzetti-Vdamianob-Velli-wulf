@@ -8,7 +8,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javawulf.controller.GameLoop;
 import javawulf.controller.GameLoopImpl;
 import javawulf.controller.PlayerStatus;
-import javawulf.controller.PlayerStatusImpl;
 import javawulf.scoreboard.ResultImpl;
 import javawulf.scoreboard.ScoreBoardImpl;
 import javawulf.scoreboard.Scoreboard;
@@ -64,7 +63,7 @@ public final class GamePanel extends JPanel {
         this.setDoubleBuffered(true);
         this.addKeyListener(new CommandListener(gameLoopController.getPlayerController()));
         this.setFocusable(true);
-        final PlayerStatus playerStatus = new PlayerStatusImpl(gameLoopController.getPlayer(), gameLoopController.getMap());
+        final PlayerStatus playerStatus = gameLoopController.getPlayer();
         this.drawers.add(new MapDrawer(gameLoopController.getMap(), this));
         this.drawers.add(new PlayerDrawer(playerStatus, this));
         this.drawers.add(new PawnDrawer(playerStatus, this, gameLoopController.getPawns()));

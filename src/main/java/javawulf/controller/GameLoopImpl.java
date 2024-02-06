@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javawulf.model.BoundingBox;
 import javawulf.model.Collectable;
 import javawulf.model.GameElement;
@@ -200,13 +201,19 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     @Override
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI"
+        },
+        justification = "Map is used to create its representation in the drawer"
+    )
     public Map getMap() {
         return this.gameMap;
     }
 
     @Override
-    public Player getPlayer() {
-        return this.gamePlayer;
+    public PlayerStatus getPlayer() {
+        return new PlayerStatusImpl(this.gamePlayer, this.gameMap);
     }
 
     @Override
