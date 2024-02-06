@@ -3,12 +3,14 @@ package javawulf.view;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
 import javawulf.controller.PlayerStatus;
+import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.Collectable;
 import javawulf.model.item.Cure;
 import javawulf.model.item.CureMax;
@@ -33,7 +35,7 @@ public final class ItemDrawer extends AbstractDrawer {
      */
     public ItemDrawer(final GamePanel gamePanel, final List<Collectable> items, final PlayerStatus player) {
         super(gamePanel, player);
-        this.items = items;
+        this.items = new ArrayList<>(items);
         try {
             images.put(Cure.class, this.imageLoader(ImagePath.CURE));
             images.put(CureMax.class, this.imageLoader(ImagePath.CURE_MAX));
@@ -50,7 +52,7 @@ public final class ItemDrawer extends AbstractDrawer {
     public void draw(final Graphics2D graphics) {
         for (final Collectable item : items) {
             final BufferedImage image = images.get(item.getClass());
-            if (image != null) {
+            if (!item.getBounds().getCollisionType().equals(CollisionType.INACTIVE)) {
                 this.drawImage(graphics, image, (int) item.getBounds().getCollisionArea().getX(),
                         (int) item.getBounds().getCollisionArea().getY());
             }

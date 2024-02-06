@@ -216,22 +216,22 @@ public final class GameLoopImpl implements GameLoop, Runnable {
 
     @Override
     public List<Collectable> getItems() {
-        return this.items;
+        return new ArrayList<>(this.items);
     }
 
     @Override
     public List<Pawn> getPawns() {
-        return this.pawns;
+        return new ArrayList<>(this.pawns);
     }
 
     @Override
     public List<AmuletPiece> getAmuletPieces() {
-        return this.pieces;
+        return new ArrayList<>(this.pieces);
     }
 
     @Override
     public List<PowerUp> getPowerUps() {
-        return this.powerUps;
+        return new ArrayList<>(this.powerUps);
     }
 
 }

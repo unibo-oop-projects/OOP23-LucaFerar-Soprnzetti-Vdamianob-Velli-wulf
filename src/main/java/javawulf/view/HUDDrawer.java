@@ -3,11 +3,13 @@ package javawulf.view;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javawulf.controller.PlayerStatus;
+import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletPiece;
 import java.awt.Color;
 import java.awt.Font;
@@ -45,7 +47,7 @@ public final class HUDDrawer extends AbstractDrawer {
         super(gamePanel, player);
         this.gamePanel = gamePanel;
         this.player = player;
-        this.pieces = pieces;
+        this.pieces = new ArrayList<>(pieces);
         try {
             this.shield = imageLoader(ImagePath.SHIELD);
             this.health = imageLoader(ImagePath.HEALTH);
@@ -118,10 +120,11 @@ public final class HUDDrawer extends AbstractDrawer {
 
     private boolean isPlayerAligned() {
         for (final AmuletPiece piece : this.pieces) {
-            if (piece.getPosition().getX() > (player.getPlayerX() - GamePanel.ORIGINAL_TILE_SIZE)
+            if ((piece.getPosition().getX() > (player.getPlayerX() - GamePanel.ORIGINAL_TILE_SIZE)
                 && piece.getPosition().getX() < (player.getPlayerX() + GamePanel.ORIGINAL_TILE_SIZE)
                 || piece.getPosition().getY() > (player.getPlayerY() - GamePanel.ORIGINAL_TILE_SIZE)
-                && piece.getPosition().getY() < (player.getPlayerY() + GamePanel.ORIGINAL_TILE_SIZE)) {
+                && piece.getPosition().getY() < (player.getPlayerY() + GamePanel.ORIGINAL_TILE_SIZE))
+                && !piece.getBounds().getCollisionType().equals(CollisionType.INACTIVE)) {
                 return true;
             }
         }

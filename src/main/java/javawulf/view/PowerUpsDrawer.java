@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javawulf.controller.PlayerStatus;
+import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.powerup.PowerUp;
 import javawulf.model.powerup.PowerUpAttack;
 import javawulf.model.powerup.PowerUpDoublePoints;
@@ -26,8 +27,8 @@ public final class PowerUpsDrawer extends AbstractDrawer {
         /**
          * Builds the power ups passed from the Controller.
          * 
-         * @param gamePanel the Game Panel where the items must be drawn
-         * @param powerUps a list of all the items to draw
+         * @param gamePanel the Game Panel where the power-ups must be drawn
+         * @param powerUps a list of all the power-ups to be drawn
          * @param playerStatus the current status of the Player character
          */
         public PowerUpsDrawer(final GamePanel gamePanel, final List<PowerUp> powerUps, final PlayerStatus playerStatus) {
@@ -47,7 +48,7 @@ public final class PowerUpsDrawer extends AbstractDrawer {
         public void draw(final Graphics2D graphics) {
             for (final PowerUp powerUp : powerUps) {
                 final BufferedImage image = images.get(powerUp.getClass());
-                if (image != null) {
+                if (!powerUp.getBounds().getCollisionType().equals(CollisionType.INACTIVE)) {
                     this.drawImage(graphics, image, (int) powerUp.getBounds().getCollisionArea().getX(),
                         (int) powerUp.getBounds().getCollisionArea().getY());
                 }

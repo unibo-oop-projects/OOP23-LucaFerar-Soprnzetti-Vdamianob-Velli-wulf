@@ -3,10 +3,12 @@ package javawulf.view;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javawulf.controller.PlayerStatus;
+import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.enemy.Pawn;
 
 /**
@@ -27,7 +29,7 @@ public final class PawnDrawer extends AbstractDrawer {
      */
     public PawnDrawer(final PlayerStatus player, final GamePanel gamePanel, final List<Pawn> pawns) {
         super(gamePanel, player);
-        this.pawns = pawns;
+        this.pawns = new ArrayList<>(pawns);
         try {
             this.pawn = this.imageLoader(ImagePath.PAWN_UP);
         } catch (IOException e) {
@@ -38,26 +40,28 @@ public final class PawnDrawer extends AbstractDrawer {
     @Override
     public void draw(final Graphics2D graphics) {
         for (final Pawn pawn : this.pawns) {
-            String direction;
-            switch (pawn.getDirection()) {
-                case UP:
-                    direction = "up";
-                    break;
-                case DOWN:
-                    direction = "down";
-                    break;
-                case LEFT:
-                    direction = "left";
-                    break;
-                case RIGHT:
-                    direction = "right";
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid direction");
-            }
-            final BufferedImage imgPawn = this.rotateImage(this.pawn, direction);
-            this.drawImage(graphics, imgPawn, (int) pawn.getBounds().getCollisionArea().getX(),
+            if(!pawn.getBounds().getCollisionType().equals(CollisionType.INACTIVE)){
+                String direction;
+                switch (pawn.getDirection()) {
+                    case UP:
+                        direction = "up";
+                        break;
+                    case DOWN:
+                        direction = "down";
+                        break;
+                    case LEFT:
+                        direction = "left";
+                        break;
+                    case RIGHT:
+                        direction = "right";
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid direction");
+                }
+                final BufferedImage imgPawn = this.rotateImage(this.pawn, direction);
+                this.drawImage(graphics, imgPawn, (int) pawn.getBounds().getCollisionArea().getX(),
                     (int) pawn.getBounds().getCollisionArea().getY());
+            }
         }
     }
 

@@ -40,6 +40,14 @@ public final class GamePanel extends JPanel {
     /** Max rows of tile (height). */
     public static final int MAX_SCREEN_ROW = 15;
 
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "Se"
+        },
+        justification = "Game panel is stored to allow calculations for the drawings that are relative "
+            + "to its size. The pieces are passed in order to check whether the Player's"
+            + " position relative to the pieces"
+    )
     private final List<Drawer> drawers = new ArrayList<>();
     private final JFrame frame;
 
