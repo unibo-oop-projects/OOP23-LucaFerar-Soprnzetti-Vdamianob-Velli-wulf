@@ -29,20 +29,8 @@ import java.awt.event.ActionListener;
  */
 public class GameMenuPanel extends JPanel {
 
-    @SuppressFBWarnings(
-        value = {
-            "M", "D", "ST"
-        },
-        justification = "scaleX needs to be static to become a Dimension"
-    )
-    private static int scaleX;
-    @SuppressFBWarnings(
-        value = {
-            "M", "D", "ST"
-        },
-        justification = "scaleY needs to be static to become a Dimension"
-    )
-    private static int scaleY;
+    private static final int SCALE_X = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2;
+    private static final int SCALE_Y = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2;
     @SuppressFBWarnings(
         value = {
             "M", "D", "ST"
@@ -70,10 +58,8 @@ public class GameMenuPanel extends JPanel {
      * @throws InterruptedException 
      */
     public GameMenuPanel() throws InterruptedException {
-        scaleX = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2;
-        scaleY = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2;
-        menuBorders = scaleX / MENU_OFFSET;
-        scoreboardBorders = scaleX / SCOREBOARD_OFFSET;
+        menuBorders = SCALE_X / MENU_OFFSET;
+        scoreboardBorders = SCALE_X / SCOREBOARD_OFFSET;
         frame = new JFrame("JavaWulf");
         createMenuGUI(frame);
     }
@@ -84,8 +70,8 @@ public class GameMenuPanel extends JPanel {
      */
     public static void createMenuGUI(final JFrame frame) {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(scaleY, scaleX));
-        frame.setSize(new Dimension(scaleY, scaleX));
+        frame.setMinimumSize(new Dimension(SCALE_Y, SCALE_X));
+        frame.setSize(new Dimension(SCALE_Y, SCALE_X));
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javawulf.controller.PlayerStatus;
 import javawulf.model.BoundingBox.CollisionType;
@@ -40,7 +41,7 @@ public final class PowerUpsDrawer extends AbstractDrawer {
                 images.put(PowerUpDoublePoints.class, this.imageLoader(ImagePath.POWERUP_DOUBLEPOINTS));
                 images.put(PowerUpSpeed.class, this.imageLoader(ImagePath.POWERUP_SPEED));
             } catch (IOException exception) {
-                exception.printStackTrace();
+                Logger.getLogger(PowerUp.class.getName()).fine(exception.getMessage());
             }
         }
 

@@ -11,6 +11,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Collections;
 import java.util.stream.Collectors;
+import java.util.logging.Logger;
+
 import java.nio.charset.StandardCharsets;
 
 
@@ -48,7 +50,7 @@ public final class ScoreBoardImpl implements Scoreboard {
                 writer.newLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(ScoreBoardImpl.class.getName()).fine(e.getMessage());
         }
     }
 
@@ -62,11 +64,11 @@ public final class ScoreBoardImpl implements Scoreboard {
         if (this.file.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH, StandardCharsets.UTF_8))) {
                 String line;
-                while ((line = reader.readLine()) != null) {
+                while ((line = reader.readLine()) != null) { // NOPMD suppressed as it is a false positive
                     this.addNewScore(convertInResult(line));
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                Logger.getLogger(ScoreBoardImpl.class.getName()).fine(e.getMessage());
             }
         }
     }
@@ -75,9 +77,9 @@ public final class ScoreBoardImpl implements Scoreboard {
         //splits [username=shrek] [score=100] [won=false]
         final String[] scoreString = line.split(",");
         //index increased by 1 because i need to read whats after "="
-        final String username = scoreString[0].substring(scoreString[0].indexOf("=") + 1);
-        final String score = scoreString[1].substring(scoreString[1].indexOf("=") + 1);
-        final String won = scoreString[2].substring(scoreString[2].indexOf("=") + 1, scoreString[2].indexOf("]"));
+        final String username = scoreString[0].substring(scoreString[0].indexOf('=') + 1);
+        final String score = scoreString[1].substring(scoreString[1].indexOf('=') + 1);
+        final String won = scoreString[2].substring(scoreString[2].indexOf('=') + 1, scoreString[2].indexOf(']'));
         boolean didWon = false;
         if ("true".equals(won)) {
             didWon = true;
