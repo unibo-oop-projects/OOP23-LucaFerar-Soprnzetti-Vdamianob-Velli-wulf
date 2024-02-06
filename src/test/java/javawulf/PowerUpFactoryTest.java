@@ -67,7 +67,7 @@ final class PowerUpFactoryTest {
     @Test
     void testCreatePowerUpSpeed() {
         // Create the powerUp and check if its not null
-        PowerUp powerUpSpeed = factory.createPowerUpSpeed(coordinatesPowerUp);
+        final PowerUp powerUpSpeed = factory.createPowerUpSpeed(coordinatesPowerUp);
         assertNotNull(powerUpSpeed);
         // Checks on the valuers of powerUp
         assertEquals(coordinatesPowerUp.getPosition(), powerUpSpeed.getPosition().getPosition());
