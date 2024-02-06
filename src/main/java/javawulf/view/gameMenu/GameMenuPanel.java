@@ -26,7 +26,7 @@ import java.awt.event.ActionListener;
  * GameMenuPanel is used to display the GUI.
  */
 public class GameMenuPanel extends JPanel {
-    
+
     public static final long serialVersionUID = 4328743;
     private static final int SCALE_X = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2;
     private static final int SCALE_Y = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2;
@@ -50,7 +50,7 @@ public class GameMenuPanel extends JPanel {
     private static final int MENU_OFFSET = 5;
     private static final int SCOREBOARD_OFFSET = 7;
     private static final int COLS_RESULTS = 3;
-    private final JFrame frame; // NOPMD suppressed as this is c
+    private final JFrame frame; // NOPMD suppressed as this is used in the constructor
 
     /**
      * Sets the size of the window and creates the menu.
