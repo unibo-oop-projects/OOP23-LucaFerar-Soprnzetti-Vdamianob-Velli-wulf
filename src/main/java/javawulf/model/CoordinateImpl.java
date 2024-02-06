@@ -2,6 +2,8 @@ package javawulf.model;
 
 import java.awt.Point;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Implementation of Coordinate.
  */
@@ -20,6 +22,12 @@ public final class CoordinateImpl implements Coordinate {
     }
 
     @Override
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI"
+        },
+        justification = "getPosition is used inside of test classes for easier testing"
+    )
     public Point getPosition() {
         return this.position;
     }
