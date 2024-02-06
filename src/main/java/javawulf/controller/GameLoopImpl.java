@@ -53,6 +53,12 @@ public final class GameLoopImpl implements GameLoop, Runnable {
      * 
      * @param panel 's view.
      */
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI2"
+        },
+        justification = "The panel is used to communicate the end game status"
+    )
     public GameLoopImpl(final GamePanel panel) {
         this.items = new ArrayList<>();
         this.pawns = new ArrayList<>();

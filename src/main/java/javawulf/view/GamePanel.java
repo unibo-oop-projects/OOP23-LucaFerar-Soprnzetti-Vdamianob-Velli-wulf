@@ -55,6 +55,13 @@ public final class GamePanel extends JPanel {
      * 
      * @param frame The JFrame that creates it
      */
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI2"
+        },
+        justification = "The frame is used to reset the frame itself to the main menu "
+            + "and update the scoreboard with the information coming from the controller"
+    )
     public GamePanel(final JFrame frame) {
         this.frame = frame;
         final GameLoop gameLoopController = new GameLoopImpl(this);
@@ -75,6 +82,12 @@ public final class GamePanel extends JPanel {
     }
 
     @Override
+    @SuppressFBWarnings(
+        value = {
+            "L", "D", "BC"
+        },
+        justification = "The cast made here does not cause exceptions"
+    )
     public void paintComponent(final Graphics graphics) {
         super.paintComponent(graphics);
         final Graphics2D graphics2d = (Graphics2D) graphics;
