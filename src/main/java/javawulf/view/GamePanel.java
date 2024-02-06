@@ -92,9 +92,9 @@ public final class GamePanel extends JPanel {
         super.paintComponent(graphics);
         final Graphics2D graphics2d = (Graphics2D) graphics;
 
-        for (final Drawer drawer : drawers) {
-            drawer.draw(graphics2d);
-        }
+        drawers.forEach(d -> {
+            d.draw(graphics2d);
+        });
         graphics2d.dispose();
     }
 
