@@ -77,8 +77,12 @@ public final class ScoreBoardImpl implements Scoreboard {
         //index increased by 1 because i need to read whats after "="
         String username = scoreString[0].substring(scoreString[0].indexOf("=") + 1);
         String score = scoreString[1].substring(scoreString[1].indexOf("=") + 1);
-        String won = scoreString[2].substring(scoreString[2].indexOf("=") + 1);
-        return new ResultImpl(username, Integer.parseInt(score), Boolean.parseBoolean(won));
+        String won = scoreString[2].substring(scoreString[2].indexOf("=") + 1, scoreString[2].indexOf("]"));
+        boolean didWon = false;
+        if (won.equals("true")) {
+            didWon = true;
+        }
+        return new ResultImpl(username, Integer.parseInt(score), didWon);
     }
 
     private void orderScoreBoard() {

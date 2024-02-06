@@ -7,6 +7,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+// CHECKSTYLE: OFF
+//The annotation is needed to avoid false positives
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+// CHECKSTYLE: ON
 import javawulf.scoreboard.ScoreBoardImpl;
 import javawulf.scoreboard.Scoreboard;
 import javawulf.view.GamePanel;
@@ -25,9 +29,33 @@ import java.awt.event.ActionListener;
  */
 public class GameMenuPanel extends JPanel {
 
+    @SuppressFBWarnings(
+        value = {
+            "M", "D", "ST"
+        },
+        justification = "scaleX needs to be static to become a Dimension"
+    )
     private static int scaleX;
+    @SuppressFBWarnings(
+        value = {
+            "M", "D", "ST"
+        },
+        justification = "scaleY needs to be static to become a Dimension"
+    )
     private static int scaleY;
+    @SuppressFBWarnings(
+        value = {
+            "M", "D", "ST"
+        },
+        justification = "menuborders needs to be static to become a box"
+    )
     private static int menuBorders;
+    @SuppressFBWarnings(
+        value = {
+            "M", "D", "ST"
+        },
+        justification = "scoreBoardBoerders needs to be static to become a box"
+    )
     private static int scoreboardBorders;
 
     private static final int MAX_BUTTON_WIDTH = 800;
