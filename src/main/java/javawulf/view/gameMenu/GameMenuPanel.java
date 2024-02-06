@@ -7,10 +7,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import javawulf.model.player.ScoreImpl;
+// CHECKSTYLE: OFF
+//The annotation is needed to avoid false positives
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+// CHECKSTYLE: ON
 import javawulf.scoreboard.ScoreBoardImpl;
 import javawulf.scoreboard.Scoreboard;
-import javawulf.scoreboard.Result;
 import javawulf.view.GamePanel;
 
 import javax.swing.Box;
@@ -18,7 +20,6 @@ import javax.swing.Box;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.List;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,13 +29,40 @@ import java.awt.event.ActionListener;
  */
 public class GameMenuPanel extends JPanel {
 
+    @SuppressFBWarnings(
+        value = {
+            "M", "D", "ST"
+        },
+        justification = "scaleX needs to be static to become a Dimension"
+    )
     private static int scaleX;
+    @SuppressFBWarnings(
+        value = {
+            "M", "D", "ST"
+        },
+        justification = "scaleY needs to be static to become a Dimension"
+    )
     private static int scaleY;
-    private static int borders;
+    @SuppressFBWarnings(
+        value = {
+            "M", "D", "ST"
+        },
+        justification = "menuborders needs to be static to become a box"
+    )
+    private static int menuBorders;
+    @SuppressFBWarnings(
+        value = {
+            "M", "D", "ST"
+        },
+        justification = "scoreBoardBoerders needs to be static to become a box"
+    )
+    private static int scoreboardBorders;
 
     private static final int MAX_BUTTON_WIDTH = 800;
     private static final int MAX_BUTTON_HEIGHT = 120;
     private static final int MENU_OFFSET = 5;
+    private static final int SCOREBOARD_OFFSET = 7;
+    private static final int COLS_RESULTS = 3;
     private final JFrame frame;
 
     /**
@@ -44,15 +72,17 @@ public class GameMenuPanel extends JPanel {
     public GameMenuPanel() throws InterruptedException {
         scaleX = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2;
         scaleY = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2;
-        borders = scaleX / MENU_OFFSET;
+        menuBorders = scaleX / MENU_OFFSET;
+        scoreboardBorders = scaleX / SCOREBOARD_OFFSET;
         frame = new JFrame("JavaWulf");
         createMenuGUI(frame);
     }
 
     /**
-     * Creates the menu.
+     * Create the buttons of the game menu.
+     * @param frame Is the frame where the menu is shown
      */
-    public static void createMenuGUI(JFrame frame) {
+    public static void createMenuGUI(final JFrame frame) {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(scaleY, scaleX));
         frame.setSize(new Dimension(scaleY, scaleX));
@@ -66,14 +96,14 @@ public class GameMenuPanel extends JPanel {
 
     private static void showMenu(final JFrame frame) {
 
-        JPanel menu = new JPanel(new GridLayout(2, 2));
-        JButton startButton = new JButton("PLAY");
-        JButton leaderboardButton = new JButton("Leaderboard");
-        JButton guideButton = new JButton("Guide");
-        JButton exitButton = new JButton("Exit");
+        final JPanel menu = new JPanel(new GridLayout(2, 2));
+        final JButton startButton = new JButton("PLAY");
+        final JButton leaderboardButton = new JButton("Leaderboard");
+        final JButton guideButton = new JButton("Guide");
+        final JButton exitButton = new JButton("Exit");
 
         // To limit Max button sixing
-        Dimension maxButtonSize = new Dimension(MAX_BUTTON_WIDTH, MAX_BUTTON_HEIGHT);
+        final Dimension maxButtonSize = new Dimension(MAX_BUTTON_WIDTH, MAX_BUTTON_HEIGHT);
         startButton.setMaximumSize(maxButtonSize);
         leaderboardButton.setMaximumSize(maxButtonSize);
         guideButton.setMaximumSize(maxButtonSize);
@@ -115,13 +145,12 @@ public class GameMenuPanel extends JPanel {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                int choice = JOptionPane.showConfirmDialog(frame,
+                final int choice = JOptionPane.showConfirmDialog(frame,
                         "Sure you want to quit?",
                         "Confirm exit",
                         JOptionPane.YES_NO_OPTION);
-
                 if (choice == JOptionPane.YES_OPTION) {
-                    System.exit(0);
+                    exitApplication();
                 }
             }
         });
@@ -130,24 +159,28 @@ public class GameMenuPanel extends JPanel {
         menu.add(leaderboardButton);
         menu.add(guideButton);
         menu.add(exitButton);
-
         frame.add(menu, BorderLayout.CENTER);
-
-        frame.add(Box.createVerticalStrut(borders), BorderLayout.NORTH);
-        frame.add(Box.createVerticalStrut(borders), BorderLayout.SOUTH);
-        frame.add(Box.createHorizontalStrut(borders), BorderLayout.WEST);
-        frame.add(Box.createHorizontalStrut(borders), BorderLayout.EAST);
+        frame.add(Box.createVerticalStrut(menuBorders), BorderLayout.NORTH);
+        frame.add(Box.createVerticalStrut(menuBorders), BorderLayout.SOUTH);
+        frame.add(Box.createHorizontalStrut(menuBorders), BorderLayout.WEST);
+        frame.add(Box.createHorizontalStrut(menuBorders), BorderLayout.EAST);
     }
 
     private static void showLeaderboard(final JFrame frame) {
-        
         frame.getContentPane().removeAll();
-        Scoreboard scoreboard = new ScoreBoardImpl();
+        frame.setLayout(new BorderLayout());
+        final Scoreboard scoreboard = new ScoreBoardImpl();
         scoreboard.loadScoreBoardFromFile();
         JPanel scoreBoardJPanel;
-        JPanel leaderboardPanel = new JPanel(new BorderLayout());
-        JLabel titleLabel = new JLabel("LeaderBoard", SwingConstants.CENTER);
-        JButton backButton = new JButton("Back");
+        final JPanel leaderboardPanel = new JPanel(new BorderLayout());
+        final JPanel titlePanel = new JPanel(new GridLayout(2, 1));
+        final JPanel legendPanel = new JPanel(new GridLayout(1, COLS_RESULTS));
+        final JLabel titleLabel = new JLabel("LeaderBoard", SwingConstants.CENTER);
+        final JLabel legendNicknameLabel = new JLabel("Nickname", SwingConstants.CENTER);
+        final JLabel legendScoreLabel = new JLabel("Score", SwingConstants.CENTER);
+        final JLabel legendWonLabel = new JLabel("Did you win?", SwingConstants.CENTER);
+
+        final JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -157,13 +190,12 @@ public class GameMenuPanel extends JPanel {
             }
         });
 
-        if(!scoreboard.getAllScores().isEmpty()) {
-            scoreBoardJPanel = new JPanel(new GridLayout(scoreboard.getAllScores().size(), 3));
+        if (!scoreboard.getAllScores().isEmpty()) {
+            scoreBoardJPanel = new JPanel(new GridLayout(scoreboard.getAllScores().size(), COLS_RESULTS));
             scoreboard.getAllScores().forEach(score -> {
-            JLabel nameLabel = new JLabel(score.getUserName());
-            JLabel scoreLabel = new JLabel(Integer.toString(score.getScore()));
-            JLabel wonLabel = new JLabel(score.getWon() ? "yes" : "no");
-    
+            final JLabel nameLabel = new JLabel(score.getUserName());
+            final JLabel scoreLabel = new JLabel(Integer.toString(score.getScore()), SwingConstants.CENTER);
+            final JLabel wonLabel = new JLabel(score.hasWon() ? "yes" : "no", SwingConstants.CENTER);
             scoreBoardJPanel.add(nameLabel);
             scoreBoardJPanel.add(scoreLabel);
             scoreBoardJPanel.add(wonLabel);
@@ -173,12 +205,26 @@ public class GameMenuPanel extends JPanel {
             scoreBoardJPanel.add(new JLabel("no results yet!"));
         }
 
-        leaderboardPanel.add(titleLabel, BorderLayout.NORTH);
+        legendPanel.add(legendNicknameLabel);
+        legendPanel.add(legendScoreLabel);
+        legendPanel.add(legendWonLabel);
+        titlePanel.add(titleLabel);
+        titlePanel.add(legendPanel);
+        leaderboardPanel.add(titlePanel, BorderLayout.NORTH);
         leaderboardPanel.add(scoreBoardJPanel, BorderLayout.CENTER);
         leaderboardPanel.add(backButton, BorderLayout.SOUTH);
-        frame.add(leaderboardPanel);
+        frame.add(leaderboardPanel, BorderLayout.CENTER);
+        frame.add(Box.createVerticalStrut(scoreboardBorders), BorderLayout.NORTH);
+        frame.add(Box.createVerticalStrut(scoreboardBorders), BorderLayout.SOUTH);
+        frame.add(Box.createHorizontalStrut(scoreboardBorders), BorderLayout.WEST);
+        frame.add(Box.createHorizontalStrut(scoreboardBorders), BorderLayout.EAST);
+
         frame.revalidate();
         frame.repaint();
+    }
+
+    private static void exitApplication() {
+        System.exit(0);
     }
 
 }

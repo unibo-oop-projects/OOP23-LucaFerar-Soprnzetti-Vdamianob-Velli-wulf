@@ -1,11 +1,9 @@
 package javawulf.scoreboard;
 
-import java.io.Serializable;
-
 /**
  * Result Impl is the representatation of a result of a finished game.
  */
-public final class ResultImpl implements Result, Serializable {
+public final class ResultImpl implements Result {
 
     private final String username;
     private final int score;
@@ -34,13 +32,13 @@ public final class ResultImpl implements Result, Serializable {
     }
 
     @Override
-    public boolean getWon() {
+    public boolean hasWon() {
         return this.won;
     }
 
     @Override
     public String toString() {
-        return "[username=" + this.getUserName() + ", score=" + this.getScore() + ", won=" + this.getWon() + "]";
+        return "[username=" + this.getUserName() + ", score=" + this.getScore() + ", won=" + this.hasWon() + "]";
     }
 
 }

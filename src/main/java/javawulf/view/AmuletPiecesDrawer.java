@@ -3,10 +3,12 @@ package javawulf.view;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javawulf.controller.PlayerStatus;
+import javawulf.model.BoundingBox.CollisionType;
 import javawulf.model.item.AmuletPiece;
 
 /**
@@ -28,7 +30,7 @@ public final class AmuletPiecesDrawer extends AbstractDrawer {
     public AmuletPiecesDrawer(final GamePanel gamePanel, final PlayerStatus player,
             final List<AmuletPiece> amuletPieces) {
         super(gamePanel, player);
-        this.amuletPieces = amuletPieces;
+        this.amuletPieces = new ArrayList<>(amuletPieces);
         try {
             this.amuletPiece = this.imageLoader(ImagePath.AMULET_PIECE);
         } catch (IOException e) {
@@ -39,8 +41,10 @@ public final class AmuletPiecesDrawer extends AbstractDrawer {
     @Override
     public void draw(final Graphics2D graphics) {
         for (final AmuletPiece piece : amuletPieces) {
-            this.drawImage(graphics, this.amuletPiece, (int) piece.getBounds().getCollisionArea().getX(),
+            if (!piece.getBounds().getCollisionType().equals(CollisionType.INACTIVE)) {
+                this.drawImage(graphics, this.amuletPiece, (int) piece.getBounds().getCollisionArea().getX(),
                     (int) piece.getBounds().getCollisionArea().getY());
+            }
         }
     }
 }

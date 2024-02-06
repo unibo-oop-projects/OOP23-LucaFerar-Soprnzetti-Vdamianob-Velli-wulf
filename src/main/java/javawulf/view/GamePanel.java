@@ -8,7 +8,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javawulf.controller.GameLoop;
 import javawulf.controller.GameLoopImpl;
 import javawulf.controller.PlayerStatus;
-import javawulf.controller.PlayerStatusImpl;
 import javawulf.scoreboard.ResultImpl;
 import javawulf.scoreboard.ScoreBoardImpl;
 import javawulf.scoreboard.Scoreboard;
@@ -40,6 +39,12 @@ public final class GamePanel extends JPanel {
     /** Max rows of tile (height). */
     public static final int MAX_SCREEN_ROW = 15;
 
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "Se"
+        },
+        justification = "This object does not have to be serializable"
+    )
     private final List<Drawer> drawers = new ArrayList<>();
     private final JFrame frame;
 
@@ -50,12 +55,6 @@ public final class GamePanel extends JPanel {
      * 
      * @param frame The JFrame that creates it
      */
-    @SuppressFBWarnings(
-        value = {
-            "L", "B"
-        },
-        justification = "Why this non-serializable warning? We don't serialize anything! "
-    )
     public GamePanel(final JFrame frame) {
         this.frame = frame;
         final GameLoop gameLoopController = new GameLoopImpl(this);
@@ -64,7 +63,7 @@ public final class GamePanel extends JPanel {
         this.setDoubleBuffered(true);
         this.addKeyListener(new CommandListener(gameLoopController.getPlayerController()));
         this.setFocusable(true);
-        final PlayerStatus playerStatus = new PlayerStatusImpl(gameLoopController.getPlayer(), gameLoopController.getMap());
+        final PlayerStatus playerStatus = gameLoopController.getPlayer();
         this.drawers.add(new MapDrawer(gameLoopController.getMap(), this));
         this.drawers.add(new PlayerDrawer(playerStatus, this));
         this.drawers.add(new PawnDrawer(playerStatus, this, gameLoopController.getPawns()));

@@ -26,7 +26,7 @@ public abstract class AbstractEntity extends GameObject implements Entity {
      * @param type     the collision type of the entity
      * @param speed    the speed of the entity
      */
-    public AbstractEntity(final Coordinate position, final CollisionType type, final int speed) {
+    protected AbstractEntity(final Coordinate position, final CollisionType type, final int speed) {
         super(position, type);
         this.speed = speed;
         this.direction = Direction.DOWN;

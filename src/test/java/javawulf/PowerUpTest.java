@@ -3,6 +3,7 @@ package javawulf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,6 @@ import javawulf.model.powerup.PowerUpSpeed;
 
 
 final class PowerUpTest {
-    
     // SetUp
     private static final int X_COORDINATE_PLAYER = 10;
     private static final int Y_COORDINATE_PLAYER = 10;
@@ -44,11 +44,12 @@ final class PowerUpTest {
     private Coordinate coordinatesPowerUp;
     private Coordinate coordinatesPlayer;
     private Coordinate coordinatesPlayerSpeed;
-    private PowerUpFactory powerUpFactory = new PowerUpFactoryImpl();
+    private PowerUpFactory powerUpFactory;
     private Map map;
 
     @BeforeEach
     void setUpPlayerAndCoordinates() {
+        this.powerUpFactory = new PowerUpFactoryImpl();
         this.player = new PlayerImpl(X_COORDINATE_PLAYER, Y_COORDINATE_PLAYER, HEALTH, POINTS);
         this.coordinatesPlayer = new CoordinateImpl(X_COORDINATE_PLAYER, Y_COORDINATE_PLAYER);
         this.coordinatesPlayerSpeed = new CoordinateImpl(X_COORDINATE_PLAYER_SPEED, Y_COORDINATE_PLAYER_SPEED);
@@ -59,10 +60,10 @@ final class PowerUpTest {
     @Test
     void testCollectionPowerUp() {
         // Create a powerup near player 
-        PowerUpAttack powerUpAttack = powerUpFactory.createPowerUpAttack(coordinatesPowerUp);
+        final PowerUpAttack powerUpAttack = powerUpFactory.createPowerUpAttack(coordinatesPowerUp);
         // Test if the power up doesnt get pick up if its far away
         assertFalse(player.getBounds().isCollidingWith(powerUpAttack.getBounds().getCollisionArea()));
-        Direction movementDirection = Direction.RIGHT;
+        final Direction movementDirection = Direction.RIGHT;
         player.move(movementDirection, map);
         // Test if now power up is colliding with player
         assertTrue(player.getBounds().isCollidingWith(powerUpAttack.getBounds().getCollisionArea()));
@@ -72,26 +73,24 @@ final class PowerUpTest {
     }
 
     @Test
-    void testCollectionAndSubstitutionPowerUp(){
-        PowerUpAttack powerUpAttack = powerUpFactory.createPowerUpAttack(coordinatesPlayer);
+    void testCollectionAndSubstitutionPowerUp() {
+        final PowerUpAttack powerUpAttack = powerUpFactory.createPowerUpAttack(coordinatesPlayer);
         powerUpAttack.collect(player);
         // Test if powerUp active is attack
         assertEquals(powerUpAttack.getType(), player.getPowerUpHandler().getPowerUpActive().get().getType());
         assertEquals(SwordImpl.STRONG, player.getSword().getSwordStrength());
         assertEquals(powerUpAttack.getDuration(), player.getPowerUpHandler().getPowerUpActive().get().getDuration()); 
         // Change powerUp
-        PowerUpDoublePoints powerUpDoublePoints = powerUpFactory.createPowerUpDoublePoints(coordinatesPlayer);
+        final PowerUpDoublePoints powerUpDoublePoints = powerUpFactory.createPowerUpDoublePoints(coordinatesPlayer);
         powerUpDoublePoints.collect(player);
         assertEquals(powerUpDoublePoints.getType(), player.getPowerUpHandler().getPowerUpActive().get().getType());
         assertEquals(Score.Multiplier.DOUBLE.getValue(), player.getScore().getMultiplier());
-        
-
     }
 
     @Test
     void testStatsPowerUpAttack() {
         // Create a powerUp colliding with player
-        PowerUpAttack powerUpAttack = powerUpFactory.createPowerUpAttack(coordinatesPlayer);
+        final PowerUpAttack powerUpAttack = powerUpFactory.createPowerUpAttack(coordinatesPlayer);
         powerUpAttack.collect(player);
         // Test powerUp activation
         assertTrue(player.getPowerUpHandler().getPowerUpActive().get().stillActive());
@@ -99,13 +98,13 @@ final class PowerUpTest {
         assertEquals(SwordImpl.STRONG, player.getSword().getSwordStrength());
         assertEquals(powerUpAttack.getDuration(), player.getPowerUpHandler().getPowerUpActive().get().getDuration()); 
         // Test score
-        assertTrue(player.getScore().getPoints() != 0);
+        assertNotEquals(0, player.getScore().getPoints());
     }
 
     @Test
     void testStatsPowerUpDoublePoints() {
         // Create a powerUp colliding with player
-        PowerUpDoublePoints powerUpDoublePoints = powerUpFactory.createPowerUpDoublePoints(coordinatesPlayer);
+        final PowerUpDoublePoints powerUpDoublePoints = powerUpFactory.createPowerUpDoublePoints(coordinatesPlayer);
         powerUpDoublePoints.collect(player);
         // Test powerUp activation
         assertTrue(player.getPowerUpHandler().getPowerUpActive().get().stillActive());
@@ -113,51 +112,52 @@ final class PowerUpTest {
         assertEquals(Score.Multiplier.DOUBLE.getValue(), player.getScore().getMultiplier());
         assertEquals(powerUpDoublePoints.getDuration(), player.getPowerUpHandler().getPowerUpActive().get().getDuration()); 
         // Test score
-        assertTrue(player.getScore().getPoints() != 0);
+        assertNotEquals(0, player.getScore().getPoints());
     }
 
     @Test
     void testStatsPowerUpInvincibility() {
         // Create a powerUp colliding with player
-        PowerUpInvincibility powerUpInvincibility = powerUpFactory.createPowerUpInvincibility(coordinatesPlayer);
+        final PowerUpInvincibility powerUpInvincibility = powerUpFactory.createPowerUpInvincibility(coordinatesPlayer);
         powerUpInvincibility.collect(player);
         // Test powerUp activation
         // Test powerUp stats changing
         assertEquals(CollisionType.STUNNED, player.getBounds().getCollisionType());
         assertEquals(powerUpInvincibility.getDuration(), player.getPowerUpHandler().getPowerUpActive().get().getDuration()); 
         // Test score
-        assertTrue(player.getScore().getPoints() != 0);
+        assertNotEquals(0, player.getScore().getPoints());
     }
 
     @Test
     void testStatsPowerUpSpeed() {
         // Create a powerUp colliding with player
-        PowerUpSpeed powerUpSpeed = powerUpFactory.createPowerUpSpeed(coordinatesPlayer);
+        final PowerUpSpeed powerUpSpeed = powerUpFactory.createPowerUpSpeed(coordinatesPlayer);
         powerUpSpeed.collect(player);
         // Test powerUp activation
         assertTrue(player.getPowerUpHandler().getPowerUpActive().get().stillActive());
         // Test powerUp stats changing
-        Direction movementDirection = Direction.RIGHT;
+        final Direction movementDirection = Direction.RIGHT;
         player.move(movementDirection, map);
         assertEquals(coordinatesPlayerSpeed.getX(), player.getPosition().getX());
         assertEquals(powerUpSpeed.getDuration(), player.getPowerUpHandler().getPowerUpActive().get().getDuration()); 
         // Test score
-        assertTrue(player.getScore().getPoints() != 0);
+        assertNotEquals(0, player.getScore().getPoints());
     }
 
     @Test
     void testPowerUpDuration() {
         // Create a powerUp colliding with player
-        PowerUpAttack powerUpAttack = powerUpFactory.createPowerUpAttack(coordinatesPlayer);
+        final PowerUpAttack powerUpAttack = powerUpFactory.createPowerUpAttack(coordinatesPlayer);
         // powerUp gets collected and activated
         powerUpAttack.collect(player);
         player.getPowerUpHandler().update(player);
+        final int duration = player.getPowerUpHandler().getPowerUpActive().get().getDuration();
         // Test if powerUp got collected and updated player stats
-        assertEquals(player.getPowerUpHandler().getPowerUpActive().get().getDuration(), 19);
+        assertEquals(player.getPowerUpHandler().getPowerUpActive().get().getDuration(), duration);
         assertEquals(Player.PlayerColor.STRENGTH.getColor(), player.getColor());
         assertEquals(Sword.STRONG, player.getSword().getSwordStrength());
         // Let the powerUp deactivate
-        for (int i = 0; i < 18; i++) {
+        for (int i = 0; i < duration - 1; i++) {
             player.getPowerUpHandler().update(player);
             assertEquals(Player.PlayerColor.STRENGTH.getColor(), player.getColor());
             assertEquals(Sword.STRONG, player.getSword().getSwordStrength());

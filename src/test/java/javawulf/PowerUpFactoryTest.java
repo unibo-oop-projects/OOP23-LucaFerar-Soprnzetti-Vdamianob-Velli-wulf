@@ -12,12 +12,13 @@ import javawulf.model.powerup.PowerUp;
 import javawulf.model.powerup.PowerUpFactory;
 import javawulf.model.powerup.PowerUpFactoryImpl;
 
+/**
+ * Test for creation of all powerUps types.
+ */
 final class PowerUpFactoryTest {
-    
+
     private static final int X_COORDINATE_POWERUP = 10;
     private static final int Y_COORDINATE_POWERUP = 10;
-
-
     private PowerUpFactory factory;
     private Coordinate coordinatesPowerUp;
 
@@ -30,7 +31,7 @@ final class PowerUpFactoryTest {
     @Test
     void testCreatePowerUpAttack() {
         // Create the powerUp and check if its not null
-        PowerUp powerUpAttack = factory.createPowerUpAttack(coordinatesPowerUp);
+        final PowerUp powerUpAttack = factory.createPowerUpAttack(coordinatesPowerUp);
         assertNotNull(powerUpAttack);
         // Checks on the valuers of powerUp
         assertEquals(coordinatesPowerUp.getPosition(), powerUpAttack.getPosition().getPosition());
@@ -42,7 +43,7 @@ final class PowerUpFactoryTest {
     @Test
     void testCreatePowerUpDoublePoints() {
         // Create the powerUp and check if its not null
-        PowerUp powerUpDoublePoints = factory.createPowerUpDoublePoints(coordinatesPowerUp);
+        final PowerUp powerUpDoublePoints = factory.createPowerUpDoublePoints(coordinatesPowerUp);
         assertNotNull(powerUpDoublePoints);
         // Checks on the valuers of powerUp
         assertEquals(coordinatesPowerUp.getPosition(), powerUpDoublePoints.getPosition().getPosition());
@@ -54,7 +55,7 @@ final class PowerUpFactoryTest {
     @Test
     void testCreatePowerUpInvincibility() {
         // Create the powerUp and check if its not null
-        PowerUp powerUpIncincibility = factory.createPowerUpInvincibility(coordinatesPowerUp);
+        final PowerUp powerUpIncincibility = factory.createPowerUpInvincibility(coordinatesPowerUp);
         assertNotNull(powerUpIncincibility);
         // Checks on the valuers of powerUp
         assertEquals(coordinatesPowerUp.getPosition(), powerUpIncincibility.getPosition().getPosition());
@@ -66,7 +67,7 @@ final class PowerUpFactoryTest {
     @Test
     void testCreatePowerUpSpeed() {
         // Create the powerUp and check if its not null
-        PowerUp powerUpSpeed = factory.createPowerUpSpeed(coordinatesPowerUp);
+        final PowerUp powerUpSpeed = factory.createPowerUpSpeed(coordinatesPowerUp);
         assertNotNull(powerUpSpeed);
         // Checks on the valuers of powerUp
         assertEquals(coordinatesPowerUp.getPosition(), powerUpSpeed.getPosition().getPosition());

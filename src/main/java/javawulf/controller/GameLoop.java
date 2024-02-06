@@ -6,7 +6,6 @@ import javawulf.model.Collectable;
 import javawulf.model.enemy.Pawn;
 import javawulf.model.item.AmuletPiece;
 import javawulf.model.map.Map;
-import javawulf.model.player.Player;
 import javawulf.model.powerup.PowerUp;
 
 /**
@@ -38,7 +37,7 @@ public interface GameLoop {
     /**
      * @return The Player character
      */
-    Player getPlayer();
+    PlayerStatus getPlayer();
 
     /**
      * @return The PlayerController

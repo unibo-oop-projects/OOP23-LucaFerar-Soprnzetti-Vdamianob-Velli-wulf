@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Collections;
 import java.util.stream.Collectors;
+import java.nio.charset.StandardCharsets;
+
 
 
 /**
@@ -25,7 +28,7 @@ public final class ScoreBoardImpl implements Scoreboard {
      */
     public ScoreBoardImpl() {
         this.file = new File(FILE_PATH);
-        scoreboard = new ArrayList<Result>();
+        scoreboard = new ArrayList<>();
     }
 
     @Override
@@ -39,8 +42,8 @@ public final class ScoreBoardImpl implements Scoreboard {
 
     @Override
     public void saveScoreBoard() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH));) {
-            for (Result result : scoreboard) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, StandardCharsets.UTF_8, false))) {
+            for (final Result result : scoreboard) {
                 writer.write(result.toString());
                 writer.newLine();
             }
@@ -51,18 +54,18 @@ public final class ScoreBoardImpl implements Scoreboard {
 
     @Override
     public List<Result> getAllScores() {
-        return this.scoreboard;
+        return Collections.unmodifiableList(this.scoreboard);
     }
 
     @Override
     public void loadScoreBoardFromFile() {
         if (this.file.exists()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH, StandardCharsets.UTF_8))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     this.addNewScore(convertInResult(line));
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -70,12 +73,16 @@ public final class ScoreBoardImpl implements Scoreboard {
 
     private Result convertInResult(final String line) {
         //splits [username=shrek] [score=100] [won=false]
-        String[] scoreString = line.split(",");
+        final String[] scoreString = line.split(",");
         //index increased by 1 because i need to read whats after "="
-        String username = scoreString[0].substring(scoreString[0].indexOf("=") + 1);
-        String score = scoreString[1].substring(scoreString[1].indexOf("=") + 1);
-        String won = scoreString[2].substring(scoreString[2].indexOf("=") + 1);
-        return new ResultImpl(username, Integer.parseInt(score), Boolean.parseBoolean(won));
+        final String username = scoreString[0].substring(scoreString[0].indexOf("=") + 1);
+        final String score = scoreString[1].substring(scoreString[1].indexOf("=") + 1);
+        final String won = scoreString[2].substring(scoreString[2].indexOf("=") + 1, scoreString[2].indexOf("]"));
+        boolean didWon = false;
+        if ("true".equals(won)) {
+            didWon = true;
+        }
+        return new ResultImpl(username, Integer.parseInt(score), didWon);
     }
 
     private void orderScoreBoard() {

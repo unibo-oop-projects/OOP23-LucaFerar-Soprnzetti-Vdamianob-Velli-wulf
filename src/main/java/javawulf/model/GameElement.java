@@ -21,11 +21,6 @@ public interface GameElement {
     Coordinate getPosition();
 
     /**
-     * @param b The BoundingBox the entity must now have
-     */
-    void setBounds(BoundingBox b);
-
-    /**
      * @param p The Coordinate the entity must now have
      */
     void setPosition(Coordinate p);

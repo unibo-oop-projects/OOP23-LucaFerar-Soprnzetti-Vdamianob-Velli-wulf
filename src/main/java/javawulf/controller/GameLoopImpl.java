@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javawulf.model.BoundingBox;
 import javawulf.model.Collectable;
 import javawulf.model.GameElement;
@@ -57,14 +58,15 @@ public final class GameLoopImpl implements GameLoop, Runnable {
         this.pawns = new ArrayList<>();
         this.pieces = new ArrayList<>();
         this.powerUps = new ArrayList<>();
-        playerInit();
         mapInit();
+        playerInit();
         this.playerController = new PlayerControllerImpl();
         this.gamePanel = panel;
     }
 
     private void mapInit() {
-        this.gameMap = new MapFactoryImpl().getDefaultMap1(this.gamePlayer);
+        this.gameMap = new MapFactoryImpl().getDefaultMap1(new PlayerImpl(Map.MAP_SIZE * GameObject.OBJECT_SIZE / 2,
+        Map.MAP_SIZE * GameObject.OBJECT_SIZE / 2, 3, 0));
         final var elements = this.gameMap.getAllElements();
         this.items.addAll(elements.stream()
                 .filter(this::isItem)
@@ -90,8 +92,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private void playerInit() {
-        this.gamePlayer = new PlayerImpl(Map.MAP_SIZE * GameObject.OBJECT_SIZE / 2,
-                Map.MAP_SIZE * GameObject.OBJECT_SIZE / 2, 3, 0);
+        this.gamePlayer = this.gameMap.getPlayer();
     }
 
     @Override
@@ -200,13 +201,19 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     @Override
+    @SuppressFBWarnings(
+        value = {
+            "M", "V", "EI"
+        },
+        justification = "Map is used to create its representation in the drawer"
+    )
     public Map getMap() {
         return this.gameMap;
     }
 
     @Override
-    public Player getPlayer() {
-        return this.gamePlayer;
+    public PlayerStatus getPlayer() {
+        return new PlayerStatusImpl(this.gamePlayer, this.gameMap);
     }
 
     @Override
@@ -216,22 +223,22 @@ public final class GameLoopImpl implements GameLoop, Runnable {
 
     @Override
     public List<Collectable> getItems() {
-        return this.items;
+        return new ArrayList<>(this.items);
     }
 
     @Override
     public List<Pawn> getPawns() {
-        return this.pawns;
+        return new ArrayList<>(this.pawns);
     }
 
     @Override
     public List<AmuletPiece> getAmuletPieces() {
-        return this.pieces;
+        return new ArrayList<>(this.pieces);
     }
 
     @Override
     public List<PowerUp> getPowerUps() {
-        return this.powerUps;
+        return new ArrayList<>(this.powerUps);
     }
 
 }

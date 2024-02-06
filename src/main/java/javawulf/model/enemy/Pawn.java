@@ -2,6 +2,7 @@ package javawulf.model.enemy;
 
 import java.util.Random;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javawulf.model.Direction;
 import javawulf.model.BoundingBox;
 import javawulf.model.BoundingBox.CollisionType;
@@ -31,11 +32,17 @@ public final class Pawn extends EnemyImpl {
      * 
      * @param position the position of the pawn when created
      */
+    @SuppressFBWarnings(
+        value = {
+            "H", "B", "DMI"
+        },
+        justification = "False positive, the random value is used twice in this constructor"
+    )
     public Pawn(final Coordinate position) {
         super(position);
         this.isAlive = true;
         this.timeToWait = random.nextInt(4) + 1;
-        this.setDirection(Direction.values()[random.nextInt(4)]);
+        this.setDirection(Direction.values()[this.timeToWait - 1]);
         this.tickCount = 0;
     }
 
