@@ -44,9 +44,7 @@ public final class GamePanel extends JPanel {
         value = {
             "M", "V", "Se"
         },
-        justification = "Game panel is stored to allow calculations for the drawings that are relative "
-            + "to its size. The pieces are passed in order to check whether the Player's"
-            + " position relative to the pieces"
+        justification = "This object does not have to be serializable"
     )
     private final List<Drawer> drawers = new ArrayList<>();
     private final JFrame frame;
@@ -58,12 +56,6 @@ public final class GamePanel extends JPanel {
      * 
      * @param frame The JFrame that creates it
      */
-    @SuppressFBWarnings(
-        value = {
-            "L", "B"
-        },
-        justification = "Why this non-serializable warning? We don't serialize anything! "
-    )
     public GamePanel(final JFrame frame) {
         this.frame = frame;
         final GameLoop gameLoopController = new GameLoopImpl(this);
