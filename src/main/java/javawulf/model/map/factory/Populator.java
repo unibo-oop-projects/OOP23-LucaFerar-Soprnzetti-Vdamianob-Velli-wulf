@@ -29,7 +29,7 @@ public final class Populator {
     private static ItemFactory itemFactory = new ItemFactoryImpl();
     private static EnemyFactory enemyFactory = new EnemyFactoryImpl();
     private static PowerUpFactory powerUpFactory = new PowerUpFactoryImpl();
-    final static Random randomNumber = new Random();
+    static final Random RANDOM_NUMBER = new Random();
 
     enum Collectables {
         CURE, CUREMAX, EXTRAHEART, GREATSWORD, SHIELD, POWERUPATTACK, POWERUPDOUBLEPOINTS, POWERUPSPEED,
@@ -37,7 +37,7 @@ public final class Populator {
 
         public static Collectables getRandomic() {
             final Collectables[] colls = Collectables.values();
-            return colls[randomNumber.nextInt(colls.length)];
+            return colls[RANDOM_NUMBER.nextInt(colls.length)];
         }
     }
 
@@ -154,7 +154,7 @@ public final class Populator {
      * @return a randomic space from arraylist
      */
     private static Pair<TilePosition, Space> getRandomicSpace(final List<Pair<TilePosition, Space>> spaces) {
-        return spaces.get(randomNumber.nextInt(spaces.size()));
+        return spaces.get(RANDOM_NUMBER.nextInt(spaces.size()));
     }
 
 }
