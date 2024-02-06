@@ -108,13 +108,16 @@ public final class GamePanel extends JPanel {
         final String value = gameWon ? "CONGRATULATIONS! You escaped sucessfully"
             : "Oh no, Game Over. Better luck next time!";
         final String username = JOptionPane.showInputDialog(value + "\n Your point total is " + score
-            + "\n Insert your username:");
+            + "\n\n Insert your USERNAME:" 
+            + "\n(if empty will not be saved)");
         this.setVisible(false);
         // Save scoreBoard
-        final Scoreboard scoreboard = new ScoreBoardImpl();
-        scoreboard.loadScoreBoardFromFile();
-        scoreboard.addNewScore(new ResultImpl(username, score, gameWon));
-        scoreboard.saveScoreBoard();
+        if (!username.isEmpty()) {
+            final Scoreboard scoreboard = new ScoreBoardImpl();
+            scoreboard.loadScoreBoardFromFile();
+            scoreboard.addNewScore(new ResultImpl(username, score, gameWon));
+            scoreboard.saveScoreBoard();
+        }
         // Clear the frame
         frame.getContentPane().removeAll();
         // Open gameMenuPanel
