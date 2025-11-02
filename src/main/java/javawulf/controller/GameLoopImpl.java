@@ -93,8 +93,7 @@ public final class GameLoopImpl implements GameLoop, Runnable {
     }
 
     private boolean isItem(final GameElement e) {
-        return e instanceof Collectable && (e instanceof Cure || e instanceof CureMax
-                || e instanceof ExtraHeart || e instanceof GreatSword || e instanceof Shield);
+        return e instanceof Collectable && !(e instanceof PowerUp);
     }
 
     private void playerInit() {
